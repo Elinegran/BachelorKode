@@ -49,6 +49,32 @@ router.use("/nyAvtale", avtaleNy.NyAvtale);
 const updateAvtale = require('../controllers/kalender');
 router.use("/updateTid", updateAvtale.UpdateTid);
 
+//Meldinger:
+
+// Alle meldingene som en bruker har fått
+const mineMeldinger = require('../controllers/meldinger');
+router.use("/meldingerMineMeldinger", mineMeldinger.getMineMeldinger);
+
+ // Samtalen mellom 2 brukere
+const minSamtale = require('../controllers/samtale');
+router.use("/meldingerMinSamtale", minSamtale.getMinSamtale); 
+
+// Henter alle grupper
+const mineGrupper= require('../controllers/grupper');
+router.use("/meldingerMineGrupper", mineGrupper.getMineGrupper); 
+
+// Henter gruppene til en bruker
+const allemineGrupper= require('../controllers/grupper');
+router.use("/grupperAlleMineGrupper", allemineGrupper.hentMineGrupper); 
+
+const addGruppe = require('../controllers/nyeGrupper'); 
+router.use("/grupperNyeGrupper", addGruppe.GruppeInput );
+
+const addGruppemedlem = require('../controllers/nyttMedlem'); 
+router.use("/grupperNyeGruppemedlemmer", addGruppemedlem.MedlemInput)
+
+const getGruppemedlem = require('../controllers/gruppemedlemmer');
+router.use("/gruppeGetMedlemmer", getGruppemedlem.getMedlem)
 
 
 // Eksporterer denne modellen, så server.js får brukt den
