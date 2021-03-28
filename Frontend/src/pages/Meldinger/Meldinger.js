@@ -62,16 +62,17 @@ export const Meldinger = () => (
         </section>
 
         {/* Liste over grupper */}
-        <section className="gruppe"> {/* <div class="col-md-4"> Noe </div> 3 colonner fra og med stor skjerm*/}
+        <section className="gruppe"> 
+        
+                <h1> Grupper </h1>
                 <NyGruppe /> {/* inputfelt og knapp for å legg til ny gruppe*/}
 
-                <NyttMedlem /> {/* selectfelter og knapp for å legg til nytt gruppemedlem */}
+                {/*<NyttMedlem />  selectfelter og knapp for å legg til nytt gruppemedlem */}
 
                 <Container fluid>
-                        <Meldingsheader overskrift = "Alle grupper"/>
-                        <Gruppeliste/> {/* Liste over grupper */}     
-                </Container>  
-                <Test />            
+                        <Gruppeliste/> {/* Liste over alle gruppene */}     
+                </Container> 
+                   
         </section> 
         
         

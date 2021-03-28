@@ -19,26 +19,25 @@ function NyttMedlem() {
 
     // Dette sendes til Meldingssiden
     return (
-        <Container fluid>
+        <p>
             <Form>
                 <Row>
                     <Col>
-                        <Form.Label>Legg til gruppemedlem</Form.Label>
+                        <Form.Label><h3>Legg til medlem</h3></Form.Label>
                     </Col>
                 </Row>
                 <Row>
-                    <Col>
-                        <SelectGruppe />
-                    </Col>
+                    
                 
                     <Col>
                         <SelectBrukere />
                     </Col>
-                </Row>
-                <Row><Col>
-                <Button onClick={addMedlem} variant="success" type="submit">Lagre medlem</Button></Col></Row>
+                
+                <Col>
+                <Button onClick={addMedlem} style={{float: 'right'}} variant="success" type="submit">Lagre medlem</Button></Col></Row>
             </Form>
-        </Container> 
+        </p>
+
     ) // slutt på return()
 
 } // slutt på funksjonen NyttMedlem()

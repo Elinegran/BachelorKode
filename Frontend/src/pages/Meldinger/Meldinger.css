@@ -56,6 +56,10 @@ main.meldingssiden {
   background: pink; 
 }
 
+h3 {
+  font-size: small;
+}
+
 section {
   background: ; 
   margin: 5px;

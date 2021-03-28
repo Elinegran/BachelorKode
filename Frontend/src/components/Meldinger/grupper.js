@@ -1,13 +1,11 @@
 import React from 'react';
 import axios from 'axios';
-// Bootstap
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Row, Col, Button, Alert, Breadcrumb, Card, Form } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css'; // Bootstap
+import { Accordion, Button, Card } from 'react-bootstrap'; // Bootstrap-greier
 import SelectGruppemedlem from './Grupper/selectGruppemedlem.js'; // Komponent som henter brukerne fra backend
 
-import AuthService from '../../services/auth.service';
-
-console.log(AuthService.getUserId());
+// import AuthService from '../../services/auth.service';
+// console.log(AuthService.getUserId());
 
 export default class Gruppeliste extends React.Component {
   state = {
@@ -23,17 +21,21 @@ export default class Gruppeliste extends React.Component {
   }
 
   render() {
-    return (
+    return ( // Returnerer en kollaps-liste over alle gruppene, med en liste med medlemmer inni 
       <p>
+        <h2> Alle grupper </h2>
+      <Accordion>
       { this.state.gruppe.map(melding => 
-      <Card className = "mb-3"> 
-        <Card.Body>
-          <Card.Title><h2>{melding.gruppenavn}</h2></Card.Title>
-          <SelectGruppemedlem />
-        </Card.Body>
-      </Card>
-      )}
+        <Card>
+            <Card.Header>
+                <Accordion.Toggle as={Button} variant="link" eventKey={melding.gruppeID}><h2> {melding.gruppenavn} </h2></Accordion.Toggle>
+            </Card.Header>
+            <Accordion.Collapse eventKey={melding.gruppeID}>
+                <Card.Body><SelectGruppemedlem /></Card.Body> 
+            </Accordion.Collapse>
+        </Card>)}
+      </Accordion>
       </p>
-    ) 
-  }
-}
+    ) // slutt på return
+  } // slutt på render
+} // slutt på funksjon Gruppeliste

@@ -2,8 +2,7 @@ import React from 'react';
 import { useState } from "react"; // for å sende til backend
 import axios from 'axios'; // for å sende/ motta til/ fra backend
 import 'bootstrap/dist/css/bootstrap.min.css'; // Bootstap
-import { Container, Row, Col, Button, Form } from 'react-bootstrap'; // Bootstrap-greier
-import Select from 'react-select';
+import { Card, Accordion, Button } from 'react-bootstrap'; // Bootstrap-greier
 
 function Test() {
     const [idbruker, setBruker] = useState(0); 
@@ -15,36 +14,26 @@ function Test() {
       };
 
     return(
-        <div>
-        {/* <select className="custom-select" onChange={(e)=> {
-            const selectedBruker = e.target.value;
-            setBruker(selectedBruker); 
-        }}> */}
-        <Select className="custom-select" onChange = {(event) => {setBruker(event.target.value);}}>
-            <option value="2">Knut</option>
-            <option value="3">Per</option>
-            <option value="4">Truls</option>
-        </Select>
-        {idbruker}
+        <Accordion>
+            <Card>
+                <Card.Header>
+                    <Accordion.Toggle as={Button} variant="link" eventKey="0"> Gruppe 1 </Accordion.Toggle>
+                </Card.Header>
+                <Accordion.Collapse eventKey="0">
+                    <Card.Body>Medlemmer gruppe 1</Card.Body>
+                </Accordion.Collapse>
+            </Card>
+            <Card>
+                <Card.Header>
+                    <Accordion.Toggle as={Button} variant="link" eventKey="1"> Gruppe 2 </Accordion.Toggle>
+                </Card.Header>
+                <Accordion.Collapse eventKey="1">
+                    <Card.Body>Medlemmer gruppe 2</Card.Body>
+                </Accordion.Collapse>
+            </Card>
+        </Accordion>
 
-        {/* <select className="custom-select" onChange={(e)=> {
-            const selectedGruppe = e.target.value;
-            setGruppe(selectedGruppe); 
-        }}> */}
-        <Select className="custom-select" onChange = {(event) => {setGruppe(event.target.value);}}>
-            <option value="2">Søvngruppa</option>
-            <option value="3">Bakegruppa</option>
-            <option value="4">CV-gruppa</option>
-        </Select>
-        {gruppeID}
-        <Button onClick={addMedl} variant="success" type="submit">Lagre medl</Button>
-        <ul className="list-group">
-            <li className="list-group-item">Søvngruppa</li>
-                
-            <li className="list-group-item">Bakegruppa</li>
-            <li className="list-group-item">Jobbegruppa</li>
-        </ul>
-        </div>
+    
     ) // slutt på return
 } // slutt å funksjon Test
 

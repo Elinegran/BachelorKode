@@ -15,25 +15,25 @@ function NyGruppe() {
   
     // Dette sendes til Meldingssiden
     return (
-        <Container fluid>
+      
             <Form>
                 <Row>
                     <Col>
-                        <Form.Label>Opprett en ny gruppe</Form.Label>
+                        <Form.Label><h2>Opprett en ny gruppe</h2></Form.Label>
                     </Col>
                 </Row>
                 <Row>
                     <Col>
                         <Form.Group>
-                            <Form.Control input type="text" placeholder="Gruppenavn" onChange = {(event) => {setGruppenavn(event.target.value);}}/>
+                            <Form.Control input type="text" placeholder="Gruppenavn" style={{float: 'left'}} onChange = {(event) => {setGruppenavn(event.target.value);}}/>
                         </Form.Group>
                     </Col>
                     <Col>  
-                        <Button onClick={addGruppe} variant="success" type="submit">Lagre gruppa</Button>
+                        <Button onClick={addGruppe} variant="success" style={{float: 'right'}} type="submit">Lagre gruppa</Button>
                     </Col>
                 </Row>        
             </Form> 
-        </Container> 
+    
     ) // slutt på return()
 
 } // slutt på funksjonen NyGruppe()
