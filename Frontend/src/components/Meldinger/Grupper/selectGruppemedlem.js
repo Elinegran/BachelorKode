@@ -9,7 +9,7 @@ export default class SelectGruppemedlem extends React.Component {
   
 
   componentDidMount() {
-    axios.get(`http://localhost:3001/api/gruppeGetMedlemmer`)
+    axios.get(`http://localhost:3001/api/gruppeGetMedlemmer`) // Skal sende gruppeID til Backend her?? 
       .then(res => {
         const bruker = res.data;
         this.setState({ bruker });
