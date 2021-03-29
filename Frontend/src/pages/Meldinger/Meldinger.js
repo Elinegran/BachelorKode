@@ -29,29 +29,23 @@ export const Meldinger = () => (
         
         {/* Brukerens innboks */}
         <section className="melding">
-                <Container>  
-                        <Row className="avatarOgOverskrift">
-                                <Avatar />
-                                <Meldingsheader overskrift = "Mine meldinger"/>
-                        </Row>
-                        <Row>
-                                <Meldingsliste /> 
-                        </Row>           
-                </Container>
+               <h1>Meldinger</h1> 
+                <Meldingsliste /> 
+                                  
         </section>
 
-        {/* Samtale mellom 2 brukere */}
+        {/* Samtale mellom 2 brukere 
         <section className="samtale">
-                <Container>
-                        <Meldingsheader overskrift = "Samtale"/>
+        
+                    
                         <Samtaleliste /> 
                         
                 
                        
-                        {/* Her kommer komponent */}
+                        {/* Her kommer komponent 
                         <Skrivemeldinger/>
-                </Container>
-        </section>
+        
+        </section> */}
 
         {/* Liste over grupper */}
         <section className="gruppe"> 

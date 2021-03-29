@@ -22,9 +22,9 @@ exports.InsertInnboksMeldinger = function(req, res) {
 // Funksjon som henter alle meldingene som en bruker har fått (her Knut)
 exports.getMineMeldinger = function(req, res)  {
 
-    const hentMineMeldinger = `SELECT avsender, tid, fornavn, etternavn, melding
+    const hentMineMeldinger = `SELECT meldingsID, avsender, mottaker, tid, fornavn, etternavn, melding
                                FROM melding, bruker
-                               WHERE mottaker = 2
+                               WHERE mottaker = 3
                                AND idbruker = avsender
                                ORDER BY tid DESC`;
 
