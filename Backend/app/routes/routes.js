@@ -55,6 +55,10 @@ router.use("/updateTid", updateAvtale.UpdateTid);
 const mineMeldinger = require('../controllers/meldinger');
 router.use("/meldingerMineMeldinger", mineMeldinger.getMineMeldinger);
 
+ // Innboks skrive meldinger
+ const innboksMeldinger = require('../controllers/meldinger');
+ router.use("/meldingerInnboksMeldinger", innboksMeldinger.InsertInnboksMeldinger);
+
  // Samtalen mellom 2 brukere
 const minSamtale = require('../controllers/samtale');
 router.use("/meldingerMinSamtale", minSamtale.getMinSamtale); 

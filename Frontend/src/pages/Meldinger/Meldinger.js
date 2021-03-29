@@ -9,6 +9,8 @@ import Samtaleliste from '../../components/Meldinger/samtaler.js';
 import Gruppeliste from '../../components/Meldinger/grupper.js';
 import Avatar from '../../components/Meldinger/Felles/avatar.js';
 import Test from '../../components/Meldinger/Grupper/test.js';
+import Skrivemeldinger from '../../components/Meldinger/skriveMelding.js';
+
 
 
 //import LagNyGruppe from '../../components/Meldinger/Grupper/lagNyGruppe.js';
@@ -45,19 +47,9 @@ export const Meldinger = () => (
                         <Samtaleliste /> 
                         
                 
-                        <Form>
-                                <Row>
-                                        <Col>
-                                                <Form.Group>
-                                                        <Form.Control type="text" placeholder="Skriv melding" />
-                                                </Form.Group>
-                                        </Col>
-                                        <Col>
-                                              <Button variant="warning" type="submit">Send</Button>  
-                                        </Col>
-                                </Row>
-                                
-                        </Form>
+                       
+                        {/* Her kommer komponent */}
+                        <Skrivemeldinger/>
                 </Container>
         </section>
 
