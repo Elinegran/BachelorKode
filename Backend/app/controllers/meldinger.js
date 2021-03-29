@@ -7,6 +7,7 @@ exports.InsertInnboksMeldinger = function(req, res) {
   const avsender = req.body.avsender;
   const melding = req.body.melding;
   
+  
   const LeggtilInnboksMeldinger = `INSERT INTO melding(mottaker, avsender, melding) VALUES (?, ?, ?)`;
   db.query(LeggtilInnboksMeldinger, [mottaker, avsender, melding], (err,result) => {
     if (err) {
@@ -21,14 +22,14 @@ exports.InsertInnboksMeldinger = function(req, res) {
 
 // Funksjon som henter alle meldingene som en bruker har fått (her Knut)
 exports.getMineMeldinger = function(req, res)  {
-
+  let idbruker = req.query.idbruker;
     const hentMineMeldinger = `SELECT meldingsID, avsender, mottaker, tid, fornavn, etternavn, melding
                                FROM melding, bruker
-                               WHERE mottaker = 3
+                               WHERE mottaker = ?
                                AND idbruker = avsender
                                ORDER BY tid DESC`;
 
-    db.query(hentMineMeldinger, (err, result) => {
+    db.query(hentMineMeldinger, [idbruker], (err, result) => {
       if (err) {
         console.log(err)
       } 

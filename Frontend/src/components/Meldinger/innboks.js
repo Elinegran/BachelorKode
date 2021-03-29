@@ -5,14 +5,22 @@ import '../../pages/Meldinger/Meldinger.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Accordion, Container, Row, Col, Button, Alert, Breadcrumb, Card, Form } from 'react-bootstrap'; 
 import Samtaleliste from '../../components/Meldinger/samtaler.js';
+import AuthService from '../../services/auth.service'; 
+
+const idbruker = AuthService.getUserId();
+alert(idbruker);
 
 export default class Meldingsliste extends React.Component {
   state = {
+    idbruker: idbruker,
     meldinger: []
   }
 
   componentDidMount() {
-    axios.get(`http://localhost:3001/api/meldingerMineMeldinger`)
+    axios.get(`http://localhost:3001/api/meldingerMineMeldinger`, 
+    {params: 
+      {idbruker:idbruker}
+    })
       .then(res => {
         const meldinger = res.data;
         this.setState({ meldinger });
@@ -44,7 +52,7 @@ export default class Meldingsliste extends React.Component {
                   </Accordion.Toggle>
               </Card.Header>
               <Accordion.Collapse eventKey={melding.meldingsID}>
-                <Card.Body><Samtaleliste /> </Card.Body> 
+                <Card.Body>hei hei hei </Card.Body> 
             </Accordion.Collapse>
           </Card>
           )}
