@@ -52,7 +52,7 @@ export default class Meldingsliste extends React.Component {
                   </Accordion.Toggle>
               </Card.Header>
               <Accordion.Collapse eventKey={melding.meldingsID}>
-                <Card.Body>hei hei hei </Card.Body> 
+                <Card.Body> <Samtaleliste /> </Card.Body> 
             </Accordion.Collapse>
           </Card>
           )}
