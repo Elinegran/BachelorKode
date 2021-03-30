@@ -6,8 +6,8 @@ export default class skriveMelding extends React.Component {
     constructor (props){
         super (props);
         this.state = {
-            avsender:2, 
-            mottaker:3,
+            avsender:{}, 
+            mottaker:{},
             tid:0,
             melding: ""
         };
