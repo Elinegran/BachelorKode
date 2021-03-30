@@ -10,26 +10,6 @@ import Meldingsliste from './innboks.js';
 
 
 const idbruker = AuthService.getUserId();
-<<<<<<< HEAD
-const avsender = 4; // Obs! Denne må hentes fra innboks.js (jeg vet bare ikke hvordan...)
-// const avsender = { this.props.idbrukerFraInnboks };
-
-export default class Samtaleliste extends React.Component {
- 
- /*  constructor(props){
-    super(props);
-    this.state = {
-        avsender: this.props.dataParentToChild,
-        idbruker: idbruker,
-        samtale: [],
-    } 
-}*/
-  
-  
-  state = {
-    idbruker: idbruker,
-    //avsender: avsender,
-=======
 // const avsender = 4; // Obs! Denne må hentes fra innboks.js (jeg vet bare ikke hvordan...)
 
 
@@ -39,7 +19,6 @@ export default class Samtaleliste extends React.Component {
     this.state = {
     avsender: this.props.idbrukerFraInnboks,
     idbruker: idbruker,
->>>>>>> 7c47f4af575c4075723b80cf47b5201515ff6283
     samtale: [],
     }
   };
