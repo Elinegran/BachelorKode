@@ -18,16 +18,20 @@ export default class SelectGruppemedlem extends React.Component {
   
 
   componentDidMount() {
+    //alert('Gryppe fra frontend: '+ this.state.gruppeID)
     axios.get(`http://localhost:3001/api/gruppeGetMedlemmer`,
     {params: 
       {
       gruppeID: this.state.gruppeID}
       
     })
-     
       .then(res => {
         const bruker = res.data;
         this.setState({ bruker });
+      })
+      .catch(error => {
+        console.log(error)
+        console.log("message")
       })
   }
 

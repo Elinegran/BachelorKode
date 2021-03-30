@@ -1,11 +1,18 @@
 const db = require("../config/config.js");
+const express = require("express");
+const app = express();
 
+//const mysql = require("mysql");
+const cors = require("cors");
+
+app.use(cors());
+app.use(express.json());
 
 
 // Henter medlemmene til en gruppe
 exports.getMedlem = function(req, res)  {
-  const gruppeID = 2; //req.body.gruppeID; 
-  console.log(gruppeID); 
+  let gruppeID = req.query.gruppeID; 
+  console.log("Gruppeid: " + gruppeID); 
 
     const sqlSelect = `SELECT gruppemedlem.gruppeID, gruppenavn, gruppemedlem.idbruker, fornavn, etternavn  
                        FROM gruppemedlem, gruppe, bruker
@@ -13,7 +20,7 @@ exports.getMedlem = function(req, res)  {
                        AND gruppemedlem.gruppeID = gruppe.gruppeID
                        AND gruppemedlem.idbruker = bruker.idbruker;`;
     
-    db.query(sqlSelect, [gruppeID], (err, result) => {
+    db.query(sqlSelect, gruppeID, (err, result) => {
       if (err) {
         console.log(err)
       } 
