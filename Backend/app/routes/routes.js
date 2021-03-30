@@ -42,12 +42,13 @@ router.use("/chatbotGetAll", chatbotQueries.getAll);
 router.use("/chatbotCheckAll", chatbotQueries.checkAndGet);
 
 //Kalender
-const kalenderAlle = require('../controllers/kalender');
-router.use("/kalenderAlleAvtaler", kalenderAlle.getKalenderAlle);
-const avtaleNy = require('../controllers/kalender');
-router.use("/nyAvtale", avtaleNy.NyAvtale);
-const updateAvtale = require('../controllers/kalender');
-router.use("/updateTid", updateAvtale.UpdateTid);
+const kalender = require('../controllers/kalender');
+router.use("/kalenderAlleAvtaler", kalender.getKalenderAlle);
+
+router.use("/nyAvtale", kalender.NyAvtale);
+
+router.use("/updateTid", kalender.UpdateTid);
+router.use("/slettAvtale", kalender.deleteAvtale)
 
 //Meldinger:
 
