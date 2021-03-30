@@ -42,18 +42,23 @@ router.use("/chatbotGetAll", chatbotQueries.getAll);
 router.use("/chatbotCheckAll", chatbotQueries.checkAndGet);
 
 //Kalender
-const kalenderAlle = require('../controllers/kalender');
-router.use("/kalenderAlleAvtaler", kalenderAlle.getKalenderAlle);
-const avtaleNy = require('../controllers/kalender');
-router.use("/nyAvtale", avtaleNy.NyAvtale);
-const updateAvtale = require('../controllers/kalender');
-router.use("/updateTid", updateAvtale.UpdateTid);
+const kalender = require('../controllers/kalender');
+router.use("/kalenderAlleAvtaler", kalender.getKalenderAlle);
+
+router.use("/nyAvtale", kalender.NyAvtale);
+
+router.use("/updateTid", kalender.UpdateTid);
+router.use("/slettAvtale", kalender.deleteAvtale)
 
 //Meldinger:
 
 // Alle meldingene som en bruker har fått
 const mineMeldinger = require('../controllers/meldinger');
 router.use("/meldingerMineMeldinger", mineMeldinger.getMineMeldinger);
+
+ // Innboks skrive meldinger
+ const innboksMeldinger = require('../controllers/meldinger');
+ router.use("/meldingerInnboksMeldinger", innboksMeldinger.InsertInnboksMeldinger);
 
  // Samtalen mellom 2 brukere
 const minSamtale = require('../controllers/samtale');
@@ -70,9 +75,15 @@ router.use("/grupperAlleMineGrupper", allemineGrupper.hentMineGrupper);
 const addGruppe = require('../controllers/nyeGrupper'); 
 router.use("/grupperNyeGrupper", addGruppe.GruppeInput );
 
+// Legger et nytt meldlem til en gruppe
 const addGruppemedlem = require('../controllers/nyttMedlem'); 
 router.use("/grupperNyeGruppemedlemmer", addGruppemedlem.MedlemInput)
 
+// Sletter et medlem fraa en gruppe
+const slettGruppemedlem = require('../controllers/nyttMedlem'); 
+router.use("/grupperSlettMedlem", slettGruppemedlem.MedlemDelete)
+
+// Henter medlemmene i en gruppe
 const getGruppemedlem = require('../controllers/gruppemedlemmer');
 router.use("/gruppeGetMedlemmer", getGruppemedlem.getMedlem)
 

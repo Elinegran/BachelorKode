@@ -9,6 +9,8 @@ import Samtaleliste from '../../components/Meldinger/samtaler.js';
 import Gruppeliste from '../../components/Meldinger/grupper.js';
 import Avatar from '../../components/Meldinger/Felles/avatar.js';
 import Test from '../../components/Meldinger/Grupper/test.js';
+import Skrivemeldinger from '../../components/Meldinger/skriveMelding.js';
+
 
 
 //import LagNyGruppe from '../../components/Meldinger/Grupper/lagNyGruppe.js';
@@ -17,7 +19,7 @@ import NyttGruppemedlem from '../../components/Meldinger/Grupper/admGruppe.js';
 import NyttMedlem from '../../components/Meldinger/Grupper/nyttGruppemedlem.js';
 // Bootstap
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Row, Col, Button, Alert, Breadcrumb, Card, Form } from 'react-bootstrap';
+import { Accordion, Container, Row, Col, Button, Alert, Breadcrumb, Card, Form } from 'react-bootstrap';
    
 // Siden Meldinger 
 //(mb-3 (padding) og text-muted ("bruksanvisn") er ferdig className fra Bootstrap)
@@ -27,39 +29,24 @@ export const Meldinger = () => (
         
         {/* Brukerens innboks */}
         <section className="melding">
-                <Container>  
-                        <Row className="avatarOgOverskrift">
-                                <Avatar />
-                                <Meldingsheader overskrift = "Mine meldinger"/>
-                        </Row>
-                        <Row>
-                                <Meldingsliste /> 
-                        </Row>           
-                </Container>
+               <h1>Meldinger</h1>
+               <Skrivemeldinger /> 
+                <Meldingsliste /> 
+                                  
         </section>
 
-        {/* Samtale mellom 2 brukere */}
+        {/* Samtale mellom 2 brukere 
         <section className="samtale">
-                <Container>
-                        <Meldingsheader overskrift = "Samtale"/>
+        
+                    
                         <Samtaleliste /> 
                         
                 
-                        <Form>
-                                <Row>
-                                        <Col>
-                                                <Form.Group>
-                                                        <Form.Control type="text" placeholder="Skriv melding" />
-                                                </Form.Group>
-                                        </Col>
-                                        <Col>
-                                              <Button variant="warning" type="submit">Send</Button>  
-                                        </Col>
-                                </Row>
-                                
-                        </Form>
-                </Container>
-        </section>
+                       
+                        {/* Her kommer komponent 
+                        <Skrivemeldinger/>
+        
+        </section> */}
 
         {/* Liste over grupper */}
         <section className="gruppe"> 

@@ -28,3 +28,24 @@ exports.MedlemInput = function(req, res)  {
   );
 }; // slutt på funksjon MedlemsInput()
 
+
+// Funksjon som sletter et gruppemedlem i databasen
+exports.MedlemDelete = function(req, res)  {
+
+  // Henter gruppeID og brukerID fra frontend
+  const brukerID = req.body.idbruker
+  const gruppeID = req.body.gruppeID
+  
+  db.query(
+    "DELETE FROM gruppemedlem WHERE idbruker = ? AND gruppeID = ?;",
+    brukerID, gruppeID, 
+    (err, res) => {
+      if (err) {
+        console.log(err);
+      } else {
+        //res.send("Values Inserted"); // tror man kan få ID'en herfra
+      }
+    }
+  );
+}; // slutt på funksjon MedlemDelete()
+

@@ -8,6 +8,7 @@ import nbLocale from '@fullcalendar/core/locales/nb';
 import axios from 'axios';
 import SelectBrukere from '../Meldinger/Felles/selectBruker.js'; // Komponent som henter brukerne fra backend ----../Felles/selectBruker.js
 import AuthService from '../../services/auth.service';
+import Rediger from './Rediger';
 
 
 // const { students } = this.props;
@@ -30,7 +31,7 @@ export default class KalenderComp extends React.Component {
       start:0,
       end:0,
       opprettetav: '',  
-      opprettetfor : 0
+      opprettetfor : ''
     };
 
     this.handleTitleChange = this.handleTitleChange.bind(this);
@@ -83,11 +84,12 @@ export default class KalenderComp extends React.Component {
       const brukertype = AuthService.getRole();
       const idbruker = AuthService.getUserId();
       this.setState({opprettetav: idbruker});
-
+      //alert(idbruker);
       if(brukertype == 2){
         this.setState({veileder:true})
       }else{
         this.setState({veileder:false})
+        this.setState({opprettetfor:brukertype})
       }
       // alert("dette er bruker" + this.state.opprettetav + " . Veileder : " + this.state.veileder + "brukerID: " + idbruker)
       // this.setState({opprettetav: idbruker});
@@ -144,9 +146,6 @@ export default class KalenderComp extends React.Component {
   }
 
   renderSidebar() {
-
-
-    
     
 
     return (
@@ -172,7 +171,7 @@ export default class KalenderComp extends React.Component {
         <div> <b>
           {
             !this.state.veileder
-            ? null 
+            ? null
             : (
               <div>
                 <p>Dette er en avtale for:</p>
@@ -203,10 +202,13 @@ export default class KalenderComp extends React.Component {
           </label>
         </div>
         <div className='demo-app-sidebar-section'>
-          <h2>All Events ({this.state.currentEvents.length})</h2>
+          <h2>Alle Avtaler ({this.state.currentEvents.length})</h2>
           <ul>
             {this.state.currentEvents.map(renderSidebarEvent)}
           </ul>
+        </div>
+        <div>
+            <Rediger/>
         </div>
       </div>
     )
@@ -315,7 +317,7 @@ export default class KalenderComp extends React.Component {
     })
   }
 
-}
+}// Slutt på klasse
 
 function renderEventContent(eventInfo) {
   return (

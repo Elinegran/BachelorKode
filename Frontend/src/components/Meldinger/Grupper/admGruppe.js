@@ -3,6 +3,7 @@ import Axios from 'axios'; // for å sende/ motta til/ fra backend
 import { useState } from "react"; // for å sende til backend
 import 'bootstrap/dist/css/bootstrap.min.css'; // Bootstap
 import { Container, Row, Col, Button, Form } from 'react-bootstrap'; // Bootstrap-greier
+import AuthService from '../../../services/auth.service';
 
 // Funksjon for å legge til gruppemedlemmer i en gruppe i databasen
 function NyttGruppemedlem() {
@@ -13,11 +14,14 @@ function NyttGruppemedlem() {
     const addGruppemedlem = () => {
       Axios.post("http://localhost:3001/api/grupperNyeGruppemedlemmer", { 
         idbruker: idbruker,
-        gruppeID: gruppeID, })   
+        gruppeID: gruppeID, // Sender  idbruker og gruppeID til Backend 
+      }) 
     };
     
     // 1. hent gruppeid
+    idbruker = 14; 
     // 2. hent brukerid
+    gruppeID = 1; 
     // 3. legg til nytt gruppemedlem
   
     // Dette sendes til Meldingssiden
