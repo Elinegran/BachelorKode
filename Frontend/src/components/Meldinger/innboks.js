@@ -13,6 +13,7 @@ const idbruker = AuthService.getUserId();
  
 
 export default class Meldingsliste extends React.Component {
+<<<<<<< HEAD
   constructor(props){
     super(props);
     this.state = {
@@ -26,6 +27,15 @@ export default class Meldingsliste extends React.Component {
     idbruker: idbruker,
     meldinger: []
   } */
+=======
+  constructor (props){
+    super (props);
+    this.state = {
+    idbruker: idbruker,
+    meldinger: []
+    }
+  };
+>>>>>>> 7c47f4af575c4075723b80cf47b5201515ff6283
 
   componentDidMount() {
     axios.get(`http://localhost:3001/api/meldingerMineMeldinger`, 
@@ -42,13 +52,19 @@ export default class Meldingsliste extends React.Component {
 
   render() {
 
+<<<<<<< HEAD
     const {id} = this.state;
+=======
+    // const id = 4; 
+    
+>>>>>>> 7c47f4af575c4075723b80cf47b5201515ff6283
 
     return (
       
+      
         <Accordion>
           { this.state.meldinger.map(melding => 
-        
+          
           <Card>
               <Card.Header>
                   <Accordion.Toggle as={Button} variant="link" eventKey={melding.meldingsID}>
@@ -57,9 +73,13 @@ export default class Meldingsliste extends React.Component {
               </Card.Header>
               <Accordion.Collapse eventKey={melding.meldingsID}>
                 <Card.Body> 
+<<<<<<< HEAD
                   
                   {melding.melding}
                   <Samtaleliste />
+=======
+                  <Samtaleliste idbrukerFraInnboks={melding.avsender}/> 
+>>>>>>> 7c47f4af575c4075723b80cf47b5201515ff6283
                   
                 </Card.Body> 
             </Accordion.Collapse>
