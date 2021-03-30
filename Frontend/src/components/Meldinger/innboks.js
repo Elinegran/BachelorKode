@@ -35,16 +35,9 @@ export default class Meldingsliste extends React.Component {
 
 
   render() {
-
-    // const id = 4; 
-    
-
     return (
-      
-      
         <Accordion>
           { this.state.meldinger.map(melding => 
-          
           <Card>
               <Card.Header>
                   <Accordion.Toggle as={Button} variant="link" eventKey={melding.meldingsID}>
