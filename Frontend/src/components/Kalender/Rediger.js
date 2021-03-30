@@ -39,7 +39,8 @@ export default class Rediger extends React.Component {
               <Accordion.Collapse eventKey={avtaler.id}>
                   <Card.Body>
                       <Form>
-                      <Button Onclick ={handleDelete(avtaler.id)}>Slett</Button>
+                      {/* {handleDelete(avtaler.id)} */}
+                      <Button Onclick >Slett</Button>
                       <Button>Rediger</Button>
                       <Form.Group>
                       <Form.Label>Tittel:{avtaler.title}</Form.Label>
