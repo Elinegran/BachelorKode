@@ -19,7 +19,7 @@ import NyttGruppemedlem from '../../components/Meldinger/Grupper/admGruppe.js';
 import NyttMedlem from '../../components/Meldinger/Grupper/nyttGruppemedlem.js';
 // Bootstap
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Row, Col, Button, Alert, Breadcrumb, Card, Form } from 'react-bootstrap';
+import { Accordion, Container, Row, Col, Button, Alert, Breadcrumb, Card, Form } from 'react-bootstrap';
    
 // Siden Meldinger 
 //(mb-3 (padding) og text-muted ("bruksanvisn") er ferdig className fra Bootstrap)
@@ -29,7 +29,8 @@ export const Meldinger = () => (
         
         {/* Brukerens innboks */}
         <section className="melding">
-               <h1>Meldinger</h1> 
+               <h1>Meldinger</h1>
+               <Skrivemeldinger /> 
                 <Meldingsliste /> 
                                   
         </section>

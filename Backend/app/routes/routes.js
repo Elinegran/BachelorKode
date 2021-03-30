@@ -74,9 +74,15 @@ router.use("/grupperAlleMineGrupper", allemineGrupper.hentMineGrupper);
 const addGruppe = require('../controllers/nyeGrupper'); 
 router.use("/grupperNyeGrupper", addGruppe.GruppeInput );
 
+// Legger et nytt meldlem til en gruppe
 const addGruppemedlem = require('../controllers/nyttMedlem'); 
 router.use("/grupperNyeGruppemedlemmer", addGruppemedlem.MedlemInput)
 
+// Sletter et medlem fraa en gruppe
+const slettGruppemedlem = require('../controllers/nyttMedlem'); 
+router.use("/grupperSlettMedlem", slettGruppemedlem.MedlemDelete)
+
+// Henter medlemmene i en gruppe
 const getGruppemedlem = require('../controllers/gruppemedlemmer');
 router.use("/gruppeGetMedlemmer", getGruppemedlem.getMedlem)
 

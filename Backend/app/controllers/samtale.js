@@ -4,7 +4,8 @@ const db = require("../config/config.js");
 exports.getMinSamtale = function(req, res)  {
   let idbruker = req.query.idbruker;
   let avsender = req.query.avsender; 
-    const hentMinSamtale = `SELECT tid, fornavn, melding 
+  
+    const hentMinSamtale = `SELECT tid, fornavn, etternavn, melding 
                             FROM bruker, melding 
                             WHERE melding.avsender = bruker.idbruker 
                             AND (avsender = ? OR avsender = ?) 

@@ -8,11 +8,13 @@ import Samtaleliste from '../../components/Meldinger/samtaler.js';
 import AuthService from '../../services/auth.service'; 
 
 const idbruker = AuthService.getUserId();
-alert(idbruker);
+// alert(idbruker);
+ 
 
 export default class Meldingsliste extends React.Component {
   state = {
     idbruker: idbruker,
+    
     meldinger: []
   }
 
@@ -27,21 +29,14 @@ export default class Meldingsliste extends React.Component {
       })
   }
 
- /*  render() {
-    return (
-      <ul>
-        { this.state.meldinger.map(melding => 
-            <li key = {melding.idbruker}> { melding.tid } 
-                                          { melding.fornavn } 
-                                          { melding.etternavn } 
-                                          { melding.melding }</li>)}
-      </ul>+
-    )
-  }
-} */
-  render() {
-    return (
 
+
+  render() {
+
+    const id = 4; 
+
+    return (
+      
         <Accordion>
           { this.state.meldinger.map(melding => 
         
@@ -52,29 +47,18 @@ export default class Meldingsliste extends React.Component {
                   </Accordion.Toggle>
               </Card.Header>
               <Accordion.Collapse eventKey={melding.meldingsID}>
-                <Card.Body> <Samtaleliste /> </Card.Body> 
+                <Card.Body> 
+                  <Samtaleliste idbrukerFraInnboks={id}/> 
+                  
+                </Card.Body> 
             </Accordion.Collapse>
           </Card>
           )}
-        </Accordion>
+        </Accordion> 
         ) // slutt på return
     } // slutt på render
-}
+
+} // slutt på klasse
 
 
-/* 
-render() {
-  return (
-    <p>
-    { this.state.meldinger.map(melding => 
-    <Card className = "mb-3"> 
-      <Card.Body>
-        <Card.Title><h2>{melding.fornavn}</h2></Card.Title>
-        <Card.Text><p>{melding.melding}</p></Card.Text>
-      </Card.Body>
-    </Card>
-    )}
-    </p>
-  )
-}
-} */
+
