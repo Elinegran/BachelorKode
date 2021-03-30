@@ -5,11 +5,26 @@ import { Card, Accordion, Container, Row, Col, Button, Form } from 'react-bootst
 import NyttMedlem from './nyttGruppemedlem.js';
 
 export default class SelectGruppemedlem extends React.Component {
-  state = { bruker: [] }
+  constructor (props){
+    super (props);
+    this.state = {
+    gruppeID: this.props.gruppeIDFraGrupper,
+    bruker: [],
+    }
+  };
+  
+  
+  /* state = { bruker: [] } */
   
 
   componentDidMount() {
-    axios.get(`http://localhost:3001/api/gruppeGetMedlemmer`) // Skal sende gruppeID til Backend her?? Ja!
+    axios.get(`http://localhost:3001/api/gruppeGetMedlemmer`,
+    {params: 
+      {
+      gruppeID: this.state.gruppeID}
+      
+    })
+     
       .then(res => {
         const bruker = res.data;
         this.setState({ bruker });
