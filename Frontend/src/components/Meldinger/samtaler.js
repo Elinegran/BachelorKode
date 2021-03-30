@@ -6,16 +6,28 @@ import { Accordion, Container, Row, Col, Button, Alert, Breadcrumb, Card, Form }
 import AuthService from '../../services/auth.service'; 
 import Skrivemelding from './skriveMelding';
 import Skrivemeldinger from '../../components/Meldinger/skriveMelding.js';
+import Meldingsliste from './innboks.js'; 
 
 
 const idbruker = AuthService.getUserId();
 const avsender = 4; // Obs! Denne må hentes fra innboks.js (jeg vet bare ikke hvordan...)
-
+// const avsender = { this.props.idbrukerFraInnboks };
 
 export default class Samtaleliste extends React.Component {
+ 
+ /*  constructor(props){
+    super(props);
+    this.state = {
+        avsender: this.props.dataParentToChild,
+        idbruker: idbruker,
+        samtale: [],
+    } 
+}*/
+  
+  
   state = {
     idbruker: idbruker,
-    avsender: avsender,
+    //avsender: avsender,
     samtale: [],
   }
 
@@ -33,6 +45,7 @@ export default class Samtaleliste extends React.Component {
   }
 
 render() {
+
   return (
     <p>
     { this.state.samtale.map(melding => 

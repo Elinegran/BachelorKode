@@ -6,17 +6,26 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Accordion, Container, Row, Col, Button, Alert, Breadcrumb, Card, Form } from 'react-bootstrap'; 
 import Samtaleliste from '../../components/Meldinger/samtaler.js';
 import AuthService from '../../services/auth.service'; 
+import Skrivemeldinger from '../../components/Meldinger/skriveMelding.js';
 
 const idbruker = AuthService.getUserId();
 // alert(idbruker);
  
 
 export default class Meldingsliste extends React.Component {
-  state = {
-    idbruker: idbruker,
-    
-    meldinger: []
+  constructor(props){
+    super(props);
+    this.state = {
+      idbruker: idbruker,
+      meldinger: [], 
+      id: 4,
+    }
   }
+  
+    /* state = {
+    idbruker: idbruker,
+    meldinger: []
+  } */
 
   componentDidMount() {
     axios.get(`http://localhost:3001/api/meldingerMineMeldinger`, 
@@ -33,7 +42,7 @@ export default class Meldingsliste extends React.Component {
 
   render() {
 
-    const id = 4; 
+    const {id} = this.state;
 
     return (
       
@@ -48,7 +57,9 @@ export default class Meldingsliste extends React.Component {
               </Card.Header>
               <Accordion.Collapse eventKey={melding.meldingsID}>
                 <Card.Body> 
-                  <Samtaleliste idbrukerFraInnboks={id}/> 
+                  
+                  {melding.melding}
+                  <Samtaleliste />
                   
                 </Card.Body> 
             </Accordion.Collapse>
