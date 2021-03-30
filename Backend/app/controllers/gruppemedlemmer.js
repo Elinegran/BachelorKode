@@ -1,5 +1,6 @@
 const db = require("../config/config.js");
 
+// Henter medlemmene til en gruppe
 exports.getMedlem = function(req, res)  {
     const sqlSelect = `SELECT gruppemedlem.gruppeID, gruppenavn, gruppemedlem.idbruker, fornavn, etternavn  
                        FROM gruppemedlem, gruppe, bruker

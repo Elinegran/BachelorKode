@@ -2,16 +2,18 @@ const db = require("../config/config.js");
 
 // Funksjon som henter samtalen mellom 2 brukere (her Knut og Per) den nyeste nederst
 exports.getMinSamtale = function(req, res)  {
-     
-    const hentMinSamtale = `SELECT tid, fornavn, melding 
+  let idbruker = req.query.idbruker;
+  let avsender = req.query.avsender; 
+  
+    const hentMinSamtale = `SELECT tid, fornavn, etternavn, melding 
                             FROM bruker, melding 
                             WHERE melding.avsender = bruker.idbruker 
-                            AND (avsender = 2 OR avsender = 3) 
-                            AND (mottaker = 2 OR mottaker = 3) 
+                            AND (avsender = ? OR avsender = ?) 
+                            AND (mottaker = ? OR mottaker = ?) 
                             AND (avsender != mottaker) 
                             ORDER BY tid`;
 
-    db.query(hentMinSamtale, (err, result) => {
+    db.query(hentMinSamtale, [avsender, idbruker, idbruker, avsender], (err, result) => {
       if (err) {
         console.log(err)
       } 
