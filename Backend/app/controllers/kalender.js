@@ -9,7 +9,7 @@ app.use(cors());
 app.use(express.json());
 
 
-// Funksjon som henter alle meldingene som en bruker har fått (her Knut)
+// Funksjon som henteravtaler
 exports.getKalenderAlle = function(req, res)  {
 
     const hentAlleAvtaler = `select * from avtale;`;
@@ -84,4 +84,20 @@ exports.UpdateTid = function(req, res)  {
   );
 }; // slutt på funksjon NyAvtale()
 
+//Sletter en avtale
+exports.deleteAvtale = function(req, res)  {
 
+  const id = req.body.id;
+ 
+
+  const slett = `DELETE FROM avtale WHERE id  = ?`;
+
+  db.query(slett, [id],(err, result) => {
+    if (err) {
+      console.log(err)
+    } 
+    else {
+     console.log("Sletting velykket");
+      }
+    });
+};

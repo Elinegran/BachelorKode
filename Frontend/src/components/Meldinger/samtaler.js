@@ -9,21 +9,24 @@ import Skrivemeldinger from '../../components/Meldinger/skriveMelding.js';
 
 
 const idbruker = AuthService.getUserId();
-const avsender = 4; // Obs! Denne må hentes fra innboks.js (jeg vet bare ikke hvordan...)
+// const avsender = 4; // Obs! Denne må hentes fra innboks.js (jeg vet bare ikke hvordan...)
 
 
 export default class Samtaleliste extends React.Component {
-  state = {
+  constructor (props){
+    super (props);
+    this.state = {
+    avsender: this.props.idbrukerFraInnboks,
     idbruker: idbruker,
-    avsender: avsender,
     samtale: [],
-  }
+    }
+  };
 
   componentDidMount() {
     axios.get(`http://localhost:3001/api/meldingerMinSamtale`,
     {params: 
       {idbruker: idbruker,
-      avsender: avsender}
+      avsender: this.state.avsender}
       
     })
       .then(res => {
@@ -43,7 +46,7 @@ render() {
       </Card.Body>
     </Card>
     )}
-    <Skrivemeldinger />
+    <Skrivemeldinger mottakerID = {this.state.avsender} />
     </p>
   )
 }
