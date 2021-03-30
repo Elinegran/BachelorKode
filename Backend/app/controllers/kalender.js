@@ -58,7 +58,7 @@ exports.NyAvtale = function(req, res)  {
 
 //UPDATE tid
 exports.UpdateTid = function(req, res)  {
-
+  console.log("nå er du her");
   // Her hentes Variablene  fra frontend 
   const start = req.body.start;
   const end = req.body.end; 
@@ -74,6 +74,7 @@ exports.UpdateTid = function(req, res)  {
       (err, res) => {
       if (err) {
         console.log(err);
+        console.log(start, end, title, gstart, opprettetfor)
 
       } else {
           console.log(start, end, title, gstart, opprettetfor)
@@ -87,14 +88,13 @@ exports.UpdateTid = function(req, res)  {
 //Sletter en avtale
 exports.deleteAvtale = function(req, res)  {
 
-  const id = req.body.id;
- 
+  const id = req.body.avtaleid;
+  const slett = 'DELETE FROM avtale WHERE id  = ?';
 
-  const slett = `DELETE FROM avtale WHERE id  = ?`;
-
-  db.query(slett, [id],(err, result) => {
+  db.query(slett, id,(err, res) => {
     if (err) {
       console.log(err)
+      console.log(id)
     } 
     else {
      console.log("Sletting velykket");

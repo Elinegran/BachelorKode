@@ -9,6 +9,8 @@ import axios from 'axios';
 import SelectBrukere from '../Meldinger/Felles/selectBruker.js'; // Komponent som henter brukerne fra backend ----../Felles/selectBruker.js
 import AuthService from '../../services/auth.service';
 import Rediger from './Rediger';
+import { Card, Accordion, Button, Form } from 'react-bootstrap'; // Bootstrap-greier
+
 
 
 // const { students } = this.props;
@@ -208,7 +210,8 @@ export default class KalenderComp extends React.Component {
           </ul>
         </div>
         <div>
-            <Rediger/>
+            {/* <Rediger/> */}
+            <Button onClick = {this.handleDelete(avtaler.id)}>Slett</Button>
         </div>
       </div>
     )
@@ -221,8 +224,9 @@ export default class KalenderComp extends React.Component {
   }
 
   handleUpdate = (info) => {
-    if (!alert("Vil du Avtale for :" + info.event.extendedProps.Opprettetfor + " til kl: "+ info.event.start + "slutt" + info.event.end +"?")) {
-      console.log(info.event)
+    if (!alert("Dette sender di:" + info.event.startStr + " " + info.event.endStr + " " + info.event.title +"?")) {
+      
+      console.log(info.event.extendedProps.Opprettetfor)
 
       const updateTid = {
         
@@ -233,7 +237,7 @@ export default class KalenderComp extends React.Component {
         opprettetfor:info.event.extendedProps.Opprettetfor
       };
 
-      axios.patch(`http://localhost:3001/api/updateTid`,updateTid)
+      axios.post(`http://localhost:3001/api/updateTid`, updateTid)
       .then(response => {
         console.log(response)
       })
@@ -243,6 +247,19 @@ export default class KalenderComp extends React.Component {
 
     }
   }
+
+  handleDelete = (id) => {
+    //id.preventDefault();
+    //alert("Dette er slett ");
+    //  axios.delete(`http://localhost:3001/api/slettAvtale`, id)
+    //  .then(response => {
+    //      console.log(response)
+    //    })
+    //    .catch(error => {
+    //      console.log(error)
+    //    })
+
+     }
 
   handleSave = (event) => {
     const burkertype =  AuthService.getRole()
@@ -305,10 +322,21 @@ export default class KalenderComp extends React.Component {
 
 
   handleEventClick = (clickInfo) => {
-    console.log(clickInfo)
-    alert("dette er clikinfo: " + clickInfo.event.extendedProps.beskrivelse + clickInfo.event.extendedProps.sted)
-    // For å hente ut ekstrended props skrive: clickInfo.event.extendedProps.DinVariabel
-   
+    if (window.confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
+      //alert("dette er ID: " + clickInfo.event.id)
+      console.log(clickInfo.event);
+      const avtaleid = clickInfo.event.id;
+      axios.post(`http://localhost:3001/api/slettAvtale`, {
+        avtaleid: avtaleid
+      })
+        .then(response => {
+            console.log(response)
+          })
+          .catch(error => {
+            console.log(error)
+            console.log("message")
+          })
+    }
   }
 
   handleEvents = (events) => {
