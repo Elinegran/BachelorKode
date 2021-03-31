@@ -3,16 +3,32 @@ import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Bootstap
 import { Card, Accordion, Container, Row, Col, Button, Form } from 'react-bootstrap'; // Bootstrap-greier
 import NyttMedlem from './nyttGruppemedlem.js';
+import SlettGruppe from './slettGruppe';
 
 export default class SelectGruppemedlem extends React.Component {
-  state = { bruker: [] }
+  constructor (props){
+    super (props);
+    this.state = {
+    gruppeID: this.props.gruppeIDFraGrupper,
+    bruker: [],
+    }
+  };
   
-
   componentDidMount() {
-    axios.get(`http://localhost:3001/api/gruppeGetMedlemmer`) // Skal sende gruppeID til Backend her?? Ja!
+    //alert('Gruppe fra frontend: '+ this.state.gruppeID)
+    axios.get(`http://localhost:3001/api/gruppeGetMedlemmer`,
+    {params: 
+      {
+      gruppeID: this.state.gruppeID}
+      
+    })
       .then(res => {
         const bruker = res.data;
         this.setState({ bruker });
+      })
+      .catch(error => {
+        console.log(error)
+        console.log("message")
       })
   }
 
@@ -34,7 +50,7 @@ export default class SelectGruppemedlem extends React.Component {
           <h3>Rediger gruppe</h3>
         <Row> 
           <Col><Button type="button" className="btn btn-success" style={{float: 'left'}}>Endre navn</Button></Col>
-          <Col><Button type="button" className="btn btn-warning" style={{float: 'right'}}>Slett gruppe</Button></Col>
+          <Col> <SlettGruppe senderGruppeID={this.state.gruppeID}/> </Col>
         </Row>
         </p>
         <p>
