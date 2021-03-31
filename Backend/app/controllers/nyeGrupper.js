@@ -8,8 +8,10 @@ const cors = require("cors");
 app.use(cors());
 app.use(express.json());
 
+// Funksjonene i denne fila er flyttet. 
+
 // Funksjon som lager en ny gruppe i databasen
-exports.GruppeInput = function(req, res)  {
+/* exports.GruppeInput = function(req, res)  {
 
     // Her hentes gruppenavn fra frontend
     const gruppe = req.body.gruppenavn
@@ -26,9 +28,9 @@ exports.GruppeInput = function(req, res)  {
       }
     );
   }; // slutt på funksjon GruppeInput()
+ */
 
-
-// Funksjon som lagrer et nytt gruppemedlem i databasen
+/* // Funksjon som lagrer et nytt gruppemedlem i databasen
 exports.MedlemInput = function(req, res)  {
 
   // Henter gruppeID og brukerID fra frontend
@@ -48,3 +50,4 @@ exports.MedlemInput = function(req, res)  {
   );
 }; // slutt på funksjon MedlemsInput()
 
+ */

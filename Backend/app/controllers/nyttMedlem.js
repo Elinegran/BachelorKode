@@ -8,7 +8,9 @@ const cors = require("cors");
 app.use(cors());
 app.use(express.json());
 
-// Funksjon som lagrer et nytt gruppemedlem i databasen
+// Funksjonene er flyttet til grupper.js
+
+/* // Funksjon som lagrer et nytt gruppemedlem i databasen
 exports.MedlemInput = function(req, res)  {
 
   // Henter gruppeID og brukerID fra frontend
@@ -26,7 +28,7 @@ exports.MedlemInput = function(req, res)  {
       }
     }
   );
-}; // slutt på funksjon MedlemsInput()
+}; // slutt på funksjon MedlemsInput() */
 
 
 // Funksjon som sletter et gruppemedlem i databasen
