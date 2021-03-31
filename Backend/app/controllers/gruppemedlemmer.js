@@ -8,11 +8,12 @@ const cors = require("cors");
 app.use(cors());
 app.use(express.json());
 
+// Denne filen har ingen funksjoner nå !! Kan slettes etterhvert. 
 
-// Henter medlemmene til en gruppe
+ // Henter medlemmene til en gruppe
 exports.getMedlem = function(req, res)  {
   let gruppeID = req.query.gruppeID; 
-  console.log("Gruppeid: " + gruppeID); 
+  // console.log("Gruppeid: " + gruppeID); 
 
     const sqlSelect = `SELECT gruppemedlem.gruppeID, gruppenavn, gruppemedlem.idbruker, fornavn, etternavn  
                        FROM gruppemedlem, gruppe, bruker
@@ -29,3 +30,4 @@ exports.getMedlem = function(req, res)  {
         }
       });
 };
+ 

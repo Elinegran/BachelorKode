@@ -41,7 +41,7 @@ router.use("/tidsbankMonthlyAverage", tidsbankQueries.getMonthlyAverage);
 router.use("/chatbotGetAll", chatbotQueries.getAll);
 router.use("/chatbotCheckAll", chatbotQueries.checkAndGet);
 
-//Kalender
+//Kalender: 
 const kalender = require('../controllers/kalender');
 router.use("/kalenderAlleAvtaler", kalender.getKalenderAlle);
 
@@ -50,8 +50,7 @@ router.use("/nyAvtale", kalender.NyAvtale);
 router.use("/updateTid", kalender.UpdateTid);
 router.use("/slettAvtale", kalender.deleteAvtale)
 
-//Meldinger:
-
+//Meldinger: 
 // Alle meldingene som en bruker har fått
 const mineMeldinger = require('../controllers/meldinger');
 router.use("/meldingerMineMeldinger", mineMeldinger.getMineMeldinger);
@@ -64,28 +63,40 @@ router.use("/meldingerMineMeldinger", mineMeldinger.getMineMeldinger);
 const minSamtale = require('../controllers/samtale');
 router.use("/meldingerMinSamtale", minSamtale.getMinSamtale); 
 
-// Henter alle grupper
+// Grupper: 
+// Henter ALLE gruppene (Funker!)
 const mineGrupper= require('../controllers/grupper');
 router.use("/meldingerMineGrupper", mineGrupper.getMineGrupper); 
 
-// Henter gruppene til en bruker
-const allemineGrupper= require('../controllers/grupper');
-router.use("/grupperAlleMineGrupper", allemineGrupper.hentMineGrupper); 
+// Henter gruppene til en bruker (Ikke lagd enda, venter til vi deler bruker og veileder)
+const brukerGrupper= require('../controllers/grupper');
+// router.use("/brukerGrupper", brukerGrupper.hentMineGrupper); 
 
-const addGruppe = require('../controllers/nyeGrupper'); 
+// Legger til en ny gruppe (Funker!)
+const addGruppe = require('../controllers/grupper'); 
 router.use("/grupperNyeGrupper", addGruppe.GruppeInput );
 
-// Legger et nytt meldlem til en gruppe
-const addGruppemedlem = require('../controllers/nyttMedlem'); 
-router.use("/grupperNyeGruppemedlemmer", addGruppemedlem.MedlemInput)
+// Endrer gruppenavnet (Ikke lagt enda)
+const gruppenavn = require('../controllers/grupper'); 
+router.use("/gruppenavn", gruppenavn.nyttGruppenavn );
 
-// Sletter et medlem fraa en gruppe
-const slettGruppemedlem = require('../controllers/nyttMedlem'); 
-router.use("/grupperSlettMedlem", slettGruppemedlem.MedlemDelete)
+// Sletter en gruppe (Ikke lagd enda)
+const deleteGruppe = require('../controllers/grupper'); 
+router.use("/deleteGruppe", deleteGruppe.slettGruppe );
 
-// Henter medlemmene i en gruppe
-const getGruppemedlem = require('../controllers/gruppemedlemmer');
+// Legger et nytt meldlem til en gruppe (Funker IKKE!!!!)
+const addMedlem = require('../controllers/grupper'); 
+//router.use("/addMedlem", addMedlem.MedlemInput)
+
+// Sletter et medlem fra en gruppe (Ikke lagd enda)
+const deleteMedlem = require('../controllers/grupper'); 
+router.use("/deleteMedlem", deleteMedlem.slettMedlem)
+
+// Henter MEDLEMMENE i en gruppe (Funker!!)
+const getGruppemedlem = require('../controllers/grupper');
 router.use("/gruppeGetMedlemmer", getGruppemedlem.getMedlem)
+
+
 
 
 // Eksporterer denne modellen, så server.js får brukt den
