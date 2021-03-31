@@ -7,10 +7,10 @@ import { Accordion, Button, Card, Container, Row, Col} from 'react-bootstrap'
 
 export const Lenkebibliotek = () => (
     <Container>
-       <Col>
-        <Lenker /> 
+       <Col >
+       <h1 style = {{ textAlign: 'center'}}>Her kan du legge til nye lenker</h1>
+        <LenkeV /> 
         <br></br>
-        <LenkeV />
         </Col>  
         
              

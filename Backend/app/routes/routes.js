@@ -88,5 +88,19 @@ const getGruppemedlem = require('../controllers/gruppemedlemmer');
 router.use("/gruppeGetMedlemmer", getGruppemedlem.getMedlem)
 
 
+//Lenkebibliotek: 
+// Se alle lenkene 
+
+// Opprette ny lenke
+
+// redigere lenke
+
+// Slette lenke
+
+
+
+
+
 // Eksporterer denne modellen, så server.js får brukt den
 module.exports = router;
+

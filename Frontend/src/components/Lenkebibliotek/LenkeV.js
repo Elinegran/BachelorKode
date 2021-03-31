@@ -1,61 +1,53 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {InputGroup, Button} from 'react-bootstrap'
+import {InputGroup, Button, InputFelt} from 'react-bootstrap'
 import FormControl from 'react-bootstrap/FormControl'
 import Form from 'react-bootstrap/Form'
+import SelectBrukere from '../Meldinger/Felles/selectBruker';
+import SelectGruppe from '../Meldinger/Grupper/selextGruppe';
+import Gruppeliste from '../Meldinger/grupper';
 
-export const LenkeV = () => {
+export const LenkeV = ({}) => {
     return (
 
     <container>
-        <label><b>Legg til link</b></label>
         <Form>
             <Form.Group controlId="exampleForm.SelectCustom">
-            <Form.Label>Velg en brukergruppe</Form.Label>
-            <Form.Control as="select" size="sm" custom>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-            </Form.Control>
-             </Form.Group>
+            {/* <Form.Label>Velg en gruppe</Form.Label> */}
+            <SelectGruppe/>
+            </Form.Group>
         </Form>
 
-        <label>eller velg en bruker</label>
+        <label><b>eller velg</b></label>
 
         <Form>
             <Form.Group controlId="exampleForm.SelectCustom">
-            <Form.Label>Velg en bruker</Form.Label>
-            <Form.Control as="select" size="sm" custom>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-            </Form.Control>
+            {/* <Form.Label>Velg en bruker</Form.Label> */}
+            <SelectBrukere/>
              </Form.Group>
         </Form>
 
         <label><b>Skriv inn info</b></label>
 
         <Form.Group>
-            <Form.Control type="text" placeholder="Tittel" />
+            <Form.Control input type="text" placeholder="Tittel" />
+            {/* onChange = {(event) => {setleggeTilLenke(event.target.value);}} */}
             <br />
-            <Form.Control type="text" placeholder="Info" />
+            <Form.Control input type="text" placeholder="Info" />
             </Form.Group>
 
         <label htmlFor="basic-url">Legg til en lenke</label>
         <InputGroup className="mb-3">
                 <InputGroup.Prepend>
                     <InputGroup.Text id="basic-addon3">
-                    https://eksempel.com
+                        URL
                     </InputGroup.Text>
                 </InputGroup.Prepend>
             <FormControl id="add_link" aria-describedby="basic-addon3" />
         </InputGroup>
-
+        
         <Button variant="primary">Legg til lenke</Button>{' '}
+        <br />
   
     </container>
    
