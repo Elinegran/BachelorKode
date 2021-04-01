@@ -9,6 +9,8 @@ export default class Rediger extends React.Component {
         this.state = {
             avtale: []
         }
+
+        this.handleDelete = this.handleDelete.bind(this);
     }
   
     componentDidMount() {
@@ -21,7 +23,18 @@ export default class Rediger extends React.Component {
         })
     }
 
-    
+    handleDelete(id){
+      //id.preventDefault();
+      alert("Dette er slett ");
+      //  axios.delete(`http://localhost:3001/api/slettAvtale`, id)
+      //  .then(response => {
+      //      console.log(response)
+      //    })
+      //    .catch(error => {
+      //      console.log(error)
+      //    })
+
+       }
     
    
   
@@ -40,7 +53,7 @@ export default class Rediger extends React.Component {
                   <Card.Body>
                       <Form>
                       {/* {handleDelete(avtaler.id)} */}
-                      <Button Onclick >Slett</Button>
+                      <Button onClick = {this.handleDelete(avtaler.id)}>Slett</Button>
                       <Button>Rediger</Button>
                       <Form.Group>
                       <Form.Label>Tittel:{avtaler.title}</Form.Label>
@@ -89,24 +102,10 @@ export default class Rediger extends React.Component {
       ) // slutt på return
     } // slutt på render
 
+    
 
 
     
     // }
   }; // slutt på funksjon Gruppeliste
 
-      //DETTE FUNKER IKKE?? HVORFOR DET???
-    function handleDelete(id){
-       //alert("Dette er ID: " + id);
-        axios.delete(`http://localhost:3001/api/slettAvtale`, id)
-        .then(response => {
-            console.log(response)
-          })
-          .catch(error => {
-            console.log(error)
-          })
-
-        }
- 
-
-  
