@@ -10,6 +10,7 @@ import Gruppeliste from '../../components/Meldinger/grupper.js';
 import Avatar from '../../components/Meldinger/Felles/avatar.js';
 import Test from '../../components/Meldinger/Grupper/test.js';
 import Skrivemeldinger from '../../components/Meldinger/skriveMelding.js';
+import SelectBrukere from '../../components/Meldinger/Felles/selectBruker';
 
 
 
@@ -30,6 +31,11 @@ export const Meldinger = () => (
         {/* Brukerens innboks */}
         <section className="melding">
                <h1>Meldinger</h1>
+               <SelectBrukere 
+
+                // onHandleSelect={this.handleSelect}
+
+              />
                <Skrivemeldinger /> 
                 <Meldingsliste /> 
                                   

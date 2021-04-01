@@ -8,6 +8,8 @@ import Skrivemelding from './skriveMelding';
 import Skrivemeldinger from '../../components/Meldinger/skriveMelding.js';
 
 
+
+
 const idbruker = AuthService.getUserId();
 // const avsender = 4; // Obs! Denne må hentes fra innboks.js (jeg vet bare ikke hvordan...)
 
@@ -50,5 +52,7 @@ render() {
     </p>
   )
 }
+
+
 } 
 
