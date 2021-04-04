@@ -24,10 +24,11 @@ export const Meldinger = () => (
         
         {/* Brukerens innboks */}
         <section className="melding">
-               <h1>Meldinger</h1>
-               <Skrivemeldinger /> 
-                <Meldingsliste /> 
-                                  
+                <Container>
+                        <h1 className= "display-4">Meldinger</h1>
+                        <Skrivemeldinger /> 
+                        <Meldingsliste /> 
+                </Container>                  
         </section>
 
         {/* Samtale mellom 2 brukere 
@@ -39,15 +40,11 @@ export const Meldinger = () => (
         </section> */}
 
         <section className="gruppe"> {/* Grupper */}
-        
-                <h1> Grupper </h1>
-                <NyGruppe /> {/* inputfelt og knapp for å legg til ny gruppe*/}
-
-                {/*<NyttMedlem />  selectfelter og knapp for å legg til nytt gruppemedlem */}
-
-                <Container fluid>
-                        <Gruppeliste/> {/* Liste over alle gruppene */}     
-                </Container>           
+                <Container>
+                        <h1 className= "display-4"> Grupper </h1>
+                        <NyGruppe /> {/* inputfelt og knapp for å legg til ny gruppe*/}
+                        <Gruppeliste/> {/* Liste over alle gruppene */}            
+                </Container>        
         </section> 
 </main>
 )

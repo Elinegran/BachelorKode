@@ -25,11 +25,11 @@ function NyGruppe() {
                 <Row>
                     <Col>
                         <Form.Group>
-                            <Form.Control input type="text" placeholder="Gruppenavn" style={{float: 'left'}} onChange = {(event) => {setGruppenavn(event.target.value);}}/>
+                            <Form.Control input type="text" placeholder="Gruppenavn" style={{float: 'right'}} onChange = {(event) => {setGruppenavn(event.target.value);}}/>
                         </Form.Group>
                     </Col>
                     <Col>  
-                        <Button onClick={addGruppe} variant="success" style={{float: 'right'}} type="submit">Lagre gruppa</Button>
+                        <Button onClick={addGruppe} variant="success" style={{float: 'left'}} type="submit">Lagre gruppa</Button>
                     </Col>
                 </Row>        
             </Form> 

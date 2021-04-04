@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Bootstap
-import { Accordion, Button, Card, Row, Col } from 'react-bootstrap'; // Bootstrap-greier
+import { Accordion, Button, Card, Row, Col, Container } from 'react-bootstrap'; // Bootstrap-greier
 import SelectGruppemedlem from './Grupper/selectGruppemedlem.js'; // Komponent som henter brukerne fra backend
 import NyttMedlem from './Grupper/nyttMedlem.js';
 import SlettGruppe from './Grupper/slettGruppe';
@@ -26,8 +26,8 @@ export default class Gruppeliste extends React.Component {
 
   render() {
     return ( // Returnerer en kollaps-liste over alle gruppene, med en liste med medlemmer inni 
-      <p>
-      <h2> Alle grupper </h2>
+      <article>
+      <h2 className="container p-3"> Alle grupper </h2>
       <Accordion>
       {this.state.gruppe.map(melding => 
         <Card>
@@ -62,7 +62,7 @@ export default class Gruppeliste extends React.Component {
           </Accordion.Collapse>
         </Card>)}
       </Accordion>
-      </p>
+      </article>
     ) // slutt på return
   } // slutt på render
 } // slutt på funksjon Gruppeliste
