@@ -36,7 +36,7 @@ exports.hentBrukerGrupper = function(req, res)  {
     });
 }; // slutt på funksjon hent brukerGrupper
 
-// Legger til en NY GRUPPE i databasen
+/* // Legger til en NY GRUPPE i databasen
 exports.GruppeInput = function(req, res)  {
 
   // Her hentes gruppenavn fra frontend
@@ -50,10 +50,28 @@ exports.GruppeInput = function(req, res)  {
       if (err) {
         console.log(err);
       } else {
-        //res.send("Values Inserted"); // tror man kan få ID'en herfra
+          res.send(result);
       }
     }
   );
+}; // slutt på funksjon GruppeInput() */
+
+// Legger til en NY GRUPPE i databasen
+exports.GruppeInput = function(req, res)  {
+
+  // Henter gruppenavn fra frontend
+  const gruppenavn = req.body.gruppenavn;
+
+  const nyGruppe = 'INSERT INTO gruppe (gruppenavn) VALUES (?)';
+  db.query(nyGruppe, gruppenavn, (err, result) => { 
+    if (err) {
+      console.log(err)
+    } 
+    else {
+      res.send(result);
+      }
+    });
+
 }; // slutt på funksjon GruppeInput()
 
 
@@ -113,7 +131,7 @@ exports.getMedlem = function(req, res)  {
       });
 };
 
-// Denne funker IKKE!!
+// Denne funker delvis!!
 // Funksjon som lagrer et NYTT GRUPPEMEDLEM i databasen
 exports.MedlemInput = function(req, res)  {
 
