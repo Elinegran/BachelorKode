@@ -10,15 +10,10 @@ import Gruppeliste from '../../components/Meldinger/grupper.js';
 import Avatar from '../../components/Meldinger/Felles/avatar.js';
 import Test from '../../components/Meldinger/Grupper/test.js';
 import Skrivemeldinger from '../../components/Meldinger/skriveMelding.js';
-
-
-
-//import LagNyGruppe from '../../components/Meldinger/Grupper/lagNyGruppe.js';
 import NyGruppe from '../../components/Meldinger/Grupper/nyGruppe.js';
 import NyttGruppemedlem from '../../components/Meldinger/Grupper/admGruppe.js';
 import NyttMedlem from '../../components/Meldinger/Grupper/nyttGruppemedlem.js';
-// Bootstap
-import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css'; // Bootstap
 import { Accordion, Container, Row, Col, Button, Alert, Breadcrumb, Card, Form } from 'react-bootstrap';
    
 // Siden Meldinger 
@@ -37,15 +32,10 @@ export const Meldinger = () => (
 
         {/* Samtale mellom 2 brukere 
         <section className="samtale">
-        
-                    
                         <Samtaleliste /> 
-                        
-                
-                       
+
                         {/* Her kommer komponent 
                         <Skrivemeldinger/>
-        
         </section> */}
 
         <section className="gruppe"> {/* Grupper */}
