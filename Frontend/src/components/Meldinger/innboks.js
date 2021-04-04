@@ -42,11 +42,13 @@ export default class Meldingsliste extends React.Component {
           <Card>
               <Card.Header>
                   <Accordion.Toggle as={Button} variant="link" eventKey={melding.meldingsID}>
-                    <h2>{melding.fornavn} {melding.etternavn} {melding.avsender} {melding.mottaker} </h2>
-                    
-                    <h3><SimpleDateTime dateFormat="DMY" timeFormat="HMA" dateSeparator="." timeSeparator=":"
-                    showTime="1" showDate="1" >
-                      {melding.tid}</SimpleDateTime></h3>
+                    <h2>{melding.fornavn} {melding.etternavn} {melding.avsender} {melding.mottaker} 
+                      <br></br>
+
+                      <SimpleDateTime dateFormat="DMY" timeFormat="HMA" dateSeparator="." timeSeparator=":"
+                      showTime="1" showDate="1" >
+                      {melding.tid}</SimpleDateTime>
+                    </h2>
                    
                                     
                   </Accordion.Toggle>
