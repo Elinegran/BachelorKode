@@ -53,12 +53,10 @@ section.gruppe {
 
 main.meldingssiden {
   display: flex; 
-  background: pink; 
+  background: white; 
 }
 
-h3 {
-  font-size: small;
-}
+
 
 section {
   background: ; 
@@ -66,7 +64,7 @@ section {
 }
 
 section.melding {
-  background: red; 
+  background: #e5ebeb; 
   width: 60%;
 }
 
@@ -76,7 +74,7 @@ section.samtale {
 }
 
 section.gruppe {
-  background: rgb(213, 231, 231);
+  background: #e5ebeb;
   width: 40%;  
 }
 
