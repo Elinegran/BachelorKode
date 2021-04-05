@@ -10,16 +10,18 @@ import Gruppeliste from '../../components/Meldinger/grupper.js';
 import Avatar from '../../components/Meldinger/Felles/avatar.js';
 import Test from '../../components/Meldinger/Grupper/test.js';
 import Skrivemeldinger from '../../components/Meldinger/skriveMelding.js';
+<<<<<<< HEAD
 import SelectBrukere from '../../components/Meldinger/Felles/selectBruker';
 
 
 
 //import LagNyGruppe from '../../components/Meldinger/Grupper/lagNyGruppe.js';
+=======
+>>>>>>> edacd396efc117492110c81395a8814dc149b72b
 import NyGruppe from '../../components/Meldinger/Grupper/nyGruppe.js';
 import NyttGruppemedlem from '../../components/Meldinger/Grupper/admGruppe.js';
 import NyttMedlem from '../../components/Meldinger/Grupper/nyttGruppemedlem.js';
-// Bootstap
-import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css'; // Bootstap
 import { Accordion, Container, Row, Col, Button, Alert, Breadcrumb, Card, Form } from 'react-bootstrap';
    
 // Siden Meldinger 
@@ -42,31 +44,27 @@ export const Meldinger = () => (
                <Skrivemeldinger /> 
                 <Meldingsliste /> 
                                   
+                <Container>
+                        <h1 className= "display-4">Meldinger</h1>
+                        <Skrivemeldinger /> 
+                        <Meldingsliste /> 
+                </Container>                  
         </section>
 
         {/* Samtale mellom 2 brukere 
         <section className="samtale">
-        
-                    
                         <Samtaleliste /> 
-                        
-                
-                       
+
                         {/* Her kommer komponent 
                         <Skrivemeldinger/>
-        
         </section> */}
 
         <section className="gruppe"> {/* Grupper */}
-        
-                <h1> Grupper </h1>
-                <NyGruppe /> {/* inputfelt og knapp for å legg til ny gruppe*/}
-
-                {/*<NyttMedlem />  selectfelter og knapp for å legg til nytt gruppemedlem */}
-
-                <Container fluid>
-                        <Gruppeliste/> {/* Liste over alle gruppene */}     
-                </Container>           
+                <Container>
+                        <h1 className= "display-4"> Grupper </h1>
+                        <NyGruppe /> {/* inputfelt og knapp for å legg til ny gruppe*/}
+                        <Gruppeliste/> {/* Liste over alle gruppene */}            
+                </Container>        
         </section> 
 </main>
 )
