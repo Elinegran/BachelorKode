@@ -67,6 +67,10 @@ router.use("/meldingerMinSamtale", minSamtale.getMinSamtale);
 const meldingTilAlle = require('../controllers/meldinger');
 router.use("/meldingTilAlle", meldingTilAlle.MeldingTilAlle); 
 
+// Sende melding til ALLE brukerne i en GRUPPE
+const gruppemelding = require('../controllers/meldinger');
+router.use("/gruppemelding", gruppemelding.Gruppemelding); 
+
 // Grupper: 
 // Henter ALLE gruppene (Funker!)
 const mineGrupper= require('../controllers/grupper');

@@ -18,7 +18,7 @@ function Gruppemelding() {
  */
     // Sender det nye gruppenavnet til backend
     const sendMelding = () => {
-      axios.post("http://localhost:3001/api/meldingTilAlle") 
+      axios.post("http://localhost:3001/api/gruppemelding", {}) 
     };
   
     // Dette sendes til Meldingssiden

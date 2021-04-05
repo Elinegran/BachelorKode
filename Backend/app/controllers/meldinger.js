@@ -82,4 +82,24 @@ exports.MeldingTilAlle = function(req, res) {
   });
 };
 
+// Funksjon som sender melding til ALLE brukerne i en GRUPPE
+exports.Gruppemelding = function(req, res) {
+
+  // Liste med alle meldingene
+  const medlemmer = [
+    [13, 13, 'Melding til alle fra Berit'],
+    [3, 13, 'Melding til alle fra Berit'],
+    [4, 13, 'Melding til alle fra Berit']
+  ];
+  const meldingTilMedlemmer = `INSERT INTO melding(mottaker, avsender, melding) VALUES (?, ?, ?)`;
+  db.query(meldingTilMedlemmer, [medlemmer], (err,result) => {
+    if (err) {
+      console.log(err)
+    }
+    else{
+      res.send(result);
+    }
+  });
+};
+
 
