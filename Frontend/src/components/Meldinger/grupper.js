@@ -6,6 +6,7 @@ import SelectGruppemedlem from './Grupper/selectGruppemedlem.js'; // Komponent s
 import NyttMedlem from './Grupper/nyttMedlem.js';
 import SlettGruppe from './Grupper/slettGruppe';
 import EndreGruppenavn from './Grupper/endreGruppenavn'; 
+import Gruppemelding from './Grupper/gruppemelding'; 
 
 export default class Gruppeliste extends React.Component {
   constructor (props){
@@ -29,6 +30,18 @@ export default class Gruppeliste extends React.Component {
       <article>
       <h2 className="container p-3"> Alle grupper </h2>
       <Accordion>
+        <Card>
+          <Card.Header>
+            <Accordion.Toggle as={Button} variant="link" eventKey={"Alle"}>
+              <h2> Alle </h2>
+            </Accordion.Toggle>
+          </Card.Header>
+          <Accordion.Collapse eventKey={"Alle"}>
+            <Card.Body>
+              <h3>Send melding til alle</h3>
+            </Card.Body> 
+          </Accordion.Collapse>
+        </Card>
       {this.state.gruppe.map(melding => 
         <Card>
           <Card.Header>
@@ -39,13 +52,7 @@ export default class Gruppeliste extends React.Component {
 
           <Accordion.Collapse eventKey={melding.gruppeID}>
             <Card.Body>
-              <p>
-                <h3>Send gruppemelding</h3>
-                <Row> 
-                  <Col><input></input></Col>
-                  <Col><Button type="button" className="btn btn-success" style={{float: 'right'}}>Send</Button></Col>
-                </Row>
-              </p>
+              <Gruppemelding />
               <p>
                 <NyttMedlem senderGruppeID={melding.gruppeID} senderID={melding.gruppeID}/> 
               </p>

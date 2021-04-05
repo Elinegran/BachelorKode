@@ -62,3 +62,44 @@ exports.getMinSamtale = function(req, res)  {
       });
 }; 
 
+// Funksjon som sender melding til ALLE brukerne
+exports.MeldingTilAlle = function(req, res) {
+
+  // Liste med alle meldingene
+  const alleBrukere = [
+    [2, 13, 'Melding til alle fra Berit'],
+    [3, 13, 'Melding til alle fra Berit'],
+    [4, 13, 'Melding til alle fra Berit']
+  ];
+  const meldingTilAlle = `INSERT INTO melding(mottaker, avsender, melding) VALUES (?, ?, ?)`;
+  db.query(meldingTilAlle, [alleBrukere], (err,result) => {
+    if (err) {
+      console.log(err)
+    }
+    else{
+      res.send(result);
+    }
+  });
+};
+
+// Funksjon som sender melding til ALLE brukerne i en GRUPPE
+exports.Gruppemelding = function(req, res) {
+
+  // Liste med alle meldingene
+  const medlemmer = [
+    [13, 13, 'Melding til alle fra Berit'],
+    [3, 13, 'Melding til alle fra Berit'],
+    [4, 13, 'Melding til alle fra Berit']
+  ];
+  const meldingTilMedlemmer = `INSERT INTO melding(mottaker, avsender, melding) VALUES (?, ?, ?)`;
+  db.query(meldingTilMedlemmer, [medlemmer], (err,result) => {
+    if (err) {
+      console.log(err)
+    }
+    else{
+      res.send(result);
+    }
+  });
+};
+
+
