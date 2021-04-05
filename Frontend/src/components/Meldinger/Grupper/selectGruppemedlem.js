@@ -36,15 +36,15 @@ export default class SelectGruppemedlem extends React.Component {
   render() {
     return(
       <p>
-        <p>
+        {/* <p>
           <h3>Send gruppemelding</h3>
           <Row> 
             <Col><input></input></Col>
             <Col><Button type="button" className="btn btn-success" style={{float: 'right'}}>Send</Button></Col>
           </Row>
-        </p>
-        <p>
-          <NyttMedlem />
+        </p> */}
+        {/* <p>
+          <NyttMedlem senderGruppeID={this.state.gruppeID}/>
         </p>
         <p>
           <h3>Rediger gruppe</h3>
@@ -53,7 +53,7 @@ export default class SelectGruppemedlem extends React.Component {
           <Col> <SlettGruppe senderGruppeID={this.state.gruppeID}/> </Col>
         </Row>
         </p>
-        <p>
+        <p> */}
           <h3>Medlemmer</h3>
         <ul className="list-group">
         { this.state.bruker.map(alleBrukere => 
@@ -66,7 +66,7 @@ export default class SelectGruppemedlem extends React.Component {
         )} 
         </ul> 
         </p>
-      </p>         
+            
     ) // slutt på return
   } // slutt på render
 } // slutt på klasse SelectGruppemedlem

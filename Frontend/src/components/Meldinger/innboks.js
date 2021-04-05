@@ -7,6 +7,7 @@ import { Accordion, Container, Row, Col, Button, Alert, Breadcrumb, Card, Form }
 import Samtaleliste from '../../components/Meldinger/samtaler.js';
 import AuthService from '../../services/auth.service'; 
 import Skrivemeldinger from '../../components/Meldinger/skriveMelding.js';
+import SimpleDateTime  from 'react-simple-timestamp-to-date'; // Formatere tid og dato
 
 const idbruker = AuthService.getUserId();
 // alert(idbruker);
@@ -41,7 +42,15 @@ export default class Meldingsliste extends React.Component {
           <Card>
               <Card.Header>
                   <Accordion.Toggle as={Button} variant="link" eventKey={melding.meldingsID}>
-                    <h2>{melding.fornavn} {melding.etternavn} {melding.avsender} {melding.mottaker} {melding.tid} </h2>
+                    <h2>{melding.fornavn} {melding.etternavn} {melding.avsender} {melding.mottaker} 
+                      <br></br>
+
+                      <SimpleDateTime dateFormat="DMY" timeFormat="HMA" dateSeparator="." timeSeparator=":"
+                      showTime="1" showDate="1" >
+                      {melding.tid}</SimpleDateTime>
+                    </h2>
+                   
+                                    
                   </Accordion.Toggle>
               </Card.Header>
               <Accordion.Collapse eventKey={melding.meldingsID}>

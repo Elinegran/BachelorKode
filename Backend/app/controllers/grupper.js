@@ -36,11 +36,12 @@ exports.hentBrukerGrupper = function(req, res)  {
     });
 }; // slutt på funksjon hent brukerGrupper
 
-// Legger til en NY GRUPPE i databasen
+/* // Legger til en NY GRUPPE i databasen
 exports.GruppeInput = function(req, res)  {
 
   // Her hentes gruppenavn fra frontend
   const gruppe = req.body.gruppenavn
+  colsole.log("gruppeID er: " + gruppe); 
   
   db.query(
     "INSERT INTO gruppe (gruppenavn) VALUES (?)",
@@ -49,18 +50,40 @@ exports.GruppeInput = function(req, res)  {
       if (err) {
         console.log(err);
       } else {
-        //res.send("Values Inserted"); // tror man kan få ID'en herfra
+          res.send(result);
       }
     }
   );
+}; // slutt på funksjon GruppeInput() */
+
+// Legger til en NY GRUPPE i databasen
+exports.GruppeInput = function(req, res)  {
+
+  // Henter gruppenavn fra frontend
+  const gruppenavn = req.body.gruppenavn;
+
+  const nyGruppe = 'INSERT INTO gruppe (gruppenavn) VALUES (?)';
+  db.query(nyGruppe, gruppenavn, (err, result) => { 
+    if (err) {
+      console.log(err)
+    } 
+    else {
+      res.send(result);
+      }
+    });
+
 }; // slutt på funksjon GruppeInput()
 
 
 // SLETTER en gruppe fra DB. NB! Alle medlemmene må være slettet først
 exports.slettGruppe = function(req, res)  {
-  let gruppeID = req.body.gruppeID
+  
+  const gruppeID = 51; 
+  //let gruppeID = req.body.gruppeID; // req.body.gruppeID; 
+  //console.log('GruppeID er: ' + gruppeID); // Får ikke tak i gruppeID (undefined)
 
-  const sqlSelect = "DELETE FROM gruppe WHERE gruppeID = ?";
+  const sqlSelect = "DELETE FROM gruppe WHERE gruppeID = ?"; // funket med post i Frontend og UPDATE 
+  //const sqlSelect = "UPDATE gruppe SET gruppenavn = 'min nye gruppe' WHERE gruppeID = 49";
   db.query(sqlSelect, gruppeID, (err, result) => {
     if (err) {
       console.log(err)
@@ -75,11 +98,11 @@ exports.slettGruppe = function(req, res)  {
 
 // OPPDATERER gruppenavnet
 exports.nyttGruppenavn = function(req, res)  {
-  let gruppeID = req.query.gruppeID;
-  let gruppenavn = req.query.gruppenavn;
+  const gruppeID = req.body.gruppeID; 
+  const gruppenavn = req.body.gruppenavn; 
 
-  const sqlSelect = "UPDATE gruppe SET gruppenavn = '?' WHERE gruppeID = ?";
-  db.query(sqlSelect, [gruppenavn, gruppeID], (err, result) => { // er det riktig med [ggg, ggg]??
+  const sqlSelect = "UPDATE gruppe SET gruppenavn = ? WHERE gruppeID = ?";
+  db.query(sqlSelect, [gruppenavn, gruppeID], (err, result) => { 
     if (err) {
       console.log(err)
     } 
@@ -110,25 +133,24 @@ exports.getMedlem = function(req, res)  {
       });
 };
 
-// Denne funker IKKE!!
+// Denne funker delvis!!
 // Funksjon som lagrer et NYTT GRUPPEMEDLEM i databasen
-exports.nyttMeldem = function(req, res)  {
+exports.MedlemInput = function(req, res)  {
 
   // Henter gruppeID og brukerID fra frontend
-  const brukerID = req.body.idbruker
+  const idbruker = req.body.idbruker
   const gruppeID = req.body.gruppeID
-  
-  db.query(
-    "INSERT INTO gruppemedlem VALUES (?,?)",
-    brukerID, gruppeID, 
-    (err, res) => {
-      if (err) {
-        console.log(err);
-      } else {
-        //res.send("Values Inserted"); // tror man kan få ID'en herfra
+
+  const nyttMedlem = 'INSERT INTO gruppemedlem VALUES (?,?)';
+  db.query(nyttMedlem, [idbruker, gruppeID], (err, result) => { 
+    if (err) {
+      console.log(err)
+    } 
+    else {
+      res.send(result);
       }
-    }
-  );
+    });
+
 }; // slutt på funksjon nyttMedlem()
 
 
