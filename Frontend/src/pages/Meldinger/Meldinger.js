@@ -32,17 +32,13 @@ export const Meldinger = () => (
         
         {/* Brukerens innboks */}
         <section className="melding">
-               <h1>Meldinger</h1>
-               <SelectBrukere 
+               
+                {/* // onHandleSelect={this.handleSelect} */}
 
-                // onHandleSelect={this.handleSelect}
-
-              />
-               <Skrivemeldinger /> 
-                <Meldingsliste /> 
-                                  
+                       
                 <Container>
                         <h1 className= "display-4">Meldinger</h1>
+                        <SelectBrukere/>
                         <Skrivemeldinger /> 
                         <Meldingsliste /> 
                 </Container>                  

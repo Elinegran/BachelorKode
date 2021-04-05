@@ -60,7 +60,7 @@ router.use("/meldingerMineMeldinger", mineMeldinger.getMineMeldinger);
  router.use("/meldingerInnboksMeldinger", innboksMeldinger.InsertInnboksMeldinger);
 
  // Samtalen mellom 2 brukere
-const minSamtale = require('../controllers/samtale');
+const minSamtale = require('../controllers/meldinger');
 router.use("/meldingerMinSamtale", minSamtale.getMinSamtale); 
 
 // Grupper: 
