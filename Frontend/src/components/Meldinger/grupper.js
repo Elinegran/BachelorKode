@@ -30,6 +30,18 @@ export default class Gruppeliste extends React.Component {
       <article>
       <h2 className="container p-3"> Alle grupper </h2>
       <Accordion>
+        <Card>
+          <Card.Header>
+            <Accordion.Toggle as={Button} variant="link" eventKey={"Alle"}>
+              <h2> Alle </h2>
+            </Accordion.Toggle>
+          </Card.Header>
+          <Accordion.Collapse eventKey={"Alle"}>
+            <Card.Body>
+              <h3>Send melding til alle</h3>
+            </Card.Body> 
+          </Accordion.Collapse>
+        </Card>
       {this.state.gruppe.map(melding => 
         <Card>
           <Card.Header>
