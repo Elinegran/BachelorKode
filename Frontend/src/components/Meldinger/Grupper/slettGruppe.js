@@ -71,8 +71,9 @@ export default SlettGruppe;
     
     // Komponent som sendes, vises på Meldingssiden
     render() {
-        
+       //alert("GruppeiD" + this.state.gruppeID); 
     return (
+      
         <Button 
             type="submit"   
             className="btn btn-warning" 

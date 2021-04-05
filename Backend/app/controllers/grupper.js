@@ -68,9 +68,11 @@ exports.slettGruppe = function(req, res)  {
   db.query(sqlSelect, gruppeID, (err, result) => {
     if (err) {
       console.log(err)
+      console.log('Gruppe id: ' + gruppeID)
     } 
     else {
       res.send(result);
+      console.log('Gruppe id: ' + gruppeID)
       }
     });
 };
