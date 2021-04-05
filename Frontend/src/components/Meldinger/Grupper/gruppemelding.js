@@ -1,27 +1,29 @@
-import React from 'react';
-import axios from 'axios'; // for å sende/ motta til/ fra backend
-import { useState } from "react"; // for å sende til backend
-import 'bootstrap/dist/css/bootstrap.min.css'; // Bootstap
-import { Container, Row, Col, Button, Form } from 'react-bootstrap'; // Bootstrap-greier
+import React from 'react'
+import axios from 'axios';
+import AuthService from '../../../services/auth.service';
 
-// Funksjon for å opprette en ny gruppe i databasen
-function Gruppemelding() {
-    //const [idbruker, setIDbruker] = useState(0); // idbruker hentes fra inputfelt
-    //const gruppeID = props.senderGruppeID; // gruppeID sendes fra grupper.js
-    //const [brukerliste, setBrukerliste] = useState([]);
-    //const brukere = []; 
+import { Container, Row, Col, Button, Alert, Breadcrumb, Card, Form } from 'react-bootstrap';
 
-    // Henter brukere fra DB
-    /* const bruker = () => {
-        axios.get("http://localhost:3001/api/brukerGetAll")
-      };
- */
-    // Sender det nye gruppenavnet til backend
-    const sendMelding = () => {
-      axios.post("http://localhost:3001/api/gruppemelding", {}) 
-    };
-  
-    // Dette sendes til Meldingssiden
+
+const idbruker = AuthService.getUserId();
+
+
+export default class gruppemelding extends React.Component {
+    constructor (props){
+        super (props);
+        this.state = {
+            avsender: idbruker, 
+            mottaker:this.props.mottakerID,
+            melding: ""
+        };
+        this.handleInputSend = this.handleInputSend.bind(this);
+    }
+    handleInputSend(event){
+        this.setState({melding:event.target.value})
+        
+    }
+
+    render(){    
     return (
         <p>
             <h3>Send gruppemelding</h3>
@@ -30,17 +32,12 @@ function Gruppemelding() {
                     <Col>
                         <Form.Group>
                             <Form.Control 
-                                input type="text" 
-                                placeholder="Skriv gruppemelding" 
-                                style={{float: 'left'}} />
+                                input type="text" placeholder ="Skriv gruppemelding"  onChange = {this.handleInputSend} style={{float: 'left'}} />
                         </Form.Group>
                     </Col>
                     <Col>  
                         <Button 
-                            type="submit"
-                            className="btn btn-success"
-                            style={{float: 'right'}} 
-                            onClick={sendMelding} 
+                            type="submit" className="btn btn-success"style={{float: 'right'}} onClick = {this.handleSend}
                             > Send
                         </Button>
                     </Col>
@@ -48,7 +45,23 @@ function Gruppemelding() {
             </Form>
         </p>
     ) // slutt på return()
+}
 
-} // slutt på funksjonen NyttMedlem()
+handleSend = (event) => {
+    alert("Du sender: " + this.state.melding);
 
-export default Gruppemelding; 
+        const nyGruppemelding = {
+            mottaker: this.state.mottaker,
+            avsender: this.state.avsender,
+            melding: this.state.melding
+        };
+
+        axios.post(`http://localhost:3001/api/gruppemelding`,nyGruppemelding)
+        .then(response => {
+          console.log(response)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    }
+}
