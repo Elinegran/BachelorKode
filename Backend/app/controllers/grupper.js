@@ -36,25 +36,6 @@ exports.hentBrukerGrupper = function(req, res)  {
     });
 }; // slutt på funksjon hent brukerGrupper
 
-/* // Legger til en NY GRUPPE i databasen
-exports.GruppeInput = function(req, res)  {
-
-  // Her hentes gruppenavn fra frontend
-  const gruppe = req.body.gruppenavn
-  colsole.log("gruppeID er: " + gruppe); 
-  
-  db.query(
-    "INSERT INTO gruppe (gruppenavn) VALUES (?)",
-    gruppe,
-    (err, res) => {
-      if (err) {
-        console.log(err);
-      } else {
-          res.send(result);
-      }
-    }
-  );
-}; // slutt på funksjon GruppeInput() */
 
 // Legger til en NY GRUPPE i databasen
 exports.GruppeInput = function(req, res)  {
@@ -87,9 +68,11 @@ exports.slettGruppe = function(req, res)  {
   db.query(sqlSelect, gruppeID, (err, result) => {
     if (err) {
       console.log(err)
+      console.log('Gruppe id: ' + gruppeID)
     } 
     else {
       res.send(result);
+      console.log('Gruppe id: ' + gruppeID)
       }
     });
 };

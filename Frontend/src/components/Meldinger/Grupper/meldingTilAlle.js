@@ -3,36 +3,39 @@ import axios from 'axios'; // for å sende/ motta til/ fra backend
 import { useState } from "react"; // for å sende til backend
 import 'bootstrap/dist/css/bootstrap.min.css'; // Bootstap
 import { Container, Row, Col, Button, Form } from 'react-bootstrap'; // Bootstrap-greier
+import AuthService from '../../../services/auth.service'; 
+
+const innlogget = AuthService.getUserId(); // Den brukeren som er innlogget, altså avsenderen 
 
 // Funksjon for å opprette en ny gruppe i databasen
 function MeldingTilAlle() {
-    //const [idbruker, setIDbruker] = useState(0); // idbruker hentes fra inputfelt
-    //const gruppeID = props.senderGruppeID; // gruppeID sendes fra grupper.js
-    //const [brukerliste, setBrukerliste] = useState([]);
-    //const brukere = []; 
-
-    // Henter brukere fra DB
+    const avsender = innlogget; // Avsenderen
+    const mottakere = [2,3,13]; // Liste med alle mottakerne
+    const [melding, setMelding] = useState(""); // Meldingsteksten hentes fra inputfelt
+    
+    // Henter ALLE brukere fra DB
     /* const bruker = () => {
         axios.get("http://localhost:3001/api/brukerGetAll")
-      };
- */
+      };*/
+ 
     // Sender det nye gruppenavnet til backend
     const sendMelding = () => {
-      axios.post("http://localhost:3001/api/gruppemelding", {}) 
+      axios.post("http://localhost:3001/api/meldingTilAlle", {avsender: avsender, mottaker: mottakere, melding: melding}) 
     };
   
     // Dette sendes til Meldingssiden
     return (
         <p>
-            <h3>Send gruppemelding</h3>
+            <h3>Send melding til alle</h3>
             <Form>
                 <Row>
                     <Col>
                         <Form.Group>
                             <Form.Control 
                                 input type="text" 
-                                placeholder="Skriv gruppemelding" 
-                                style={{float: 'left'}} />
+                                placeholder="Skriv melding" 
+                                style={{float: 'left'}} 
+                                onChange = {(event) => {setMelding(event.target.value);}}/>
                         </Form.Group>
                     </Col>
                     <Col>  
@@ -51,4 +54,4 @@ function MeldingTilAlle() {
 
 } // slutt på funksjonen 
 
-export default MedlingTilAlle; 
+export default MeldingTilAlle; 
