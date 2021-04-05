@@ -16,7 +16,7 @@ export default class NyMelding extends React.Component {
 
     async handleSelect(value){
         this.setState({mottakerbruker: value })
-         await alert('Detter er id:' + this.state.mottakerbruker)
+        
     };
     
 
@@ -24,7 +24,7 @@ export default class NyMelding extends React.Component {
         return(
             <Container>
             <SelectBrukere  onHandleSelect={this.handleSelect} />
-                        
+          
             <Skrivemeldinger mottakerID = {this.state.mottakerbruker} /> 
             </Container>
         )
