@@ -7,6 +7,7 @@ import NyttMedlem from './Grupper/nyttMedlem.js';
 import SlettGruppe from './Grupper/slettGruppe';
 import EndreGruppenavn from './Grupper/endreGruppenavn'; 
 import Gruppemelding from './Grupper/gruppemelding'; 
+import MeldingTilAlle from './Grupper/meldingTilAlle';
 
 export default class Gruppeliste extends React.Component {
   constructor (props){
@@ -38,7 +39,7 @@ export default class Gruppeliste extends React.Component {
           </Card.Header>
           <Accordion.Collapse eventKey={"Alle"}>
             <Card.Body>
-              <h3>Send melding til alle</h3>
+              <MeldingTilAlle />
             </Card.Body> 
           </Accordion.Collapse>
         </Card>
