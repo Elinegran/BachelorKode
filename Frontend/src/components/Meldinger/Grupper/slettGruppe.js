@@ -17,7 +17,7 @@ export default class SelectGruppemedlem extends React.Component {
     slett(){
         
             //alert('Gruppe fra frontend: '+ this.state.gruppeID)
-            axios.delete(`http://localhost:3001/api/deleteGruppe`,
+            axios.post(`http://localhost:3001/api/deleteGruppe`,
             {params: 
               { gruppeID: this.state.gruppeID }
               
@@ -37,8 +37,9 @@ export default class SelectGruppemedlem extends React.Component {
     
     // Komponent som sendes, vises på Meldingssiden
     render() {
-        
+       //alert("GruppeiD" + this.state.gruppeID); 
     return (
+      
         <Button 
             type="submit"   
             className="btn btn-warning" 

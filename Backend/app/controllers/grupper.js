@@ -58,15 +58,17 @@ exports.GruppeInput = function(req, res)  {
 
 // SLETTER en gruppe fra DB. NB! Alle medlemmene må være slettet først
 exports.slettGruppe = function(req, res)  {
-  let gruppeID = req.query.gruppeID;
+  let gruppeID = req.body.gruppeID
 
   const sqlSelect = "DELETE FROM gruppe WHERE gruppeID = ?";
-  db.query(sqlSelect, [gruppeID], (err, result) => {
+  db.query(sqlSelect, gruppeID, (err, result) => {
     if (err) {
       console.log(err)
+      console.log('Gruppe id: ' + gruppeID)
     } 
     else {
       res.send(result);
+      console.log('Gruppe id: ' + gruppeID)
       }
     });
 };
