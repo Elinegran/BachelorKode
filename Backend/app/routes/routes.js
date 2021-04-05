@@ -76,17 +76,17 @@ const brukerGrupper= require('../controllers/grupper');
 const addGruppe = require('../controllers/grupper'); 
 router.use("/grupperNyeGrupper", addGruppe.GruppeInput );
 
-// Endrer gruppenavnet (Ikke lagt enda)
+// Endrer gruppenavnet (Funker!)
 const gruppenavn = require('../controllers/grupper'); 
 router.use("/gruppenavn", gruppenavn.nyttGruppenavn );
 
-// Sletter en gruppe (Ikke lagd enda)
+// Sletter en gruppe (Funker IKKE, Backend mottar ikke gruppeID)
 const deleteGruppe = require('../controllers/grupper'); 
 router.use("/deleteGruppe", deleteGruppe.slettGruppe );
 
-// Legger et nytt meldlem til en gruppe (Funker IKKE!!!!)
+// Legger et nytt meldlem til en gruppe (Funker delvis, idbruker er input, ikke select)
 const addMedlem = require('../controllers/grupper'); 
-//router.use("/addMedlem", addMedlem.MedlemInput)
+router.use("/addMedlem", addMedlem.MedlemInput)
 
 // Sletter et medlem fra en gruppe (Ikke lagd enda)
 const deleteMedlem = require('../controllers/grupper'); 
@@ -95,6 +95,8 @@ router.use("/deleteMedlem", deleteMedlem.slettMedlem)
 // Henter MEDLEMMENE i en gruppe (Funker!!)
 const getGruppemedlem = require('../controllers/grupper');
 router.use("/gruppeGetMedlemmer", getGruppemedlem.getMedlem)
+
+
 
 
 

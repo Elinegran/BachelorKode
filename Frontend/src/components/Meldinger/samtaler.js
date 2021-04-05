@@ -7,6 +7,7 @@ import AuthService from '../../services/auth.service';
 import Skrivemelding from './skriveMelding';
 import Skrivemeldinger from '../../components/Meldinger/skriveMelding.js';
 import Meldingsliste from './innboks.js'; 
+import SimpleDateTime  from 'react-simple-timestamp-to-date'; // Formatere tid og dato
 
 
 
@@ -46,7 +47,11 @@ render() {
     <Card> 
       <Card.Body>
         <Card.Title><h2>{melding.fornavn} {melding.etternavn}</h2></Card.Title>
-        <Card.Text><p>{melding.melding}</p></Card.Text>
+        <Card.Text>
+          <p>{melding.melding}</p>
+          <p><SimpleDateTime dateFormat="DMY" timeFormat="HMA" dateSeparator="." timeSeparator=":" showTime="1" showDate="1" >
+            {melding.tid}</SimpleDateTime></p>
+        </Card.Text>
       </Card.Body>
     </Card>
     )}

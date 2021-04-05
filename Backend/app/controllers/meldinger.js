@@ -20,7 +20,7 @@ exports.InsertInnboksMeldinger = function(req, res) {
 };
 
 
-// Funksjon som henter alle meldingene som en bruker har fått (her Knut)
+// Funksjon som henter alle meldingene som en bruker har fått
 exports.getMineMeldinger = function(req, res)  {
   let idbruker = req.query.idbruker;
     const hentMineMeldinger = `SELECT meldingsID, avsender, mottaker, tid, fornavn, etternavn, melding
@@ -38,4 +38,6 @@ exports.getMineMeldinger = function(req, res)  {
         }
       });
 };
+
+
 
