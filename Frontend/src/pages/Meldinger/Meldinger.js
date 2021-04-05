@@ -10,14 +10,11 @@ import Gruppeliste from '../../components/Meldinger/grupper.js';
 import Avatar from '../../components/Meldinger/Felles/avatar.js';
 import Test from '../../components/Meldinger/Grupper/test.js';
 import Skrivemeldinger from '../../components/Meldinger/skriveMelding.js';
-<<<<<<< HEAD
 import SelectBrukere from '../../components/Meldinger/Felles/selectBruker';
 
 
 
 //import LagNyGruppe from '../../components/Meldinger/Grupper/lagNyGruppe.js';
-=======
->>>>>>> edacd396efc117492110c81395a8814dc149b72b
 import NyGruppe from '../../components/Meldinger/Grupper/nyGruppe.js';
 import NyttGruppemedlem from '../../components/Meldinger/Grupper/admGruppe.js';
 import NyttMedlem from '../../components/Meldinger/Grupper/nyttGruppemedlem.js';
