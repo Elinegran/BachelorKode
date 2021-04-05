@@ -25,8 +25,11 @@ import { Accordion, Container, Row, Col, Button, Alert, Breadcrumb, Card, Form }
 // Siden Meldinger 
 //(mb-3 (padding) og text-muted ("bruksanvisn") er ferdig className fra Bootstrap)
 // fluid bruker max-vidden av skjermen
+
+
 export const Meldinger = () => (
 <main className ="meldingssiden">
+        
         
         {/* Brukerens innboks */}
         <section className="melding">
