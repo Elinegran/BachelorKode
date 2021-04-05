@@ -51,17 +51,21 @@ router.use("/updateTid", kalender.UpdateTid);
 router.use("/slettAvtale", kalender.deleteAvtale)
 
 //Meldinger: 
-// Alle meldingene som en bruker har fått
+// Alle meldingene som en bruker har fått (Funker!)
 const mineMeldinger = require('../controllers/meldinger');
 router.use("/meldingerMineMeldinger", mineMeldinger.getMineMeldinger);
 
- // Innboks skrive meldinger
+ // Innboks skrive meldinger (Funker, delvis bare hvis du har mottaker)
  const innboksMeldinger = require('../controllers/meldinger');
  router.use("/meldingerInnboksMeldinger", innboksMeldinger.InsertInnboksMeldinger);
 
- // Samtalen mellom 2 brukere
+ // Samtalen mellom 2 brukere (Funker!)
 const minSamtale = require('../controllers/meldinger');
 router.use("/meldingerMinSamtale", minSamtale.getMinSamtale); 
+
+// Sende melding til ALLE brukerne
+const meldingTilAlle = require('../controllers/meldinger');
+router.use("/meldingTilAlle", meldingTilAlle.MeldingTilAlle); 
 
 // Grupper: 
 // Henter ALLE gruppene (Funker!)

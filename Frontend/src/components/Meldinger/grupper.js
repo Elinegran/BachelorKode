@@ -6,6 +6,7 @@ import SelectGruppemedlem from './Grupper/selectGruppemedlem.js'; // Komponent s
 import NyttMedlem from './Grupper/nyttMedlem.js';
 import SlettGruppe from './Grupper/slettGruppe';
 import EndreGruppenavn from './Grupper/endreGruppenavn'; 
+import Gruppemelding from './Grupper/gruppemelding'; 
 
 export default class Gruppeliste extends React.Component {
   constructor (props){
@@ -39,13 +40,7 @@ export default class Gruppeliste extends React.Component {
 
           <Accordion.Collapse eventKey={melding.gruppeID}>
             <Card.Body>
-              <p>
-                <h3>Send gruppemelding</h3>
-                <Row> 
-                  <Col><input></input></Col>
-                  <Col><Button type="button" className="btn btn-success" style={{float: 'right'}}>Send</Button></Col>
-                </Row>
-              </p>
+              <Gruppemelding />
               <p>
                 <NyttMedlem senderGruppeID={melding.gruppeID} senderID={melding.gruppeID}/> 
               </p>
