@@ -6,41 +6,66 @@ import { Container, Row, Col, Button, Form } from 'react-bootstrap'; // Bootstra
 import SelectGruppe from './selextGruppe.js'; // Komponent som henter gruppene fra backend
 import SelectBrukere from '../Felles/selectBruker.js'; // Komponent som henter brukerne fra backend
 
-// Funksjon for å legge til et nytt gruppemedlem i databasen
-function NyttMedlem() {
-    const [gruppeID, setGruppeID] = useState(0); // tomt tall 
-    const [idbruker, setIDbruker] = useState(0); // tomt tall
-    const [gruppeliste, setGruppeliste] = useState([]); // tom liste
+// const idbruker = 13; // Denne må hentes fra et eller annet sted...
 
-    // Sender det nye gruppenavnet til backend
-    const addMedlem = () => {
-      axios.post("http://localhost:3001/api/grupperNyeGruppemedlemmer", { gruppeID: gruppeID, idbruker: idbruker, })   
-    };
+// Klasse for å legge til et nytt gruppemedlem i databasen
+export default class NyttMedlem extends React.Component {
+    constructor (props){
+        super (props);
+        this.state = {
+            idbruker: this.props.senderID, 
+            gruppeID: this.props.senderGruppeID, // gruppeID sendes fra selectGruppemedlem.js
+        };
+        this.handleInputChange = this.handleInputChange.bind(this);
+    }
 
-    // Dette sendes til Meldingssiden
-    return (
-        <p>
-            <Form>
-                <Row>
-                    <Col>
-                        <Form.Label><h3>Legg til medlem</h3></Form.Label>
-                    </Col>
-                </Row>
-                <Row>
-                    
-                
-                    <Col>
-                        <SelectBrukere />
-                    </Col>
-                
-                <Col>
-                <Button onClick={addMedlem} style={{float: 'right'}} variant="success" type="submit">Lagre medlem</Button></Col></Row>
-            </Form>
-        </p>
+    handleInputChange(event){
+        this.setState({melding:event.target.value})   
+    }              // endre melding til ny
 
-    ) // slutt på return()
+    render(){
+        // Dette sendes til Meldingssiden
+        return (
+            <p>
+                <Form>
+                    <Row>
+                        <Col>
+                            <Form.Label><h3>Legg til medlem</h3></Form.Label>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <SelectBrukere />
+                        </Col>
+                        <Col>
+                            <Form.Group>
+                                <Form.Control type="text" placeholder="idbruker" onChange = {this.handleInputChange} />
+                            </Form.Group>
+                        </Col>
+                        <Col>
+                            <Button variant="success" type="submit" onClick = {this.handleSend} style={{float: 'right'}}>Lagre medlem</Button>
+                        </Col>
+                    </Row>   
+                </Form>
+            </p>
+        ) // slutt på return()
+    } // Slutt på render
 
-} // slutt på funksjonen NyttMedlem()
+    handleSend = (event) => {
+        alert("Du la til: " + this.state.melding);
 
-export default NyttMedlem; 
+        const nyttMedlem = {
+            idbruker: this.state.idbruker,
+            gruppeID: this.state.gruppeID    
+        };
 
+    // Sender til Backend
+    axios.post(`http://localhost:3001/api/addMedlem`, nyttMedlem)
+        .then(response => {
+            console.log(response)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+    }
+} // slutt på Klasse NyttMedlem

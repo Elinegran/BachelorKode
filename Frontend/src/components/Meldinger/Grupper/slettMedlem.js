@@ -1,12 +1,12 @@
-import React from 'react';
+/* import React from 'react';
 import axios from 'axios'; // for å sende/ motta til/ fra backend
 import { useState } from "react"; // for å sende til backend
 import 'bootstrap/dist/css/bootstrap.min.css'; // Bootstap
 import { Container, Row, Col, Button, Form } from 'react-bootstrap'; // Bootstrap-greier
 
 // Funksjon for å opprette en ny gruppe i databasen
-function NyGruppe() {
-    const [gruppenavn, setGruppenavn] = useState("");
+function SlettMedlem() {
+    // const [gruppenavn, setGruppenavn] = useState("");
 
     // Sender det nye gruppenavnet til backend
     const addGruppe = () => {
@@ -25,11 +25,11 @@ function NyGruppe() {
                 <Row>
                     <Col>
                         <Form.Group>
-                            <Form.Control input type="text" placeholder="Gruppenavn" style={{float: 'right'}} onChange = {(event) => {setGruppenavn(event.target.value);}}/>
+                            <Form.Control input type="text" placeholder="Gruppenavn" style={{float: 'left'}} onChange = {(event) => {setGruppenavn(event.target.value);}}/>
                         </Form.Group>
                     </Col>
                     <Col>  
-                        <Button onClick={addGruppe} variant="success" style={{float: 'left'}} type="submit">Lagre gruppa</Button>
+                        <Button onClick={addGruppe} variant="success" style={{float: 'right'}} type="submit">Lagre gruppa</Button>
                     </Col>
                 </Row>        
             </Form> 
@@ -203,3 +203,4 @@ function App() {
 }
 
 export default App; */
+ */

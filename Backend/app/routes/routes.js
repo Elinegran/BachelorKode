@@ -51,17 +51,25 @@ router.use("/updateTid", kalender.UpdateTid);
 router.use("/slettAvtale", kalender.deleteAvtale)
 
 //Meldinger: 
-// Alle meldingene som en bruker har fått
+// Alle meldingene som en bruker har fått (Funker!)
 const mineMeldinger = require('../controllers/meldinger');
 router.use("/meldingerMineMeldinger", mineMeldinger.getMineMeldinger);
 
- // Innboks skrive meldinger
+ // Innboks skrive meldinger (Funker, delvis bare hvis du har mottaker)
  const innboksMeldinger = require('../controllers/meldinger');
  router.use("/meldingerInnboksMeldinger", innboksMeldinger.InsertInnboksMeldinger);
 
- // Samtalen mellom 2 brukere
-const minSamtale = require('../controllers/samtale');
+ // Samtalen mellom 2 brukere (Funker!)
+const minSamtale = require('../controllers/meldinger');
 router.use("/meldingerMinSamtale", minSamtale.getMinSamtale); 
+
+// Sende melding til ALLE brukerne
+const meldingTilAlle = require('../controllers/meldinger');
+router.use("/meldingTilAlle", meldingTilAlle.MeldingTilAlle); 
+
+// Sende melding til ALLE brukerne i en GRUPPE
+const gruppemelding = require('../controllers/meldinger');
+router.use("/gruppemelding", gruppemelding.Gruppemelding); 
 
 // Grupper: 
 // Henter ALLE gruppene (Funker!)
@@ -76,17 +84,17 @@ const brukerGrupper= require('../controllers/grupper');
 const addGruppe = require('../controllers/grupper'); 
 router.use("/grupperNyeGrupper", addGruppe.GruppeInput );
 
-// Endrer gruppenavnet (Ikke lagt enda)
+// Endrer gruppenavnet (Funker!)
 const gruppenavn = require('../controllers/grupper'); 
 router.use("/gruppenavn", gruppenavn.nyttGruppenavn );
 
-// Sletter en gruppe (Ikke lagd enda)
+// Sletter en gruppe (Funker IKKE, Backend mottar ikke gruppeID)
 const deleteGruppe = require('../controllers/grupper'); 
 router.use("/deleteGruppe", deleteGruppe.slettGruppe );
 
-// Legger et nytt meldlem til en gruppe (Funker IKKE!!!!)
+// Legger et nytt meldlem til en gruppe (Funker delvis, idbruker er input, ikke select)
 const addMedlem = require('../controllers/grupper'); 
-//router.use("/addMedlem", addMedlem.MedlemInput)
+router.use("/addMedlem", addMedlem.MedlemInput)
 
 // Sletter et medlem fra en gruppe (Ikke lagd enda)
 const deleteMedlem = require('../controllers/grupper'); 
@@ -109,6 +117,8 @@ router.use("/lenkerNylenke", addLenke.LenkeInput );
 // redigere lenke
 
 // Slette lenke
+
+
 
 
 

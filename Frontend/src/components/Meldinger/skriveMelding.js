@@ -1,7 +1,10 @@
 import React from 'react'
 import axios from 'axios';
 import AuthService from '../../services/auth.service';
+
+
 import { Container, Row, Col, Button, Alert, Breadcrumb, Card, Form } from 'react-bootstrap';
+
 
 const idbruker = AuthService.getUserId();
 
@@ -18,7 +21,8 @@ export default class skriveMelding extends React.Component {
         this.handleInputChange = this.handleInputChange.bind(this);
     }
     handleInputChange(event){
-        this.setState({melding:event.target.value})
+        this.setState({melding:event.target.value,
+        mottaker: this.props.mottakerID})
         
     }
 

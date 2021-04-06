@@ -268,10 +268,7 @@ export default class KalenderComp extends React.Component {
     alert("You are submitting " + this.state.opprettetav + "Dette er bruker type: " + burkertype );
 
 
-    //Sende parametere med en gang
-    // google req.body
-    // skriv ut hva som blir mnotatt i console.log
-    //Ring anne
+    //LAger objekt som sendes til backend
     const nyavtale = {
       title: this.state.title,
       beskrivelse: this.state.beskrivelse, 
@@ -308,7 +305,7 @@ export default class KalenderComp extends React.Component {
       end: selectInfo.endStr
     })
 
-    alert("Dette er tiden :" + this.state.start + 'til' + this.state.end)
+    alert("Dette er tiden :" + selectInfo.startStr + 'til' + this.state.end)
     // if (title) {
     //   calendarApi.addEvent({
     //     avtaleid: createEventId(),
@@ -323,6 +320,7 @@ export default class KalenderComp extends React.Component {
 
   handleEventClick = (clickInfo) => {
     if (window.confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
+      
       //alert("dette er ID: " + clickInfo.event.id)
       console.log(clickInfo.event);
       const avtaleid = clickInfo.event.id;
@@ -331,11 +329,15 @@ export default class KalenderComp extends React.Component {
       })
         .then(response => {
             console.log(response)
+            
+            
           })
           .catch(error => {
             console.log(error)
             console.log("message")
           })
+
+          window.location.reload()
     }
   }
 
@@ -348,6 +350,7 @@ export default class KalenderComp extends React.Component {
 }// Slutt på klasse
 
 function renderEventContent(eventInfo) {
+  console.log(eventInfo);
   return (
     <>
       <b>{eventInfo.timeText}</b>
