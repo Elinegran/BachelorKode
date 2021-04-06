@@ -19,7 +19,9 @@ export default class gruppemelding extends React.Component {
         this.handleInputSend = this.handleInputSend.bind(this);
     }
     handleInputSend(event){
-        this.setState({melding:event.target.value})
+        this.setState({melding:event.target.value,
+        mottaker: this.props.mottakerID})
+
         
     }
 
