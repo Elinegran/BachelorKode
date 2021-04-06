@@ -34,7 +34,7 @@ function MeldingTilAlle() {
                             <Form.Control 
                                 input type="text" 
                                 placeholder="Skriv melding" 
-                                style={{float: 'left'}} 
+                                style={{float: 'right'}} 
                                 onChange = {(event) => {setMelding(event.target.value);}}/>
                         </Form.Group>
                     </Col>
@@ -42,7 +42,7 @@ function MeldingTilAlle() {
                         <Button 
                             type="submit"
                             className="btn btn-success"
-                            style={{float: 'right'}} 
+                            style={{float: 'left'}} 
                             onClick={sendMelding} 
                             > Send
                         </Button>
