@@ -37,7 +37,7 @@ export default class gruppemelding extends React.Component {
                     </Col>
                     <Col>  
                         <Button 
-                            type="submit" className="btn btn-success"style={{float: 'right'}} onClick = {this.handleSend}
+                            type="submit" className="btn btn-success"style={{float: 'right'}} onClick = {this.handleSendGroup}
                             > Send
                         </Button>
                     </Col>
@@ -47,7 +47,7 @@ export default class gruppemelding extends React.Component {
     ) // slutt på return()
 }
 
-handleSend = (event) => {
+handleSendGroup = (event) => {
     alert("Du sender gruppemelding: " + this.state.melding);
 
         const nyGruppemelding = {

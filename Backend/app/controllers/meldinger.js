@@ -107,11 +107,10 @@ exports.Gruppemelding = function(req, res) {
 
   // Liste med alle meldingene
   const medlemmer = [
-    [13, 13, 'Melding til alle fra Berit'],
-    [3, 13, 'Melding til alle fra Berit'],
-    [4, 13, 'Melding til alle fra Berit']
+    [13, 13, 'Sommerferie snart, fra Berit'],
+    [4, 13, 'Sommerferie snart, fra Berit']
   ];
-  const meldingTilMedlemmer = `INSERT INTO melding(mottaker, avsender, melding) VALUES (?, ?, ?)`;
+  const meldingTilMedlemmer = `INSERT INTO melding(mottaker, avsender, melding) VALUES ?`;
   db.query(meldingTilMedlemmer, [medlemmer], (err,result) => {
     if (err) {
       console.log(err)
