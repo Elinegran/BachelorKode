@@ -99,8 +99,12 @@ router.use("/gruppeGetMedlemmer", getGruppemedlem.getMedlem)
 
 //Lenkebibliotek: 
 // Se alle lenkene 
+const getLenker = require('../controllers/lenkebibliotek');
+router.use("/getLenker", getLenker.getAlleLenker)
 
 // Opprette ny lenke
+const addLenke = require('../controllers/lenkebibliotek'); 
+router.use("/lenkerNylenke", addLenke.LenkeInput );
 
 // redigere lenke
 
