@@ -10,17 +10,21 @@ const innlogget = AuthService.getUserId(); // Den brukeren som er innlogget, alt
 // Funksjon for å opprette en ny gruppe i databasen
 function MeldingTilAlle() {
     const avsender = innlogget; // Avsenderen
-    const mottakere = [2,3,13]; // Liste med alle mottakerne
+    // const mottaker = [2,3,4]; // Liste med alle mottakerne
+    const [mottaker, setMottaker] = useState([]); // Liste med alle mottakerne
     const [melding, setMelding] = useState(""); // Meldingsteksten hentes fra inputfelt
     
     // Henter ALLE brukere fra DB
-    /* const bruker = () => {
-        axios.get("http://localhost:3001/api/brukerGetAll")
-      };*/
- 
+    const bruker = () => {
+        axios.get("http://localhost:3001/api/brukerGetAll").then((response) => {
+            setMottaker(response.data);
+        });
+      };
+     
     // Sender det nye gruppenavnet til backend
     const sendMelding = () => {
-      axios.post("http://localhost:3001/api/meldingTilAlle", {avsender: avsender, mottaker: mottakere, melding: melding}) 
+      axios.post("http://localhost:3001/api/meldingTilAlle", {avsender: avsender, mottaker: mottaker, melding: melding}) 
+        alert(melding);
     };
   
     // Dette sendes til Meldingssiden
@@ -43,7 +47,7 @@ function MeldingTilAlle() {
                             type="submit"
                             className="btn btn-success"
                             style={{float: 'left'}} 
-                            onClick={sendMelding} 
+                            onClick={sendMelding, bruker} 
                             > Send
                         </Button>
                     </Col>

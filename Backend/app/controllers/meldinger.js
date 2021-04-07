@@ -66,24 +66,32 @@ exports.getMinSamtale = function(req, res)  {
 exports.MeldingTilAlle = function(req, res) {
 
   const meldingTilAlle = `INSERT INTO melding(mottaker, avsender, melding) VALUES ?`;
+  /* const meldingTilAlle = `INSERT INTO melding(mottaker, avsender, melding) 
+                            SELECT idbruker
+                            FROM bruker
+                            WHERE idbruker = mottaker`;
+                             */
   
-  var mottaker = [2,3,4];
+  var mottaker = req.body.mottaker; // Mottar liste med brukere fra Frontend. Funker! 
+  console.log(mottaker);
   var avsender = req.body.avsender; // Henter avsender (den innloggede) fra frontend. Funker!
   var melding = req.body.melding; // Henter medlingsteksen fra Frontend. Funker!
  
   // Dette formatet funker!
-  /* var brukere = [
+ /*  var brukere = [
     [2, avsender, melding],
     [3, avsender, melding],
     [4, avsender, melding] 
-  ]; */
+  ];
+ */
 
+  // Her blir lista riktig formtert, men får ikke tak i mottaker
   var brukere = mottaker.map(bruker => [bruker.mottaker, avsender, melding]);
   console.log(brukere); 
 
   //var liste = brukere.map (mottaker => [mottaker.mottakere, mottaker.avsender, mottaker.melding ] ); 
 
-  /* db.query(meldingTilMedlemmer, [mottaker, avsender, melding], (err,result) => {
+ /*  db.query(meldingTilMedlemmer, [mottaker, avsender, melding], (err,result) => {
     if (err) {
       console.log(err)
     }
@@ -93,9 +101,9 @@ exports.MeldingTilAlle = function(req, res) {
   }); */
 
   // Legger alle meldingene inn i DB (Denne funker!)
-  db.query(meldingTilAlle, [brukere], function(err) {
+ /*  db.query(meldingTilAlle, [brukere], function(err) {
       if (err) throw err;   
-  });
+  }); */
   
 }; // Slutt på funksjon meldingTilAlle()
 
