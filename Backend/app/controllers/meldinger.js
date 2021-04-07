@@ -103,14 +103,19 @@ exports.MeldingTilAlle = function(req, res) {
 // Funksjon som sender melding til ALLE brukerne i en GRUPPE
 exports.Gruppemelding = function(req, res) {
 
-  const meldingTilMedlemmer = `INSERT INTO melding(mottaker, avsender, melding) VALUES ?`;
+  const meldingTilMedlemmer = `INSERT INTO melding(mottaker, avsender, melding)
+                               SELECT gruppemedlem.idbruker, ?, ?
+                               FROM gruppemedlem
+                               WHERE gruppemedlem.gruppeID = 40;`;
 
-  const mottaker = [13, 11];
+
+
+  // const mottaker = [13,11];
   const avsender = req.body.avsender; // Henter avsender (den innloggede) fra frontend. Funker!
   const melding = req.body.melding; // Henter medlingsteksen fra Frontend. Funker!
 
-  const medlemmer = mottaker.map(bruker => [bruker.mottaker, avsender, melding]);
-  console.log(medlemmer); 
+  // const medlemmer = mottaker.map(bruker => [bruker.mottaker, avsender, melding]);
+  // console.log(medlemmer); 
 
   // Liste med alle meldingene
   // const medlemmer = [
@@ -118,7 +123,7 @@ exports.Gruppemelding = function(req, res) {
   //   [4, 13, 'Sommerferie snart, fra Berit']
   // ];
   // const meldingTilMedlemmer = `INSERT INTO melding(mottaker, avsender, melding) VALUES ?`;
-   db.query(meldingTilMedlemmer, [medlemmer], (err,result) => {
+   db.query(meldingTilMedlemmer, [avsender, melding], (err,result) => {
     if (err) throw err;    
    });
 };
