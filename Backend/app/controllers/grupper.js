@@ -104,7 +104,7 @@ exports.getMedlem = function(req, res)  {
                        AND gruppemedlem.gruppeID = gruppe.gruppeID
                        AND gruppemedlem.idbruker = bruker.idbruker;`;
     
-    db.query(sqlSelect, gruppeID, (err, result) => {
+    db.query(sqlSelect, gruppeID, (err, result) => { // Feilmeld her, Protkol seq timeout...
       if (err) {
         console.log(err)
       } 

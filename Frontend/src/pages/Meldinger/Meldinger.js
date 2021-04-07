@@ -9,8 +9,8 @@ import Samtaleliste from '../../components/Meldinger/samtaler.js';
 import Gruppeliste from '../../components/Meldinger/grupper.js';
 import Avatar from '../../components/Meldinger/Felles/avatar.js';
 import Test from '../../components/Meldinger/Grupper/test.js';
-import NyMelding from '../../components/Meldinger/nyMelding';
-
+import Skrivemeldinger from '../../components/Meldinger/skriveMelding.js';
+import SelectBrukere from '../../components/Meldinger/Felles/selectBruker';
 
 
 
@@ -26,9 +26,7 @@ import { Accordion, Container, Row, Col, Button, Alert, Breadcrumb, Card, Form }
 // fluid bruker max-vidden av skjermen
 
 
-
 export const Meldinger = () => (
-
 <main className ="meldingssiden">
         
         
@@ -37,10 +35,11 @@ export const Meldinger = () => (
                
                 {/* // onHandleSelect={this.handleSelect} */}
 
-                       
+                                  
                 <Container>
                         <h1 className= "display-4">Meldinger</h1>
-                        <NyMelding />
+                        <SelectBrukere/>
+                        <Skrivemeldinger /> 
                         <Meldingsliste /> 
                 </Container>                  
         </section>
@@ -61,7 +60,4 @@ export const Meldinger = () => (
                 </Container>        
         </section> 
 </main>
-
-
 )
-

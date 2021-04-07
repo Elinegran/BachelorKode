@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios'; // for å sende/ motta til/ fra backend
 import { useState } from "react"; // for å sende til backend
 import 'bootstrap/dist/css/bootstrap.min.css'; // Bootstap
-import { Container, Row, Col, Button, Form } from 'react-bootstrap'; // Bootstrap-greier
+import { Row, Col, Button, Form } from 'react-bootstrap'; // Bootstrap-greier
 import AuthService from '../../../services/auth.service'; 
 
 const innlogget = AuthService.getUserId(); // Den brukeren som er innlogget, altså avsenderen 
@@ -10,17 +10,12 @@ const innlogget = AuthService.getUserId(); // Den brukeren som er innlogget, alt
 // Funksjon for å opprette en ny gruppe i databasen
 function MeldingTilAlle() {
     const avsender = innlogget; // Avsenderen
-    const mottakere = [2,3,13]; // Liste med alle mottakerne
     const [melding, setMelding] = useState(""); // Meldingsteksten hentes fra inputfelt
     
-    // Henter ALLE brukere fra DB
-    /* const bruker = () => {
-        axios.get("http://localhost:3001/api/brukerGetAll")
-      };*/
- 
-    // Sender det nye gruppenavnet til backend
+    // Sender avsender og medlingstekst til backend
     const sendMelding = () => {
-      axios.post("http://localhost:3001/api/meldingTilAlle", {avsender: avsender, mottaker: mottakere, melding: melding}) 
+      axios.post("http://localhost:3001/api/meldingTilAlle", {avsender: avsender, melding: melding}) 
+        alert(melding);
     };
   
     // Dette sendes til Meldingssiden
@@ -34,7 +29,7 @@ function MeldingTilAlle() {
                             <Form.Control 
                                 input type="text" 
                                 placeholder="Skriv melding" 
-                                style={{float: 'left'}} 
+                                style={{float: 'right'}} 
                                 onChange = {(event) => {setMelding(event.target.value);}}/>
                         </Form.Group>
                     </Col>
@@ -42,7 +37,7 @@ function MeldingTilAlle() {
                         <Button 
                             type="submit"
                             className="btn btn-success"
-                            style={{float: 'right'}} 
+                            style={{float: 'left'}} 
                             onClick={sendMelding} 
                             > Send
                         </Button>

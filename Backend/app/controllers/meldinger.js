@@ -44,12 +44,11 @@ exports.getMinSamtale = function(req, res)  {
   let idbruker = req.query.idbruker;
   let avsender = req.query.avsender; 
   
-    const hentMinSamtale = `SELECT tid, fornavn, etternavn, melding 
+    const hentMinSamtale = `SELECT DISTINCT tid, fornavn, etternavn, melding 
                             FROM bruker, melding 
                             WHERE melding.avsender = bruker.idbruker 
                             AND (avsender = ? OR avsender = ?) 
                             AND (mottaker = ? OR mottaker = ?) 
-                            
                             ORDER BY tid`;
 
     db.query(hentMinSamtale, [avsender, idbruker, idbruker, avsender], (err, result) => {
@@ -65,61 +64,46 @@ exports.getMinSamtale = function(req, res)  {
 // Funksjon som sender melding til ALLE brukerne
 exports.MeldingTilAlle = function(req, res) {
 
-  /* const items = [
-    {mottaker: 2, avsender: 13, melding: 'Hei alle sammen fra Berit'},
-    {mottaker: 3, avsender: 13, melding: 'Hei alle sammen fra Berit'},
-    {mottaker: 4, avsender: 13, melding: 'Hei alle sammen fra Berit'}
-  ]; */
+  const meldingTilAlle = `INSERT INTO melding(mottaker, avsender, melding) 
+                          SELECT bruker.idbruker, ?, ?
+                          FROM bruker`;
 
-  //const mottaker = 4; 
-  //const avsender = req.body.avsender; // Henter avsender (den innloggede) fra frontend. Funker!
-  //const melding = req.body.melding; // Henter medlingsteksen fra Frontend. Funker!
-
-  const meldingTilAlle = `INSERT INTO melding(mottaker, avsender, melding) VALUES ?`;
-  
-  var values = [
-    [2, 13, 'God påaske, hilsen Berit'],
-    [3, 13, 'God påske, hilsen Berit'],
-    [4, 13, 'God påske, hilsen Berit']
-    
-];
-db.query(meldingTilAlle, [values], function(err) {
-    if (err) throw err;
-    
-});
-  
-  // db.query(meldingTilAlle, [mottaker, avsender, melding], (err,result) => {
-  // db.query(meldingTilAlle, [items.map(item => [item.mottaker, item.avsender, item.melding])], (err,result) => {
-    /* if (err) {
-      console.log(err)
-    }
-    else{
-      res.send(result);
-    }
-  });
-}; */
-
-};
+  var avsender = req.body.avsender; // Henter avsender (den innloggede) fra frontend
+  var melding = req.body.melding; // Henter medlingsteksen fra Frontend
+ 
+  db.query(meldingTilAlle, [avsender, melding], (err,result) => {
+    if (err) throw err;    
+   });
+ 
+}; // Slutt på funksjon meldingTilAlle()
 
 
 // Funksjon som sender melding til ALLE brukerne i en GRUPPE
 exports.Gruppemelding = function(req, res) {
 
+  const meldingTilMedlemmer = `INSERT INTO melding(mottaker, avsender, melding)
+                               SELECT gruppemedlem.idbruker, ?, ?
+                               FROM gruppemedlem
+                               WHERE gruppemedlem.gruppeID = 40;`;
+
+
+
+  // const mottaker = [13,11];
+  const avsender = req.body.avsender; // Henter avsender (den innloggede) fra frontend. Funker!
+  const melding = req.body.melding; // Henter medlingsteksen fra Frontend. Funker!
+
+  // const medlemmer = mottaker.map(bruker => [bruker.mottaker, avsender, melding]);
+  // console.log(medlemmer); 
+
   // Liste med alle meldingene
-  const medlemmer = [
-    [13, 13, 'Melding til alle fra Berit'],
-    [3, 13, 'Melding til alle fra Berit'],
-    [4, 13, 'Melding til alle fra Berit']
-  ];
-  const meldingTilMedlemmer = `INSERT INTO melding(mottaker, avsender, melding) VALUES (?, ?, ?)`;
-  db.query(meldingTilMedlemmer, [medlemmer], (err,result) => {
-    if (err) {
-      console.log(err)
-    }
-    else{
-      res.send(result);
-    }
-  });
+  // const medlemmer = [
+  //   [13, 13, 'Sommerferie snart, fra Berit'],
+  //   [4, 13, 'Sommerferie snart, fra Berit']
+  // ];
+  // const meldingTilMedlemmer = `INSERT INTO melding(mottaker, avsender, melding) VALUES ?`;
+   db.query(meldingTilMedlemmer, [avsender, melding], (err,result) => {
+    if (err) throw err;    
+   });
 };
 
 

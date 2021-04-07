@@ -67,7 +67,7 @@ function App() {
             <Route exact path="/" component={ Logginn }></Route>
             <Route path="/Loggut" component= { Loggut }></Route>
             <ProtectedRouteVeileder path="/Veileder" component={ ForsideVeileder } />
-              <Route path="/RegBruker" component={ RegBruker } /> 
+            <ProtectedRouteVeileder path="/RegBruker" component={ RegBruker } /> 
               <ProtectedRouteVeileder path="/Brukeroversikt" component={ BrukerOversikt } />
               <ProtectedRouteVeileder path="/EndreFAQ" component={ EndreFAQ } />
               <ProtectedRouteVeileder path="/EndreAktivitet" component={ EndreAktivitet } />
