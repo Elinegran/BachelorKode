@@ -9,7 +9,9 @@ import { Logginn } from './pages/Login/Login';
 import Loggut  from './components/Logout/Loggut';
 import { ForsideBruker } from './pages/ForsideBruker/ForsideBruker';
 import { ForsideVeileder } from './pages/ForsideVeileder/ForsideVeileder';
+
 import { Meldinger } from './pages/Meldinger/Meldinger';
+import { MeldingerV} from './pages/Meldinger/Meldinger-veileder';
 import { Meldekort } from './pages/Meldekort/Meldekort';
 import { Kalender } from './pages/Kalender/Kalender';
 import { CV } from './pages/CV/CV';
@@ -69,6 +71,8 @@ function App() {
               <ProtectedRouteVeileder path="/Brukeroversikt" component={ BrukerOversikt } />
               <ProtectedRouteVeileder path="/EndreFAQ" component={ EndreFAQ } />
               <ProtectedRouteVeileder path="/EndreAktivitet" component={ EndreAktivitet } />
+              
+              <ProtectedRouteVeileder path="/MeldingerV" component={ MeldingerV } />
 
               <ProtectedRoute path="/Bruker" component={ ForsideBruker } />
                 <ProtectedRoute path="/Profil" component={ RedigerProfil } />
