@@ -44,12 +44,11 @@ exports.getMinSamtale = function(req, res)  {
   let idbruker = req.query.idbruker;
   let avsender = req.query.avsender; 
   
-    const hentMinSamtale = `SELECT tid, fornavn, etternavn, melding 
+    const hentMinSamtale = `SELECT DISTINCT tid, fornavn, etternavn, melding 
                             FROM bruker, melding 
                             WHERE melding.avsender = bruker.idbruker 
                             AND (avsender = ? OR avsender = ?) 
                             AND (mottaker = ? OR mottaker = ?) 
-                            
                             ORDER BY tid`;
 
     db.query(hentMinSamtale, [avsender, idbruker, idbruker, avsender], (err, result) => {
@@ -65,46 +64,17 @@ exports.getMinSamtale = function(req, res)  {
 // Funksjon som sender melding til ALLE brukerne
 exports.MeldingTilAlle = function(req, res) {
 
-  const meldingTilAlle = `INSERT INTO melding(mottaker, avsender, melding) VALUES ?`;
-  /* const meldingTilAlle = `INSERT INTO melding(mottaker, avsender, melding) 
-                            SELECT idbruker
-                            FROM bruker
-                            WHERE idbruker = mottaker`;
-                             */
-  
-  var mottaker = req.body.mottaker; // Mottar liste med brukere fra Frontend. Funker! 
-  console.log(mottaker);
-  var avsender = req.body.avsender; // Henter avsender (den innloggede) fra frontend. Funker!
-  var melding = req.body.melding; // Henter medlingsteksen fra Frontend. Funker!
+  const meldingTilAlle = `INSERT INTO melding(mottaker, avsender, melding) 
+                          SELECT bruker.idbruker, ?, ?
+                          FROM bruker`;
+
+  var avsender = req.body.avsender; // Henter avsender (den innloggede) fra frontend
+  var melding = req.body.melding; // Henter medlingsteksen fra Frontend
  
-  // Dette formatet funker!
- /*  var brukere = [
-    [2, avsender, melding],
-    [3, avsender, melding],
-    [4, avsender, melding] 
-  ];
- */
-
-  // Her blir lista riktig formtert, men får ikke tak i mottaker
-  var brukere = mottaker.map(bruker => [bruker.mottaker, avsender, melding]);
-  console.log(brukere); 
-
-  //var liste = brukere.map (mottaker => [mottaker.mottakere, mottaker.avsender, mottaker.melding ] ); 
-
- /*  db.query(meldingTilMedlemmer, [mottaker, avsender, melding], (err,result) => {
-    if (err) {
-      console.log(err)
-    }
-    else{
-      res.send(result);
-    }
-  }); */
-
-  // Legger alle meldingene inn i DB (Denne funker!)
- /*  db.query(meldingTilAlle, [brukere], function(err) {
-      if (err) throw err;   
-  }); */
-  
+  db.query(meldingTilAlle, [avsender, melding], (err,result) => {
+    if (err) throw err;    
+   });
+ 
 }; // Slutt på funksjon meldingTilAlle()
 
 
