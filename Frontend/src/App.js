@@ -4,12 +4,10 @@ import React, { Component, useState, useEffect  } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import ProtectedRouteVeileder from './components/ProtectedRouteVeileder'
 import ProtectedRoute from './components/ProtectedRoute'
-
 import { Logginn } from './pages/Login/Login';
 import Loggut  from './components/Logout/Loggut';
 import { ForsideBruker } from './pages/ForsideBruker/ForsideBruker';
 import { ForsideVeileder } from './pages/ForsideVeileder/ForsideVeileder';
-
 import { Meldinger } from './pages/Meldinger/Meldinger';
 import { MeldingerV} from './pages/Meldinger/Meldinger-veileder';
 import { Meldekort } from './pages/Meldekort/Meldekort';
@@ -71,9 +69,7 @@ function App() {
               <ProtectedRouteVeileder path="/Brukeroversikt" component={ BrukerOversikt } />
               <ProtectedRouteVeileder path="/EndreFAQ" component={ EndreFAQ } />
               <ProtectedRouteVeileder path="/EndreAktivitet" component={ EndreAktivitet } />
-              
               <ProtectedRouteVeileder path="/MeldingerV" component={ MeldingerV } />
-
               <ProtectedRoute path="/Bruker" component={ ForsideBruker } />
                 <ProtectedRoute path="/Profil" component={ RedigerProfil } />
                 <ProtectedRoute path="/TidsbankBruker" component={ TidsbankBruker } />

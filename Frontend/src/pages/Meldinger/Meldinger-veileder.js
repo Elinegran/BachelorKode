@@ -10,7 +10,7 @@ import { Container } from 'react-bootstrap';
    
 // Meldingssiden for VEILEDER 
 
-export const Meldinger = () => (
+export const MeldingerV = () => (
 <main className ="meldingssiden">
         
         {/* Brukerens INNBOKS */}
