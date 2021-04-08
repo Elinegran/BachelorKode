@@ -84,26 +84,17 @@ exports.Gruppemelding = function(req, res) {
   const meldingTilMedlemmer = `INSERT INTO melding(mottaker, avsender, melding)
                                SELECT gruppemedlem.idbruker, ?, ?
                                FROM gruppemedlem
-                               WHERE gruppemedlem.gruppeID = 40;`;
+                               WHERE gruppemedlem.gruppeID = ?;`;
 
+  const avsender = req.body.avsender; // Henter avsender (den innloggede) fra frontend. 
+  const melding = req.body.melding; // Henter meldingsteksen fra Frontend.
+  const gruppeID = req.body.gruppeID; //Henter gruppeID fra frontend.
 
+  console.log(gruppeID);
 
-  // const mottaker = [13,11];
-  const avsender = req.body.avsender; // Henter avsender (den innloggede) fra frontend. Funker!
-  const melding = req.body.melding; // Henter medlingsteksen fra Frontend. Funker!
-
-  // const medlemmer = mottaker.map(bruker => [bruker.mottaker, avsender, melding]);
-  // console.log(medlemmer); 
-
-  // Liste med alle meldingene
-  // const medlemmer = [
-  //   [13, 13, 'Sommerferie snart, fra Berit'],
-  //   [4, 13, 'Sommerferie snart, fra Berit']
-  // ];
-  // const meldingTilMedlemmer = `INSERT INTO melding(mottaker, avsender, melding) VALUES ?`;
-   db.query(meldingTilMedlemmer, [avsender, melding], (err,result) => {
+   db.query(meldingTilMedlemmer, [avsender, melding, gruppeID], (err,result) => {
     if (err) throw err;    
    });
-};
+}; //Slutt på meldingTilMedlemmer funksjonen
 
 
