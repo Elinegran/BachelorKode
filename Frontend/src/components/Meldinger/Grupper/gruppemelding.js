@@ -9,19 +9,18 @@ import { Container, Row, Col, Button, Alert, Breadcrumb, Card, Form } from 'reac
 const idbruker = AuthService.getUserId();
 
 
-export default class gruppemelding extends React.Component {
+export default class Gruppemelding extends React.Component {
     constructor (props){
         super (props);
         this.state = {
             avsender: idbruker, 
-            gruppeID: this.props.gruppeID,
-            melding: ""
+            melding: "",
+            gruppeID: this.props.gruppeID
         };
         this.handleInputSend = this.handleInputSend.bind(this);
     }
     handleInputSend(event){
-        this.setState({melding:event.target.value,
-        gruppeID: this.props.gruppeID})
+        this.setState({melding:event.target.value})
 
       
    
@@ -54,12 +53,13 @@ export default class gruppemelding extends React.Component {
 }
 
 handleSendGroup = (event) => {
-    alert("Du sender gruppemelding: " + this.state.melding);
+    alert("Du sender gruppemeldingen: " + this.state.melding);
+    alert("Dette er gruppeID" + this.state.gruppeID);
 
         const nyGruppemelding = {
-            gruppeID: this.state.gruppeID,
             avsender: this.state.avsender,
-            melding: this.state.melding
+            melding: this.state.melding,
+            gruppeID: this.state.gruppeID
         };
 
         axios.post(`http://localhost:3001/api/gruppemelding`,nyGruppemelding)
