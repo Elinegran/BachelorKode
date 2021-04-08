@@ -8,8 +8,16 @@ import nbLocale from '@fullcalendar/core/locales/nb';
 import axios from 'axios';
 import SelectBrukere from '../Meldinger/Felles/selectBruker.js'; // Komponent som henter brukerne fra backend ----../Felles/selectBruker.js
 import AuthService from '../../services/auth.service';
+import { Button, Modal, ModalBody, ModalFooter } from 'react-bootstrap';
+//import { Button } from 'react-bootstrap'; // Bootstrap-greier
+//import {useState} from 'react';
+//import Modal from 'react-bootstrap/Modal';
+
+
+import EditDialog from './editDialog';
+
 import Rediger from './Rediger';
-import { Card, Accordion, Button, Form } from 'react-bootstrap'; // Bootstrap-greier
+//import { Card, Accordion, Button, Form } from 'react-bootstrap'; // Bootstrap-greier
 
 
 
@@ -33,7 +41,8 @@ export default class KalenderComp extends React.Component {
       start:0,
       end:0,
       opprettetav: '',  
-      opprettetfor : ''
+      opprettetfor : '', 
+      modal: false
     };
 
     this.handleTitleChange = this.handleTitleChange.bind(this);
@@ -46,6 +55,23 @@ export default class KalenderComp extends React.Component {
 
   }
 
+  toggle = () => {
+    this.setState({ modal: !this.state.modal });
+  };
+
+  handleEventClick = ({ event, el }) => {
+    this.toggle();
+
+
+    console.log("Dette er objekt : "+event.title + "Beskrivelse: " + event.extendedProps.beskrivelse + "sted: " + event.extendedProps.sted);
+
+    this.setState({ title: event.title,
+    beskrivelse:event.extendedProps.beskrivelse,
+     sted:event.extendedProps.sted,
+     });
+
+
+  };
 
 
   handleSelect(value){
@@ -95,13 +121,8 @@ export default class KalenderComp extends React.Component {
       }
       // alert("dette er bruker" + this.state.opprettetav + " . Veileder : " + this.state.veileder + "brukerID: " + idbruker)
       // this.setState({opprettetav: idbruker});
-
-
-
      
   };
-
- 
 
 
   render() {
@@ -142,6 +163,26 @@ export default class KalenderComp extends React.Component {
             eventRemove={function(){}}
             */
           />
+          <Modal
+              isOpen={true}
+              toggle={this.toggle}
+            
+            >
+              <Modal.Header toggle={this.toggle}>
+               {this.state.title}
+              </Modal.Header>
+              <Modal.Body>
+                <div>
+                  <p> {this.state.beskrivelse}</p>
+                </div>
+              </Modal.Body>
+              <Modal.Footer>
+                {/* <Button color="primary">Do Something</Button>{" "} */}
+                <Button color="secondary" onClick={this.toggle}>
+                  Cancel
+                </Button>
+              </Modal.Footer>
+            </Modal>
         </div>
       </div>
     )
@@ -154,6 +195,7 @@ export default class KalenderComp extends React.Component {
       <div className='demo-app-sidebar'>
         <div className='demo-app-sidebar-section'>
           <h2>Legg til avtale</h2>
+          
           <form onSubmit={this.handleSave}>
           <input type ='text' id='title' navn = 'title' placeholder= 'Tittel' onChange={this.handleTitleChange} />
           <br/>
@@ -318,28 +360,80 @@ export default class KalenderComp extends React.Component {
   }
 
 
-  handleEventClick = (clickInfo) => {
-    if (window.confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
-      
-      //alert("dette er ID: " + clickInfo.event.id)
-      console.log(clickInfo.event);
-      const avtaleid = clickInfo.event.id;
-      axios.post(`http://localhost:3001/api/slettAvtale`, {
-        avtaleid: avtaleid
-      })
-        .then(response => {
-            console.log(response)
-            
-            
-          })
-          .catch(error => {
-            console.log(error)
-            console.log("message")
-          })
 
-          window.location.reload()
-    }
-  }
+  // handleEventClick = ({ event, el }) => {
+  //   this.toggle();
+
+
+  //   console.log("Dette er objekt : "+event.title + "Beskrivelse: " + event.extendedProps.beskrivelse + "sted: " + event.extendedProps.sted);
+
+  //   this.setState({ title: event.title,
+  //   beskrivelse:event.extendedProps.beskrivelse,
+  //    sted:event.extendedProps.sted,
+  //    });
+
+
+  // };
+
+  // handleEventClick = (clickInfo) => {
+
+    
+
+  //   const handleClose = () => this.setState({show:false});
+   
+  
+  //   return (
+  //     <>
+  //       {/* <Button variant="primary" onClick={handleShow}>
+  //         Launch demo modal
+  //       </Button> */}
+  
+  //       <Modal show={this.state.show} >
+  //         <Modal.Header closeButton>
+  //           <Modal.Title>Modal heading</Modal.Title>
+  //         </Modal.Header>
+  //         <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+  //         <Modal.Footer>
+  //           <Button variant="secondary" onClick={handleClose}>
+  //             Close
+  //           </Button>
+  //           <Button variant="primary" onClick={handleClose}>
+  //             Save Changes
+  //           </Button>
+  //         </Modal.Footer>
+  //       </Modal>
+  //     </>
+  //   );
+
+
+
+
+
+    /////////////////////////////////////////
+    // //Dette er delete
+    // if (window.confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
+      
+    //   //alert("dette er ID: " + clickInfo.event.id)
+    //   console.log(clickInfo.event);
+    //   const avtaleid = clickInfo.event.id;
+    //   axios.post(`http://localhost:3001/api/slettAvtale`, {
+    //     avtaleid: avtaleid
+    //   })
+    //     .then(response => {
+    //         console.log(response)
+            
+            
+    //       })
+    //       .catch(error => {
+    //         console.log(error)
+    //         console.log("message")
+    //       })
+
+    //       window.location.reload()
+
+    // }
+    //////////
+  //}
 
   handleEvents = (events) => {
     this.setState({
