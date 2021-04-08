@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios';
 import AuthService from '../../../services/auth.service';
 
+
 import { Container, Row, Col, Button, Alert, Breadcrumb, Card, Form } from 'react-bootstrap';
 
 
@@ -13,16 +14,17 @@ export default class gruppemelding extends React.Component {
         super (props);
         this.state = {
             avsender: idbruker, 
-            mottaker:this.props.mottakerID,
+            gruppeID: this.props.gruppeID,
             melding: ""
         };
         this.handleInputSend = this.handleInputSend.bind(this);
     }
     handleInputSend(event){
         this.setState({melding:event.target.value,
-        mottaker: this.props.mottakerID})
+        gruppeID: this.props.gruppeID})
 
-        
+      
+   
     }
 
     render(){    
@@ -34,12 +36,14 @@ export default class gruppemelding extends React.Component {
                     <Col>
                         <Form.Group>
                             <Form.Control 
-                                input type="text" placeholder ="Skriv gruppemelding"  onChange = {this.handleInputSend} style={{float: 'left'}} />
+                                input type="text" placeholder ="Skriv gruppemelding"  
+                                onChange = {this.handleInputSend} style={{float: 'left'}} />
                         </Form.Group>
                     </Col>
                     <Col>  
                         <Button 
-                            type="submit" className="btn btn-success"style={{float: 'right'}} onClick = {this.handleSendGroup}
+                            type="submit" className="btn btn-success"style={{float: 'right'}} 
+                            onClick = {this.handleSendGroup}
                             > Send
                         </Button>
                     </Col>
@@ -53,7 +57,7 @@ handleSendGroup = (event) => {
     alert("Du sender gruppemelding: " + this.state.melding);
 
         const nyGruppemelding = {
-            mottaker: this.state.mottaker,
+            gruppeID: this.state.gruppeID,
             avsender: this.state.avsender,
             melding: this.state.melding
         };
