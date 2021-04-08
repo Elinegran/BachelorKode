@@ -6,13 +6,11 @@ import { Row, Col, Button } from 'react-bootstrap'; // Bootstrap-greier
 
  function SlettMedlem(props) {
     const idbruker = props.senderIDbruker; // idbruker sendes fra selectGruppemedlem.js
-    const gruppeID = 1; //props.senderGruppeID; // gruppeID sendes fra selectGruppemedlem.js
+    const gruppeID = props.senderGruppeID; // gruppeID sendes fra selectGruppemedlem.js
     
   // Sender medlemmet som skal slettes til Backend
   const slettMedlem = () => { 
-    axios.delete(`http://localhost:3001/api/deleteMedlem`, { idbruker: idbruker, gruppeID: gruppeID }) 
-    alert(gruppeID);
-    
+    axios.delete('http://localhost:3001/api/deleteMedlem' , { data: { idbruker: idbruker, gruppeID: gruppeID }})  
   };  
 
   // Returnerer en liste over medlemmene i gruppa

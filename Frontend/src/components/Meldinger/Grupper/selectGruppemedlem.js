@@ -69,7 +69,7 @@ export default class SelectGruppemedlem extends React.Component {
               ? null 
               : (  
               <Col>
-                <SlettMedlem senderIDbruker={alleBrukere.idbruker}/>
+                <SlettMedlem senderIDbruker={alleBrukere.idbruker} senderGruppeID={alleBrukere.gruppeID}/>
                 {/* <Button 
                   type="button" 
                   className="btn btn-warning btn-sm" 
