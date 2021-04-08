@@ -23,10 +23,15 @@ exports.getMineGrupper = function(req, res)  {
 
 // Henter gruppene til EN BESTEMT BRUKER fra DB
 exports.hentBrukerGrupper = function(req, res)  {
-  let idbruker = req.query.idbruker;
+  let idbruker = req.query.idbruker; // Får den innloggede brukeren fra Frontend
+  console.log(idbruker); 
 
-  const sqlSelect = "SELECT * FROM gruppe WHERE idbruker = ?";
-  db.query(sqlSelect, [idbruker], (err, result) => {
+  const sqlSelect = `SELECT gruppemedlem.gruppeID, gruppenavn
+                     FROM gruppe, gruppemedlem  
+                     WHERE idbruker = ?
+                     AND gruppe.gruppeID = gruppemedlem.gruppeID`;
+
+  db.query(sqlSelect, idbruker, (err, result) => {
     if (err) {
       console.log(err)
     } 
@@ -139,11 +144,12 @@ exports.MedlemInput = function(req, res)  {
 exports.slettMedlem = function(req, res)  {
 
   // Henter gruppeID og brukerID fra frontend
-  const brukerID = req.body.idbruker
+  const brukerID = req.query.idbruker
+  console.log(brukerID);
   const gruppeID = req.body.gruppeID
   
   db.query(
-    "DELETE FROM gruppemedlem WHERE idbruker = ? AND gruppeID = ?;",
+    "DELETE FROM gruppemedlem WHERE idbruker = 1 AND gruppeID = 1;",
     brukerID, gruppeID, 
     (err, res) => {
       if (err) {

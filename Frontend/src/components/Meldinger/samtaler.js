@@ -43,6 +43,7 @@ render() {
 
   return (
     <p>
+    <Skrivemeldinger mottakerID = {this.state.avsender} />
     { this.state.samtale.map(melding => 
     <Card> 
       <Card.Body>
@@ -55,7 +56,6 @@ render() {
       </Card.Body>
     </Card>
     )}
-    <Skrivemeldinger mottakerID = {this.state.avsender} />
     </p>
   )
 }

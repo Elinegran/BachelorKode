@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Bootstap
-import { Card, Accordion, Container, Row, Col, Button, Form } from 'react-bootstrap'; // Bootstrap-greier
-import NyttMedlem from './nyttGruppemedlem.js';
-import SlettGruppe from './slettGruppe';
+import { Row, Col, Button } from 'react-bootstrap'; // Bootstrap-greier
+import AuthService from '../../../services/auth.service'; 
+// import { useState } from "react"; // for å sende til backend
+import SlettMedlem from './slettMedlem';
+
+const brukertype = AuthService.getRole(); 
 
 export default class SelectGruppemedlem extends React.Component {
   constructor (props){
@@ -11,11 +14,18 @@ export default class SelectGruppemedlem extends React.Component {
     this.state = {
     gruppeID: this.props.gruppeIDFraGrupper,
     bruker: [],
+    veileder: false,
+    idbruker: 0, 
     }
   };
   
   componentDidMount() {
-    //alert('Gruppe fra frontend: '+ this.state.gruppeID)
+    
+    // Tester om den innloggede er veileder
+    if(brukertype == 2){ this.setState({veileder:true})}
+    else { this.setState({veileder:false }) }
+    
+    // Henter medlemmene i denne gruppa
     axios.get(`http://localhost:3001/api/gruppeGetMedlemmer`,
     {params: 
       {
@@ -30,37 +40,45 @@ export default class SelectGruppemedlem extends React.Component {
         console.log(error)
         console.log("message")
       })
-  }
+
+    
+  } // Slutt på componentDidMount
+
+ /*  function slettMedlem() {
+    const [idbruker, setIDbruker] = useState(0); // idbruker hentes fra inputfelt
+    const gruppeID = setGruppeID] = useState(0); // gruppeID sendes fra grupper.js
+    
+  // Sender medlemmet som skal slettes til Backend
+  const slettMedlem = () => { 
+    axios.delete(`http://localhost:3001/api/deleteMedlem`, { idbruker: idbruker, gruppeID: gruppeID }) 
+  
+    
+  };  */
 
   // Returnerer en liste over medlemmene i gruppa
   render() {
     return(
       <p>
-        {/* <p>
-          <h3>Send gruppemelding</h3>
-          <Row> 
-            <Col><input></input></Col>
-            <Col><Button type="button" className="btn btn-success" style={{float: 'right'}}>Send</Button></Col>
-          </Row>
-        </p> */}
-        {/* <p>
-          <NyttMedlem senderGruppeID={this.state.gruppeID}/>
-        </p>
-        <p>
-          <h3>Rediger gruppe</h3>
-        <Row> 
-          <Col><Button type="button" className="btn btn-success" style={{float: 'left'}}>Endre navn</Button></Col>
-          <Col> <SlettGruppe senderGruppeID={this.state.gruppeID}/> </Col>
-        </Row>
-        </p>
-        <p> */}
-          <h3>Medlemmer</h3>
+        <h3>Medlemmer</h3>
         <ul className="list-group">
         { this.state.bruker.map(alleBrukere => 
           <li className="list-group-item">
             <Row> 
               <Col> { alleBrukere.idbruker } { alleBrukere.fornavn } { alleBrukere.etternavn } </Col>
-              <Col><Button type="button" className="btn btn-warning btn-sm" style={{float: 'right'}}>Slett medlem</Button></Col>
+              {!this.state.veileder // Slett-knappen skal bare være synlig for Veiledere
+              ? null 
+              : (  
+              <Col>
+                <SlettMedlem senderIDbruker={alleBrukere.idbruker}/>
+                {/* <Button 
+                  type="button" 
+                  className="btn btn-warning btn-sm" 
+                  style={{float: 'right'}}>
+                  onClick={slettMedlem}>  
+                    Slett medlem
+                </Button> */}
+              </Col>
+              )}
             </Row>
           </li>
         )} 

@@ -49,7 +49,7 @@ exports.getMinSamtale = function(req, res)  {
                             WHERE melding.avsender = bruker.idbruker 
                             AND (avsender = ? OR avsender = ?) 
                             AND (mottaker = ? OR mottaker = ?) 
-                            ORDER BY tid`;
+                            ORDER BY tid DESC`;
 
     db.query(hentMinSamtale, [avsender, idbruker, idbruker, avsender], (err, result) => {
       if (err) {

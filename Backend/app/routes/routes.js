@@ -78,7 +78,7 @@ router.use("/meldingerMineGrupper", mineGrupper.getMineGrupper);
 
 // Henter gruppene til en bruker (Ikke lagd enda, venter til vi deler bruker og veileder)
 const brukerGrupper= require('../controllers/grupper');
-// router.use("/brukerGrupper", brukerGrupper.hentMineGrupper); 
+router.use("/brukerGrupper", brukerGrupper.hentBrukerGrupper); 
 
 // Legger til en ny gruppe (Funker!)
 const addGruppe = require('../controllers/grupper'); 
