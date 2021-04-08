@@ -5,8 +5,8 @@ import LenkeV from '../../components/Lenkebibliotek/LenkeV'
 import Form from 'react-bootstrap/Form'
 import LeggeTilLenke from '../../components/Lenkebibliotek/leggeTilLenke'
 import { Accordion, Button, Card, Container, Row, Col} from 'react-bootstrap'
-
-
+import VisAlleLenker from '../../components/Lenkebibliotek/visAlleLenker';
+import HentAlleLenker from '../../components/Lenkebibliotek/hentAlleLenker';
 export const Lenkebibliotek = () => (
     <Container>
         <Col >
@@ -15,10 +15,12 @@ export const Lenkebibliotek = () => (
     <Form>
         <LeggeTilLenke/>
         <br />
+        <LenkeV /> 
+        <VisAlleLenker />
     </Form>
        
       
-        <LenkeV /> 
+        
 
 
 

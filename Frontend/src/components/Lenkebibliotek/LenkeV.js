@@ -60,7 +60,7 @@ export default class SelectLenker extends React.Component {
              </Form.Group>
         </Form>
         
-        <Card>
+<Card>
   <Card.Header>
       <Accordion.Toggle as={Button} variant="link" eventKey="0">
         Nyttige linker for deg
@@ -73,7 +73,7 @@ export default class SelectLenker extends React.Component {
                   Dette er linker til deg
               </Card.Text>
               <Card.Link >
-              <HentAlleLenker/>
+              {/* <HentAlleLenker/> */}
               </Card.Link>
                 
     </Card.Body>
@@ -81,7 +81,7 @@ export default class SelectLenker extends React.Component {
       </Accordion.Collapse>
 </Card>
 
-<HentAlleLenker/>
+
        
 
 

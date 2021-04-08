@@ -25,8 +25,9 @@ exports.getAlleLenker = function(req, res)  {
 exports.LenkeInput = function(req, res)  {
 
     // Her hentes lenkenavn fra frontend
-    const lenke = req.body.lenkenavn
-    
+    const url = req.body.url;
+    const tittel = req.body.tittel;
+    const info = req.body.info;
 
 
   const LeggTilLenke = `INSERT INTO lenke(url, tittel, info) VALUES (?, ?, ?)`;
