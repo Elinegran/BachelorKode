@@ -59,7 +59,8 @@ export default class SelectGruppemedlem extends React.Component {
   render() {
     return(
       <p>
-        <h3>Medlemmer</h3>
+        
+        <h5>Medlemmer</h5>
         <ul className="list-group">
         { this.state.bruker.map(alleBrukere => 
           <li className="list-group-item">
@@ -70,13 +71,6 @@ export default class SelectGruppemedlem extends React.Component {
               : (  
               <Col>
                 <SlettMedlem senderIDbruker={alleBrukere.idbruker} senderGruppeID={alleBrukere.gruppeID}/>
-                {/* <Button 
-                  type="button" 
-                  className="btn btn-warning btn-sm" 
-                  style={{float: 'right'}}>
-                  onClick={slettMedlem}>  
-                    Slett medlem
-                </Button> */}
               </Col>
               )}
             </Row>

@@ -34,7 +34,7 @@ export default class Gruppeliste extends React.Component {
         <Card>
           <Card.Header>
             <Accordion.Toggle as={Button} variant="link" eventKey={"Alle"}>
-              <h2> Alle </h2>
+              <h2> Alle brukere </h2>
             </Accordion.Toggle>
           </Card.Header>
           <Accordion.Collapse eventKey={"Alle"}>
@@ -53,19 +53,13 @@ export default class Gruppeliste extends React.Component {
 
           <Accordion.Collapse eventKey={melding.gruppeID}>
             <Card.Body>
+
               <Gruppemelding gruppeID ={melding.gruppeID}/>
-              <p>
-                <NyttMedlem senderGruppeID={melding.gruppeID} senderID={melding.gruppeID}/> 
-              </p>
-              <p>
-                <h3>Rediger gruppe</h3>
-                <Row> 
-                  <Col> <EndreGruppenavn sendeGruppeID={melding.gruppeID} /> </Col>
-                  <Col> <SlettGruppe senderGruppeID={melding.gruppeID}/> </Col>
-                </Row>
-              </p>
-        
+              <NyttMedlem senderGruppeID={melding.gruppeID} senderID={melding.gruppeID}/>  
+              <EndreGruppenavn sendeGruppeID={melding.gruppeID} /> 
               <SelectGruppemedlem gruppeIDFraGrupper={melding.gruppeID} />
+              <SlettGruppe senderGruppeID={melding.gruppeID}/> 
+              
             </Card.Body> 
           </Accordion.Collapse>
         </Card>)}

@@ -98,3 +98,21 @@ exports.Gruppemelding = function(req, res) {
 }; //Slutt på meldingTilMedlemmer funksjonen
 
 
+// Funksjon som legger til NÅR en melding er lest
+exports.MeldingLest = function(req, res) {
+
+  const meldingsID = req.body.meldingsID; 
+
+  const meldingLest = `INSERT INTO meldingLest (meldingsID) VALUES (?);`;
+  db.query(meldingLest, meldingsID, (err,result) => {
+    if (err) {
+      console.log(err)
+    }
+    else{
+      res.send(result);
+    }
+  });
+};
+
+
+

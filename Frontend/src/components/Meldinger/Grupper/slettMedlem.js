@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Bootstap
-import { Row, Col, Button } from 'react-bootstrap'; // Bootstrap-greier
+import { Form, Button } from 'react-bootstrap'; // Bootstrap-greier
 
 
  function SlettMedlem(props) {
@@ -15,13 +15,15 @@ import { Row, Col, Button } from 'react-bootstrap'; // Bootstrap-greier
 
   // Returnerer en liste over medlemmene i gruppa
     return(
+      <Form>
       <Button 
-        type="button" 
+        type="submit" 
         className="btn btn-warning btn-sm" 
         style={{float: 'right'}}
         onClick={slettMedlem}> 
           Slett medlem
       </Button>
+      </Form>
     ) // slutt på return
 } // slutt på funksjon slettMedlem()
 

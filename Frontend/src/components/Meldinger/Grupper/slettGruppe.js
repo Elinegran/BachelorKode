@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios'; // for å sende/ motta til/ fra backend
 import 'bootstrap/dist/css/bootstrap.min.css'; // Bootstap
-import { Button } from 'react-bootstrap'; // Bootstrap-greier
+import { Button, Form } from 'react-bootstrap'; // Bootstrap-greier
 
 
 // Funksjon for å opprette en ny gruppe i databasen
@@ -15,14 +15,18 @@ function SlettGruppe(props) {
 
   // Dette sendes til grupper.js
   return (
-
-    <Button 
-      type="submit"   
-      className="btn btn-warning" 
-      style={{float: 'right'}}
-      onClick={slettGruppe}
-      > Slett gruppe
-    </Button>      
+    <p>
+      <Form>
+        <label> Slett gruppa </label>
+        <Button 
+          type="submit"   
+          className="btn btn-warning" 
+          style={{float: 'right'}}
+          onClick={slettGruppe}
+          > Slett gruppe
+        </Button> 
+      </Form>
+    </p>     
   ) // slutt på return()
 
 } // slutt på funksjonen NyGruppe()

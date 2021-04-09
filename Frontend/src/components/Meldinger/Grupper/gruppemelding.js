@@ -5,9 +5,7 @@ import AuthService from '../../../services/auth.service';
 
 import { Container, Row, Col, Button, Alert, Breadcrumb, Card, Form } from 'react-bootstrap';
 
-
 const idbruker = AuthService.getUserId();
-
 
 export default class Gruppemelding extends React.Component {
     constructor (props){
@@ -21,27 +19,24 @@ export default class Gruppemelding extends React.Component {
     }
     handleInputSend(event){
         this.setState({melding:event.target.value})
-
-      
-   
     }
 
     render(){    
     return (
         <p>
-            <h3>Send gruppemelding</h3>
             <Form>
+                <label> Send gruppemelding: </label>
                 <Row>
                     <Col>
                         <Form.Group>
                             <Form.Control 
-                                input type="text" placeholder ="Skriv gruppemelding"  
-                                onChange = {this.handleInputSend} style={{float: 'left'}} />
+                                input type="text" placeholder ="Skriv melding..."  
+                                onChange = {this.handleInputSend} style={{float: 'right'}} />
                         </Form.Group>
                     </Col>
                     <Col>  
                         <Button 
-                            type="submit" className="btn btn-success"style={{float: 'right'}} 
+                            type="submit" className="btn btn-success"style={{float: 'left'}} 
                             onClick = {this.handleSendGroup}
                             > Send
                         </Button>
