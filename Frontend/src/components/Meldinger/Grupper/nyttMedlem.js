@@ -8,14 +8,7 @@ import { Container, Row, Col, Button, Form } from 'react-bootstrap'; // Bootstra
 function NyttMedlem(props) {
     const [idbruker, setIDbruker] = useState(0); // idbruker hentes fra inputfelt
     const gruppeID = props.senderGruppeID; // gruppeID sendes fra grupper.js
-    //const [brukerliste, setBrukerliste] = useState([]);
-    //const brukere = []; 
-
-    // Henter brukere fra DB
-    /* const bruker = () => {
-        axios.get("http://localhost:3001/api/brukerGetAll")
-      };
- */
+    
     // Sender det nye gruppenavnet til backend
     const nyttMedlem = () => {
       axios.post("http://localhost:3001/api/addMedlem", { idbruker: idbruker, gruppeID: gruppeID })   
@@ -23,23 +16,16 @@ function NyttMedlem(props) {
   
     // Dette sendes til Meldingssiden
     return (
+    <p>
     <Form>
-        <Row>
-            {/* <Col>
-                <select className="custom-select" id = "valgtBruker" onChange = {(event) => {setIDbruker(event.target.value);}}> 
-                    <option selected>--Bruker--</option>
-                    { this.state.brukere.map(alleBrukere => 
-                    <option value={alleBrukere.idbruker}>{alleBrukere.fornavn} {alleBrukere.etternavn}</option>   
-                    )}
-                </select> 
-            </Col> */}
-
+        <label> Legg til nytt medlem: </label>
+        <Row>   
             <Col>
                 <Form.Group>
                     <Form.Control 
                         input type="text" 
                         placeholder="idbruker" 
-                        style={{float: 'left'}} 
+                        style={{float: 'right'}} 
                         onChange = {(event) => {setIDbruker(event.target.value);}}/>
                 </Form.Group>
             </Col>
@@ -47,13 +33,14 @@ function NyttMedlem(props) {
                 <Button 
                     type="submit"
                     className="btn btn-success"
-                    style={{float: 'right'}} 
+                    style={{float: 'left'}} 
                     onClick={nyttMedlem} 
                     > Legg til medlem
                 </Button>
             </Col>
         </Row>        
-    </Form> 
+    </Form>
+    </p> 
     ) // slutt på return()
 
 } // slutt på funksjonen NyttMedlem()

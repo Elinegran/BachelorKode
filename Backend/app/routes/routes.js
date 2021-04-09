@@ -71,6 +71,10 @@ router.use("/meldingTilAlle", meldingTilAlle.MeldingTilAlle);
 const gruppemelding = require('../controllers/meldinger');
 router.use("/gruppemelding", gruppemelding.Gruppemelding); 
 
+// Legge til NÅR en melding er lest
+const meldingLest = require('../controllers/meldinger');
+router.use("/meldingLest", meldingLest.MeldingLest); 
+
 // Grupper: 
 // Henter ALLE gruppene (Funker!)
 const mineGrupper= require('../controllers/grupper');

@@ -21,14 +21,14 @@ function MeldingTilAlle() {
     // Dette sendes til Meldingssiden
     return (
         <p>
-            <h3>Send melding til alle</h3>
             <Form>
+                <label>Send melding til alle</label>
                 <Row>
                     <Col>
                         <Form.Group>
                             <Form.Control 
-                                input type="text" 
-                                placeholder="Skriv melding" 
+                                input type="textarea" 
+                                placeholder="Skriv melding..." 
                                 style={{float: 'right'}} 
                                 onChange = {(event) => {setMelding(event.target.value);}}/>
                         </Form.Group>
