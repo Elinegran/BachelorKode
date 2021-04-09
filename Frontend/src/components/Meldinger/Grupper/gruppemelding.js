@@ -2,12 +2,9 @@ import React from 'react'
 import axios from 'axios';
 import AuthService from '../../../services/auth.service';
 
-
 import { Container, Row, Col, Button, Alert, Breadcrumb, Card, Form } from 'react-bootstrap';
 
-
 const idbruker = AuthService.getUserId();
-
 
 export default class Gruppemelding extends React.Component {
     constructor (props){
@@ -21,9 +18,6 @@ export default class Gruppemelding extends React.Component {
     }
     handleInputSend(event){
         this.setState({melding:event.target.value})
-
-      
-   
     }
 
     render(){    

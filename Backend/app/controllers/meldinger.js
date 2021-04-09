@@ -86,7 +86,7 @@ exports.Gruppemelding = function(req, res) {
                                FROM gruppemedlem
                                WHERE gruppemedlem.gruppeID = ?;`;
 
-  const avsender = req.body.avsender; // Henter avsender (den innloggede) fra frontend. 
+  const avsender = req.body.avsender; // Henter avsender fra frontend. 
   const melding = req.body.melding; // Henter meldingsteksen fra Frontend.
   const gruppeID = req.body.gruppeID; //Henter gruppeID fra frontend.
 
