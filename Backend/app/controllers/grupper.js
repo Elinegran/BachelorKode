@@ -23,10 +23,15 @@ exports.getMineGrupper = function(req, res)  {
 
 // Henter gruppene til EN BESTEMT BRUKER fra DB
 exports.hentBrukerGrupper = function(req, res)  {
-  let idbruker = req.query.idbruker;
+  let idbruker = req.query.idbruker; // Får den innloggede brukeren fra Frontend
+  console.log(idbruker); 
 
-  const sqlSelect = "SELECT * FROM gruppe WHERE idbruker = ?";
-  db.query(sqlSelect, [idbruker], (err, result) => {
+  const sqlSelect = `SELECT gruppemedlem.gruppeID, gruppenavn
+                     FROM gruppe, gruppemedlem  
+                     WHERE idbruker = ?
+                     AND gruppe.gruppeID = gruppemedlem.gruppeID`;
+
+  db.query(sqlSelect, idbruker, (err, result) => {
     if (err) {
       console.log(err)
     } 
@@ -59,12 +64,11 @@ exports.GruppeInput = function(req, res)  {
 // SLETTER en gruppe fra DB. NB! Alle medlemmene må være slettet først
 exports.slettGruppe = function(req, res)  {
   
-  const gruppeID = 51; 
-  //let gruppeID = req.body.gruppeID; // req.body.gruppeID; 
-  //console.log('GruppeID er: ' + gruppeID); // Får ikke tak i gruppeID (undefined)
+  const gruppeID = req.body.gruppeID;  
+  console.log('GruppeID er: ' + gruppeID); // Får ikke tak i gruppeID (undefined)
 
   const sqlSelect = "DELETE FROM gruppe WHERE gruppeID = ?"; // funket med post i Frontend og UPDATE 
-  //const sqlSelect = "UPDATE gruppe SET gruppenavn = 'min nye gruppe' WHERE gruppeID = 49";
+  
   db.query(sqlSelect, gruppeID, (err, result) => {
     if (err) {
       console.log(err)
@@ -139,19 +143,21 @@ exports.MedlemInput = function(req, res)  {
 exports.slettMedlem = function(req, res)  {
 
   // Henter gruppeID og brukerID fra frontend
-  const brukerID = req.body.idbruker
-  const gruppeID = req.body.gruppeID
+  const brukerID = req.body.idbruker; 
+  console.log('idbruker: ' + brukerID);
+  const gruppeID = req.body.gruppeID;
+  console.log('gruppeID ' + gruppeID);
+
+  const slett = "DELETE FROM gruppemedlem WHERE idbruker = ? AND gruppeID = ?";
   
-  db.query(
-    "DELETE FROM gruppemedlem WHERE idbruker = ? AND gruppeID = ?;",
-    brukerID, gruppeID, 
-    (err, res) => {
-      if (err) {
-        console.log(err);
-      } else {
-        //res.send("Values Inserted"); // tror man kan få ID'en herfra
+  db.query(slett, [brukerID, gruppeID ], (err, result) => {
+    if (err) {
+      console.log(err)
+      console.log(id)
+    } 
+    else {
+      res.send(result);
       }
-    }
-  );
+    });
 }; // slutt på funksjon slettMedlem()
 

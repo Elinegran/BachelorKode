@@ -71,6 +71,10 @@ router.use("/meldingTilAlle", meldingTilAlle.MeldingTilAlle);
 const gruppemelding = require('../controllers/meldinger');
 router.use("/gruppemelding", gruppemelding.Gruppemelding); 
 
+// Legge til NÅR en melding er lest
+const meldingLest = require('../controllers/meldinger');
+router.use("/meldingLest", meldingLest.MeldingLest); 
+
 // Grupper: 
 // Henter ALLE gruppene (Funker!)
 const mineGrupper= require('../controllers/grupper');
@@ -78,7 +82,7 @@ router.use("/meldingerMineGrupper", mineGrupper.getMineGrupper);
 
 // Henter gruppene til en bruker (Ikke lagd enda, venter til vi deler bruker og veileder)
 const brukerGrupper= require('../controllers/grupper');
-// router.use("/brukerGrupper", brukerGrupper.hentMineGrupper); 
+router.use("/brukerGrupper", brukerGrupper.hentBrukerGrupper); 
 
 // Legger til en ny gruppe (Funker!)
 const addGruppe = require('../controllers/grupper'); 
@@ -105,9 +109,25 @@ const getGruppemedlem = require('../controllers/grupper');
 router.use("/gruppeGetMedlemmer", getGruppemedlem.getMedlem)
 
 
+//Lenkebibliotek: 
+// Se alle lenkene 
+const getLenker = require('../controllers/lenkebibliotek');
+router.use("/getLenker", getLenker.getAlleLenker)
+
+// Opprette ny lenke
+const addLenke = require('../controllers/lenkebibliotek'); 
+router.use("/lenkerNylenke", addLenke.LenkeInput );
+
+// redigere lenke
+
+// Slette lenke
+
+
+
 
 
 
 
 // Eksporterer denne modellen, så server.js får brukt den
 module.exports = router;
+

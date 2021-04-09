@@ -49,7 +49,7 @@ exports.getMinSamtale = function(req, res)  {
                             WHERE melding.avsender = bruker.idbruker 
                             AND (avsender = ? OR avsender = ?) 
                             AND (mottaker = ? OR mottaker = ?) 
-                            ORDER BY tid`;
+                            ORDER BY tid DESC`;
 
     db.query(hentMinSamtale, [avsender, idbruker, idbruker, avsender], (err, result) => {
       if (err) {
@@ -96,5 +96,23 @@ exports.Gruppemelding = function(req, res) {
     if (err) throw err;    
    });
 }; //Slutt på meldingTilMedlemmer funksjonen
+
+
+// Funksjon som legger til NÅR en melding er lest
+exports.MeldingLest = function(req, res) {
+
+  const meldingsID = req.body.meldingsID; 
+
+  const meldingLest = `INSERT INTO meldingLest (meldingsID) VALUES (?);`;
+  db.query(meldingLest, meldingsID, (err,result) => {
+    if (err) {
+      console.log(err)
+    }
+    else{
+      res.send(result);
+    }
+  });
+};
+
 
 
