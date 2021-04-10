@@ -37,6 +37,7 @@ export default class KalenderComp extends React.Component {
       weekendsVisible: true,
       currentEvents: [],
       avtaler:[],
+      innhold: '',
       veileder: false,
       title:'',
       beskrivelse:'',
@@ -55,6 +56,7 @@ export default class KalenderComp extends React.Component {
     this.handleEndChange = this.handleEndChange.bind(this);
     this.handleDateSelect = this.handleDateSelect.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
+    this.kalenderInnhold = this.kalenderInnhold
 
   }
 
@@ -75,7 +77,9 @@ export default class KalenderComp extends React.Component {
 
 
   };
-
+  kalenderInnhold(value){
+   this.setState({innhold: value })
+  }
 
   handleSelect(value){
     this.setState({opprettetfor: value })
@@ -118,10 +122,38 @@ export default class KalenderComp extends React.Component {
       //alert(idbruker);
       if(brukertype == 2){
         this.setState({veileder:true})
+
+        if(!this.state.innhold){
+          axios.get(`http://localhost:3001/api/kalenderAlleAvtaler`)
+            .then(res => {
+            this.setState({avtaler : res.data})
+            const avtaler = res.data;
+            this.setState({ avtaler });
+      
+          })
+        }else{
+          axios.get(`http://localhost:3001/api/kalenderBruker`)
+            .then(res => {
+            this.setState({avtaler : res.data})
+            const avtaler = res.data;
+            this.setState({ avtaler });
+      
+        })
+
+        }
+
+
+
       }else{
         this.setState({veileder:false})
         this.setState({opprettetfor:brukertype})
+
+
       }
+
+
+
+
       // alert("dette er bruker" + this.state.opprettetav + " . Veileder : " + this.state.veileder + "brukerID: " + idbruker)
       // this.setState({opprettetav: idbruker});
      
@@ -134,6 +166,8 @@ export default class KalenderComp extends React.Component {
         {this.renderSidebar()}
         
         <div className='demo-app-main'>
+        <SelectBrukere 
+                onHandleSelect={this.kalenderFor}/>
           <FullCalendar
             plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
             headerToolbar={{
@@ -341,7 +375,7 @@ export default class KalenderComp extends React.Component {
     const burkertype =  AuthService.getRole()
     //event.preventDefault();
     console.log(this.state);
-    alert("You are submitting " + this.state.opprettetav + "Dette er bruker type: " + burkertype );
+    alert("You are submitting " + this.state.opprettetfor + "Dette er bruker type: " + burkertype );
 
 
     //LAger objekt som sendes til backend
@@ -400,7 +434,7 @@ export default class KalenderComp extends React.Component {
    
     ///////////////////////////////////////
     //Dette er delete
-    if (window.confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
+    if (window.confirm(`Er du sikker på at du vil slette '${clickInfo.event.title}'?`)) {
       
       //alert("dette er ID: " + clickInfo.event.id)
       console.log(clickInfo.event);
