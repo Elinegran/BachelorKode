@@ -275,7 +275,7 @@ export default class KalenderComp extends React.Component {
               <Accordion.Collapse eventKey={avtale.id}>
                 <Card.Body> 
                   
-                   <EditDialog eventT = {avtale.title} eventB ={avtale.beskrivelse} eventS ={avtale.sted} eventStart = {avtale.start} eventE = {avtale.end}/>
+                   <EditDialog eventI={avtale.id} eventT = {avtale.title} eventB ={avtale.beskrivelse} eventS ={avtale.sted} eventStart = {avtale.start} eventE = {avtale.end}/>
                    
                 </Card.Body> 
             </Accordion.Collapse>

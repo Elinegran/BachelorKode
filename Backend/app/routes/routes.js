@@ -44,11 +44,10 @@ router.use("/chatbotCheckAll", chatbotQueries.checkAndGet);
 //Kalender: 
 const kalender = require('../controllers/kalender');
 router.use("/kalenderAlleAvtaler", kalender.getKalenderAlle);
-
 router.use("/nyAvtale", kalender.NyAvtale);
-
 router.use("/updateTid", kalender.UpdateTid);
-router.use("/slettAvtale", kalender.deleteAvtale)
+router.use("/updateAvtale", kalender.updateAvtale);
+router.use("/slettAvtale", kalender.deleteAvtale);
 
 //Meldinger: 
 // Alle meldingene som en bruker har fått (Funker!)
