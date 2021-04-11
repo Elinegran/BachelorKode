@@ -12,7 +12,9 @@ import SimpleDateTime  from 'react-simple-timestamp-to-date'; // Formatere tid o
 const idbruker = AuthService.getUserId();
 // alert(idbruker);
  
-
+const detteSkjer = (event) => {
+  alert('Denne funker ' + event.meldingID);
+}
 export default class Meldingsliste extends React.Component {
   constructor (props){
     super (props);
@@ -35,6 +37,7 @@ export default class Meldingsliste extends React.Component {
 
       
   }
+ 
 
   render() {
     return (
@@ -45,7 +48,7 @@ export default class Meldingsliste extends React.Component {
             else { this.setState({meldingLest:true }) }
              */}
               <Card.Header>
-                  <Accordion.Toggle as={Button} variant="link" eventKey={melding.meldingsID}>
+                  <Accordion.Toggle as={Button} variant="link" onClick = {detteSkjer} eventKey={melding.meldingsID}>
                     <h2>
                       {melding.meldingLest != '0000-00-00 00:00:00' ? null : <span class="badge badge-pill badge-warning"> Ny </span>}
                       
