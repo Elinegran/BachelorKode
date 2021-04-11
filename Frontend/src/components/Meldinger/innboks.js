@@ -18,6 +18,7 @@ export default class Meldingsliste extends React.Component {
     super (props);
     this.state = {
     idbruker: idbruker,
+    meldingLest: false,
     meldinger: []
     }
   };
@@ -31,18 +32,24 @@ export default class Meldingsliste extends React.Component {
         const meldinger = res.data;
         this.setState({ meldinger });
       })
+
+      
   }
-
-
 
   render() {
     return (
         <Accordion>
           { this.state.meldinger.map(melding => 
           <Card>
+            {if(melding.meldingLest == '0000-00-00 00:00:00'){ this.setState({meldingLest:false})}
+            else { this.setState({meldingLest:true }) }
+            
               <Card.Header>
                   <Accordion.Toggle as={Button} variant="link" eventKey={melding.meldingsID}>
-                    <h2>{melding.fornavn} {melding.etternavn} {melding.avsender} {melding.mottaker} 
+                    <h2>
+                      {melding.meldingLest ? null : <span class="badge badge-pill badge-warning"> Ny </span>}
+                      
+                      {melding.fornavn} {melding.etternavn} {melding.avsender} {melding.mottaker} 
                       <br></br>
 
                       <SimpleDateTime dateFormat="DMY" timeFormat="HMA" dateSeparator="." timeSeparator=":"

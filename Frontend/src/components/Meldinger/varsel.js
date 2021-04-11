@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'; // Bootstap
 import { Container, Row, Col, Button, Form } from 'react-bootstrap'; // Bootstrap-greier
 
 // Funksjon for å opprette en ny gruppe i databasen
-function EndreGruppenavn(props) {
+function Varsel(props) {
     const gruppeID = props.sendeGruppeID; // fra gruppe.js
     const [gruppenavn, setGruppenavn] = useState("");
 
@@ -49,4 +49,4 @@ function EndreGruppenavn(props) {
 
 } // slutt på funksjonen EndreGruppenavn()
 
-export default EndreGruppenavn; 
+export default Varsel; 

@@ -7,10 +7,13 @@ import { Button, Form } from 'react-bootstrap'; // Bootstrap-greier
 // Funksjon for å opprette en ny gruppe i databasen
 function SlettGruppe(props) {
   const gruppeID = props.senderGruppeID;
+  const gruppenavn = props.senderGruppenavn; 
   
   // Sender gruppeID til backend
   const slettGruppe = () => {
-    axios.delete("http://localhost:3001/api/deleteGruppe", {data: {gruppeID: gruppeID}})    
+    if (window.confirm(`Er du sikker på at du vil slette ${ gruppenavn } ?`)) {
+    axios.delete("http://localhost:3001/api/deleteGruppe", {data: {gruppeID: gruppeID}}) 
+    }
   };
 
   // Dette sendes til grupper.js
