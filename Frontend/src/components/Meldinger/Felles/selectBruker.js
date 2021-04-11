@@ -13,7 +13,7 @@ export default class SelectBrukere extends React.Component {
      }
      
     
-
+     this.onHandleSelect = this.onHandleSelect.bind(this);
   }
 
   onHandleSelect(event){

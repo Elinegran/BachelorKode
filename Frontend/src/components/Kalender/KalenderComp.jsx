@@ -48,42 +48,33 @@ export default class KalenderComp extends React.Component {
       opprettetfor : '', 
      
     };
-
+    
     this.handleTitleChange = this.handleTitleChange.bind(this);
-    this.handleBeskrivelseChange = this.handleBeskrivelseChange.bind(this);
+    this.handleBeskrivelseChange = this.handleBeskrivelseChange.bind(this); 
+    this.kalenderInnhold = this.kalenderInnhold.bind(this);
     this.handleStedChange = this.handleStedChange.bind(this);
     this.handleStartChange = this.handleStartChange.bind(this);
     this.handleEndChange = this.handleEndChange.bind(this);
     this.handleDateSelect = this.handleDateSelect.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
-    this.kalenderInnhold = this.kalenderInnhold.bind(this);
+   
+    //Hvis funksjon er gul så er det en arrowfunction
+   
 
   }
 
-  toggle = () => {
-    this.setState({ modal: !this.state.modal });
-  };
 
-  handleEventClick = ({ event, el }) => {
-    this.toggle();
-
-
-    console.log("Dette er objekt : "+event.title + "Beskrivelse: " + event.extendedProps.beskrivelse + "sted: " + event.extendedProps.sted);
-
-    this.setState({ title: event.title,
-    beskrivelse:event.extendedProps.beskrivelse,
-     sted:event.extendedProps.sted,
-     });
-
-
-  };
   kalenderInnhold(value){
    this.setState({innhold: value })
   }
 
-  handleSelect = (selectedValue) => {
-    this.setState({opprettetfor: selectedValue });
+  // handleSelect = (selectedValue) => {
+  //   this.setState({opprettetfor: selectedValue });
+  // }
+  handleSelect(value){
+    this.setState({opprettetfor: value })
   }
+
 
   handleTitleChange(event) {
       this.setState({
@@ -142,17 +133,12 @@ export default class KalenderComp extends React.Component {
 
         }
 
-
-
       }else{
         this.setState({veileder:false})
         this.setState({opprettetfor:brukertype})
 
 
       }
-
-
-
 
       // alert("dette er bruker" + this.state.opprettetav + " . Veileder : " + this.state.veileder + "brukerID: " + idbruker)
       // this.setState({opprettetav: idbruker});
@@ -166,8 +152,8 @@ export default class KalenderComp extends React.Component {
         {this.renderSidebar()}
         
         <div className='demo-app-main'>
-        <SelectBrukere 
-                onHandleSelect={this.kalenderFor}/>
+        {/* <SelectBrukere 
+                onHandleSelect={this.kalenderFor}/> */}
           <FullCalendar
             plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
             headerToolbar={{
