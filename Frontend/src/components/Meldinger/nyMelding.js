@@ -14,13 +14,8 @@ export default class NyMelding extends React.Component {
         this.handleSelect = this.handleSelect.bind(this);
     };
 
-<<<<<<< HEAD
-    async handleSelect(value){
-        this.setState({mottakerbruker: value})
-=======
     handleSelect(value){
         this.setState({mottakerbruker: value })
->>>>>>> 2d09b3b26d71480408fe60ba0993fc0c953d3834
         
     };
     
