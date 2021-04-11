@@ -56,7 +56,7 @@ export default class KalenderComp extends React.Component {
     this.handleEndChange = this.handleEndChange.bind(this);
     this.handleDateSelect = this.handleDateSelect.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
-    this.kalenderInnhold = this.kalenderInnhold
+    this.kalenderInnhold = this.kalenderInnhold.bind(this);
 
   }
 
@@ -81,8 +81,8 @@ export default class KalenderComp extends React.Component {
    this.setState({innhold: value })
   }
 
-  handleSelect(value){
-    this.setState({opprettetfor: value })
+  handleSelect = (selectedValue) => {
+    this.setState({opprettetfor: selectedValue });
   }
 
   handleTitleChange(event) {

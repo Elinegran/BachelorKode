@@ -6,18 +6,19 @@ import Skrivemeldinger from '../skriveMelding';
 
 
 export default class SelectBrukere extends React.Component {
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state = { 
-      bruker: []
+      bruker: [],
      }
      
-     this.onHandleSelect = this.onHandleSelect.bind(this);
+    
 
   }
 
-  onHandleSelect(event){
-    this.props.onHandleSelect(event.target.value)
+  onHandleSelect = (event) =>{
+    let selectedValue = event.target.value;
+    this.props.handleSelect(selectedValue);
 
   }
 
