@@ -70,7 +70,12 @@ export default class SelectGruppemedlem extends React.Component {
               ? null 
               : (  
               <Col>
-                <SlettMedlem senderIDbruker={alleBrukere.idbruker} senderGruppeID={alleBrukere.gruppeID}/>
+                <SlettMedlem 
+                  senderIDbruker={alleBrukere.idbruker} 
+                  senderGruppeID={alleBrukere.gruppeID}
+                  senderGruppenavn={alleBrukere.gruppenavn}
+                  senderFornavn={alleBrukere.fornavn}
+                  senderEtternavn={alleBrukere.etternavn}/>
               </Col>
               )}
             </Row>

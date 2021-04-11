@@ -83,7 +83,39 @@ exports.UpdateTid = function(req, res)  {
       }
     }
   );
-}; // slutt på funksjon NyAvtale()
+}; // slutt på funksjon UPdate Tid
+
+
+//UPDATE AVTALE
+exports.updateAvtale = function(req, res){
+  console.log("nå er du i updateAVtale");
+
+  //Variabler hentes fra frontend:
+  const id = req.body.id;
+  const title = req.body.title;
+  const beskrivelse = req.body.beskrivelse;
+  const sted = req.body.sted;
+  const start = req.body.start;
+  const slutt = req.body.slutt;
+
+  db.query(
+    "UPDATE avtale SET title = ?, beskrivelse = ?, sted = ?, start = ?, end = ? WHERE id = ?",
+    [title, beskrivelse, sted, start, slutt, id], 
+    (err, res) => {
+    if (err) {
+      console.log(err);
+      console.log(title, beskrivelse, sted, start, slutt, id)
+
+    } else {
+        console.log(title, beskrivelse, sted, start, slutt, id)
+     // res.send("Values Inserted"); // tror man kan få ID'en herfra
+
+    }
+  }
+);
+
+};// slutt på update avtale
+
 
 //Sletter en avtale
 exports.deleteAvtale = function(req, res)  {

@@ -9,6 +9,9 @@ import axios from 'axios';
 import SelectBrukere from '../Meldinger/Felles/selectBruker.js'; // Komponent som henter brukerne fra backend ----../Felles/selectBruker.js
 import AuthService from '../../services/auth.service';
 import { Button, Modal, ModalBody, ModalFooter } from 'react-bootstrap';
+
+import { Accordion, Container, Row, Col, Card, Form } from 'react-bootstrap'; 
+
 //import { Button } from 'react-bootstrap'; // Bootstrap-greier
 //import {useState} from 'react';
 //import Modal from 'react-bootstrap/Modal';
@@ -34,6 +37,7 @@ export default class KalenderComp extends React.Component {
       weekendsVisible: true,
       currentEvents: [],
       avtaler:[],
+      innhold: '',
       veileder: false,
       title:'',
       beskrivelse:'',
@@ -42,7 +46,7 @@ export default class KalenderComp extends React.Component {
       end:0,
       opprettetav: '',  
       opprettetfor : '', 
-      modal: false
+     
     };
 
     this.handleTitleChange = this.handleTitleChange.bind(this);
@@ -52,6 +56,7 @@ export default class KalenderComp extends React.Component {
     this.handleEndChange = this.handleEndChange.bind(this);
     this.handleDateSelect = this.handleDateSelect.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
+    this.kalenderInnhold = this.kalenderInnhold.bind(this);
 
   }
 
@@ -72,10 +77,12 @@ export default class KalenderComp extends React.Component {
 
 
   };
+  kalenderInnhold(value){
+   this.setState({innhold: value })
+  }
 
-
-  handleSelect(value){
-    this.setState({opprettetfor: value })
+  handleSelect = (selectedValue) => {
+    this.setState({opprettetfor: selectedValue });
   }
 
   handleTitleChange(event) {
@@ -115,10 +122,38 @@ export default class KalenderComp extends React.Component {
       //alert(idbruker);
       if(brukertype == 2){
         this.setState({veileder:true})
+
+        if(!this.state.innhold){
+          axios.get(`http://localhost:3001/api/kalenderAlleAvtaler`)
+            .then(res => {
+            this.setState({avtaler : res.data})
+            const avtaler = res.data;
+            this.setState({ avtaler });
+      
+          })
+        }else{
+          axios.get(`http://localhost:3001/api/kalenderBruker`)
+            .then(res => {
+            this.setState({avtaler : res.data})
+            const avtaler = res.data;
+            this.setState({ avtaler });
+      
+        })
+
+        }
+
+
+
       }else{
         this.setState({veileder:false})
         this.setState({opprettetfor:brukertype})
+
+
       }
+
+
+
+
       // alert("dette er bruker" + this.state.opprettetav + " . Veileder : " + this.state.veileder + "brukerID: " + idbruker)
       // this.setState({opprettetav: idbruker});
      
@@ -131,6 +166,8 @@ export default class KalenderComp extends React.Component {
         {this.renderSidebar()}
         
         <div className='demo-app-main'>
+        <SelectBrukere 
+                onHandleSelect={this.kalenderFor}/>
           <FullCalendar
             plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
             headerToolbar={{
@@ -163,7 +200,7 @@ export default class KalenderComp extends React.Component {
             eventRemove={function(){}}
             */
           />
-          <Modal
+          {/* <Modal
               isOpen={true}
               toggle={this.toggle}
             
@@ -177,12 +214,12 @@ export default class KalenderComp extends React.Component {
                 </div>
               </Modal.Body>
               <Modal.Footer>
-                {/* <Button color="primary">Do Something</Button>{" "} */}
+                
                 <Button color="secondary" onClick={this.toggle}>
                   Cancel
                 </Button>
               </Modal.Footer>
-            </Modal>
+            </Modal> */}
         </div>
       </div>
     )
@@ -252,8 +289,39 @@ export default class KalenderComp extends React.Component {
           </ul>
         </div>
         <div>
+
+        <Accordion>
+          { this.state.avtaler.map(avtale => 
+          <Card>
+              <Card.Header>
+                  <Accordion.Toggle as={Button} variant="link" eventKey={avtale.id}>
+                    <h2>{avtale.title} 
+                      <br></br>
+
+                      {/* <SimpleDateTime dateFormat="DMY" timeFormat="HMA" dateSeparator="." timeSeparator=":"
+                      showTime="1" showDate="1" >
+                      {melding.tid}</SimpleDateTime> */}
+                    </h2>
+                   
+                                    
+                  </Accordion.Toggle>
+              </Card.Header>
+              <Accordion.Collapse eventKey={avtale.id}>
+                <Card.Body> 
+                  
+                   <EditDialog eventI={avtale.id} eventT = {avtale.title} eventB ={avtale.beskrivelse} eventS ={avtale.sted} eventStart = {avtale.start} eventE = {avtale.end}/>
+                   
+                </Card.Body> 
+            </Accordion.Collapse>
+          </Card>
+          )}
+        </Accordion> 
+
+
+
+      
             {/* <Rediger/> */}
-            <Button onClick = {this.handleDelete(avtaler.id)}>Slett</Button>
+           
         </div>
       </div>
     )
@@ -307,7 +375,7 @@ export default class KalenderComp extends React.Component {
     const burkertype =  AuthService.getRole()
     //event.preventDefault();
     console.log(this.state);
-    alert("You are submitting " + this.state.opprettetav + "Dette er bruker type: " + burkertype );
+    alert("You are submitting " + this.state.opprettetfor + "Dette er bruker type: " + burkertype );
 
 
     //LAger objekt som sendes til backend
@@ -361,79 +429,34 @@ export default class KalenderComp extends React.Component {
 
 
 
-  // handleEventClick = ({ event, el }) => {
-  //   this.toggle();
+  handleEventClick = (clickInfo) => {
 
-
-  //   console.log("Dette er objekt : "+event.title + "Beskrivelse: " + event.extendedProps.beskrivelse + "sted: " + event.extendedProps.sted);
-
-  //   this.setState({ title: event.title,
-  //   beskrivelse:event.extendedProps.beskrivelse,
-  //    sted:event.extendedProps.sted,
-  //    });
-
-
-  // };
-
-  // handleEventClick = (clickInfo) => {
-
-    
-
-  //   const handleClose = () => this.setState({show:false});
    
-  
-  //   return (
-  //     <>
-  //       {/* <Button variant="primary" onClick={handleShow}>
-  //         Launch demo modal
-  //       </Button> */}
-  
-  //       <Modal show={this.state.show} >
-  //         <Modal.Header closeButton>
-  //           <Modal.Title>Modal heading</Modal.Title>
-  //         </Modal.Header>
-  //         <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-  //         <Modal.Footer>
-  //           <Button variant="secondary" onClick={handleClose}>
-  //             Close
-  //           </Button>
-  //           <Button variant="primary" onClick={handleClose}>
-  //             Save Changes
-  //           </Button>
-  //         </Modal.Footer>
-  //       </Modal>
-  //     </>
-  //   );
-
-
-
-
-
-    /////////////////////////////////////////
-    // //Dette er delete
-    // if (window.confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
+    ///////////////////////////////////////
+    //Dette er delete
+    if (window.confirm(`Er du sikker på at du vil slette '${clickInfo.event.title}'?`)) {
       
-    //   //alert("dette er ID: " + clickInfo.event.id)
-    //   console.log(clickInfo.event);
-    //   const avtaleid = clickInfo.event.id;
-    //   axios.post(`http://localhost:3001/api/slettAvtale`, {
-    //     avtaleid: avtaleid
-    //   })
-    //     .then(response => {
-    //         console.log(response)
+      //alert("dette er ID: " + clickInfo.event.id)
+      console.log(clickInfo.event);
+      const avtaleid = clickInfo.event.id;
+      axios.post(`http://localhost:3001/api/slettAvtale`, {
+        avtaleid: avtaleid
+      })
+        .then(response => {
+            console.log(response)
             
             
-    //       })
-    //       .catch(error => {
-    //         console.log(error)
-    //         console.log("message")
-    //       })
+          })
+          .catch(error => {
+            console.log(error)
+            console.log("message")
+          })
 
-    //       window.location.reload()
+          window.location.reload()
 
-    // }
-    //////////
-  //}
+    }
+    ////////
+  }
 
   handleEvents = (events) => {
     this.setState({

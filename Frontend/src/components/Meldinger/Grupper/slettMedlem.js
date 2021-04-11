@@ -5,12 +5,18 @@ import { Form, Button } from 'react-bootstrap'; // Bootstrap-greier
 
 
  function SlettMedlem(props) {
-    const idbruker = props.senderIDbruker; // idbruker sendes fra selectGruppemedlem.js
-    const gruppeID = props.senderGruppeID; // gruppeID sendes fra selectGruppemedlem.js
+   // idbruker, gruppeID, gruppenavn, fornavn og etternavn sendes fra selectGruppemedlem.js
+    const idbruker = props.senderIDbruker; 
+    const gruppeID = props.senderGruppeID; 
+    const gruppenavn = props.senderGruppenavn;
+    const fornavn = props.senderFornavn;
+    const etternavn = props.senderEtternavn; 
     
   // Sender medlemmet som skal slettes til Backend
   const slettMedlem = () => { 
-    axios.delete('http://localhost:3001/api/deleteMedlem' , { data: { idbruker: idbruker, gruppeID: gruppeID }})  
+    if (window.confirm(`Er du sikker på at du vil slette ${ fornavn } ${ etternavn } fra ${ gruppenavn } ?`)) {
+      axios.delete('http://localhost:3001/api/deleteMedlem' , { data: { idbruker: idbruker, gruppeID: gruppeID }})  
+    }
   };  
 
   // Returnerer en liste over medlemmene i gruppa

@@ -8,7 +8,6 @@ import Samtaleliste from '../../components/Meldinger/samtaler.js';
 import AuthService from '../../services/auth.service'; 
 import Skrivemeldinger from '../../components/Meldinger/skriveMelding.js';
 import SimpleDateTime  from 'react-simple-timestamp-to-date'; // Formatere tid og dato
-import MeldingLest from './meldingLest'; 
 
 const idbruker = AuthService.getUserId();
 // alert(idbruker);
@@ -19,6 +18,7 @@ export default class Meldingsliste extends React.Component {
     super (props);
     this.state = {
     idbruker: idbruker,
+    meldingLest: false,
     meldinger: []
     }
   };
@@ -32,27 +32,31 @@ export default class Meldingsliste extends React.Component {
         const meldinger = res.data;
         this.setState({ meldinger });
       })
+
+      
   }
-
-
 
   render() {
     return (
         <Accordion>
           { this.state.meldinger.map(melding => 
           <Card>
+            {/* {if(melding.meldingLest == '0000-00-00 00:00:00'){ this.setState({meldingLest:false})}
+            else { this.setState({meldingLest:true }) }
+             */}
               <Card.Header>
-                  <Accordion.Toggle as={Button} variant="link" eventKey={melding.meldingsID} 
-                                    onClick={<MeldingLest senderID={melding.meldingsID}/>}>
+                  <Accordion.Toggle as={Button} variant="link" eventKey={melding.meldingsID}>
                     <h2>
-                      <span className="badge badge-pill badge-warning"> Ny </span>
-                      {melding.fornavn} {melding.etternavn} 
-                    </h2>  
-                    <p>
+                      {melding.meldingLest != '0000-00-00 00:00:00' ? null : <span class="badge badge-pill badge-warning"> Ny </span>}
+                      
+                      {melding.fornavn} {melding.etternavn} {melding.avsender} {melding.mottaker} 
+                      <br></br>
+
                       <SimpleDateTime dateFormat="DMY" timeFormat="HMA" dateSeparator="." timeSeparator=":"
                       showTime="1" showDate="1" >
                       {melding.tid}</SimpleDateTime>
-                    </p>
+                    </h2>
+                   
                                     
                   </Accordion.Toggle>
               </Card.Header>
