@@ -17,7 +17,7 @@ export default class SelectBrukere extends React.Component {
   }
 
   onHandleSelect(event){
-    this.props.onHandleSelect(event.target.value)
+    this.props.onHandleSelect(event.target.value) 
 
   }
 

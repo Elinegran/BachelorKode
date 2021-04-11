@@ -6,12 +6,15 @@ import { Container, Row, Col, Button, Form } from 'react-bootstrap'; // Bootstra
 
 // Funksjon for å opprette en ny gruppe i databasen
 function EndreGruppenavn(props) {
-    const gruppeID = props.sendeGruppeID;
+    const gruppeID = props.sendeGruppeID; // fra gruppe.js
     const [gruppenavn, setGruppenavn] = useState("");
 
     // Sender det nye gruppenavnet til backend
     const endreNavn = () => {
-      axios.post("http://localhost:3001/api/gruppenavn", { gruppeID: gruppeID, gruppenavn: gruppenavn, })   
+        if (window.confirm(`Er du sikker på at du endre gruppenavnet til ${ gruppenavn } ?`)) {
+            axios.post("http://localhost:3001/api/gruppenavn", { gruppeID: gruppeID, gruppenavn: gruppenavn, }) 
+            // alert('Du endret gruppenavnet til ' + gruppenavn);  
+        }
     };
   
     // Dette sendes til Meldingssiden

@@ -102,8 +102,9 @@ exports.Gruppemelding = function(req, res) {
 exports.MeldingLest = function(req, res) {
 
   const meldingsID = req.body.meldingsID; 
+  console.log(meldingsID); 
 
-  const meldingLest = `INSERT INTO meldingLest (meldingsID) VALUES (?);`;
+  const meldingLest = `INSERT INTO meldingLest (meldingsID) VALUES (1);`;
   db.query(meldingLest, meldingsID, (err,result) => {
     if (err) {
       console.log(err)

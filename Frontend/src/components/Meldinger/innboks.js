@@ -34,8 +34,6 @@ export default class Meldingsliste extends React.Component {
       })
   }
 
-
-
   render() {
     return (
         <Accordion>

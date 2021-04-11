@@ -11,7 +11,8 @@ function NyttMedlem(props) {
     
     // Sender det nye gruppenavnet til backend
     const nyttMedlem = () => {
-      axios.post("http://localhost:3001/api/addMedlem", { idbruker: idbruker, gruppeID: gruppeID })   
+      axios.post("http://localhost:3001/api/addMedlem", { idbruker: idbruker, gruppeID: gruppeID }) 
+      alert('Nytt medlem lagret!' );   
     };
   
     // Dette sendes til Meldingssiden

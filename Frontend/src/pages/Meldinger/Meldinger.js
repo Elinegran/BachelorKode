@@ -22,7 +22,7 @@ export const Meldinger = () => (
                 </Container>                  
         </section>
 
-        {/* Samtale mellom 2 brukere */}
+        
         <section className="gruppe"> {/* Grupper */}
                 <Container>
                         <h1 className= "display-4"> Mine grupper </h1>

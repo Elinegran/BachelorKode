@@ -10,7 +10,8 @@ function NyGruppe() {
 
     // Sender det nye gruppenavnet til backend
     const addGruppe = () => {
-      axios.post("http://localhost:3001/api/grupperNyeGrupper", { gruppenavn: gruppenavn, })   
+      axios.post("http://localhost:3001/api/grupperNyeGrupper", { gruppenavn: gruppenavn, }) 
+      alert ('Du lagret ' + gruppenavn);  
     };
   
     // Dette sendes til Meldingssiden
