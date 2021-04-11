@@ -8,7 +8,7 @@ exports.InsertInnboksMeldinger = function(req, res) {
   const melding = req.body.melding;
   
 
-  const LeggtilInnboksMeldinger = `INSERT INTO melding(mottaker, avsender, melding) VALUES (?, ?, ?)`;
+  const LeggtilInnboksMeldinger = `INSERT INTO melding(mottaker, avsender, melding) VALUES (?, ?, ?`;
   db.query(LeggtilInnboksMeldinger, [mottaker, avsender, melding], (err,result) => {
     if (err) {
       console.log(err)
@@ -23,7 +23,7 @@ exports.InsertInnboksMeldinger = function(req, res) {
 // Funksjon som henter alle meldingene som en bruker har fått
 exports.getMineMeldinger = function(req, res)  {
   let idbruker = req.query.idbruker;
-    const hentMineMeldinger = `SELECT meldingsID, avsender, mottaker, tid, fornavn, etternavn, melding
+    const hentMineMeldinger = `SELECT meldingsID, avsender, mottaker, tid, meldingLest, fornavn, etternavn, melding
                                FROM melding, bruker
                                WHERE mottaker = ?
                                AND idbruker = avsender
@@ -98,13 +98,16 @@ exports.Gruppemelding = function(req, res) {
 }; //Slutt på meldingTilMedlemmer funksjonen
 
 
-// Funksjon som legger til NÅR en melding er lest
+// Funksjon som oppdaterer en rad til NÅR en melding er lest
 exports.MeldingLest = function(req, res) {
 
   const meldingsID = req.body.meldingsID; 
   console.log(meldingsID); 
 
-  const meldingLest = `INSERT INTO meldingLest (meldingsID) VALUES (1);`;
+  const meldingLest = `UPDATE melding 
+                       SET meldingLest = CURRENT_TIMESTAMP()
+                       WHERE meldingsID = 3`;
+
   db.query(meldingLest, meldingsID, (err,result) => {
     if (err) {
       console.log(err)
