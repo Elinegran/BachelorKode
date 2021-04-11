@@ -6,7 +6,6 @@ import { Container, Row, Col, Button, Form } from 'react-bootstrap'; // Bootstra
 import SelectGruppe from './selextGruppe.js'; // Komponent som henter gruppene fra backend
 import SelectBrukere from '../Felles/selectBruker.js'; // Komponent som henter brukerne fra backend
 
-// const idbruker = 13; // Denne må hentes fra et eller annet sted...
 
 // Klasse for å legge til et nytt gruppemedlem i databasen
 export default class NyttMedlem extends React.Component {
@@ -35,7 +34,7 @@ export default class NyttMedlem extends React.Component {
                     </Row>
                     <Row>
                         <Col>
-                            <SelectBrukere />
+                            <SelectBrukere onHandleSelect={this.handleSelect}/>
                         </Col>
                         <Col>
                             <Form.Group>
