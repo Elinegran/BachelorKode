@@ -41,13 +41,13 @@ export default class Meldingsliste extends React.Component {
         <Accordion>
           { this.state.meldinger.map(melding => 
           <Card>
-            {if(melding.meldingLest == '0000-00-00 00:00:00'){ this.setState({meldingLest:false})}
+            {/* {if(melding.meldingLest == '0000-00-00 00:00:00'){ this.setState({meldingLest:false})}
             else { this.setState({meldingLest:true }) }
-            
+             */}
               <Card.Header>
                   <Accordion.Toggle as={Button} variant="link" eventKey={melding.meldingsID}>
                     <h2>
-                      {melding.meldingLest ? null : <span class="badge badge-pill badge-warning"> Ny </span>}
+                      {melding.meldingLest != '0000-00-00 00:00:00' ? null : <span class="badge badge-pill badge-warning"> Ny </span>}
                       
                       {melding.fornavn} {melding.etternavn} {melding.avsender} {melding.mottaker} 
                       <br></br>
