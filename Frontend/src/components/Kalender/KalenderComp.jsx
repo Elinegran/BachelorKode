@@ -3,7 +3,7 @@ import FullCalendar, { formatDate } from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
-import { createEventId,avtaler } from './event-utils'
+
 import nbLocale from '@fullcalendar/core/locales/nb';
 import axios from 'axios';
 import SelectBrukere from '../Meldinger/Felles/selectBruker.js'; // Komponent som henter brukerne fra backend ----../Felles/selectBruker.js
@@ -20,13 +20,6 @@ import { Accordion, Container, Row, Col, Card, Form } from 'react-bootstrap';
 import EditDialog from './editDialog';
 
 import Rediger from './Rediger';
-//import { Card, Accordion, Button, Form } from 'react-bootstrap'; // Bootstrap-greier
-
-
-
-// const { students } = this.props;
-// const { name, age } = this.state;
-
 
 
 export default class KalenderComp extends React.Component {
@@ -37,7 +30,6 @@ export default class KalenderComp extends React.Component {
       weekendsVisible: true,
       currentEvents: [],
       avtaler:[],
-      innhold: '',
       veileder: false,
       title:'',
       beskrivelse:'',
@@ -65,8 +57,18 @@ export default class KalenderComp extends React.Component {
 
 
   kalenderInnhold(value){
-   this.setState({innhold: value })
-  }
+   alert('Dette er kalender innhold: ' + value);
+   
+   axios.get(`http://localhost:3001/api/kalenderBruker`, 
+   {params:
+    {enBruker : value}
+    } )
+   .then(res => {
+   this.setState({avtaler : res.data})
+   const avtaler = res.data;
+   this.setState({ avtaler });
+  })
+}
 
   // handleSelect = (selectedValue) => {
   //   this.setState({opprettetfor: selectedValue });
@@ -81,8 +83,8 @@ export default class KalenderComp extends React.Component {
         title: event.target.value,
 
       });
-      //alert(this.state.title);
-    }
+     }
+
   handleBeskrivelseChange(event) {
       this.setState({beskrivelse: event.target.value});
   }
@@ -100,13 +102,13 @@ export default class KalenderComp extends React.Component {
   componentDidMount() {
 
 
-    axios.get(`http://localhost:3001/api/kalenderAlleAvtaler`)
-      .then(res => {
-        this.setState({avtaler : res.data})
-        const avtaler = res.data;
-        this.setState({ avtaler });
+    // axios.get(`http://localhost:3001/api/kalenderAlleAvtaler`)
+    //   .then(res => {
+    //     this.setState({avtaler : res.data})
+    //     const avtaler = res.data;
+    //     this.setState({ avtaler });
       
-      })
+    //   })
       const brukertype = AuthService.getRole();
       const idbruker = AuthService.getUserId();
       this.setState({opprettetav: idbruker});
@@ -114,7 +116,6 @@ export default class KalenderComp extends React.Component {
       if(brukertype == 2){
         this.setState({veileder:true})
 
-        if(!this.state.innhold){
           axios.get(`http://localhost:3001/api/kalenderAlleAvtaler`)
             .then(res => {
             this.setState({avtaler : res.data})
@@ -122,26 +123,29 @@ export default class KalenderComp extends React.Component {
             this.setState({ avtaler });
       
           })
-        }else{
-          axios.get(`http://localhost:3001/api/kalenderBruker`)
-            .then(res => {
-            this.setState({avtaler : res.data})
-            const avtaler = res.data;
-            this.setState({ avtaler });
-      
-        })
+        
 
-        }
 
       }else{
         this.setState({veileder:false})
-        this.setState({opprettetfor:brukertype})
+        this.setState({opprettetfor:idbruker})
+
+       
+
+        axios.get(`http://localhost:3001/api/kalenderBruker`, 
+        {params:
+         {enBruker : idbruker}
+         } )
+        .then(res => {
+        this.setState({avtaler : res.data})
+        const avtaler = res.data;
+        this.setState({ avtaler });
+       })
 
 
       }
 
-      // alert("dette er bruker" + this.state.opprettetav + " . Veileder : " + this.state.veileder + "brukerID: " + idbruker)
-      // this.setState({opprettetav: idbruker});
+    
      
   };
 
@@ -150,10 +154,21 @@ export default class KalenderComp extends React.Component {
     return (
       <div className='demo-app'>
         {this.renderSidebar()}
-        
+       
         <div className='demo-app-main'>
-        {/* <SelectBrukere 
-                onHandleSelect={this.kalenderFor}/> */}
+        {
+            !this.state.veileder
+            ? null
+            : (
+              <div>
+                <p>Dette er en avtale for:</p>
+                
+                <SelectBrukere 
+                onHandleSelect={this.kalenderInnhold}/>
+              </div>
+              )
+              }
+        
           <FullCalendar
             plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
             headerToolbar={{
@@ -178,7 +193,9 @@ export default class KalenderComp extends React.Component {
             //   alert('clicked' + tid)
             // }}
             eventContent={renderEventContent} // custom render function
+
             eventClick={this.handleEventClick}
+
             eventsSet={this.handleEvents} // called after events are initialized/added/changed/removed
             /* you can update a remote database when these fire:
             eventAdd={function(){}}
@@ -186,26 +203,6 @@ export default class KalenderComp extends React.Component {
             eventRemove={function(){}}
             */
           />
-          {/* <Modal
-              isOpen={true}
-              toggle={this.toggle}
-            
-            >
-              <Modal.Header toggle={this.toggle}>
-               {this.state.title}
-              </Modal.Header>
-              <Modal.Body>
-                <div>
-                  <p> {this.state.beskrivelse}</p>
-                </div>
-              </Modal.Body>
-              <Modal.Footer>
-                
-                <Button color="secondary" onClick={this.toggle}>
-                  Cancel
-                </Button>
-              </Modal.Footer>
-            </Modal> */}
         </div>
       </div>
     )
@@ -233,7 +230,7 @@ export default class KalenderComp extends React.Component {
         <input type="datetime-local" id="start" name="start"  value = {this.state.start} onChange={this.handleStartChange}/>
 
         <label for="slutt">Velg sluttid:</label> <br/>
-        <input type="datetime-local" id="slutt" name="sutt" onChange={this.handleEndChange}/>
+        <input type="datetime-local" id="slutt" name="sutt" value = {this.state.end} onChange={this.handleEndChange}/>
 
         <div> <b>
           {
@@ -402,15 +399,7 @@ export default class KalenderComp extends React.Component {
     })
 
     alert("Dette er tiden :" + selectInfo.startStr + 'til' + this.state.end)
-    // if (title) {
-    //   calendarApi.addEvent({
-    //     avtaleid: createEventId(),
-    //     title,
-    //     start: selectInfo.startStr,
-    //     end: selectInfo.endStr,
-    //     allDay: selectInfo.allDay
-    //   })
-    // }
+
   }
 
 
