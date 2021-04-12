@@ -18,7 +18,7 @@ const idbruker = AuthService.getUserId();
 } */
 
 const meldingLest = (event) => {
-  alert('Denne funker ' + event.meldingID);
+  console.log(event);
 }
 
 
@@ -51,7 +51,7 @@ export default class Meldingsliste extends React.Component {
               <Card.Header>
                   <Accordion.Toggle as={Button} 
                                     variant="link" 
-                                    onClick = {<MeldingLest senderID={melding.meldingsID}/>} 
+                                    onClick = {meldingLest}// {<MeldingLest senderID={melding.meldingsID}/>} 
                                     eventKey={melding.meldingsID}>
                     <h2>
                       {melding.meldingLest != '0000-00-00 00:00:00' ? null : <span class="badge badge-pill badge-warning"> Ny </span>}
