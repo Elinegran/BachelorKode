@@ -6,21 +6,28 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Accordion, Container, Row, Col, Button, Alert, Breadcrumb, Card, Form } from 'react-bootstrap'; 
 import Samtaleliste from '../../components/Meldinger/samtaler.js';
 import AuthService from '../../services/auth.service'; 
-import Skrivemeldinger from '../../components/Meldinger/skriveMelding.js';
 import SimpleDateTime  from 'react-simple-timestamp-to-date'; // Formatere tid og dato
+import MeldingLest from './meldingLest';
 
 const idbruker = AuthService.getUserId();
 // alert(idbruker);
  
-const detteSkjer = (event) => {
+// Eline sin
+/* const detteSkjer = (event) => {
+  alert('Denne funker ' + event.meldingID);
+} */
+
+const meldingLest = (event) => {
   alert('Denne funker ' + event.meldingID);
 }
+
+
 export default class Meldingsliste extends React.Component {
   constructor (props){
     super (props);
     this.state = {
     idbruker: idbruker,
-    meldingLest: false,
+    // meldingLest: false,
     meldinger: []
     }
   };
@@ -33,22 +40,19 @@ export default class Meldingsliste extends React.Component {
       .then(res => {
         const meldinger = res.data;
         this.setState({ meldinger });
-      })
-
-      
+      })    
   }
  
-
   render() {
     return (
         <Accordion>
           { this.state.meldinger.map(melding => 
           <Card>
-            {/* {if(melding.meldingLest == '0000-00-00 00:00:00'){ this.setState({meldingLest:false})}
-            else { this.setState({meldingLest:true }) }
-             */}
               <Card.Header>
-                  <Accordion.Toggle as={Button} variant="link" onClick = {detteSkjer} eventKey={melding.meldingsID}>
+                  <Accordion.Toggle as={Button} 
+                                    variant="link" 
+                                    onClick = {<MeldingLest senderID={melding.meldingsID}/>} 
+                                    eventKey={melding.meldingsID}>
                     <h2>
                       {melding.meldingLest != '0000-00-00 00:00:00' ? null : <span class="badge badge-pill badge-warning"> Ny </span>}
                       
@@ -59,7 +63,6 @@ export default class Meldingsliste extends React.Component {
                       showTime="1" showDate="1" >
                       {melding.tid}</SimpleDateTime>
                     </h2>
-                   
                                     
                   </Accordion.Toggle>
               </Card.Header>
