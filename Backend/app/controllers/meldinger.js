@@ -106,7 +106,7 @@ exports.MeldingLest = function(req, res) {
 
   const meldingLest = `UPDATE melding 
                        SET meldingLest = CURRENT_TIMESTAMP()
-                       WHERE meldingsID = 3`;
+                       WHERE meldingsID = ?`;
 
   db.query(meldingLest, meldingsID, (err,result) => {
     if (err) {

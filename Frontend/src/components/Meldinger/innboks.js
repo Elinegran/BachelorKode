@@ -17,8 +17,10 @@ const idbruker = AuthService.getUserId();
   alert('Denne funker ' + event.meldingID);
 } */
 
-const meldingLest = (event) => {
-  alert('Denne funker ' + event.meldingID);
+const meldingLest = (melding) => {
+
+  console.log(melding);
+
 }
 
 
@@ -51,14 +53,14 @@ export default class Meldingsliste extends React.Component {
               <Card.Header>
                   <Accordion.Toggle as={Button} 
                                     variant="link" 
-                                    onClick = {<MeldingLest senderID={melding.meldingsID}/>} 
+                                    onClick = {() =>console.log(axios.post("http://localhost:3001/api/meldingLest", { meldingsID: melding.meldingsID, }) )} //{<MeldingLest senderID={melding.meldingsID}/>} 
                                     eventKey={melding.meldingsID}>
                     <h2>
                       {melding.meldingLest != '0000-00-00 00:00:00' ? null : <span class="badge badge-pill badge-warning"> Ny </span>}
                       
                       {melding.fornavn} {melding.etternavn} {melding.avsender} {melding.mottaker} 
                       <br></br>
-
+                      
                       <SimpleDateTime dateFormat="DMY" timeFormat="HMA" dateSeparator="." timeSeparator=":"
                       showTime="1" showDate="1" >
                       {melding.tid}</SimpleDateTime>
