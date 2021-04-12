@@ -24,6 +24,29 @@ exports.getKalenderAlle = function(req, res)  {
       });
 };
 
+// Funksjon som henteravtaler
+exports.getKalenderBruker = function(req, res)  {
+
+  let enBruker = req.query.enBruker;
+
+  const hentEnBruker = `select * from avtale where opprettetfor = ?;`;
+
+  db.query(hentEnBruker, enBruker, (err, result) => {
+    if (err) {
+      console.log(err)
+      console.log('Dette er SQL: ' + hentEnBruker + enBruker)
+    } 
+    else {
+      res.send(result);
+      }
+    });
+};
+
+
+
+
+
+
 //Legger til ny avtale
 exports.NyAvtale = function(req, res)  {
 

@@ -3,6 +3,7 @@ import './Meldinger.css';
 import Meldingsliste from '../../components/Meldinger/innboks.js';
 import MinGruppeliste from '../../components/Meldinger/Grupper/mineGrupper.js';
 import Skrivemeldinger from '../../components/Meldinger/skriveMelding.js';
+import NyMelding from '../../components/Meldinger/nyMelding';
 import SelectBrukere from '../../components/Meldinger/Felles/selectBruker';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Bootstap
 import { Container } from 'react-bootstrap';
@@ -16,8 +17,9 @@ export const Meldinger = () => (
         <section className="melding">                  
                 <Container>
                         <h1 className= "display-4">Meldinger</h1>
-                        <SelectBrukere/>
-                        <Skrivemeldinger /> 
+                        {/* <SelectBrukere/>
+                        <Skrivemeldinger />  */}
+                        <NyMelding/>
                         <Meldingsliste /> 
                 </Container>                  
         </section>
