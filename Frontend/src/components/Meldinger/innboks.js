@@ -22,6 +22,7 @@ const meldingLest = (event) => {
 }
 
 
+
 export default class Meldingsliste extends React.Component {
   constructor (props){
     super (props);
