@@ -8,7 +8,7 @@ exports.InsertInnboksMeldinger = function(req, res) {
   const melding = req.body.melding;
   
 
-  const LeggtilInnboksMeldinger = `INSERT INTO melding(mottaker, avsender, melding) VALUES (?, ?, ?`;
+  const LeggtilInnboksMeldinger = `INSERT INTO melding(mottaker, avsender, melding) VALUES (?, ?, ?)`;
   db.query(LeggtilInnboksMeldinger, [mottaker, avsender, melding], (err,result) => {
     if (err) {
       console.log(err)

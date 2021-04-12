@@ -34,7 +34,7 @@ export default class NyttMedlem extends React.Component {
                     </Row>
                     <Row>
                         <Col>
-                            <SelectBrukere onHandleSelect={this.handleSelect}/>
+                            <SelectBrukere/>
                         </Col>
                         <Col>
                             <Form.Group>

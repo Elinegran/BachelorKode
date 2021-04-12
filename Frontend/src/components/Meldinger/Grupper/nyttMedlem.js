@@ -3,6 +3,7 @@ import axios from 'axios'; // for å sende/ motta til/ fra backend
 import { useState } from "react"; // for å sende til backend
 import 'bootstrap/dist/css/bootstrap.min.css'; // Bootstap
 import { Container, Row, Col, Button, Form } from 'react-bootstrap'; // Bootstrap-greier
+import SelectBrukere from '../Felles/selectBruker.js';
 // import DropdownBruker from '../Felles/dropdownBruker';
 // import SelectBrukere from '../Felles/selectBruker';
 
@@ -24,7 +25,7 @@ function NyttMedlem(props) {
         <label> Legg til nytt medlem: </label>
         <Row>   
             <Col>
-                {/* <SelectBrukere /> */}
+                <SelectBrukere /> 
                 <Form.Group>
                     <Form.Control 
                         input type="text" 
