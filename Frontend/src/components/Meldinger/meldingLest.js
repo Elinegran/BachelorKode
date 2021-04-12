@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios'; // for å sende/ motta til/ fra backend
 import 'bootstrap/dist/css/bootstrap.min.css'; // Bootstap
 
-// Funksjon for å legge til NÅR melding er lest
+// Funksjon for å oppdatere rad NÅR melding er lest
 function MeldingLest(props) {
     const meldingsID = props.senderID;
 

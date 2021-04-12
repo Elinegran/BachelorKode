@@ -12,8 +12,7 @@ function EndreGruppenavn(props) {
     // Sender det nye gruppenavnet til backend
     const endreNavn = () => {
         if (window.confirm(`Er du sikker på at du endre gruppenavnet til ${ gruppenavn } ?`)) {
-            axios.post("http://localhost:3001/api/gruppenavn", { gruppeID: gruppeID, gruppenavn: gruppenavn, }) 
-            // alert('Du endret gruppenavnet til ' + gruppenavn);  
+            axios.post("http://localhost:3001/api/gruppenavn", { gruppeID: gruppeID, gruppenavn: gruppenavn, })  
         }
     };
   
