@@ -50,9 +50,9 @@ export default class Meldingsliste extends React.Component {
           { this.state.meldinger.map(melding => 
           <Card>
               <Card.Header>
-                  <Accordion.Toggle as={Button} 
+              <Accordion.Toggle as={Button} 
                                     variant="link" 
-                                    onClick = {meldingLest}// {<MeldingLest senderID={melding.meldingsID}/>} 
+                                    onClick = {() =>console.log(axios.post("http://localhost:3001/api/meldingLest", { meldingsID: melding.meldingsID, }) )} //{<MeldingLest senderID={melding.meldingsID}/>} 
                                     eventKey={melding.meldingsID}>
                     <h2>
                       {melding.meldingLest != '0000-00-00 00:00:00' ? null : <span class="badge badge-pill badge-warning"> Ny </span>}
