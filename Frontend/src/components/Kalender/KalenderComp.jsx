@@ -3,24 +3,15 @@ import FullCalendar, { formatDate } from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
-
 import nbLocale from '@fullcalendar/core/locales/nb';
 import axios from 'axios';
 import SelectBrukere from '../Meldinger/Felles/selectBruker.js'; // Komponent som henter brukerne fra backend ----../Felles/selectBruker.js
 import AuthService from '../../services/auth.service';
-import { Button, Modal, ModalBody, ModalFooter } from 'react-bootstrap';
+import { Button, ModalBody, ModalFooter } from 'react-bootstrap';
 
 import { Accordion, Container, Row, Col, Card, Form } from 'react-bootstrap'; 
 
-//import { Button } from 'react-bootstrap'; // Bootstrap-greier
-//import {useState} from 'react';
-//import Modal from 'react-bootstrap/Modal';
-
-
 import EditDialog from './editDialog';
-
-import Rediger from './Rediger';
-
 
 export default class KalenderComp extends React.Component {
   
@@ -55,9 +46,8 @@ export default class KalenderComp extends React.Component {
 
   }
 
-
+  // Velger bruker som Avtaler skal vises for i veileder
   kalenderInnhold(value){
-   alert('Dette er kalender innhold: ' + value);
    
    axios.get(`http://localhost:3001/api/kalenderBruker`, 
    {params:
@@ -70,14 +60,13 @@ export default class KalenderComp extends React.Component {
   })
 }
 
-  // handleSelect = (selectedValue) => {
-  //   this.setState({opprettetfor: selectedValue });
-  // }
+//Select bruker i Opprettelse av arrangement
   handleSelect(value){
     this.setState({opprettetfor: value })
   }
 
 
+  //Onchange håndteringer for inputfelter
   handleTitleChange(event) {
       this.setState({
         title: event.target.value,
@@ -99,20 +88,13 @@ export default class KalenderComp extends React.Component {
     this.setState({end: event.target.value });
   }
 
+
+
   componentDidMount() {
 
-
-    // axios.get(`http://localhost:3001/api/kalenderAlleAvtaler`)
-    //   .then(res => {
-    //     this.setState({avtaler : res.data})
-    //     const avtaler = res.data;
-    //     this.setState({ avtaler });
-      
-    //   })
       const brukertype = AuthService.getRole();
       const idbruker = AuthService.getUserId();
       this.setState({opprettetav: idbruker});
-      //alert(idbruker);
       if(brukertype == 2){
         this.setState({veileder:true})
 
@@ -124,8 +106,6 @@ export default class KalenderComp extends React.Component {
       
           })
         
-
-
       }else{
         this.setState({veileder:false})
         this.setState({opprettetfor:idbruker})
@@ -177,7 +157,7 @@ export default class KalenderComp extends React.Component {
               right: 'dayGridMonth,timeGridWeek,timeGridDay'
             }}
             locale={nbLocale }
-            initialView='dayGridMonth'
+            initialView='timeGridWeek'
             editable={true}
             eventDrop={this.handleUpdate}
             selectable={true}
@@ -187,21 +167,13 @@ export default class KalenderComp extends React.Component {
             events={this.state.avtaler}
 
             select={this.handleDateSelect}
-            // select={ function(info){
-            //   const tid = info.startStr
-            //   this.setState({start: tid});
-            //   alert('clicked' + tid)
-            // }}
+
             eventContent={renderEventContent} // custom render function
 
             eventClick={this.handleEventClick}
 
             eventsSet={this.handleEvents} // called after events are initialized/added/changed/removed
-            /* you can update a remote database when these fire:
-            eventAdd={function(){}}
-            eventChange={function(){}}
-            eventRemove={function(){}}
-            */
+     
           />
         </div>
       </div>
@@ -216,21 +188,31 @@ export default class KalenderComp extends React.Component {
         <div className='demo-app-sidebar-section'>
           <h2>Legg til avtale</h2>
           
-          <form onSubmit={this.handleSave}>
-          <input type ='text' id='title' navn = 'title' placeholder= 'Tittel' onChange={this.handleTitleChange} />
-          <br/>
-          <label for= 'beskrivelse'> Beskrivelse</label>
-          <input type ='text' id='Beskrivelse' navn = 'beskrivelse' placeholder= 'Beskrivelse' onChange={this.handleBeskrivelseChange}/>
-          <br/>
-          <label for= 'sted'>Sted</label>
-          <input type ='text' id='sted' navn = 'sted' placeholder= 'Sted' onChange={this.handleStedChange}/>
+          <Form onSubmit={this.handleSave}>
+          <Form.Group controlId="formTitle">
+            <Form.Label>Tittel</Form.Label>
+            <Form.Control type="text" placeholder="Tittel" onChange={this.handleTitleChange} />
+          </Form.Group>
 
-          <br/>
-        <label for="start">Velg starttid:</label> <br/>
-        <input type="datetime-local" id="start" name="start"  value = {this.state.start} onChange={this.handleStartChange}/>
+          <Form.Group controlId="formBeskrivelse">
+            <Form.Label>Beskrivelse</Form.Label>
+            <Form.Control as="textarea" placeholder="Beskrivelse" onChange={this.handleBeskrivelseChange} />
+          </Form.Group>
 
-        <label for="slutt">Velg sluttid:</label> <br/>
-        <input type="datetime-local" id="slutt" name="sutt" value = {this.state.end} onChange={this.handleEndChange}/>
+          <Form.Group controlId="formSted">
+            <Form.Label>Sted</Form.Label>
+            <Form.Control type="text" placeholder="Sted" onChange={this.handleStedChange} />
+          </Form.Group>
+
+          <Form.Group controlId="formStart">
+            <Form.Label>Velg starttid: </Form.Label>
+            <Form.Control type="datetime-local" value = {this.state.start}  onChange={this.handleStartChange} />
+          </Form.Group>
+
+          <Form.Group controlId="formSlutt">
+            <Form.Label>Velg sluttid: </Form.Label>
+            <Form.Control type="datetime-local" value = {this.state.slutt}  onChange={this.handleSluttChange} />
+          </Form.Group>
 
         <div> <b>
           {
@@ -238,7 +220,7 @@ export default class KalenderComp extends React.Component {
             ? null
             : (
               <div>
-                <p>Dette er en avtale for:</p>
+                <p>Dette er avtalene til:</p>
                 
               <SelectBrukere 
                 onHandleSelect={this.handleSelect}
@@ -248,30 +230,20 @@ export default class KalenderComp extends React.Component {
               }
               </b></div>
         
-        
-        {/* <input type="time" id="starttid" name="starttid" onChange={this.handleTidChange}/> */}
-          
-         <button type="submit">Lagre</button> 
-         </form>
+                
+         <Button type="submit">Lagre</Button> 
+         </Form>
 
         </div>
         <div className='demo-app-sidebar-section'>
-          <label>
-            <input
-              type='checkbox'
-              checked={this.state.weekendsVisible}
-              onChange={this.handleWeekendsToggle}
-            ></input>
-            Skjul helg
-          </label>
+
+          <Form.Group controlId="formCheckbox">
+            
+          <Form.Check label="Skjul Helg" checked={this.state.weekendsVisible} onChange={this.handleWeekendsToggle}/>
+      
+           </Form.Group>
         </div>
         <div className='demo-app-sidebar-section'>
-          <h2>Alle Avtaler ({this.state.currentEvents.length})</h2>
-          <ul>
-            {this.state.currentEvents.map(renderSidebarEvent)}
-          </ul>
-        </div>
-        <div>
 
         <Accordion>
           { this.state.avtaler.map(avtale => 
@@ -280,13 +252,7 @@ export default class KalenderComp extends React.Component {
                   <Accordion.Toggle as={Button} variant="link" eventKey={avtale.id}>
                     <h2>{avtale.title} 
                       <br></br>
-
-                      {/* <SimpleDateTime dateFormat="DMY" timeFormat="HMA" dateSeparator="." timeSeparator=":"
-                      showTime="1" showDate="1" >
-                      {melding.tid}</SimpleDateTime> */}
-                    </h2>
-                   
-                                    
+                    </h2>             
                   </Accordion.Toggle>
               </Card.Header>
               <Accordion.Collapse eventKey={avtale.id}>
@@ -299,12 +265,7 @@ export default class KalenderComp extends React.Component {
           </Card>
           )}
         </Accordion> 
-
-
-
-      
-            {/* <Rediger/> */}
-           
+               
         </div>
       </div>
     )
@@ -337,7 +298,6 @@ export default class KalenderComp extends React.Component {
       .catch(error => {
         console.log(error)
       })
-
     }
   }
 
@@ -374,17 +334,13 @@ export default class KalenderComp extends React.Component {
     
     axios.post(`http://localhost:3001/api/nyAvtale`,nyavtale)
           .then(response => {
-            console.log('vi har fått respone')
             console.log(response)
             alert(response)
           })
           .catch(error => {
             console.log(error)
           })
-    
-
   }
-
 
 
   //Denne funkjsonen avtiveres når en dato eller tispunkt klikkes
@@ -397,17 +353,11 @@ export default class KalenderComp extends React.Component {
       start: selectInfo.startStr,
       end: selectInfo.endStr
     })
-
     alert("Dette er tiden :" + selectInfo.startStr + 'til' + this.state.end)
-
   }
 
 
-
   handleEventClick = (clickInfo) => {
-
-   
-    ///////////////////////////////////////
     //Dette er delete
     if (window.confirm(`Er du sikker på at du vil slette '${clickInfo.event.title}'?`)) {
       
@@ -419,27 +369,23 @@ export default class KalenderComp extends React.Component {
       })
         .then(response => {
             console.log(response)
-            
-            
           })
           .catch(error => {
             console.log(error)
             console.log("message")
           })
-
           window.location.reload()
-
     }
-    ////////
   }
+
 
   handleEvents = (events) => {
     this.setState({
       currentEvents: events
     })
   }
-
 }// Slutt på klasse
+
 
 function renderEventContent(eventInfo) {
   console.log(eventInfo);
@@ -448,16 +394,15 @@ function renderEventContent(eventInfo) {
       <b>{eventInfo.timeText}</b>
       <i>{eventInfo.event.title}</i>
       
-     
     </>
   )
 }
 
-function renderSidebarEvent(event) {
-  return (
-    <li key={event.avtaleid}>
-      <b>{formatDate(event.start, {year: 'numeric', month: 'short', day: 'numeric'})}</b>
-      <i>{event.title}</i>
-    </li>
-  )
-}
+// function renderSidebarEvent(event) {
+//   return (
+//     <li key={event.avtaleid}>
+//       <b>{formatDate(event.start, {year: 'numeric', month: 'short', day: 'numeric'})}</b>
+//       <i>{event.title}</i>
+//     </li>
+//   )
+// }

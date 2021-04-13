@@ -47,7 +47,8 @@ export default class HentAlleLenker extends React.Component {
           
           <Card.Title className="list-group" >{ alleLenker.tittel }</Card.Title>
           <Card.Text>{ alleLenker.info}</Card.Text>
-          <Card.Link href="{ alleLenker.url }">{ alleLenker.url }</Card.Link>
+          <Card.Link target="_blank" to='http://www.google.com'> Google </Card.Link>
+          <Button target = "_blank" href={ alleLenker.url }>{ alleLenker.url }</Button>
                     
       </Card.Body>
 
