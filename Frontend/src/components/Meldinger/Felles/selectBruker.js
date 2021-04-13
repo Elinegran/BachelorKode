@@ -39,7 +39,7 @@ export default class SelectBrukere extends React.Component {
         <select className="custom-select" id = "valgtBruker" onChange={this.onHandleSelect}>  {/* Her mangler det en onChange event, tror jeg */}
             <option selected>--Bruker--</option>
             { this.state.bruker.map(alleBrukere => 
-            <option value={alleBrukere.idbruker}>{alleBrukere.fornavn}</option>   
+            <option value={alleBrukere.idbruker}>{alleBrukere.fornavn} {alleBrukere.etternavn}</option>   
             )}
         </select> 
         {/* <Skrivemeldinger mottakerID = {this.state.idbruker}/> Prøver å sende mottaker til skriveMelding */}
