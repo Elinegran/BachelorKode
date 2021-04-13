@@ -3,7 +3,7 @@ import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Bootstap
 import { Accordion, Button, Card, Row, Col, Container } from 'react-bootstrap'; // Bootstrap-greier
 import SelectGruppemedlem from './Grupper/selectGruppemedlem.js'; // Komponent som henter brukerne fra backend
-import NyttMedlem from './Grupper/nyttMedlem.js';
+import NyttMedlem from './Grupper/nyttGruppemedlem';
 import SlettGruppe from './Grupper/slettGruppe';
 import EndreGruppenavn from './Grupper/endreGruppenavn'; 
 import Gruppemelding from './Grupper/gruppemelding'; 

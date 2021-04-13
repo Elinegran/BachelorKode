@@ -6,7 +6,6 @@ import { Container, Row, Col, Button, Form } from 'react-bootstrap'; // Bootstra
 import SelectGruppe from './selextGruppe.js'; // Komponent som henter gruppene fra backend
 import SelectBrukere from '../Felles/selectBruker.js'; // Komponent som henter brukerne fra backend
 
-// const idbruker = 13; // Denne må hentes fra et eller annet sted...
 
 // Klasse for å legge til et nytt gruppemedlem i databasen
 export default class NyttMedlem extends React.Component {
@@ -16,12 +15,16 @@ export default class NyttMedlem extends React.Component {
             idbruker: this.props.senderID, 
             gruppeID: this.props.senderGruppeID, // gruppeID sendes fra selectGruppemedlem.js
         };
-        this.handleInputChange = this.handleInputChange.bind(this);
+
+        this.handleSelect = this.handleSelect.bind(this);
     }
 
-    handleInputChange(event){
-        this.setState({melding:event.target.value})   
-    }              // endre melding til ny
+    
+    handleSelect(value){
+        this.setState({idbruker: value })
+        
+    };
+    
 
     render(){
         // Dette sendes til Meldingssiden
@@ -30,20 +33,17 @@ export default class NyttMedlem extends React.Component {
                 <Form>
                     <Row>
                         <Col>
-                            <Form.Label><h3>Legg til medlem</h3></Form.Label>
+                            <Form.Label>Legg til medlem:</Form.Label>
                         </Col>
                     </Row>
                     <Row>
                         <Col>
-                            <SelectBrukere />
+                            <SelectBrukere onHandleSelect={this.handleSelect} />
                         </Col>
                         <Col>
-                            <Form.Group>
-                                <Form.Control type="text" placeholder="idbruker" onChange = {this.handleInputChange} />
-                            </Form.Group>
-                        </Col>
-                        <Col>
-                            <Button variant="success" type="submit" onClick = {this.handleSend} style={{float: 'right'}}>Lagre medlem</Button>
+                            <Button variant="success" 
+                            type="submit" onClick = {this.handleSend} 
+                            style={{float: 'left'}}>Lagre medlem</Button>
                         </Col>
                     </Row>   
                 </Form>
@@ -52,7 +52,7 @@ export default class NyttMedlem extends React.Component {
     } // Slutt på render
 
     handleSend = (event) => {
-        alert("Du la til: " + this.state.melding);
+        alert("Du la til: " + this.state.idbruker);
 
         const nyttMedlem = {
             idbruker: this.state.idbruker,
