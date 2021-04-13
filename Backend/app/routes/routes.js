@@ -75,6 +75,10 @@ router.use("/gruppemelding", gruppemelding.Gruppemelding);
 const meldingLest = require('../controllers/meldinger');
 router.use("/meldingLest", meldingLest.MeldingLest); 
 
+// Teller antall nye medlinger til en bruker
+const antallNyeMeldinger = require('../controllers/meldinger');
+router.use("/antallNyeMeldinger", antallNyeMeldinger.AntallNyeMeldinger); 
+
 // Grupper: 
 // Henter ALLE gruppene (Funker!)
 const mineGrupper= require('../controllers/grupper');

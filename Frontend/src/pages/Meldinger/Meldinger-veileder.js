@@ -8,6 +8,7 @@ import NyMelding from '../../components/Meldinger/nyMelding';
 import NyGruppe from '../../components/Meldinger/Grupper/nyGruppe.js';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Bootstap
 import { Container } from 'react-bootstrap';
+import AntallMeldinger from '../../components/Meldinger/antallMeldinger';
    
 // Meldingssiden for VEILEDER 
 
@@ -21,6 +22,7 @@ export const MeldingerV = () => (
                         {/* <SelectBrukere/>
                         <Skrivemeldinger />  */}
                         <NyMelding/>
+                        <AntallMeldinger />
                         <Meldingsliste /> 
                 </Container>                  
         </section>

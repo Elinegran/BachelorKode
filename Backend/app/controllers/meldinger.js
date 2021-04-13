@@ -44,7 +44,7 @@ exports.getMinSamtale = function(req, res)  {
   let idbruker = req.query.idbruker;
   let avsender = req.query.avsender; 
   
-    const hentMinSamtale = `SELECT DISTINCT tid, fornavn, etternavn, melding 
+    const hentMinSamtale = `SELECT DISTINCT tid, fornavn, etternavn, melding, meldingLest
                             FROM bruker, melding 
                             WHERE melding.avsender = bruker.idbruker 
                             AND (avsender = ? OR avsender = ?) 
@@ -118,5 +118,21 @@ exports.MeldingLest = function(req, res) {
   });
 };
 
+// Teller hvor mange nye medlinger en bruker har fått 
+exports.AntallNyeMeldinger = function(req, res)  {
+  let mottaker = req.query.idbruker;
+  
+    const antallNye = `SELECT COUNT(meldingsID) AS AntallNyeMeldinger
+                       FROM melding
+                       WHERE mottaker = ?
+                       AND meldingLest = '0000-00-00 00:00:00' `;
 
-
+    db.query(antallNye, mottaker, (err, result) => {
+      if (err) {
+        console.log(err)
+      } 
+      else {
+        res.send(result);
+        }
+      });
+}; 
