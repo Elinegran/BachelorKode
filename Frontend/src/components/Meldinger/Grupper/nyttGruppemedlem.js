@@ -15,12 +15,19 @@ export default class NyttMedlem extends React.Component {
             idbruker: this.props.senderID, 
             gruppeID: this.props.senderGruppeID, // gruppeID sendes fra selectGruppemedlem.js
         };
-        this.handleInputChange = this.handleInputChange.bind(this);
+        // this.handleSelect = this.handleInputChange.bind(this);
+        this.handleSelect = this.handleSelect.bind(this);
     }
 
-    handleInputChange(event){
-        this.setState({melding:event.target.value})   
-    }              // endre melding til ny
+    // handleInputChange(event){
+    //     this.setState({melding:event.target.value})   
+    // }  // endre melding til ny
+
+    handleSelect(value){
+        this.setState({idbruker: value })
+        
+    };
+    
 
     render(){
         // Dette sendes til Meldingssiden
@@ -34,12 +41,12 @@ export default class NyttMedlem extends React.Component {
                     </Row>
                     <Row>
                         <Col>
-                            <SelectBrukere/>
+                            <SelectBrukere onHandleSelect={this.handleSelect}/>
                         </Col>
                         <Col>
-                            <Form.Group>
-                                <Form.Control type="text" placeholder="idbruker" onChange = {this.handleInputChange} />
-                            </Form.Group>
+                            {/* <Form.Group>
+                                <Form.Control type="text" placeholder="idbruker" onChange = {this.handleSelect} />
+                            </Form.Group> */}
                         </Col>
                         <Col>
                             <Button variant="success" type="submit" onClick = {this.handleSend} style={{float: 'right'}}>Lagre medlem</Button>
@@ -51,7 +58,7 @@ export default class NyttMedlem extends React.Component {
     } // Slutt på render
 
     handleSend = (event) => {
-        alert("Du la til: " + this.state.melding);
+        alert("Du la til: " + this.state.idbruker);
 
         const nyttMedlem = {
             idbruker: this.state.idbruker,

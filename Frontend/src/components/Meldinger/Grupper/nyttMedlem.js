@@ -25,7 +25,7 @@ function NyttMedlem(props) {
         <label> Legg til nytt medlem: </label>
         <Row>   
             <Col>
-                <SelectBrukere /> 
+                {/* <SelectBrukere />  */}
                 <Form.Group>
                     <Form.Control 
                         input type="text" 
