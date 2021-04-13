@@ -33,7 +33,7 @@ export default class NyttMedlem extends React.Component {
                 <Form>
                     <Row>
                         <Col>
-                            <Form.Label><h3>Legg til medlem</h3></Form.Label>
+                            <Form.Label>Legg til medlem:</Form.Label>
                         </Col>
                     </Row>
                     <Row>
@@ -41,12 +41,9 @@ export default class NyttMedlem extends React.Component {
                             <SelectBrukere onHandleSelect={this.handleSelect} />
                         </Col>
                         <Col>
-                            {/* <Form.Group>
-                                <Form.Control type="text" placeholder="idbruker" onChange = {this.handleSelect} />
-                            </Form.Group> */}
-                        </Col>
-                        <Col>
-                            <Button variant="success" type="submit" onClick = {this.handleSend} style={{float: 'right'}}>Lagre medlem</Button>
+                            <Button variant="success" 
+                            type="submit" onClick = {this.handleSend} 
+                            style={{float: 'left'}}>Lagre medlem</Button>
                         </Col>
                     </Row>   
                 </Form>

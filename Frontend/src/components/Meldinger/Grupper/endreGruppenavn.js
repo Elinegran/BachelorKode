@@ -20,7 +20,7 @@ function EndreGruppenavn(props) {
     return (
         <p>
         <Form>
-            <label> Endre gruppenavn </label>
+            <label> Endre gruppenavn: </label>
             <Row>
                 <Col>
                     <Form.Group>
