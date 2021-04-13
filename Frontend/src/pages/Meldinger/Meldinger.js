@@ -7,6 +7,7 @@ import NyMelding from '../../components/Meldinger/nyMelding';
 import SelectBrukere from '../../components/Meldinger/Felles/selectBruker';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Bootstap
 import { Container } from 'react-bootstrap';
+import AntallMeldinger from '../../components/Meldinger/antallMeldinger';
    
 // Siden Meldinger fro BRUKERE 
 
@@ -20,6 +21,7 @@ export const Meldinger = () => (
                         {/* <SelectBrukere/>
                         <Skrivemeldinger />  */}
                         <NyMelding/>
+                        <AntallMeldinger />
                         <Meldingsliste /> 
                 </Container>                  
         </section>
@@ -31,5 +33,6 @@ export const Meldinger = () => (
                         <MinGruppeliste/> {/* Liste over alle gruppene */}            
                 </Container>        
         </section> 
+        
 </main>
 )
