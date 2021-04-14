@@ -5,16 +5,16 @@ import { Container } from 'react-bootstrap';
 
 //const mottaker = '';
 export default class NyMelding extends React.Component {
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
             mottakerbruker: ''
         };
 
         this.handleSelect = this.handleSelect.bind(this);
-    }
+    };
 
-    async handleSelect(value){
+    handleSelect(value){
         this.setState({mottakerbruker: value })
         
     };

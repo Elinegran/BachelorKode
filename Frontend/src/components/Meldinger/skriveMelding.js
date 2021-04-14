@@ -20,9 +20,11 @@ export default class skriveMelding extends React.Component {
         };
         this.handleInputChange = this.handleInputChange.bind(this);
     }
-    handleInputChange(event){
-        this.setState({melding:event.target.value,
-        mottaker: this.props.mottakerID})
+    
+   handleInputChange(event){
+        this.setState({melding:event.target.value, 
+         mottaker: this.props.mottakerID}
+       )
         
     }
 

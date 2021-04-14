@@ -3,28 +3,15 @@ import FullCalendar, { formatDate } from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
-import { createEventId,avtaler } from './event-utils'
 import nbLocale from '@fullcalendar/core/locales/nb';
 import axios from 'axios';
 import SelectBrukere from '../Meldinger/Felles/selectBruker.js'; // Komponent som henter brukerne fra backend ----../Felles/selectBruker.js
 import AuthService from '../../services/auth.service';
-import { Button, Modal, ModalBody, ModalFooter } from 'react-bootstrap';
-//import { Button } from 'react-bootstrap'; // Bootstrap-greier
-//import {useState} from 'react';
-//import Modal from 'react-bootstrap/Modal';
 
+import { Accordion, Card, Form , Button} from 'react-bootstrap'; 
 
 import EditDialog from './editDialog';
-
-import Rediger from './Rediger';
-//import { Card, Accordion, Button, Form } from 'react-bootstrap'; // Bootstrap-greier
-
-
-
-// const { students } = this.props;
-// const { name, age } = this.state;
-
-
+import moment from 'moment';
 
 export default class KalenderComp extends React.Component {
   
@@ -42,49 +29,51 @@ export default class KalenderComp extends React.Component {
       end:0,
       opprettetav: '',  
       opprettetfor : '', 
-      modal: false
+     
     };
-
+    
     this.handleTitleChange = this.handleTitleChange.bind(this);
-    this.handleBeskrivelseChange = this.handleBeskrivelseChange.bind(this);
+    this.handleBeskrivelseChange = this.handleBeskrivelseChange.bind(this); 
+    this.kalenderInnhold = this.kalenderInnhold.bind(this);
     this.handleStedChange = this.handleStedChange.bind(this);
     this.handleStartChange = this.handleStartChange.bind(this);
     this.handleEndChange = this.handleEndChange.bind(this);
     this.handleDateSelect = this.handleDateSelect.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
+   
+    //Hvis funksjon er gul så er det en arrowfunction
+   
 
   }
 
-  toggle = () => {
-    this.setState({ modal: !this.state.modal });
-  };
+  // Velger bruker som Avtaler skal vises for i veileder
+  kalenderInnhold(value){
+   
+   axios.get(`http://localhost:3001/api/kalenderBruker`, 
+   {params:
+    {enBruker : value}
+    } )
+   .then(res => {
+   this.setState({avtaler : res.data})
+   const avtaler = res.data;
+   this.setState({ avtaler });
+  })
+}
 
-  handleEventClick = ({ event, el }) => {
-    this.toggle();
-
-
-    console.log("Dette er objekt : "+event.title + "Beskrivelse: " + event.extendedProps.beskrivelse + "sted: " + event.extendedProps.sted);
-
-    this.setState({ title: event.title,
-    beskrivelse:event.extendedProps.beskrivelse,
-     sted:event.extendedProps.sted,
-     });
-
-
-  };
-
-
+//Select bruker i Opprettelse av arrangement
   handleSelect(value){
     this.setState({opprettetfor: value })
   }
 
+
+  //Onchange håndteringer for inputfelter
   handleTitleChange(event) {
       this.setState({
         title: event.target.value,
 
       });
-      //alert(this.state.title);
-    }
+     }
+
   handleBeskrivelseChange(event) {
       this.setState({beskrivelse: event.target.value});
   }
@@ -99,28 +88,44 @@ export default class KalenderComp extends React.Component {
     this.setState({end: event.target.value });
   }
 
+
+
   componentDidMount() {
 
-
-    axios.get(`http://localhost:3001/api/kalenderAlleAvtaler`)
-      .then(res => {
-        this.setState({avtaler : res.data})
-        const avtaler = res.data;
-        this.setState({ avtaler });
-      
-      })
       const brukertype = AuthService.getRole();
       const idbruker = AuthService.getUserId();
       this.setState({opprettetav: idbruker});
-      //alert(idbruker);
       if(brukertype == 2){
         this.setState({veileder:true})
+
+          axios.get(`http://localhost:3001/api/kalenderAlleAvtaler`)
+            .then(res => {
+            this.setState({avtaler : res.data})
+            const avtaler = res.data;
+            this.setState({ avtaler });
+      
+          })
+        
       }else{
         this.setState({veileder:false})
-        this.setState({opprettetfor:brukertype})
+        this.setState({opprettetfor:idbruker})
+
+       
+
+        axios.get(`http://localhost:3001/api/kalenderBruker`, 
+        {params:
+         {enBruker : idbruker}
+         } )
+        .then(res => {
+        this.setState({avtaler : res.data})
+        const avtaler = res.data;
+        this.setState({ avtaler });
+       })
+
+
       }
-      // alert("dette er bruker" + this.state.opprettetav + " . Veileder : " + this.state.veileder + "brukerID: " + idbruker)
-      // this.setState({opprettetav: idbruker});
+
+    
      
   };
 
@@ -129,8 +134,21 @@ export default class KalenderComp extends React.Component {
     return (
       <div className='demo-app'>
         {this.renderSidebar()}
-        
+       
         <div className='demo-app-main'>
+        {
+            !this.state.veileder
+            ? null
+            : (
+              <div>
+                <p>Dette er en avtale for:</p>
+                
+                <SelectBrukere 
+                onHandleSelect={this.kalenderInnhold}/>
+              </div>
+              )
+              }
+        
           <FullCalendar
             plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
             headerToolbar={{
@@ -149,46 +167,22 @@ export default class KalenderComp extends React.Component {
             events={this.state.avtaler}
 
             select={this.handleDateSelect}
-            // select={ function(info){
-            //   const tid = info.startStr
-            //   this.setState({start: tid});
-            //   alert('clicked' + tid)
-            // }}
+
             eventContent={renderEventContent} // custom render function
+
             eventClick={this.handleEventClick}
+
             eventsSet={this.handleEvents} // called after events are initialized/added/changed/removed
-            /* you can update a remote database when these fire:
-            eventAdd={function(){}}
-            eventChange={function(){}}
-            eventRemove={function(){}}
-            */
+     
           />
-          <Modal
-              isOpen={true}
-              toggle={this.toggle}
-            
-            >
-              <Modal.Header toggle={this.toggle}>
-               {this.state.title}
-              </Modal.Header>
-              <Modal.Body>
-                <div>
-                  <p> {this.state.beskrivelse}</p>
-                </div>
-              </Modal.Body>
-              <Modal.Footer>
-                {/* <Button color="primary">Do Something</Button>{" "} */}
-                <Button color="secondary" onClick={this.toggle}>
-                  Cancel
-                </Button>
-              </Modal.Footer>
-            </Modal>
         </div>
       </div>
     )
   }
 
   renderSidebar() {
+
+    let dagensDato = moment(new Date()).format("YYYY-MM-DDTHH:MM:00.0000Z");
     
 
     return (
@@ -196,21 +190,31 @@ export default class KalenderComp extends React.Component {
         <div className='demo-app-sidebar-section'>
           <h2>Legg til avtale</h2>
           
-          <form onSubmit={this.handleSave}>
-          <input type ='text' id='title' navn = 'title' placeholder= 'Tittel' onChange={this.handleTitleChange} />
-          <br/>
-          <label for= 'beskrivelse'> Beskrivelse</label>
-          <input type ='text' id='Beskrivelse' navn = 'beskrivelse' placeholder= 'Beskrivelse' onChange={this.handleBeskrivelseChange}/>
-          <br/>
-          <label for= 'sted'>Sted</label>
-          <input type ='text' id='sted' navn = 'sted' placeholder= 'Sted' onChange={this.handleStedChange}/>
+          <Form onSubmit={this.handleSave}>
+          <Form.Group controlId="formTitle">
+            <Form.Label>Tittel</Form.Label>
+            <Form.Control type="text" placeholder="Tittel" onChange={this.handleTitleChange} />
+          </Form.Group>
 
-          <br/>
-        <label for="start">Velg starttid:</label> <br/>
-        <input type="datetime-local" id="start" name="start"  value = {this.state.start} onChange={this.handleStartChange}/>
+          <Form.Group controlId="formBeskrivelse">
+            <Form.Label>Beskrivelse</Form.Label>
+            <Form.Control as="textarea" placeholder="Beskrivelse" onChange={this.handleBeskrivelseChange} />
+          </Form.Group>
 
-        <label for="slutt">Velg sluttid:</label> <br/>
-        <input type="datetime-local" id="slutt" name="sutt" onChange={this.handleEndChange}/>
+          <Form.Group controlId="formSted">
+            <Form.Label>Sted</Form.Label>
+            <Form.Control type="text" placeholder="Sted" onChange={this.handleStedChange} />
+          </Form.Group>
+
+          <Form.Group controlId="formStart">
+            <Form.Label>Velg starttid: </Form.Label>
+            <Form.Control type="datetime-local" value = {this.state.start}  onChange={this.handleStartChange} />
+          </Form.Group>
+
+          <Form.Group controlId="formSlutt">
+            <Form.Label>Velg sluttid: </Form.Label>
+            <Form.Control type="datetime-local" value = {this.state.slutt}  onChange={this.handleSluttChange} />
+          </Form.Group>
 
         <div> <b>
           {
@@ -218,7 +222,7 @@ export default class KalenderComp extends React.Component {
             ? null
             : (
               <div>
-                <p>Dette er en avtale for:</p>
+                <p>Dette er avtalene til:</p>
                 
               <SelectBrukere 
                 onHandleSelect={this.handleSelect}
@@ -228,32 +232,49 @@ export default class KalenderComp extends React.Component {
               }
               </b></div>
         
-        
-        {/* <input type="time" id="starttid" name="starttid" onChange={this.handleTidChange}/> */}
-          
-         <button type="submit">Lagre</button> 
-         </form>
+                
+         <Button type="submit">Lagre</Button> 
+         </Form>
 
         </div>
         <div className='demo-app-sidebar-section'>
-          <label>
-            <input
-              type='checkbox'
-              checked={this.state.weekendsVisible}
-              onChange={this.handleWeekendsToggle}
-            ></input>
-            Skjul helg
-          </label>
+
+          <Form.Group controlId="formCheckbox">
+            
+          <Form.Check label="Skjul Helg" checked={this.state.weekendsVisible} onChange={this.handleWeekendsToggle}/>
+      
+           </Form.Group>
         </div>
         <div className='demo-app-sidebar-section'>
-          <h2>Alle Avtaler ({this.state.currentEvents.length})</h2>
-          <ul>
-            {this.state.currentEvents.map(renderSidebarEvent)}
-          </ul>
-        </div>
-        <div>
-            {/* <Rediger/> */}
-            <Button onClick = {this.handleDelete(avtaler.id)}>Slett</Button>
+
+        <Accordion>
+          { this.state.avtaler.map(avtale => 
+        
+        // denne sørger for at brukeren kun kan redigere kommende avtaler, ikke tidligere.
+          avtale.start <= dagensDato ? null : 
+          <Card>
+              <Card.Header>
+          
+                  <Accordion.Toggle as={Button} variant="link" eventKey={avtale.id}>
+                    <h2>{avtale.title} 
+                      <br></br>
+                    </h2>             
+                  </Accordion.Toggle>
+  
+              </Card.Header>
+              <Accordion.Collapse eventKey={avtale.id}>
+                <Card.Body> 
+                  
+                   <EditDialog eventI={avtale.id} eventT = {avtale.title} eventB ={avtale.beskrivelse} eventS ={avtale.sted} eventStart = {avtale.start} eventE = {avtale.end}/>
+                   
+                </Card.Body> 
+            </Accordion.Collapse>
+          
+          </Card>
+        
+          )}
+        </Accordion> 
+               
         </div>
       </div>
     )
@@ -286,7 +307,6 @@ export default class KalenderComp extends React.Component {
       .catch(error => {
         console.log(error)
       })
-
     }
   }
 
@@ -307,7 +327,7 @@ export default class KalenderComp extends React.Component {
     const burkertype =  AuthService.getRole()
     //event.preventDefault();
     console.log(this.state);
-    alert("You are submitting " + this.state.opprettetav + "Dette er bruker type: " + burkertype );
+    alert("You are submitting " + this.state.opprettetfor + "Dette er bruker type: " + burkertype );
 
 
     //LAger objekt som sendes til backend
@@ -323,17 +343,13 @@ export default class KalenderComp extends React.Component {
     
     axios.post(`http://localhost:3001/api/nyAvtale`,nyavtale)
           .then(response => {
-            console.log('vi har fått respone')
             console.log(response)
             alert(response)
           })
           .catch(error => {
             console.log(error)
           })
-    
-
   }
-
 
 
   //Denne funkjsonen avtiveres når en dato eller tispunkt klikkes
@@ -346,102 +362,39 @@ export default class KalenderComp extends React.Component {
       start: selectInfo.startStr,
       end: selectInfo.endStr
     })
-
     alert("Dette er tiden :" + selectInfo.startStr + 'til' + this.state.end)
-    // if (title) {
-    //   calendarApi.addEvent({
-    //     avtaleid: createEventId(),
-    //     title,
-    //     start: selectInfo.startStr,
-    //     end: selectInfo.endStr,
-    //     allDay: selectInfo.allDay
-    //   })
-    // }
   }
 
 
-
-  // handleEventClick = ({ event, el }) => {
-  //   this.toggle();
-
-
-  //   console.log("Dette er objekt : "+event.title + "Beskrivelse: " + event.extendedProps.beskrivelse + "sted: " + event.extendedProps.sted);
-
-  //   this.setState({ title: event.title,
-  //   beskrivelse:event.extendedProps.beskrivelse,
-  //    sted:event.extendedProps.sted,
-  //    });
-
-
-  // };
-
-  // handleEventClick = (clickInfo) => {
-
-    
-
-  //   const handleClose = () => this.setState({show:false});
-   
-  
-  //   return (
-  //     <>
-  //       {/* <Button variant="primary" onClick={handleShow}>
-  //         Launch demo modal
-  //       </Button> */}
-  
-  //       <Modal show={this.state.show} >
-  //         <Modal.Header closeButton>
-  //           <Modal.Title>Modal heading</Modal.Title>
-  //         </Modal.Header>
-  //         <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-  //         <Modal.Footer>
-  //           <Button variant="secondary" onClick={handleClose}>
-  //             Close
-  //           </Button>
-  //           <Button variant="primary" onClick={handleClose}>
-  //             Save Changes
-  //           </Button>
-  //         </Modal.Footer>
-  //       </Modal>
-  //     </>
-  //   );
-
-
-
-
-
-    /////////////////////////////////////////
-    // //Dette er delete
-    // if (window.confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
+  handleEventClick = (clickInfo) => {
+    //Dette er delete
+    if (window.confirm(`Er du sikker på at du vil slette '${clickInfo.event.title}'?`)) {
       
-    //   //alert("dette er ID: " + clickInfo.event.id)
-    //   console.log(clickInfo.event);
-    //   const avtaleid = clickInfo.event.id;
-    //   axios.post(`http://localhost:3001/api/slettAvtale`, {
-    //     avtaleid: avtaleid
-    //   })
-    //     .then(response => {
-    //         console.log(response)
-            
-            
-    //       })
-    //       .catch(error => {
-    //         console.log(error)
-    //         console.log("message")
-    //       })
+      //alert("dette er ID: " + clickInfo.event.id)
+      console.log(clickInfo.event);
+      const avtaleid = clickInfo.event.id;
+      axios.post(`http://localhost:3001/api/slettAvtale`, {
+        avtaleid: avtaleid
+      })
+        .then(response => {
+            console.log(response)
+          })
+          .catch(error => {
+            console.log(error)
+            console.log("message")
+          })
+          window.location.reload()
+    }
+  }
 
-    //       window.location.reload()
-
-    // }
-    //////////
-  //}
 
   handleEvents = (events) => {
     this.setState({
       currentEvents: events
     })
   }
-
 }// Slutt på klasse
+
 
 function renderEventContent(eventInfo) {
   console.log(eventInfo);
@@ -450,16 +403,15 @@ function renderEventContent(eventInfo) {
       <b>{eventInfo.timeText}</b>
       <i>{eventInfo.event.title}</i>
       
-     
     </>
   )
 }
 
-function renderSidebarEvent(event) {
-  return (
-    <li key={event.avtaleid}>
-      <b>{formatDate(event.start, {year: 'numeric', month: 'short', day: 'numeric'})}</b>
-      <i>{event.title}</i>
-    </li>
-  )
-}
+// function renderSidebarEvent(event) {
+//   return (
+//     <li key={event.avtaleid}>
+//       <b>{formatDate(event.start, {year: 'numeric', month: 'short', day: 'numeric'})}</b>
+//       <i>{event.title}</i>
+//     </li>
+//   )
+// }

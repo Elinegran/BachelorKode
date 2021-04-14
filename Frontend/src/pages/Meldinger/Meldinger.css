@@ -6,17 +6,16 @@
 
 /*  Design for mobil */ 
 
-main.meldingssiden {
-  background: pink; 
+main.meldingssiden { 
 	margin: 0 auto;
 }
 
 section {
-  background: blue;  
+  background: white;  
 }
 
 section.melding {
-  background: red; 
+  background: #e5ebeb; 
 }
 .avatarOgOverskrift {
   background: lightgoldenrodyellow;
@@ -44,7 +43,7 @@ section.samtale {
 }
 
 section.gruppe {
-  background: aqua;  
+  background: #e5ebeb;  
 }
 
 /*  Design for stor skjerm  */ 
@@ -56,21 +55,13 @@ main.meldingssiden {
   background: white; 
 }
 
-
-
 section {
-  background: ; 
   margin: 12px;
 }
 
 section.melding {
   background: #e5ebeb; 
   width: 60%;
-}
-
-section.samtale {
-  background: yellow; 
-  width: 33%; 
 }
 
 section.gruppe {

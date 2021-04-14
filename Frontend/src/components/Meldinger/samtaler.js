@@ -13,14 +13,13 @@ import SimpleDateTime  from 'react-simple-timestamp-to-date'; // Formatere tid o
 
 
 const idbruker = AuthService.getUserId();
-// const avsender = 4; // Obs! Denne må hentes fra innboks.js (jeg vet bare ikke hvordan...)
-
 
 export default class Samtaleliste extends React.Component {
   constructor (props){
     super (props);
     this.state = {
     avsender: this.props.idbrukerFraInnboks,
+    meldingLest: this.props.meldingLest,
     idbruker: idbruker,
     samtale: [],
     }
@@ -43,6 +42,7 @@ render() {
 
   return (
     <p>
+    <Skrivemeldinger mottakerID = {this.state.avsender} />
     { this.state.samtale.map(melding => 
     <Card> 
       <Card.Body>
@@ -51,11 +51,17 @@ render() {
           <p>{melding.melding}</p>
           <p><SimpleDateTime dateFormat="DMY" timeFormat="HMA" dateSeparator="." timeSeparator=":" showTime="1" showDate="1" >
             {melding.tid}</SimpleDateTime></p>
+          <p> {melding.meldingLest == '0000-00-00 00:00:00' ? null : 
+              <span class="badge badge-pill badge-success">
+                Meldingen er lest 
+                {<SimpleDateTime dateFormat="DMY" timeFormat="HMA" dateSeparator="." timeSeparator=":" showTime="1" showDate="1" >
+                  {melding.meldingLest}</SimpleDateTime>}</span>}
+              
+          </p>
         </Card.Text>
       </Card.Body>
     </Card>
     )}
-    <Skrivemeldinger mottakerID = {this.state.avsender} />
     </p>
   )
 }

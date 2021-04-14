@@ -15,20 +15,20 @@ function MeldingTilAlle() {
     // Sender avsender og medlingstekst til backend
     const sendMelding = () => {
       axios.post("http://localhost:3001/api/meldingTilAlle", {avsender: avsender, melding: melding}) 
-        alert(melding);
+        alert('Du sendte ' + melding);
     };
   
     // Dette sendes til Meldingssiden
     return (
         <p>
-            <h3>Send melding til alle</h3>
             <Form>
+                <label>Send melding til alle</label>
                 <Row>
                     <Col>
                         <Form.Group>
                             <Form.Control 
                                 input type="text" 
-                                placeholder="Skriv melding" 
+                                placeholder="Skriv melding..." 
                                 style={{float: 'right'}} 
                                 onChange = {(event) => {setMelding(event.target.value);}}/>
                         </Form.Group>

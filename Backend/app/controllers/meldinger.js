@@ -23,7 +23,7 @@ exports.InsertInnboksMeldinger = function(req, res) {
 // Funksjon som henter alle meldingene som en bruker har fått
 exports.getMineMeldinger = function(req, res)  {
   let idbruker = req.query.idbruker;
-    const hentMineMeldinger = `SELECT meldingsID, avsender, mottaker, tid, fornavn, etternavn, melding
+    const hentMineMeldinger = `SELECT meldingsID, avsender, mottaker, tid, meldingLest, fornavn, etternavn, melding
                                FROM melding, bruker
                                WHERE mottaker = ?
                                AND idbruker = avsender
@@ -44,12 +44,12 @@ exports.getMinSamtale = function(req, res)  {
   let idbruker = req.query.idbruker;
   let avsender = req.query.avsender; 
   
-    const hentMinSamtale = `SELECT DISTINCT tid, fornavn, etternavn, melding 
+    const hentMinSamtale = `SELECT DISTINCT tid, fornavn, etternavn, melding, meldingLest
                             FROM bruker, melding 
                             WHERE melding.avsender = bruker.idbruker 
                             AND (avsender = ? OR avsender = ?) 
                             AND (mottaker = ? OR mottaker = ?) 
-                            ORDER BY tid`;
+                            ORDER BY tid DESC`;
 
     db.query(hentMinSamtale, [avsender, idbruker, idbruker, avsender], (err, result) => {
       if (err) {
@@ -86,7 +86,7 @@ exports.Gruppemelding = function(req, res) {
                                FROM gruppemedlem
                                WHERE gruppemedlem.gruppeID = ?;`;
 
-  const avsender = req.body.avsender; // Henter avsender (den innloggede) fra frontend. 
+  const avsender = req.body.avsender; // Henter avsender fra frontend. 
   const melding = req.body.melding; // Henter meldingsteksen fra Frontend.
   const gruppeID = req.body.gruppeID; //Henter gruppeID fra frontend.
 
@@ -98,3 +98,41 @@ exports.Gruppemelding = function(req, res) {
 }; //Slutt på meldingTilMedlemmer funksjonen
 
 
+// Funksjon som oppdaterer en rad til NÅR en melding er lest
+exports.MeldingLest = function(req, res) {
+
+  const meldingsID = req.body.meldingsID; 
+  console.log(meldingsID); 
+
+  const meldingLest = `UPDATE melding 
+                       SET meldingLest = CURRENT_TIMESTAMP()
+                       WHERE meldingsID = ?`;
+
+  db.query(meldingLest, meldingsID, (err,result) => {
+    if (err) {
+      console.log(err)
+    }
+    else{
+      res.send(result);
+    }
+  });
+};
+
+// Teller hvor mange nye medlinger en bruker har fått 
+exports.AntallNyeMeldinger = function(req, res)  {
+  let mottaker = req.query.idbruker;
+  
+    const antallNye = `SELECT COUNT(meldingsID) AS AntallNyeMeldinger
+                       FROM melding
+                       WHERE mottaker = ?
+                       AND meldingLest = '0000-00-00 00:00:00' `;
+
+    db.query(antallNye, mottaker, (err, result) => {
+      if (err) {
+        console.log(err)
+      } 
+      else {
+        res.send(result);
+        }
+      });
+}; 

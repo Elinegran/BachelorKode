@@ -44,11 +44,11 @@ router.use("/chatbotCheckAll", chatbotQueries.checkAndGet);
 //Kalender: 
 const kalender = require('../controllers/kalender');
 router.use("/kalenderAlleAvtaler", kalender.getKalenderAlle);
-
 router.use("/nyAvtale", kalender.NyAvtale);
-
 router.use("/updateTid", kalender.UpdateTid);
-router.use("/slettAvtale", kalender.deleteAvtale)
+router.use("/updateAvtale", kalender.updateAvtale);
+router.use("/slettAvtale", kalender.deleteAvtale);
+router.use("/kalenderBruker", kalender.getKalenderBruker);
 
 //Meldinger: 
 // Alle meldingene som en bruker har fått (Funker!)
@@ -71,6 +71,14 @@ router.use("/meldingTilAlle", meldingTilAlle.MeldingTilAlle);
 const gruppemelding = require('../controllers/meldinger');
 router.use("/gruppemelding", gruppemelding.Gruppemelding); 
 
+// Legge til NÅR en melding er lest
+const meldingLest = require('../controllers/meldinger');
+router.use("/meldingLest", meldingLest.MeldingLest); 
+
+// Teller antall nye medlinger til en bruker
+const antallNyeMeldinger = require('../controllers/meldinger');
+router.use("/antallNyeMeldinger", antallNyeMeldinger.AntallNyeMeldinger); 
+
 // Grupper: 
 // Henter ALLE gruppene (Funker!)
 const mineGrupper= require('../controllers/grupper');
@@ -78,7 +86,7 @@ router.use("/meldingerMineGrupper", mineGrupper.getMineGrupper);
 
 // Henter gruppene til en bruker (Ikke lagd enda, venter til vi deler bruker og veileder)
 const brukerGrupper= require('../controllers/grupper');
-// router.use("/brukerGrupper", brukerGrupper.hentMineGrupper); 
+router.use("/brukerGrupper", brukerGrupper.hentBrukerGrupper); 
 
 // Legger til en ny gruppe (Funker!)
 const addGruppe = require('../controllers/grupper'); 

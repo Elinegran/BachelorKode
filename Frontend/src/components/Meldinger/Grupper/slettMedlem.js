@@ -1,206 +1,46 @@
-/* import React from 'react';
-import axios from 'axios'; // for å sende/ motta til/ fra backend
-import { useState } from "react"; // for å sende til backend
+import React, { useState } from 'react';
+import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Bootstap
-import { Container, Row, Col, Button, Form } from 'react-bootstrap'; // Bootstrap-greier
+import { Form, Button } from 'react-bootstrap'; // Bootstrap-greier
+import AuthService from '../../../services/auth.service'; 
 
-// Funksjon for å opprette en ny gruppe i databasen
-function SlettMedlem() {
-    // const [gruppenavn, setGruppenavn] = useState("");
+const innlogget = AuthService.getUserId();
 
-    // Sender det nye gruppenavnet til backend
-    const addGruppe = () => {
-      axios.post("http://localhost:3001/api/grupperNyeGrupper", { gruppenavn: gruppenavn, })   
-    };
-  
-    // Dette sendes til Meldingssiden
-    return (
-      
-            <Form>
-                <Row>
-                    <Col>
-                        <Form.Label><h2>Opprett en ny gruppe</h2></Form.Label>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col>
-                        <Form.Group>
-                            <Form.Control input type="text" placeholder="Gruppenavn" style={{float: 'left'}} onChange = {(event) => {setGruppenavn(event.target.value);}}/>
-                        </Form.Group>
-                    </Col>
-                    <Col>  
-                        <Button onClick={addGruppe} variant="success" style={{float: 'right'}} type="submit">Lagre gruppa</Button>
-                    </Col>
-                </Row>        
-            </Form> 
+
+ function SlettMedlem(props) {
+   // idbruker, gruppeID, gruppenavn, fornavn og etternavn sendes fra selectGruppemedlem.js
+    const idbruker = props.senderIDbruker; 
+    const gruppeID = props.senderGruppeID; 
+    const gruppenavn = props.senderGruppenavn;
+    const fornavn = props.senderFornavn;
+    const etternavn = props.senderEtternavn; 
+    const mottaker = idbruker;
+    const avsender = innlogget;
+    const melding = 'Du er nå meldt ut av ' + gruppenavn; 
     
-    ) // slutt på return()
+  // Sender medlemmet som skal slettes til Backend
+  const slettMedlem = () => { 
+    if (window.confirm(`Er du sikker på at du vil slette ${ fornavn } ${ etternavn } fra ${ gruppenavn } ?`)) {
+      // sletter medlem i DB
+      axios.delete('http://localhost:3001/api/deleteMedlem', { data: { idbruker: idbruker, gruppeID: gruppeID }});
+      // sender melding til bruker om at h*n er slettet som medlem
+      axios.post('http://localhost:3001/api/meldingerInnboksMeldinger', { mottaker: mottaker, avsender: avsender , melding: melding }); 
 
-} // slutt på funksjonen NyGruppe()
+    }
+  };  
 
-export default NyGruppe; 
+  // Returnerer en liste over medlemmene i gruppa
+    return(
+      <Form>
+      <Button 
+        type="submit" 
+        className="btn btn-warning btn-sm" 
+        style={{float: 'right'}}
+        onClick={slettMedlem}> 
+          Slett medlem
+      </Button>
+      </Form>
+    ) // slutt på return
+} // slutt på funksjon slettMedlem()
 
-
-
-/*
-import "./App.css";
-import { useState } from "react";
-import Axios from "axios";
-
-function App() {
-  const [name, setName] = useState("");
-  const [age, setAge] = useState(0);
-  const [country, setCountry] = useState("");
-  const [position, setPosition] = useState("");
-  const [wage, setWage] = useState(0);
-
-  const [newWage, setNewWage] = useState(0);
-
-  const [employeeList, setEmployeeList] = useState([]);
-
-  const addEmployee = () => {
-    Axios.post("http://localhost:3001/create", {
-      name: name,
-      age: age,
-      country: country,
-      position: position,
-      wage: wage,
-    }).then(() => {
-      setEmployeeList([
-        ...employeeList,
-        {
-          name: name,
-          age: age,
-          country: country,
-          position: position,
-          wage: wage,
-        },
-      ]);
-    });
-  };
-
-  const getEmployees = () => {
-    Axios.get("http://localhost:3001/employees").then((response) => {
-      setEmployeeList(response.data);
-    });
-  };
-
-  const updateEmployeeWage = (id) => {
-    Axios.put("http://localhost:3001/update", { wage: newWage, id: id }).then(
-      (response) => {
-        setEmployeeList(
-          employeeList.map((val) => {
-            return val.id == id
-              ? {
-                  id: val.id,
-                  name: val.name,
-                  country: val.country,
-                  age: val.age,
-                  position: val.position,
-                  wage: newWage,
-                }
-              : val;
-          })
-        );
-      }
-    );
-  };
-
-  const deleteEmployee = (id) => {
-    Axios.delete(`http://localhost:3001/delete/${id}`).then((response) => {
-      setEmployeeList(
-        employeeList.filter((val) => {
-          return val.id != id;
-        })
-      );
-    });
-  };
-
-  return (
-    <div className="App">
-      <div className="information">
-        <label>Name:</label>
-        <input
-          type="text"
-          onChange={(event) => {
-            setName(event.target.value);
-          }}
-        />
-        <label>Age:</label>
-        <input
-          type="number"
-          onChange={(event) => {
-            setAge(event.target.value);
-          }}
-        />
-        <label>Country:</label>
-        <input
-          type="text"
-          onChange={(event) => {
-            setCountry(event.target.value);
-          }}
-        />
-        <label>Position:</label>
-        <input
-          type="text"
-          onChange={(event) => {
-            setPosition(event.target.value);
-          }}
-        />
-        <label>Wage (year):</label>
-        <input
-          type="number"
-          onChange={(event) => {
-            setWage(event.target.value);
-          }}
-        />
-        <button onClick={addEmployee}>Add Employee</button>
-      </div>
-      <div className="employees">
-        <button onClick={getEmployees}>Show Employees</button>
-
-        {employeeList.map((val, key) => {
-          return (
-            <div className="employee">
-              <div>
-                <h3>Name: {val.name}</h3>
-                <h3>Age: {val.age}</h3>
-                <h3>Country: {val.country}</h3>
-                <h3>Position: {val.position}</h3>
-                <h3>Wage: {val.wage}</h3>
-              </div>
-              <div>
-                <input
-                  type="text"
-                  placeholder="2000..."
-                  onChange={(event) => {
-                    setNewWage(event.target.value);
-                  }}
-                />
-                <button
-                  onClick={() => {
-                    updateEmployeeWage(val.id);
-                  }}
-                >
-                  {" "}
-                  Update
-                </button>
-
-                <button
-                  onClick={() => {
-                    deleteEmployee(val.id);
-                  }}
-                >
-                  Delete
-                </button>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    </div>
-  );
-}
-
-export default App; */
- */
+export default SlettMedlem; 

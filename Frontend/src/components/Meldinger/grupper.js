@@ -3,7 +3,7 @@ import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Bootstap
 import { Accordion, Button, Card, Row, Col, Container } from 'react-bootstrap'; // Bootstrap-greier
 import SelectGruppemedlem from './Grupper/selectGruppemedlem.js'; // Komponent som henter brukerne fra backend
-import NyttMedlem from './Grupper/nyttMedlem.js';
+import NyttMedlem from './Grupper/nyttGruppemedlem';
 import SlettGruppe from './Grupper/slettGruppe';
 import EndreGruppenavn from './Grupper/endreGruppenavn'; 
 import Gruppemelding from './Grupper/gruppemelding'; 
@@ -34,7 +34,7 @@ export default class Gruppeliste extends React.Component {
         <Card>
           <Card.Header>
             <Accordion.Toggle as={Button} variant="link" eventKey={"Alle"}>
-              <h2> Alle </h2>
+              <h2> Alle brukere </h2>
             </Accordion.Toggle>
           </Card.Header>
           <Accordion.Collapse eventKey={"Alle"}>
@@ -47,25 +47,19 @@ export default class Gruppeliste extends React.Component {
         <Card>
           <Card.Header>
             <Accordion.Toggle as={Button} variant="link" eventKey={melding.gruppeID}>
-              <h2> {melding.gruppeID} {melding.gruppenavn} </h2>
+              <h2> {melding.gruppenavn} </h2>
             </Accordion.Toggle>
           </Card.Header>
 
           <Accordion.Collapse eventKey={melding.gruppeID}>
             <Card.Body>
+
               <Gruppemelding gruppeID ={melding.gruppeID}/>
-              <p>
-                <NyttMedlem senderGruppeID={melding.gruppeID} senderID={melding.gruppeID}/> 
-              </p>
-              <p>
-                <h3>Rediger gruppe</h3>
-                <Row> 
-                  <Col> <EndreGruppenavn sendeGruppeID={melding.gruppeID} /> </Col>
-                  <Col> <SlettGruppe senderGruppeID={melding.gruppeID}/> </Col>
-                </Row>
-              </p>
-        
+              <NyttMedlem senderGruppeID={melding.gruppeID} senderID={melding.gruppeID}/>  
+              <EndreGruppenavn sendeGruppeID={melding.gruppeID} /> 
               <SelectGruppemedlem gruppeIDFraGrupper={melding.gruppeID} />
+              <SlettGruppe senderGruppeID={melding.gruppeID} senderGruppenavn={melding.gruppenavn}/> 
+              
             </Card.Body> 
           </Accordion.Collapse>
         </Card>)}

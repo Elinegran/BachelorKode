@@ -6,24 +6,28 @@ import { Container, Row, Col, Button, Form } from 'react-bootstrap'; // Bootstra
 
 // Funksjon for å opprette en ny gruppe i databasen
 function EndreGruppenavn(props) {
-    const gruppeID = props.sendeGruppeID;
+    const gruppeID = props.sendeGruppeID; // fra gruppe.js
     const [gruppenavn, setGruppenavn] = useState("");
 
     // Sender det nye gruppenavnet til backend
     const endreNavn = () => {
-      axios.post("http://localhost:3001/api/gruppenavn", { gruppeID: gruppeID, gruppenavn: gruppenavn, })   
+        if (window.confirm(`Er du sikker på at du endre gruppenavnet til ${ gruppenavn } ?`)) {
+            axios.post("http://localhost:3001/api/gruppenavn", { gruppeID: gruppeID, gruppenavn: gruppenavn, })  
+        }
     };
   
     // Dette sendes til Meldingssiden
     return (
+        <p>
         <Form>
+            <label> Endre gruppenavn: </label>
             <Row>
                 <Col>
                     <Form.Group>
                         <Form.Control 
                             input type="text" 
-                            placeholder="Nytt gruppenavn" 
-                            style={{float: 'left'}} 
+                            placeholder="Nytt gruppenavn..." 
+                            style={{float: 'right'}} 
                             onChange = {(event) => {setGruppenavn(event.target.value);}}/>
                     </Form.Group>
                 </Col>
@@ -31,19 +35,15 @@ function EndreGruppenavn(props) {
                     <Button 
                         type="submit"
                         className="btn btn-success"
-                        style={{float: 'right'}} 
+                        style={{float: 'left'}} 
                         onClick={endreNavn} 
                         > Endre
                     </Button>
                 </Col>
             </Row>        
         </Form> 
-        
-        
-        
-        
-           
-    
+    </p>
+
     ) // slutt på return()
 
 } // slutt på funksjonen EndreGruppenavn()
