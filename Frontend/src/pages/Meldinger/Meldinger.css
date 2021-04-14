@@ -45,6 +45,13 @@ section.samtale {
 section.gruppe {
   background: #e5ebeb;  
 }
+.mobil {
+  visibility:visible;
+}
+
+.innboksMelding {
+  display:flex;
+}
 
 /*  Design for stor skjerm  */ 
 /* Main blir delt i 2 kolonner */
@@ -67,6 +74,10 @@ section.melding {
 section.gruppe {
   background: #e5ebeb;
   width: 40%;  
+}
+
+.mobil {
+  visibility:hidden;
 }
 
 } /* slutt på media-queiry for stor skjerm  */
