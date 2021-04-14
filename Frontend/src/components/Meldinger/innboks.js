@@ -56,7 +56,7 @@ export default class Meldingsliste extends React.Component {
                     <h2>
                       {melding.meldingLest != '0000-00-00 00:00:00' ? null : <span class="badge badge-pill badge-warning"> Ny </span>}
                       
-                      {melding.fornavn} {melding.etternavn} {melding.avsender} {melding.mottaker} 
+                      {melding.fornavn} {melding.etternavn}  
                       <br></br>
 
                       <SimpleDateTime dateFormat="DMY" timeFormat="HMA" dateSeparator="." timeSeparator=":"

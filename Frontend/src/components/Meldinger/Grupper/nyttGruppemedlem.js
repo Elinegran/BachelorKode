@@ -15,14 +15,11 @@ export default class NyttMedlem extends React.Component {
             idbruker: this.props.senderID, 
             gruppeID: this.props.senderGruppeID, // gruppeID sendes fra selectGruppemedlem.js
         };
-        // this.handleSelect = this.handleInputChange.bind(this);
+
         this.handleSelect = this.handleSelect.bind(this);
     }
 
-    // handleInputChange(event){
-    //     this.setState({melding:event.target.value})   
-    // }  // endre melding til ny
-
+    
     handleSelect(value){
         this.setState({idbruker: value })
         
@@ -36,20 +33,17 @@ export default class NyttMedlem extends React.Component {
                 <Form>
                     <Row>
                         <Col>
-                            <Form.Label><h3>Legg til medlem</h3></Form.Label>
+                            <Form.Label>Legg til medlem:</Form.Label>
                         </Col>
                     </Row>
                     <Row>
                         <Col>
-                            <SelectBrukere onHandleSelect={this.handleSelect}/>
+                            <SelectBrukere onHandleSelect={this.handleSelect} />
                         </Col>
                         <Col>
-                            {/* <Form.Group>
-                                <Form.Control type="text" placeholder="idbruker" onChange = {this.handleSelect} />
-                            </Form.Group> */}
-                        </Col>
-                        <Col>
-                            <Button variant="success" type="submit" onClick = {this.handleSend} style={{float: 'right'}}>Lagre medlem</Button>
+                            <Button variant="success" 
+                            type="submit" onClick = {this.handleSend} 
+                            style={{float: 'left'}}>Lagre medlem</Button>
                         </Col>
                     </Row>   
                 </Form>

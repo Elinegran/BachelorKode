@@ -10,7 +10,10 @@ app.use(express.json());
 
 // Henter ALLE gruppene fra Databasen
 exports.getMineGrupper = function(req, res)  {
-    const sqlSelect = "SELECT * FROM gruppe WHERE gruppenavn IS NOT NULL";
+    const sqlSelect = `SELECT * 
+                       FROM gruppe 
+                       WHERE gruppenavn IS NOT NULL
+                       ORDER BY gruppenavn`;
     db.query(sqlSelect, (err, result) => {
       if (err) {
         console.log(err)
@@ -29,7 +32,8 @@ exports.hentBrukerGrupper = function(req, res)  {
   const sqlSelect = `SELECT gruppemedlem.gruppeID, gruppenavn
                      FROM gruppe, gruppemedlem  
                      WHERE idbruker = ?
-                     AND gruppe.gruppeID = gruppemedlem.gruppeID`;
+                     AND gruppe.gruppeID = gruppemedlem.gruppeID
+                     ORDER BY gruppenavn`;
 
   db.query(sqlSelect, idbruker, (err, result) => {
     if (err) {

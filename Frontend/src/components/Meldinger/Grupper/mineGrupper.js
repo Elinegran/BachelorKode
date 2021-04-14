@@ -38,7 +38,7 @@ export default class MinGruppeliste extends React.Component {
         <Card>
           <Card.Header>
             <Accordion.Toggle as={Button} variant="link" eventKey={melding.gruppeID}>
-              <h2> {melding.gruppeID} {melding.gruppenavn} </h2>
+              <h2> {melding.gruppenavn} </h2>
             </Accordion.Toggle>
           </Card.Header>
 
