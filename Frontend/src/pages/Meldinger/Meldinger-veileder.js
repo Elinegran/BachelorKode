@@ -17,7 +17,7 @@ export const MeldingerV = () => (
         <section className="melding">     
                 <Container>
                 <h1 id= "meldinger">Meldinger</h1>
-                        <p><a href="#grupper">Gå til grupper</a></p>
+                        <p><a className = "mobil" href="#grupper">Gå til grupper</a></p>
                         <NyMelding/>
                         <Row>
                                 <Col>
@@ -30,11 +30,6 @@ export const MeldingerV = () => (
                         
                         <Meldingsliste /> 
                         
-                        {/* <h1 className= "display-4"> Meldinger </h1>
-                        
-                        <NyMelding/>
-                        <AntallMeldinger />
-                        <Meldingsliste />  */}
                 </Container>                  
         </section>
 
@@ -42,7 +37,7 @@ export const MeldingerV = () => (
         <section className="gruppe"> 
                 <Container>
                         <h1 id="grupper">Grupper</h1>
-                        <p><a href="#meldinger">Gå til meldinger</a></p>
+                        <p><a className = "mobil" href="#meldinger">Gå til meldinger</a></p>
                         <NyGruppe /> {/* inputfelt og knapp for å legge til ny gruppe*/}
                         <Gruppeliste/> {/* Liste over alle gruppene med redigeringsmuligheter */}            
                 </Container>        
