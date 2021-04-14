@@ -7,11 +7,11 @@ import nbLocale from '@fullcalendar/core/locales/nb';
 import axios from 'axios';
 import SelectBrukere from '../Meldinger/Felles/selectBruker.js'; // Komponent som henter brukerne fra backend ----../Felles/selectBruker.js
 import AuthService from '../../services/auth.service';
-import { Button, ModalBody, ModalFooter } from 'react-bootstrap';
 
-import { Accordion, Container, Row, Col, Card, Form } from 'react-bootstrap'; 
+import { Accordion, Card, Form , Button} from 'react-bootstrap'; 
 
 import EditDialog from './editDialog';
+import moment from 'moment';
 
 export default class KalenderComp extends React.Component {
   
@@ -157,7 +157,7 @@ export default class KalenderComp extends React.Component {
               right: 'dayGridMonth,timeGridWeek,timeGridDay'
             }}
             locale={nbLocale }
-            initialView='timeGridWeek'
+            initialView='dayGridMonth'
             editable={true}
             eventDrop={this.handleUpdate}
             selectable={true}
@@ -181,6 +181,8 @@ export default class KalenderComp extends React.Component {
   }
 
   renderSidebar() {
+
+    let dagensDato = moment(new Date()).format("YYYY-MM-DDTHH:MM:00.0000Z");
     
 
     return (
@@ -247,13 +249,18 @@ export default class KalenderComp extends React.Component {
 
         <Accordion>
           { this.state.avtaler.map(avtale => 
+        
+        // denne sørger for at brukeren kun kan redigere kommende avtaler, ikke tidligere.
+          avtale.start <= dagensDato ? null : 
           <Card>
               <Card.Header>
+          
                   <Accordion.Toggle as={Button} variant="link" eventKey={avtale.id}>
                     <h2>{avtale.title} 
                       <br></br>
                     </h2>             
                   </Accordion.Toggle>
+  
               </Card.Header>
               <Accordion.Collapse eventKey={avtale.id}>
                 <Card.Body> 
@@ -262,7 +269,9 @@ export default class KalenderComp extends React.Component {
                    
                 </Card.Body> 
             </Accordion.Collapse>
+          
           </Card>
+        
           )}
         </Accordion> 
                

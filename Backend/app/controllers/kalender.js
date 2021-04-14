@@ -12,7 +12,7 @@ app.use(express.json());
 // Funksjon som henteravtaler
 exports.getKalenderAlle = function(req, res)  {
 
-    const hentAlleAvtaler = `select * from avtale;`;
+    const hentAlleAvtaler = `select * from avtale order by start;`;
 
     db.query(hentAlleAvtaler, (err, result) => {
       if (err) {

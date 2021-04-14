@@ -7,24 +7,20 @@ import LeggeTilLenke from '../../components/Lenkebibliotek/leggeTilLenke'
 import { Accordion, Button, Card, Container, Row, Col} from 'react-bootstrap'
 import VisAlleLenker from '../../components/Lenkebibliotek/visAlleLenker';
 import HentAlleLenker from '../../components/Lenkebibliotek/hentAlleLenker';
+import VisGruppene from '../../components/Lenkebibliotek/visGruppene';
+import VisBrukere from '../../components/Lenkebibliotek/visBrukere';
+
 export const Lenkebibliotek = () => (
     <Container>
         <Col >
             <h1 style = {{ textAlign: 'center'}}>Her kan du legge til nye lenker</h1>
 
-    <Form>
+    
         <LeggeTilLenke/>
         <br />
-        <LenkeV /> 
+        {/* <LenkeV />  */}
         <VisAlleLenker />
-    </Form>
        
-      
-        
-
-
-
-        {/* <LeggeTilLenke/> */}
         <br></br>
         </Col>  
         

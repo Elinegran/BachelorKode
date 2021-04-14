@@ -122,6 +122,20 @@ router.use("/getLenker", getLenker.getAlleLenker)
 const addLenke = require('../controllers/lenkebibliotek'); 
 router.use("/lenkerNylenke", addLenke.LenkeInput );
 
+// Legg lenke til hos en brukerne
+const addLenkeBruker = require('../controllers/lenkebibliotek'); 
+router.use("/lenkeAddBruker", addLenkeBruker.AddLenkeBruker );
+
+// Legg lenke til hos en gruppe
+const visGruppeLenker = require('../controllers/lenkebibliotek'); 
+router.use("/visGruppeLenker", visGruppeLenker.VisGruppeLenker );
+
+// Se alle lenkene til en bruker
+const visLenkerBruker= require('../controllers/lenkebibliotek'); 
+router.use("/visLenkerBruker", visLenkerBruker.VisBrukerLenker );
+// se alle lenkene til en gruppe
+const visLenkerGruppe= require('../controllers/lenkebibliotek'); 
+router.use("/visLenkerGruppe", visLenkerGruppe.VisGruppeLenker );
 // redigere lenke
 
 // Slette lenke

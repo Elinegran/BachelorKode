@@ -7,7 +7,6 @@ import Form from 'react-bootstrap/Form'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AuthService from '../../services/auth.service';
 
-// const idbruker = AuthService.getUserId();
 function NyLenke() {
     const [url, setUrl] = useState("");
     const [tittel, setTittel] = useState("");
@@ -19,7 +18,7 @@ function NyLenke() {
     };
     
     return(
-
+    <Form>
         <Form.Group>
             <Form.Control input type="text" placeholder="Tittel"onChange = {(event) => {setTittel(event.target.value);}} />
             <br />
@@ -28,9 +27,8 @@ function NyLenke() {
             <Form.Control input type="text" placeholder="URL" onChange = {(event) => {setUrl(event.target.value);}}/>
             <br />
             <Button onClick = {addLenke} variant="primary" type = "submit">Legg til lenke</Button>
-            
         </Form.Group>   
-           
+    </Form>       
     )
 }
 
