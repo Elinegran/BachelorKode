@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {Card, ListGroup, article, Button, CustomToggle } from 'react-bootstrap';
 // import { usearticleToggle } from 'react-bootstrap/articleToggle';
 // import AuthService from '../../../services/auth.service';
+import SletteLenkeBruker from './sletteLenkeBruker';
     
 export default class AlleLenkerBruker extends React.Component {
     constructor (props){
@@ -22,8 +23,12 @@ export default class AlleLenkerBruker extends React.Component {
         .then(res => {
         const lenkeBruker = res.data;
         this.setState({ lenkeBruker });
-        console.log (this.state.lenkeBruker);
+        // console.log (this.state.lenkeBruker);
         })
+        .catch(error => {
+            console.log(error)
+            console.log("message")
+          })
     }
 
     render () {
@@ -32,13 +37,21 @@ export default class AlleLenkerBruker extends React.Component {
                 { this.state.lenkeBruker.map(brukerLenke => 
                
                 <ListGroup variant="flush">
-                <ListGroup.Item variant="light">
-                {/* <p>Dette er Accordion til:{this.state.idbruker}</p> */}
-                    <Card.Text>{brukerLenke.tittel} 
-                    {/* <Card.Text>{brukerLenke.info} </Card.Text>     */}
-                    <Card.Link href = {brukerLenke.url}> {brukerLenke.url}</Card.Link>
-                    </Card.Text>
-                </ListGroup.Item>
+                    <ListGroup.Item variant="light">
+                        <Card.Text>
+                            {brukerLenke.tittel} 
+                            {/* {brukerLenke.info}  */}
+                        <Card.Link href = {brukerLenke.url}> {brukerLenke.url}</Card.Link>
+                        <SletteLenkeBruker
+                            senderIdbruker = {brukerLenke.idbruker}
+                            senderLenkeID = {brukerLenke.lenkeID}
+                            senderUrl = {brukerLenke.url}
+                            senderFornavn = {brukerLenke.fornavn}
+                            senderEtternavn = {brukerLenke.etternavn}
+                        />
+                        {/* <Button style = {{ float: 'right'}} variant="danger" type = "submit">Slett</Button> */}
+                        </Card.Text>
+                    </ListGroup.Item>
                 </ListGroup>
                )}     
             </Card>
