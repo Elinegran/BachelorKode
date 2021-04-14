@@ -34,7 +34,7 @@ const innlogget = AuthService.getUserId();
       <Form>
       <Button 
         type="submit" 
-        className="btn btn-warning btn-sm" 
+        className="btn btn-danger btn-sm" 
         style={{float: 'right'}}
         onClick={slettMedlem}> 
           Slett medlem

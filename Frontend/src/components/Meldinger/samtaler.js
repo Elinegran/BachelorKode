@@ -8,6 +8,7 @@ import Skrivemelding from './skriveMelding';
 import Skrivemeldinger from '../../components/Meldinger/skriveMelding.js';
 import Meldingsliste from './innboks.js'; 
 import SimpleDateTime  from 'react-simple-timestamp-to-date'; // Formatere tid og dato
+import moment from 'moment';
 
 
 
@@ -39,6 +40,8 @@ export default class Samtaleliste extends React.Component {
   }
 
 render() {
+  // let dagensDato = moment(new Date()).format("YYYY-MM-DDTHH:MM:00.0000Z");
+  let tidLest = moment(new Date()).format("DD-MM-YYYY HH:MM");
 
   return (
     <p>
@@ -53,11 +56,13 @@ render() {
             {melding.tid}</SimpleDateTime></p>
           <p> {melding.meldingLest == '0000-00-00 00:00:00' ? null : 
               <span class="badge badge-pill badge-success">
-                Meldingen er lest 
-                {<SimpleDateTime dateFormat="DMY" timeFormat="HMA" dateSeparator="." timeSeparator=":" showTime="1" showDate="1" >
-                  {melding.meldingLest}</SimpleDateTime>}</span>}
-              
+                Meldingen er lest {moment(melding.meldingLest).format("DD-MM-YYYY HH:MM")}                
+              </span>}
           </p>
+    //              {/* {<SimpleDateTime dateFormat="DMY" timeFormat="HMA" dateSeparator="." timeSeparator=":" showTime="1" showDate="1" >
+    // {melding.meldingLest}</SimpleDateTime>}</span>} */}
+              
+          
         </Card.Text>
       </Card.Body>
     </Card>

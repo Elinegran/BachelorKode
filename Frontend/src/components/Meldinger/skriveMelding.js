@@ -39,7 +39,7 @@ export default class skriveMelding extends React.Component {
                                                 </Form.Group>
                                         </Col>
                                         <Col>
-                                              <Button variant="warning" type="submit" onClick = {this.handleSend}>Send</Button>  
+                                              <Button variant="success" type="submit" onClick = {this.handleSend}>Send</Button>  
                                         </Col>
                                 </Row>
                                 
