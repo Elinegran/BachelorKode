@@ -38,7 +38,7 @@ export default function Avtale(props){
   // const handleClose = () => setShow(false);
   // const handleShow = () => setShow(true);
 
-  const handleClose  = () => {
+  const handleUpt  = () => {
     alert("Dette sendes: " + avtaleID);
       axios.post("http://localhost:3001/api/updateAvtale", {
       id: avtaleID,
@@ -51,9 +51,26 @@ export default function Avtale(props){
      
   };
 
-  const handleShow  = () => (
-    alert('Dette er Slett')
-  );
+  const handleShow  = () => {
+
+    if(window.confirm(`Er du sikker på at du vil slette ${title}?`)) {
+      
+      //alert("dette er ID: " + clickInfo.event.id)
+     
+      const avtaleid = avtaleID;
+      axios.post(`http://localhost:3001/api/slettAvtale`, {
+        avtaleid: avtaleid
+      })
+        .then(response => {
+            console.log(response)
+          })
+          .catch(error => {
+            console.log(error)
+            console.log("message")
+          })
+          window.location.reload()
+    }
+  };
 
   
   return (
@@ -89,7 +106,7 @@ export default function Avtale(props){
     {/* <Datetime  initialValue={start} />; */}
 
     {/* {moment().format(start)} */}
-  <Button variant="primary" onClick={handleClose}>
+  <Button variant="primary" onClick={handleUpt}>
         Lagre
       </Button>
 
@@ -98,23 +115,8 @@ export default function Avtale(props){
       </Button>
   
 </Form>
-     {title }
       
 
-      {/* <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal> */}
     </>
   );
 }
