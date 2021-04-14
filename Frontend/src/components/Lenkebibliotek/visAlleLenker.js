@@ -9,35 +9,20 @@ import SelectGruppe from '../Meldinger/Grupper/selextGruppe';
 import Gruppeliste from '../Meldinger/grupper';
 import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router';
 import HentAlleLenker from '../Lenkebibliotek/hentAlleLenker';
+import Example from './visBrukere';
+import VisBrukere from './visBrukere';
+import VisGruppene from './visGruppene';
+import AlleLenkerBruker from './alleLenkerBruker';
 
-export default class VisAlleLenker extends React.Component {
-    constructor (props){
-      super (props);
-      this.state = {
-      lenker: [],
-      }
-    };
-    
-    componentDidMount() {
-      //alert('Gruppe fra frontend: '+ this.state.gruppeID)
-      axios.get(`http://localhost:3001/api/getLenker`)
-        .then(res => {
-          const lenker = res.data;
-          this.setState({ lenker });
-        })
-        .catch(error => {
-          console.log(error)
-          console.log("message")
-        })
-    }
-    render() {
-      return ( // Returnerer en kollaps-liste over alle gruppene, med en liste med medlemmer inni 
+function VisAlleLenker (){
+      return (  
         <article>
           <Accordion>
+
           <Card>
             <Card.Header>
                 <Accordion.Toggle as={Button} variant="light" eventKey="allelenker">
-                  Se alle lenker
+                  Se og administrer lenker
                 </Accordion.Toggle>
             </Card.Header>
                 <Accordion.Collapse eventKey="allelenker">
@@ -46,14 +31,44 @@ export default class VisAlleLenker extends React.Component {
                         <Card.Text>
                            <HentAlleLenker />
                         </Card.Text>
-                
-                          
               </Card.Body>
+                </Accordion.Collapse>
+          </Card>
 
+          <Card>
+            <Card.Header>
+                <Accordion.Toggle as={Button} variant="light" eventKey="oversiktBrukere">
+                  Oversikt over brukere
+                </Accordion.Toggle>
+            </Card.Header>
+                <Accordion.Collapse eventKey="oversiktBrukere">
+            <Card.Body>
+                <Card.Title style = {{ textAlign: 'center'}}>Oversikt over lenkene til en bruker </Card.Title>
+                        <Card.Text>
+                           <VisBrukere />
+                        </Card.Text>
+              </Card.Body>
+                </Accordion.Collapse>
+          </Card>
+
+          <Card>
+            <Card.Header>
+                <Accordion.Toggle as={Button} variant="light" eventKey="oversiktGrupper">
+                  Oversikt over grupper
+                </Accordion.Toggle>
+            </Card.Header>
+                <Accordion.Collapse eventKey="oversiktGrupper">
+            <Card.Body>
+                <Card.Title style = {{ textAlign: 'center'}}>Oversikt over lenker til gruppene </Card.Title>
+                        <Card.Text>
+                        <VisGruppene />
+                        </Card.Text>
+              </Card.Body>
                 </Accordion.Collapse>
           </Card>
     </Accordion>
         </article>
       )
     }
-}
+
+export default VisAlleLenker;

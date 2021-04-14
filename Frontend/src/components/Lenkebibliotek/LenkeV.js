@@ -9,16 +9,16 @@ import SelectGruppe from '../Meldinger/Grupper/selextGruppe';
 import Gruppeliste from '../Meldinger/grupper';
 import HentAlleLenker from './hentAlleLenker';
 import LeggeTilLenke from './leggeTilLenke';
+import ViseBrukerne from './visBrukere';
+import { useState } from "react"; // for å sende til backend
 
-
-
-export default class SelectLenker extends React.Component {
-    constructor (props){
-      super (props);
-      this.state = {
-      lenker: [],
-      }
-    };
+// export default class SelectLenker extends React.Component {
+//     constructor (props){
+//       super (props);
+//       this.state = {
+//       lenker: [],
+//       }
+//     };
     
     // componentDidMount() {
     //   //alert('Gruppe fra frontend: '+ this.state.gruppeID)
@@ -34,8 +34,15 @@ export default class SelectLenker extends React.Component {
     // }
   
     // Returnerer en liste over medlemmene i gruppa
-    render() {
-
+    // render() {
+    function AddLenkeBruker(props) {
+        const [idbruker, setidbruker] = useState(0);
+        // const [lenkeID, setlenkeID] = useState(0);
+        const lenkeID = props.senderlenkeid;
+        const addLenkeBruker = () => {
+            axios.post("http://localhost:3001/api/lenkeAddBruker", {idbruker: idbruker, lenkeID: lenkeID})
+            alert(idbruker + lenkeID);   
+        };
 // export const LenkeV = ({}) => {
     return (
 
@@ -48,6 +55,13 @@ export default class SelectLenker extends React.Component {
             <Form.Group controlId="exampleForm.SelectCustom">
             {/* <Form.Label>Velg en gruppe</Form.Label> */}
             <SelectGruppe/>
+            <input type="text" 
+                            placeholder="Brukerid"  
+                            onChange = {(event) => {setidbruker(event.target.value);}}/>
+{/* 
+            <input type="text" 
+                            placeholder="lenkeID"  
+                            onChange = {(event) => {setlenkeID(event.target.value);}}/> */}
             </Form.Group>
         </Form>
 
@@ -58,38 +72,20 @@ export default class SelectLenker extends React.Component {
             {/* <Form.Label>Velg en lenker</Form.Label> */}
             <SelectBrukere/>
              </Form.Group>
+        </Form> 
+        <Button onClick = {addLenkeBruker} type = "submit" variant ="primary">Legg til</Button>{' '} 
+        {/* <br />
+        <br />
+        <Button type = "submit" variant ="danger">Slett lenke</Button>{' '}   */}
+        <Form>
+            <br />
+        {/* <ViseBrukerne />  */}
         </Form>
-        
-<Card>
-  <Card.Header>
-      <Accordion.Toggle as={Button} variant="link" eventKey="0">
-        Nyttige linker for deg
-      </Accordion.Toggle>
-  </Card.Header>
-      <Accordion.Collapse eventKey="0">
-  <Card.Body>
-      <Card.Title>Her finer du lineker som kan være nyttige for dere alle sammen</Card.Title>
-              <Card.Text>
-                  Dette er linker til deg
-              </Card.Text>
-              <Card.Link >
-              {/* <HentAlleLenker/> */}
-              </Card.Link>
-                
-    </Card.Body>
-
-      </Accordion.Collapse>
-</Card>
-
-
-       
-
-
-       
     </container>
    
     )// slutt på return
 
 }  // Slutt på render
-}// Slutt på klasse
-// export default LenkeV;
+// Slutt på klasse
+export default AddLenkeBruker;
+

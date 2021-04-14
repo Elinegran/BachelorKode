@@ -8,6 +8,7 @@ import SelectBrukere from '../Meldinger/Felles/selectBruker';
 import SelectGruppe from '../Meldinger/Grupper/selextGruppe';
 import Gruppeliste from '../Meldinger/grupper';
 import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router';
+import LenkeV from '../Lenkebibliotek/LenkeV';
 
 
 export default class HentAlleLenker extends React.Component {
@@ -19,7 +20,6 @@ export default class HentAlleLenker extends React.Component {
     };
     
     componentDidMount() {
-      //alert('Gruppe fra frontend: '+ this.state.gruppeID)
       axios.get(`http://localhost:3001/api/getLenker`)
         .then(res => {
           const lenker = res.data;
@@ -43,12 +43,14 @@ export default class HentAlleLenker extends React.Component {
       </Card.Header>
           <Accordion.Collapse eventKey={ alleLenker.lenkeID }>
       <Card.Body>
-          
-          
           <Card.Title className="list-group" >{ alleLenker.tittel }</Card.Title>
           <Card.Text>{ alleLenker.info}</Card.Text>
-          <Card.Link href="{ alleLenker.url }">{ alleLenker.url }</Card.Link>
-                    
+          <Card.Link href= "{ alleLenker.url }">{ alleLenker.url }</Card.Link>
+          <br />
+          <br />
+          <LenkeV senderlenkeid = {alleLenker.lenkeID}/>
+          
+                  
       </Card.Body>
 
           </Accordion.Collapse>
