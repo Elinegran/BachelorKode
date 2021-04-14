@@ -9,12 +9,8 @@ import AuthService from '../../services/auth.service';
 import SimpleDateTime  from 'react-simple-timestamp-to-date'; // Formatere tid og dato
 
 const idbruker = AuthService.getUserId();
-// alert(idbruker);
+
  
-// Eline sin
-/* const detteSkjer = (event) => {
-  alert('Denne funker ' + event.meldingID);
-} */
 
 const meldingLest = (event) => {
   console.log(event);

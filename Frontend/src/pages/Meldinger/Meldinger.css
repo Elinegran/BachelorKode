@@ -47,7 +47,7 @@ section.gruppe {
 }
 
 /*  Design for stor skjerm  */ 
-/* Main blir delt i 3 kolonner */
+/* Main blir delt i 2 kolonner */
 @media screen and (min-width: 950px) {
 
 main.meldingssiden {
