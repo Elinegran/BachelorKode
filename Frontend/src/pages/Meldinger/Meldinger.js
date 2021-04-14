@@ -6,7 +6,7 @@ import Skrivemeldinger from '../../components/Meldinger/skriveMelding.js';
 import NyMelding from '../../components/Meldinger/nyMelding';
 import SelectBrukere from '../../components/Meldinger/Felles/selectBruker';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Bootstap
-import { Container } from 'react-bootstrap';
+import { Container, Col, Row } from 'react-bootstrap';
 import AntallMeldinger from '../../components/Meldinger/antallMeldinger';
    
 // Siden Meldinger fro BRUKERE 
@@ -17,11 +17,18 @@ export const Meldinger = () => (
         {/* Brukerens innboks */}
         <section className="melding">                  
                 <Container>
-                        <h1 className= "display-4">Meldinger</h1>
-                        {/* <SelectBrukere/>
-                        <Skrivemeldinger />  */}
+                        <h1 id= "meldinger">Meldinger</h1>
+                        <p><a className = "mobil" href="#grupper">Gå til grupper</a></p>
                         <NyMelding/>
-                        <AntallMeldinger />
+                        <Row>
+                                <Col>
+                                        <h2 style= {{float:"right"}}>Nye meldinger:</h2>
+                                </Col>
+                                <Col>
+                                        <AntallMeldinger />
+                                </Col> 
+                        </Row>
+                        
                         <Meldingsliste /> 
                 </Container>                  
         </section>
@@ -29,7 +36,8 @@ export const Meldinger = () => (
         
         <section className="gruppe"> {/* Grupper */}
                 <Container>
-                        <h1 className= "display-4"> Mine grupper </h1>
+                        <h1 id="grupper">Mine grupper</h1>
+                        <p><a className = "mobil" href="#meldinger">Gå til meldinger</a></p>
                         <MinGruppeliste/> {/* Liste over alle gruppene */}            
                 </Container>        
         </section> 

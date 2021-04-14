@@ -6,16 +6,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Accordion, Button, Card } from 'react-bootstrap'; 
 import Samtaleliste from '../../components/Meldinger/samtaler.js';
 import AuthService from '../../services/auth.service'; 
-import SimpleDateTime  from 'react-simple-timestamp-to-date'; // Formatere tid og dato
+import moment from 'moment';
+
 
 const idbruker = AuthService.getUserId();
-// alert(idbruker);
- 
-// Eline sin
-/* const detteSkjer = (event) => {
-  alert('Denne funker ' + event.meldingID);
-} */
 
+ 
 const meldingLest = (event) => {
   console.log(event);
 }
@@ -27,7 +23,6 @@ export default class Meldingsliste extends React.Component {
     super (props);
     this.state = {
     idbruker: idbruker,
-    // meldingLest: false,
     meldinger: []
     }
   };
@@ -53,15 +48,12 @@ export default class Meldingsliste extends React.Component {
                                 variant="link" 
                                 onClick = {() =>console.log(axios.post("http://localhost:3001/api/meldingLest", { meldingsID: melding.meldingsID, }) )} //{<MeldingLest senderID={melding.meldingsID}/>} 
                                 eventKey={melding.meldingsID}>
-                    <h2>
-                      {melding.meldingLest != '0000-00-00 00:00:00' ? null : <span class="badge badge-pill badge-warning"> Ny </span>}
-                      
-                      {melding.fornavn} {melding.etternavn}  
+                    <h2 className = "innboksMelding">
+                     <p> {melding.meldingLest != '0000-00-00 00:00:00' ? null : <span class="badge badge-pill badge-warning"> Ny </span>}</p>
+                     <p> {melding.fornavn} {melding.etternavn} 
                       <br></br>
+                      {moment(melding.tid).format("DD-MM-YYYY HH:mm")}</p>
 
-                      <SimpleDateTime dateFormat="DMY" timeFormat="HMA" dateSeparator="." timeSeparator=":"
-                      showTime="1" showDate="1" >
-                      {melding.tid}</SimpleDateTime>
                     </h2>
                                     
                   </Accordion.Toggle>

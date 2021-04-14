@@ -122,7 +122,7 @@ exports.getMedlem = function(req, res)  {
       });
 };
 
-// Denne funker delvis!!
+
 // Funksjon som lagrer et NYTT GRUPPEMEDLEM i databasen
 exports.MedlemInput = function(req, res)  {
 
