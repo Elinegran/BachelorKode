@@ -22,11 +22,11 @@ export default class NyMelding extends React.Component {
 
     render(){
         return(
-            <Container>
+            <p>
             <SelectBrukere  onHandleSelect={this.handleSelect} />
           
             <Skrivemeldinger mottakerID = {this.state.mottakerbruker} /> 
-            </Container>
+            </p>
         )
     }
     

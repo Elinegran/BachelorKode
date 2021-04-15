@@ -20,10 +20,10 @@ function SlettGruppe(props) {
   return (
     <p>
       <Form>
-        <label> Slett gruppa </label>
+        <label> Slett gruppa: </label>
         <Button 
           type="submit"   
-          className="btn btn-warning" 
+          className="btn btn-danger" 
           style={{float: 'right'}}
           onClick={slettGruppe}
           > Slett gruppe

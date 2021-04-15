@@ -131,17 +131,19 @@ const visGruppeLenker = require('../controllers/lenkebibliotek');
 router.use("/visGruppeLenker", visGruppeLenker.VisGruppeLenker );
 
 // Se alle lenkene til en bruker
-const visLenkerBruker= require('../controllers/lenkebibliotek'); 
+const visLenkerBruker = require('../controllers/lenkebibliotek'); 
 router.use("/visLenkerBruker", visLenkerBruker.VisBrukerLenker );
 // se alle lenkene til en gruppe
 const visLenkerGruppe= require('../controllers/lenkebibliotek'); 
 router.use("/visLenkerGruppe", visLenkerGruppe.VisGruppeLenker );
 // redigere lenke
 
-// Slette lenke
+// Slette lenke hos en bruker
+const slettLenkeBruker = require('../controllers/lenkebibliotek'); 
+router.use("/slettLenkeBruker", slettLenkeBruker.SlettBrukerLenke );
 
-
-
+const slettLenkeGruppe = require('../controllers/lenkebibliotek'); 
+// router.use("/slettLenkeGruppe", slettLenkeGruppe.SlettGruppeLenke );
 
 
 

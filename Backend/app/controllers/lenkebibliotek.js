@@ -69,7 +69,7 @@ exports.VisBrukerLenker = function(req, res)  {
   const idbruker = req.query.idbruker;
   console.log (idbruker);
   const sqlSelect = 
-                  `SELECT lenke.lenkeID, url, tittel, info, bruker.idbruker, fornavn, etternavn
+                  `SELECT DISTINCT lenke.lenkeID, url, tittel, info, bruker.idbruker, fornavn, etternavn
                   FROM lenke, bruker, lenkebruker
                   WHERE lenke.lenkeID = lenkebruker.lenkeID 
                   AND lenkebruker.idbruker = bruker.idbruker
@@ -130,6 +130,24 @@ exports.VisGruppeLenker = function(req, res)  {
 };
 
 
+// Slette en lenke hos en bruker
+exports.SlettBrukerLenke = function(req, res)  {
+  const lenkeID = req.body.lenkeID;
+  const idbruker = req.body.idbruker;
+  console.log ("idbruker" + idbruker);
+  console.log ("lenkeID" + lenkeID);
+  const sqlSelect = 
+                  `DELETE FROM lenkebruker
+                   WHERE lenkeID = ? AND idbruker = ?`;
+  db.query(sqlSelect, [lenkeID, idbruker],(err, result) => {
+    if (err) {
+      console.log(err)
+    } 
+    else {
+      res.send(result);
+      }
+    });
+};
 
 
 
