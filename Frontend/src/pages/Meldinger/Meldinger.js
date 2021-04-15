@@ -18,7 +18,7 @@ export const Meldinger = () => (
         <section className="melding">                  
                 <Container>
                         <h1 id= "meldinger">Meldinger</h1>
-                        <p><a className = "mobil" href="#grupper">Gå til grupper</a></p>
+                        <p><a href="#grupper">Gå til grupper</a></p>
                         <NyMelding/>
                         <Row>
                                 <Col>
@@ -37,7 +37,7 @@ export const Meldinger = () => (
         <section className="gruppe"> {/* Grupper */}
                 <Container>
                         <h1 id="grupper">Mine grupper</h1>
-                        <p><a className = "mobil" href="#meldinger">Gå til meldinger</a></p>
+                        <p><a href="#meldinger">Gå til meldinger</a></p>
                         <MinGruppeliste/> {/* Liste over alle gruppene */}            
                 </Container>        
         </section> 

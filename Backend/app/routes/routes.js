@@ -143,7 +143,7 @@ const slettLenkeBruker = require('../controllers/lenkebibliotek');
 router.use("/slettLenkeBruker", slettLenkeBruker.SlettBrukerLenke );
 
 const slettLenkeGruppe = require('../controllers/lenkebibliotek'); 
-router.use("/slettLenkeGruppe", slettLenkeGruppe.SlettGruppeLenke );
+// router.use("/slettLenkeGruppe", slettLenkeGruppe.SlettGruppeLenke );
 
 
 
