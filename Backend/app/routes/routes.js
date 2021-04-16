@@ -144,6 +144,7 @@ router.use("/slettLenkeBruker", slettLenkeBruker.SlettBrukerLenke );
 // Slette lenken hos en gruppe  
 const slettLenkeGruppe = require('../controllers/lenkebibliotek'); 
 router.use("/slettLenkeGruppe", slettLenkeGruppe.SlettGruppeLenke );
+
 // Endre en lenke FUNKER IKKE!
 const endreLenke = require('../controllers/lenkebibliotek'); 
 router.use("/endreLenke", endreLenke.RedigerLenke );

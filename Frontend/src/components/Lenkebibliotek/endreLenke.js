@@ -20,7 +20,7 @@ function EndreLenke(props) {
     const endreL = () => {
         if (window.confirm(`Du har nå endret denne lenken til: ${ nyTittel } ${nyInfo} ${nyUrl} vil du gjøre endringen ?`)) {
             axios.post('http://localhost:3001/api/endreLenke', 
-            { data:{ lenkeID: lenkeID, info: nyInfo, tittel: nyTittel, url: nyUrl, }});
+            { lenkeID: lenkeID, info: nyInfo, tittel: nyTittel, url: nyUrl, });
         }     
         alert ("lenkeID" + lenkeID)
         alert ("url" + nyUrl);

@@ -10,6 +10,7 @@ import Gruppeliste from '../Meldinger/grupper';
 import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router';
 import LenkeV from '../Lenkebibliotek/LenkeV';
 import EndreLenke from '../Lenkebibliotek/endreLenke';
+import LeggTilLenkeAlle from './leggTilLenkeAlle';
 
 
 export default class HentAlleLenker extends React.Component {
@@ -51,8 +52,9 @@ export default class HentAlleLenker extends React.Component {
           <Accordion.Collapse eventKey={ alleLenker.lenkeID }>
       <Card.Body>
           <Card.Title className="list-group" >{ alleLenker.tittel }</Card.Title>
+          <LeggTilLenkeAlle senderLenkeID = {alleLenker.lenkeID} senderUrl = {alleLenker.url}/>
           <Card.Text>{ alleLenker.info}</Card.Text>
-          <Card.Link href= "{ alleLenker.url }">{ alleLenker.url }</Card.Link>
+          <Card.Link href ={ alleLenker.url } >{ alleLenker.url }</Card.Link>
           <br />
           <LenkeV 
           senderlenkeid = {alleLenker.lenkeID}

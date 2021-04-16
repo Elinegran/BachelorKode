@@ -47,8 +47,8 @@ exports.LenkeInput = function(req, res)  {
 exports.AddLenkeBruker = function(req, res)  {
   const idbruker = req.body.idbruker;
   const lenkeID = req.body.lenkeID;
-  console.log("idbruker" + idbruker);
-  console.log("lenkeID" + lenkeID);
+  // console.log("idbruker" + idbruker);
+  // console.log("lenkeID" + lenkeID);
 const LeggTilBruker = `INSERT INTO lenkebruker(idbruker, lenkeID) VALUES (?, ? )`;
 db.query(LeggTilBruker, [idbruker, lenkeID], (err,result) => {
   if (err) {
@@ -65,7 +65,7 @@ db.query(LeggTilBruker, [idbruker, lenkeID], (err,result) => {
 // Funksjonen som henter alle lenkene som en bruker har fått
 exports.VisBrukerLenker = function(req, res)  {
   const idbruker = req.query.idbruker;
-  console.log (idbruker);
+  // console.log (idbruker);
   const sqlSelect = 
                   `SELECT DISTINCT lenke.lenkeID, url, tittel, info, bruker.idbruker, fornavn, etternavn
                   FROM lenke, bruker, lenkebruker
@@ -109,7 +109,7 @@ exports.VisBrukerLenker = function(req, res)  {
 // alle lenkene som en gruppe har
 exports.VisGruppeLenker = function(req, res)  {
   const gruppeID = req.query.gruppeID;
-  console.log (gruppeID);
+  // console.log (gruppeID);
   const sqlSelect = 
                   `SELECT DISTINCT lenke.lenkeID, url, tittel, info, gruppe.gruppeID, gruppenavn
                   FROM lenke, gruppe, lenkebruker, gruppemedlem
@@ -132,8 +132,8 @@ exports.VisGruppeLenker = function(req, res)  {
 exports.SlettBrukerLenke = function(req, res)  {
   const lenkeID = req.body.lenkeID;
   const idbruker = req.body.idbruker;
-  console.log ("idbruker" + idbruker);
-  console.log ("lenkeID" + lenkeID);
+  // console.log ("idbruker" + idbruker);
+  // console.log ("lenkeID" + lenkeID);
   const sqlSelect = 
                   `DELETE FROM lenkebruker
                    WHERE lenkeID = ? AND idbruker = ?`;
@@ -147,22 +147,21 @@ exports.SlettBrukerLenke = function(req, res)  {
     });
 };
 
-// Endre redigere en lenke VIRKER IKKE helt!
-exports.RedigerLenke
- = function(req, res)  {
+// Endre redigere en lenke !
+exports.RedigerLenke = function(req, res)  {
   const lenkeID = req.body.lenkeID;
-  const nyUrl = req.body.nyUrl;
-  const nyTittel = req.body.nyTittel;
-  const nyInfo = req.body.nyInfo;
-  console.log ("url" + nyUrl);
-  console.log ("tittel" + nyTittel);
-  console.log ("info" + nyInfo);
-  console.log ("lenkeID" + lenkeID);
+  const nyUrl = req.body.url;
+  const nyTittel = req.body.tittel;
+  const nyInfo = req.body.info;
+  // console.log ("url" + nyUrl);
+  // console.log ("tittel" + nyTittel);
+  // console.log ("info" + nyInfo);
+  // console.log ("lenkeID" + lenkeID);
   const sqlSelect = 
                 `UPDATE lenke 
                 SET url = ?, tittel = ?, info = ?
                 WHERE lenkeID = ?`;
-  db.query(sqlSelect, [lenkeID, url, tittel, info],(err, result) => {
+  db.query(sqlSelect, [ nyUrl, nyTittel, nyInfo, lenkeID],(err, result) => {
     if (err) {
       console.log(err)
     } 
@@ -178,8 +177,8 @@ exports.SlettGruppeLenke
  = function(req, res)  {
   const lenkeID = req.body.lenkeID;
   const idbruker = req.body.idbruker;
-  console.log ("idbruker" + idbruker);
-  console.log ("lenkeID" + lenkeID);
+  // console.log ("idbruker" + idbruker);
+  // console.log ("lenkeID" + lenkeID);
   const sqlSelect = 
                   ``;
   db.query(sqlSelect, [lenkeID, idbruker],(err, result) => {
@@ -192,18 +191,16 @@ exports.SlettGruppeLenke
     });
 };
 
-// Slette en lenke, slettes da for alle brukerne som har denne lenken
+
 // legge til en lenke hos alle brukerne
-exports.LeggTilAlleLenke
- = function(req, res)  {
-  const lenkeID = req.query.lenkeID;
-  const idbruker = req.query.idbruker;
+exports.LeggTilAlleLenke = function(req, res)  {
+  const lenkeID = req.body.lenkeID;
   console.log ("lenkeID legg til alle brukere" + lenkeID);
   const sqlSelect = 
                   `INSERT INTO lenkebruker (idbruker, lenkeID)
                   SELECT bruker.idbruker, ?
                   FROM bruker;`;
-  db.query(sqlSelect, [lenkeID, idbruker],(err, result) => {
+  db.query(sqlSelect, lenkeID,(err, result) => {
     if (err) {
       console.log(err)
     } 
