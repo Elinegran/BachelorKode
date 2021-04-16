@@ -55,7 +55,7 @@ export default class Gruppeliste extends React.Component {
             <Card.Body>
 
               <Gruppemelding gruppeID ={melding.gruppeID}/>
-              <NyttMedlem senderGruppeID={melding.gruppeID} senderID={melding.gruppeID}/>  
+              <NyttMedlem senderGruppeID={melding.gruppeID} />  
               <EndreGruppenavn sendeGruppeID={melding.gruppeID} /> 
               <SelectGruppemedlem gruppeIDFraGrupper={melding.gruppeID} />
               <SlettGruppe senderGruppeID={melding.gruppeID} senderGruppenavn={melding.gruppenavn}/> 
