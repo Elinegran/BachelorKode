@@ -9,6 +9,7 @@ import SelectGruppe from '../Meldinger/Grupper/selextGruppe';
 import Gruppeliste from '../Meldinger/grupper';
 import HentAlleLenker from './hentAlleLenker';
 import LeggeTilLenke from './leggeTilLenke';
+import LeggTilLenkeAlle from'./leggTilLenkeAlle';
 import ViseBrukerne from './visBrukere';
 import { useState } from "react"; // for å sende til backend
 
@@ -39,6 +40,7 @@ import { useState } from "react"; // for å sende til backend
         const [idbruker, setidbruker] = useState(0);
         // const [lenkeID, setlenkeID] = useState(0);
         const lenkeID = props.senderlenkeid;
+        const fornavn = props.senderfornavn;
         const addLenkeBruker = () => {
             axios.post("http://localhost:3001/api/lenkeAddBruker", {idbruker: idbruker, lenkeID: lenkeID})
             alert(idbruker + lenkeID);   
@@ -73,13 +75,13 @@ import { useState } from "react"; // for å sende til backend
             <SelectBrukere/>
              </Form.Group>
         </Form> 
-        <Button onClick = {addLenkeBruker} type = "submit" variant ="primary">Legg til</Button>{' '} 
-        {/* <br />
-        <br />
-        <Button type = "submit" variant ="danger">Slett lenke</Button>{' '}   */}
+        <>
+        <Button  onClick = {addLenkeBruker} 
+        type = "submit" variant ="success"><b>Legg til lenke hos</b> {idbruker}</Button>{' '}
+        
+        <LeggTilLenkeAlle />
+        </>
         <Form>
-            <br />
-        {/* <ViseBrukerne />  */}
         </Form>
     </container>
    

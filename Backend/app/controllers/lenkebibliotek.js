@@ -10,7 +10,7 @@ app.use(express.json());
 
 // Henter ALLE lenkene fra Databasen
 exports.getAlleLenker = function(req, res)  {
-    const sqlSelect = "SELECT * FROM lenke WHERE url IS NOT NULL; ";
+    const sqlSelect = "SELECT DISTINCT * FROM lenke WHERE url IS NOT NULL; ";
     db.query(sqlSelect, (err, result) => {
       if (err) {
         console.log(err)
@@ -45,8 +45,6 @@ exports.LenkeInput = function(req, res)  {
 // Legger til en lenke hos en bruker
 
 exports.AddLenkeBruker = function(req, res)  {
-
-  // Her hentes lenkenavn fra frontend
   const idbruker = req.body.idbruker;
   const lenkeID = req.body.lenkeID;
   console.log("idbruker" + idbruker);
@@ -149,9 +147,71 @@ exports.SlettBrukerLenke = function(req, res)  {
     });
 };
 
+// Endre redigere en lenke VIRKER IKKE helt!
+exports.RedigerLenke
+ = function(req, res)  {
+  const lenkeID = req.body.lenkeID;
+  const nyUrl = req.body.nyUrl;
+  const nyTittel = req.body.nyTittel;
+  const nyInfo = req.body.nyInfo;
+  console.log ("url" + nyUrl);
+  console.log ("tittel" + nyTittel);
+  console.log ("info" + nyInfo);
+  console.log ("lenkeID" + lenkeID);
+  const sqlSelect = 
+                `UPDATE lenke 
+                SET url = ?, tittel = ?, info = ?
+                WHERE lenkeID = ?`;
+  db.query(sqlSelect, [lenkeID, url, tittel, info],(err, result) => {
+    if (err) {
+      console.log(err)
+    } 
+    else {
+      res.send(result);
+      }
+    });
+};
 
+
+// Slette en lenke for en gruppe VIRKER IKKE!
+exports.SlettGruppeLenke
+ = function(req, res)  {
+  const lenkeID = req.body.lenkeID;
+  const idbruker = req.body.idbruker;
+  console.log ("idbruker" + idbruker);
+  console.log ("lenkeID" + lenkeID);
+  const sqlSelect = 
+                  ``;
+  db.query(sqlSelect, [lenkeID, idbruker],(err, result) => {
+    if (err) {
+      console.log(err)
+    } 
+    else {
+      res.send(result);
+      }
+    });
+};
 
 // Slette en lenke, slettes da for alle brukerne som har denne lenken
+// legge til en lenke hos alle brukerne
+exports.LeggTilAlleLenke
+ = function(req, res)  {
+  const lenkeID = req.query.lenkeID;
+  const idbruker = req.query.idbruker;
+  console.log ("lenkeID legg til alle brukere" + lenkeID);
+  const sqlSelect = 
+                  `INSERT INTO lenkebruker (idbruker, lenkeID)
+                  SELECT bruker.idbruker, ?
+                  FROM bruker;`;
+  db.query(sqlSelect, [lenkeID, idbruker],(err, result) => {
+    if (err) {
+      console.log(err)
+    } 
+    else {
+      res.send(result);
+      }
+    });
+};
 
 // Se alle brukerne som har en lenke
 
