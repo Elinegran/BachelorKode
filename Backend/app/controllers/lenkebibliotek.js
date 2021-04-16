@@ -157,12 +157,12 @@ exports.SlettBrukerLenke = function(req, res)  {
 
 // Spørring 
 /* // Opprette en lenke for en gruppe: 
+-- Opprette en lenke for en gruppe: 
 INSERT INTO lenkebruker (lenkeID, idbruker)  
-SELECT DISTINCT 27, bruker.idbruker // 27 = lenkeID
-FROM lenkebruker, bruker, gruppemedlem
-WHERE lenkebruker.idbruker = bruker.idbruker
-AND bruker.idbruker = gruppemedlem.idbruker
-AND gruppemedlem.gruppeID = 2; // 2 = gruppeID
+SELECT DISTINCT ?, bruker.idbruker // ? = lenkeID
+FROM bruker, gruppemedlem
+WHERE bruker.idbruker = gruppemedlem.idbruker
+AND gruppemedlem.gruppeID = ?; // ? = gruppeID
  */
 
 
