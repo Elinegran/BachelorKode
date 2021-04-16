@@ -1,21 +1,13 @@
 import React from 'react'; 
 import { Button, Form } from 'react-bootstrap'; // Bootstrap-greier
 import {useState} from 'react';
-import Modal from 'react-bootstrap/Modal';
-import SimpleDateTime  from 'react-simple-timestamp-to-date'; // Formatere tid og dato
-// Import the library
-import Datetime from 'react-datetime';
-//import { useState } from "react"; // for å sende til backend
 import axios from 'axios'; // for å sende/ motta til/ fra backend
 
 import moment from 'moment';
 import "../../../node_modules/react-datetime/css/react-datetime.css";
- 
-//eact-datetime/css/react-datetime.css
 
 export default function Avtale(props){
 
- // alert('Dette mottas fra cale: ' + props.eventI);
   const avtaleID = props.eventI;
   const title = props.eventT;
   const beskrivelse = props.eventB;
@@ -30,16 +22,9 @@ export default function Avtale(props){
   const [nyStart, setStart] = useState(start);
   const [nySlutt, setSlutt] = useState(slutt);
 
-
-
-
  console.log(props.eventID)
 
-  // const handleClose = () => setShow(false);
-  // const handleShow = () => setShow(true);
-
   const handleUpt  = () => {
-    alert("Dette sendes: " + avtaleID);
       axios.post("http://localhost:3001/api/updateAvtale", {
       id: avtaleID,
       title: nyTitle, 
@@ -51,7 +36,7 @@ export default function Avtale(props){
      
   };
 
-  const handleShow  = () => {
+  const handleDelete  = () => {
 
     if(window.confirm(`Er du sikker på at du vil slette ${title}?`)) {
       
@@ -74,7 +59,7 @@ export default function Avtale(props){
 
   
   return (
-    <>
+    <>  
     <Form>
   <Form.Group controlId="FormTitle">
     <Form.Label>Tittel</Form.Label>
@@ -102,15 +87,12 @@ export default function Avtale(props){
     <Form.Control type="datetime" defaultValue= {moment(slutt).format("YYYY-MM-DD HH:mm")} onChange = {(event) => {setSlutt(event.target.value);}}/>
   </Form.Group>
 
- 
-    {/* <Datetime  initialValue={start} />; */}
 
-    {/* {moment().format(start)} */}
-  <Button variant="primary" onClick={handleUpt}>
+    <Button variant="primary" type="submit" onClick={handleUpt} active>
         Lagre
-      </Button>
+      </Button> {' '}
 
-      <Button variant="primary" onClick={handleShow}>
+      <Button variant="danger" onClick={handleDelete}active>
         Slett
       </Button>
   
