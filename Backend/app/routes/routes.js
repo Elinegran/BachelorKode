@@ -49,6 +49,7 @@ router.use("/updateTid", kalender.UpdateTid);
 router.use("/updateAvtale", kalender.updateAvtale);
 router.use("/slettAvtale", kalender.deleteAvtale);
 router.use("/kalenderBruker", kalender.getKalenderBruker);
+router.use("/nyGruppeAvtale", kalender.NyGruppeAvtale);
 
 //Meldinger: 
 // Alle meldingene som en bruker har fått (Funker!)
