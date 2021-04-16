@@ -53,6 +53,10 @@ section.gruppe {
   display:flex;
 }
 
+.tidMelding {
+  font-size: 0.8em ;
+}
+
 /*  Design for stor skjerm  */ 
 /* Main blir delt i 2 kolonner */
 @media screen and (min-width: 950px) {

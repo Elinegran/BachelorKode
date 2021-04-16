@@ -47,7 +47,7 @@ render() {
         <Card.Title><h2>{melding.fornavn} {melding.etternavn}</h2></Card.Title>
         <Card.Text>
           <p>{melding.melding}</p>
-          <p>{moment(melding.tid).format("DD-MM-YYYY HH:mm")}</p>
+          <p className= "tidMelding">{moment(melding.tid).format("DD-MM-YYYY HH:mm")}</p>
           <p> {/* Tester om meldingen er lest */}
             {melding.meldingLest == '0000-00-00 00:00:00' ? null : 
               <span class="badge badge-pill badge-success">
