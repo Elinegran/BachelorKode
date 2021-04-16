@@ -22,13 +22,9 @@ export default function Avtale(props){
   const [nyStart, setStart] = useState(start);
   const [nySlutt, setSlutt] = useState(slutt);
 
-
-
-
  console.log(props.eventID)
 
   const handleUpt  = () => {
-    alert("Dette sendes: " + avtaleID);
       axios.post("http://localhost:3001/api/updateAvtale", {
       id: avtaleID,
       title: nyTitle, 
@@ -40,7 +36,7 @@ export default function Avtale(props){
      
   };
 
-  const handleShow  = () => {
+  const handleDelete  = () => {
 
     if(window.confirm(`Er du sikker på at du vil slette ${title}?`)) {
       
@@ -63,7 +59,7 @@ export default function Avtale(props){
 
   
   return (
-    <>
+    <>  
     <Form>
   <Form.Group controlId="FormTitle">
     <Form.Label>Tittel</Form.Label>
@@ -92,11 +88,11 @@ export default function Avtale(props){
   </Form.Group>
 
 
-  <Button variant="primary" onClick={handleUpt}>
+    <Button variant="primary" type="submit" onClick={handleUpt} active>
         Lagre
-      </Button>
+      </Button> {' '}
 
-      <Button variant="primary" onClick={handleShow}>
+      <Button variant="danger" onClick={handleDelete}active>
         Slett
       </Button>
   

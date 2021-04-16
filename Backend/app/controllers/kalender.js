@@ -78,6 +78,44 @@ exports.NyAvtale = function(req, res)  {
   );
 }; // slutt på funksjon NyAvtale()
 
+exports.NyGruppeAvtale = function(req, res)  {
+
+  // Her hentes Variablene  fra frontend
+  const title = req.body.title;
+  const beskrivelse = req.body.beskrivelse;
+
+  const start = req.body.start;
+  const end = req.body.end; 
+  const sted = req.body.sted;
+  const opprettetav = req.body.opprettetav;
+  const gruppeId = req.body.gruppeId;
+ 
+
+  const gruppeAvtale = `INSERT INTO avtale(title, beskrivelse, start, end, sted, opprettetav, opprettetfor)
+	                      SELECT ?, ?,?, ?,? , ?, gruppemedlem.idbruker
+                        FROM gruppemedlem
+                        WHERE gruppemedlem.gruppeID = ?`
+
+
+ // var sql =  "INSERT INTO avtale (title, beskrivelse, start, end, sted, opprettetav, opprettetfor ) VALUES ("title" ?, ?, ?, ?, ?, ?)"
+  db.query(gruppeAvtale, [title, beskrivelse, start, end, sted, opprettetav, gruppeId], 
+      (err, res) => {
+      if (err) {
+        console.log(err);
+        console.log(title, beskrivelse, start, end, sted, opprettetav, gruppeId)
+
+      } else {
+          console.log(title, beskrivelse, start, end, sted, opprettetav, gruppeId)
+          console.log(res.insertId);
+       // res.send("Values Inserted"); // tror man kan få ID'en herfra
+
+      }
+    }
+  );
+}; // slutt på funksjon NyGruppeAvtale()
+
+
+
 
 //UPDATE tid
 exports.UpdateTid = function(req, res)  {
