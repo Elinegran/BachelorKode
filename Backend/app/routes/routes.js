@@ -128,8 +128,8 @@ const addLenkeBruker = require('../controllers/lenkebibliotek');
 router.use("/lenkeAddBruker", addLenkeBruker.AddLenkeBruker );
 
 // Legg lenke til hos en gruppe
-const visGruppeLenker = require('../controllers/lenkebibliotek'); 
-router.use("/visGruppeLenker", visGruppeLenker.VisGruppeLenker );
+const addLenkeGruppe = require('../controllers/lenkebibliotek'); 
+router.use("/lenkeAddGruppe", addLenkeGruppe.AddLenkeGruppe );
 
 // Se alle lenkene til en bruker
 const visLenkerBruker = require('../controllers/lenkebibliotek'); 

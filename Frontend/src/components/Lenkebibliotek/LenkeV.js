@@ -38,10 +38,12 @@ export default class SelectLenker extends React.Component {
        addLenkeBruker = () => {
            if (this.state.idbruker) {
             axios.post("http://localhost:3001/api/lenkeAddBruker", {idbruker: this.state.idbruker, lenkeID: this.state.lenkeID})
-        }
-        else {
-            alert("gruppeID valgt:" + this.state.gruppeID)
-        }
+        }else {
+            addLenkeGruppe = () => {
+            (this.state.gruppeID) 
+                axios.post("http://localhost:3001/api/lenkeAddGruppe", {gruppeID: this.state.gruppeID, lenkeID: this.state.lenkeID})
+            // alert("gruppeID valgt:" + this.state.gruppeID)
+        }}
             // alert(idbruker + lenkeID);   
         };
     render () { 
@@ -49,20 +51,21 @@ export default class SelectLenker extends React.Component {
 
         <container>
             <Form>
-                <Form.Group controlId="exampleForm.SelectCustom">
-                <Form.Label>Velg en gruppe</Form.Label>
-                <SelectGruppe onHandleSelect={this.handleChangeG} />
-                </Form.Group>
-            
 
-            <label><b>eller velg</b></label>
 
-            
-                <Form.Group controlId="exampleForm.SelectCustom">
-                {/* <Form.Label>Velg en lenker</Form.Label> */}
+            <Form.Group controlId="exampleForm.SelectCustom">
+                <Form.Label>Velg en bruker</Form.Label>
                 <SelectBrukere onHandleSelect={this.handleChange}/>
+            </Form.Group>
                 
-                </Form.Group>
+                <label><b>eller velg</b></label>
+
+            <Form.Group controlId="exampleForm.SelectCustom">
+                <Form.Label>Velg en gruppe</Form.Label>
+                <SelectGruppe onHandleSelectG={this.handleChangeG} />
+            </Form.Group>
+            
+              
             </Form> 
             
             <Button  onClick = {this.addLenkeBruker} 

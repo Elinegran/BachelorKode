@@ -60,6 +60,24 @@ db.query(LeggTilBruker, [idbruker, lenkeID], (err,result) => {
 });
 }; 
 
+// legge til en lenke i en gruppe
+exports.AddLenkeGruppe = function(req, res)  {
+  const lenkeID = req.body.lenkeID;
+  console.log ("lenkeID legg til alle brukere" + lenkeID);
+  const sqlSelect = 
+                  `INSERT INTO lenkebruker (idbruker, lenkeID)
+                  SELECT gruppemedlem.idbruker, ?
+                  FROM gruppemedlem 
+                  WHERE gruppeID = ?`;
+  db.query(sqlSelect, lenkeID,(err, result) => {
+    if (err) {
+      console.log(err)
+    } 
+    else {
+      res.send(result);
+      }
+    });
+};
 
 
 // Funksjonen som henter alle lenkene som en bruker har fått
@@ -211,7 +229,6 @@ exports.LeggTilAlleLenke = function(req, res)  {
 };
 
 // Se alle brukerne som har en lenke
-
 
 
 
