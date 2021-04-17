@@ -230,6 +230,15 @@ exports.LeggTilAlleLenke = function(req, res)  {
 
 // Se alle brukerne som har en lenke
 
+// Spørring 
+/* // Opprette en lenke for en gruppe: 
+-- Opprette en lenke for en gruppe: 
+INSERT INTO lenkebruker (lenkeID, idbruker)  
+SELECT DISTINCT ?, bruker.idbruker // ? = lenkeID
+FROM bruker, gruppemedlem
+WHERE bruker.idbruker = gruppemedlem.idbruker
+AND gruppemedlem.gruppeID = ?; // ? = gruppeID
+ */
 
 
 
