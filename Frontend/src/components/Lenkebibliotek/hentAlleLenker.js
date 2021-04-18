@@ -51,7 +51,7 @@ export default class HentAlleLenker extends React.Component {
       </Card.Header>
           <Accordion.Collapse eventKey={ alleLenker.lenkeID }>
       <Card.Body>
-          <Card.Title className="list-group" >{ alleLenker.tittel }</Card.Title>
+          <Card.Title className="list-group" ></Card.Title>
           <LeggTilLenkeAlle senderLenkeID = {alleLenker.lenkeID} senderUrl = {alleLenker.url}/>
           <Card.Text>{ alleLenker.info}</Card.Text>
           <Card.Link href ={ alleLenker.url } >{ alleLenker.url }</Card.Link>

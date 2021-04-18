@@ -35,43 +35,49 @@ export default class SelectLenker extends React.Component {
         this.setState({gruppeID: value})
     }
 
-       addLenkeBruker = () => {
-           if (this.state.idbruker) {
-            axios.post("http://localhost:3001/api/lenkeAddBruker", {idbruker: this.state.idbruker, lenkeID: this.state.lenkeID})
-        }else {
-            addLenkeGruppe = () => {
-            (this.state.gruppeID) 
-                axios.post("http://localhost:3001/api/lenkeAddGruppe", {gruppeID: this.state.gruppeID, lenkeID: this.state.lenkeID})
-            // alert("gruppeID valgt:" + this.state.gruppeID)
-        }}
+    addLenkeBruker = () => {
+        if (this.state.idbruker) {
+        axios.post("http://localhost:3001/api/lenkeAddBruker",
+         {idbruker: this.state.idbruker, lenkeID: this.state.lenkeID})
+        
+    }else {
+        alert("gruppeID valgt:" + this.state.gruppeID)
+    // AddLenkeGruppe = () => {
+    //     this.state.gruppeID 
+    //         axios.post("http://localhost:3001/api/lenkeAddGruppe", 
+    //         {gruppeID: this.state.gruppeID, lenkeID: this.state.lenkeID})
+    //     alert("gruppeID valgt:" + this.state.gruppeID)
+        
+    // }
+}
             // alert(idbruker + lenkeID);   
-        };
+    };
     render () { 
         return (
 
         <container>
             <Form>
-
-
             <Form.Group controlId="exampleForm.SelectCustom">
                 <Form.Label>Velg en bruker</Form.Label>
                 <SelectBrukere onHandleSelect={this.handleChange}/>
             </Form.Group>
                 
-                <label><b>eller velg</b></label>
+                {/* <label><b>eller</b></label> */}
 
             <Form.Group controlId="exampleForm.SelectCustom">
                 <Form.Label>Velg en gruppe</Form.Label>
                 <SelectGruppe onHandleSelectG={this.handleChangeG} />
+                {/* <Button  onClick = {this.addLenkeGruppe}
+                type = "submit" variant ="success"><b>Legg til lenke hos</b> 
+                {this.state.gruppeID}</Button>{' '} */}
             </Form.Group>
             
               
             </Form> 
             
-            <Button  onClick = {this.addLenkeBruker} 
+            <Button  onClick = {this.addLenkeBruker}
             type = "submit" variant ="success"><b>Legg til lenke hos</b> {this.state.idbruker}</Button>{' '}
             
-           
         </container>
         
     )

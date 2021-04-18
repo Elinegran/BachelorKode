@@ -65,10 +65,11 @@ exports.AddLenkeGruppe = function(req, res)  {
   const lenkeID = req.body.lenkeID;
   console.log ("lenkeID legg til alle brukere" + lenkeID);
   const sqlSelect = 
-                  `INSERT INTO lenkebruker (idbruker, lenkeID)
-                  SELECT gruppemedlem.idbruker, ?
-                  FROM gruppemedlem 
-                  WHERE gruppeID = ?`;
+                  `INSERT INTO lenkebruker (lenkeID, idbruker)  
+                  SELECT DISTINCT ?, bruker.idbruker // ? = lenkeID
+                  FROM bruker, gruppemedlem
+                  WHERE bruker.idbruker = gruppemedlem.idbruker
+                  AND gruppemedlem.gruppeID = ?`;
   db.query(sqlSelect, lenkeID,(err, result) => {
     if (err) {
       console.log(err)
@@ -78,6 +79,12 @@ exports.AddLenkeGruppe = function(req, res)  {
       }
     });
 };
+
+// INSERT INTO lenkebruker (idbruker, lenkeID)
+//                   SELECT gruppemedlem.idbruker, ?
+//                   FROM gruppemedlem 
+//                   WHERE gruppeID = ?
+
 
 
 // Funksjonen som henter alle lenkene som en bruker har fått
