@@ -26,7 +26,7 @@ function NyLenke() {
             <br />
             <Form.Control input type="text" placeholder="URL" onChange = {(event) => {setUrl(event.target.value);}}/>
             <br />
-            <Button onClick = {addLenke} variant="primary" type = "submit">Legg til lenke</Button>
+            <Button onClick = {addLenke} variant="success" type = "submit">Legg til lenke</Button>
         </Form.Group>   
     </Form>       
     )

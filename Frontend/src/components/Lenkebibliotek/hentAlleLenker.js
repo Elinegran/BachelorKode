@@ -9,18 +9,26 @@ import SelectGruppe from '../Meldinger/Grupper/selextGruppe';
 import Gruppeliste from '../Meldinger/grupper';
 import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router';
 import LenkeV from '../Lenkebibliotek/LenkeV';
+import EndreLenke from '../Lenkebibliotek/endreLenke';
+import LeggTilLenkeAlle from './leggTilLenkeAlle';
 
 
 export default class HentAlleLenker extends React.Component {
     constructor (props){
       super (props);
       this.state = {
+      idbruker: this.props.sendidbuker,
+      lenkeID: this.props.sendlenkeid,
       lenker: [],
       }
     };
     
     componentDidMount() {
-      axios.get(`http://localhost:3001/api/getLenker`)
+      axios.get(`http://localhost:3001/api/getLenker`,
+      {params:
+        {idbruker: this.state.idbruker, lenkeID: this.state.lenkeID}
+        
+      })
         .then(res => {
           const lenker = res.data;
           this.setState({ lenker });
@@ -43,12 +51,22 @@ export default class HentAlleLenker extends React.Component {
       </Card.Header>
           <Accordion.Collapse eventKey={ alleLenker.lenkeID }>
       <Card.Body>
-          <Card.Title className="list-group" >{ alleLenker.tittel }</Card.Title>
+          <Card.Title className="list-group" ></Card.Title>
+          <LeggTilLenkeAlle senderLenkeID = {alleLenker.lenkeID} senderUrl = {alleLenker.url}/>
           <Card.Text>{ alleLenker.info}</Card.Text>
-          <Card.Link href= "{ alleLenker.url }">{ alleLenker.url }</Card.Link>
+          <Card.Link href ={ alleLenker.url } >{ alleLenker.url }</Card.Link>
+          <br />
+          <LenkeV 
+          senderlenkeid = {alleLenker.lenkeID}
+          senderfornavn = {alleLenker.fornavn}/>
           <br />
           <br />
-          <LenkeV senderlenkeid = {alleLenker.lenkeID}/>
+          <EndreLenke 
+          senderlenkeid = {alleLenker.lenkeID}
+          senderInfo = {alleLenker.info}
+          senderTittel = {alleLenker.tittel}
+          senderUrl = {alleLenker.url}
+          />
           
                   
       </Card.Body>
