@@ -44,7 +44,7 @@ exports.getMinSamtale = function(req, res)  {
   let idbruker = req.query.idbruker;
   let avsender = req.query.avsender; 
   
-    const hentMinSamtale = `SELECT DISTINCT mottaker, tid, fornavn, etternavn, melding, meldingLest
+    const hentMinSamtale = `SELECT DISTINCT idbruker, mottaker, tid, fornavn, etternavn, melding, meldingLest
                             FROM bruker, melding 
                             WHERE melding.avsender = bruker.idbruker 
                             AND (avsender = ? OR avsender = ?) 
@@ -66,7 +66,8 @@ exports.MeldingTilAlle = function(req, res) {
 
   const meldingTilAlle = `INSERT INTO melding(mottaker, avsender, melding) 
                           SELECT bruker.idbruker, ?, ?
-                          FROM bruker`;
+                          FROM bruker
+                          WHERE idbrukertype = 1`;
 
   var avsender = req.body.avsender; // Henter avsender (den innloggede) fra frontend
   var melding = req.body.melding; // Henter medlingsteksen fra Frontend

@@ -19,12 +19,9 @@ function SlettGruppe(props) {
   })
   .catch(error => {
       console.log(error)
-      alert('Du kan ikke slette en gruppe som har medlemmer!')
   })
     }
-    else {
-      alert('Du kan ikke slette en gruppe som har medlemmer!')
-    }
+    
   };
 
   // Dette sendes til grupper.js
