@@ -128,8 +128,8 @@ const addLenkeBruker = require('../controllers/lenkebibliotek');
 router.use("/lenkeAddBruker", addLenkeBruker.AddLenkeBruker );
 
 // Legg lenke til hos en gruppe
-const visGruppeLenker = require('../controllers/lenkebibliotek'); 
-router.use("/visGruppeLenker", visGruppeLenker.VisGruppeLenker );
+const addLenkeGruppe = require('../controllers/lenkebibliotek'); 
+router.use("/lenkeAddGruppe", addLenkeGruppe.AddLenkeGruppe );
 
 // Se alle lenkene til en bruker
 const visLenkerBruker = require('../controllers/lenkebibliotek'); 
@@ -142,13 +142,16 @@ router.use("/visLenkerGruppe", visLenkerGruppe.VisGruppeLenker );
 // Slette lenke hos en bruker
 const slettLenkeBruker = require('../controllers/lenkebibliotek'); 
 router.use("/slettLenkeBruker", slettLenkeBruker.SlettBrukerLenke );
-
+// Slette lenken hos en gruppe  
 const slettLenkeGruppe = require('../controllers/lenkebibliotek'); 
-// router.use("/slettLenkeGruppe", slettLenkeGruppe.SlettGruppeLenke );
+router.use("/slettLenkeGruppe", slettLenkeGruppe.SlettGruppeLenke );
 
+// Endre en lenke FUNKER IKKE!
+const endreLenke = require('../controllers/lenkebibliotek'); 
+router.use("/endreLenke", endreLenke.RedigerLenke );
 
-
-
+const leggTilLenkeAlle = require('../controllers/lenkebibliotek'); 
+router.use("/leggTilLenkeAlle", leggTilLenkeAlle.LeggTilAlleLenke );
 // Eksporterer denne modellen, så server.js får brukt den
 module.exports = router;
 

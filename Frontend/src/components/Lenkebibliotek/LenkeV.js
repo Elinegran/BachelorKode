@@ -9,83 +9,77 @@ import SelectGruppe from '../Meldinger/Grupper/selextGruppe';
 import Gruppeliste from '../Meldinger/grupper';
 import HentAlleLenker from './hentAlleLenker';
 import LeggeTilLenke from './leggeTilLenke';
+import LeggTilLenkeAlle from'./leggTilLenkeAlle';
 import ViseBrukerne from './visBrukere';
 import { useState } from "react"; // for å sende til backend
 
-// export default class SelectLenker extends React.Component {
-//     constructor (props){
-//       super (props);
-//       this.state = {
-//       lenker: [],
-//       }
-//     };
+
+export default class SelectLenker extends React.Component {
+    constructor (props){
+      super (props);
+      this.state = {
+      idbruker: "",
+      lenkeID: this.props.senderlenkeid,
+      gruppeID: "",
+      fornavn : this.props.senderfornavn,
+      }
+      this.handleChange = this.handleChange.bind(this);
+      this.handleChangeG = this.handleChangeG.bind(this);
+    };
     
-    // componentDidMount() {
-    //   //alert('Gruppe fra frontend: '+ this.state.gruppeID)
-    //   axios.get(`http://localhost:3001/api/getLenker`)
-    //     .then(res => {
-    //       const lenker = res.data;
-    //       this.setState({ lenker });
-    //     })
-    //     .catch(error => {
-    //       console.log(error)
-    //       console.log("message")
-    //     })
+    handleChange (value) {
+        this.setState({idbruker: value})
+    }
+
+    handleChangeG (value) {
+        this.setState({gruppeID: value})
+    }
+
+    addLenkeBruker = () => {
+        if (this.state.idbruker) {
+        axios.post("http://localhost:3001/api/lenkeAddBruker",
+         {idbruker: this.state.idbruker, lenkeID: this.state.lenkeID})
+        
+    }else {
+        alert("gruppeID valgt:" + this.state.gruppeID)
+    // AddLenkeGruppe = () => {
+    //     this.state.gruppeID 
+    //         axios.post("http://localhost:3001/api/lenkeAddGruppe", 
+    //         {gruppeID: this.state.gruppeID, lenkeID: this.state.lenkeID})
+    //     alert("gruppeID valgt:" + this.state.gruppeID)
+        
     // }
-  
-    // Returnerer en liste over medlemmene i gruppa
-    // render() {
-    function AddLenkeBruker(props) {
-        const [idbruker, setidbruker] = useState(0);
-        // const [lenkeID, setlenkeID] = useState(0);
-        const lenkeID = props.senderlenkeid;
-        const addLenkeBruker = () => {
-            axios.post("http://localhost:3001/api/lenkeAddBruker", {idbruker: idbruker, lenkeID: lenkeID})
-            alert(idbruker + lenkeID);   
-        };
-// export const LenkeV = ({}) => {
-    return (
+}
+            // alert(idbruker + lenkeID);   
+    };
+    render () { 
+        return (
 
-    <container>
-        {/* <Form>
-            <LeggeTilLenke/>
-        </Form> */}
-
-        <Form>
+        <container>
+            <Form>
             <Form.Group controlId="exampleForm.SelectCustom">
-            {/* <Form.Label>Velg en gruppe</Form.Label> */}
-            <SelectGruppe/>
-            <input type="text" 
-                            placeholder="Brukerid"  
-                            onChange = {(event) => {setidbruker(event.target.value);}}/>
-{/* 
-            <input type="text" 
-                            placeholder="lenkeID"  
-                            onChange = {(event) => {setlenkeID(event.target.value);}}/> */}
+                <Form.Label>Velg en bruker</Form.Label>
+                <SelectBrukere onHandleSelect={this.handleChange}/>
             </Form.Group>
-        </Form>
+                
+                {/* <label><b>eller</b></label> */}
 
-        <label><b>eller velg</b></label>
-
-        <Form>
             <Form.Group controlId="exampleForm.SelectCustom">
-            {/* <Form.Label>Velg en lenker</Form.Label> */}
-            <SelectBrukere/>
-             </Form.Group>
-        </Form> 
-        <Button onClick = {addLenkeBruker} type = "submit" variant ="primary">Legg til</Button>{' '} 
-        {/* <br />
-        <br />
-        <Button type = "submit" variant ="danger">Slett lenke</Button>{' '}   */}
-        <Form>
-            <br />
-        {/* <ViseBrukerne />  */}
-        </Form>
-    </container>
-   
-    )// slutt på return
-
-}  // Slutt på render
-// Slutt på klasse
-export default AddLenkeBruker;
-
+                <Form.Label>Velg en gruppe</Form.Label>
+                <SelectGruppe onHandleSelectG={this.handleChangeG} />
+                {/* <Button  onClick = {this.addLenkeGruppe}
+                type = "submit" variant ="success"><b>Legg til lenke hos</b> 
+                {this.state.gruppeID}</Button>{' '} */}
+            </Form.Group>
+            
+              
+            </Form> 
+            
+            <Button  onClick = {this.addLenkeBruker}
+            type = "submit" variant ="success"><b>Legg til lenke hos</b> {this.state.idbruker}</Button>{' '}
+            
+        </container>
+        
+    )
+ }
+}
