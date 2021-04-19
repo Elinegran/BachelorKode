@@ -87,8 +87,11 @@ exports.Gruppemelding = function(req, res) {
                                WHERE gruppemedlem.gruppeID = ?;`;
 
   const avsender = req.body.avsender; // Henter avsender fra frontend. 
-  const melding = req.body.melding; // Henter meldingsteksen fra Frontend.
+  const meldingstekst = req.body.melding; // Henter meldingsteksen fra Frontend.
   const gruppeID = req.body.gruppeID; //Henter gruppeID fra frontend.
+  const gruppenavn = req.body.gruppenavn; // Henter gruppenavn fra frontend
+
+  const melding = 'Melding til ' + gruppenavn + ': ' + meldingstekst; 
 
   console.log(gruppeID);
 

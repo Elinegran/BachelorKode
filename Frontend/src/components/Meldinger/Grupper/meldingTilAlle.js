@@ -27,7 +27,7 @@ function MeldingTilAlle() {
                     <Col>
                         <Form.Group>
                             <Form.Control 
-                                input type="text" 
+                                input as ="textarea" 
                                 placeholder="Skriv melding..." 
                                 style={{float: 'right'}} 
                                 onChange = {(event) => {setMelding(event.target.value);}}/>

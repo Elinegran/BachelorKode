@@ -30,7 +30,7 @@ function NyGruppe() {
                         </Form.Group>
                     </Col>
                     <Col>  
-                        <Button onClick={addGruppe} variant="success" style={{float: 'left'}} type="submit">Lagre gruppa</Button>
+                        <Button onClick={addGruppe} variant="success" style={{float: 'left'}} type="submit">Opprett gruppe</Button>
                     </Col>
                 </Row>        
             </Form> 
