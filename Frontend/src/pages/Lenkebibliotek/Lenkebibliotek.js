@@ -13,7 +13,7 @@ import VisBrukere from '../../components/Lenkebibliotek/visBrukere';
 export const Lenkebibliotek = () => (
     <Container>
         <Col >
-            <h1 style = {{ textAlign: 'center'}}>Her kan du legge til nye lenker</h1>
+            <h1 style = {{ textAlign: 'center', fontSize:'25px'}}>Her kan du legge til nye lenker</h1>
 
     
         <LeggeTilLenke/>
