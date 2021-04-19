@@ -65,11 +65,10 @@ exports.AddLenkeGruppe = function(req, res)  {
   const lenkeID = req.body.lenkeID;
   console.log ("lenkeID legg til alle brukere" + lenkeID);
   const sqlSelect = 
-                  `INSERT INTO lenkebruker (lenkeID, idbruker)  
-                  SELECT DISTINCT ?, bruker.idbruker // ? = lenkeID
-                  FROM bruker, gruppemedlem
-                  WHERE bruker.idbruker = gruppemedlem.idbruker
-                  AND gruppemedlem.gruppeID = ?`;
+                  `INSERT INTO lenkebruker (idbruker, lenkeID)
+                  SELECT DISTINCT gruppemedlem.idbruker, ?
+                  FROM gruppemedlem 
+                  WHERE gruppeID = ?`;
   db.query(sqlSelect, lenkeID,(err, result) => {
     if (err) {
       console.log(err)
@@ -80,10 +79,12 @@ exports.AddLenkeGruppe = function(req, res)  {
     });
 };
 
-// INSERT INTO lenkebruker (idbruker, lenkeID)
-//                   SELECT gruppemedlem.idbruker, ?
-//                   FROM gruppemedlem 
-//                   WHERE gruppeID = ?
+// INSERT INTO lenkebruker (lenkeID, idbruker)  
+//                   SELECT DISTINCT ?, bruker.idbruker ? = lenkeID
+//                   FROM bruker, gruppemedlem
+//                   WHERE bruker.idbruker = gruppemedlem.idbruker
+//                   AND gruppemedlem.gruppeID = ?
+
 
 
 
@@ -235,6 +236,25 @@ exports.LeggTilAlleLenke = function(req, res)  {
     });
 };
 
+//Brukeren kan se alle lenkne sine
+
+exports.LenkerBruker = function(req, res)  {
+  const lenkeID = req.body.lenkeID;
+  console.log ("lenkeID legg til alle brukere" + lenkeID);
+  const sqlSelect = 
+                  `SELECT * FROM lenke, lenkebruker
+                  WHERE lenkebruker.idbruker = 13
+                  AND lenkebruker.lenkeID = lenke.lenkeID
+                  ORDER BY tittel;`;
+  db.query(sqlSelect, lenkeID,(err, result) => {
+    if (err) {
+      console.log(err)
+    } 
+    else {
+      res.send(result);
+      }
+    });
+};
 // Se alle brukerne som har en lenke
 
 // Spørring 

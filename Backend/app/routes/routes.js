@@ -134,24 +134,35 @@ router.use("/lenkeAddGruppe", addLenkeGruppe.AddLenkeGruppe );
 // Se alle lenkene til en bruker
 const visLenkerBruker = require('../controllers/lenkebibliotek'); 
 router.use("/visLenkerBruker", visLenkerBruker.VisBrukerLenker );
+
 // se alle lenkene til en gruppe
 const visLenkerGruppe= require('../controllers/lenkebibliotek'); 
 router.use("/visLenkerGruppe", visLenkerGruppe.VisGruppeLenker );
-// redigere lenke
+
 
 // Slette lenke hos en bruker
 const slettLenkeBruker = require('../controllers/lenkebibliotek'); 
 router.use("/slettLenkeBruker", slettLenkeBruker.SlettBrukerLenke );
+
 // Slette lenken hos en gruppe  
 const slettLenkeGruppe = require('../controllers/lenkebibliotek'); 
 router.use("/slettLenkeGruppe", slettLenkeGruppe.SlettGruppeLenke );
 
-// Endre en lenke FUNKER IKKE!
+// Endre en lenke
 const endreLenke = require('../controllers/lenkebibliotek'); 
 router.use("/endreLenke", endreLenke.RedigerLenke );
 
+// Legge til en lenke hos alle brukerne
 const leggTilLenkeAlle = require('../controllers/lenkebibliotek'); 
 router.use("/leggTilLenkeAlle", leggTilLenkeAlle.LeggTilAlleLenke );
+
+// Liste med lenker hos en bruker
+const lenkerForBruker = require('../controllers/lenkebibliotek'); 
+router.use("/LenkebibBruker", lenkerForBruker.LenkerBruker );
+
+
+
+
 // Eksporterer denne modellen, så server.js får brukt den
 module.exports = router;
 

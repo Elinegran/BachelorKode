@@ -1,11 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import 'bootstrap/dist/css/bootstrap.min.css'; // Bootstap
-import { Form, Button } from 'react-bootstrap'; // Bootstrap-greier
-// import AuthService from '../../../services/auth.service'; 
-
-
-
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Form, Button } from 'react-bootstrap'; 
 
 function EndreLenke(props) {
     // const idbruker = props.senderIdbruker;
@@ -22,10 +18,6 @@ function EndreLenke(props) {
             axios.post('http://localhost:3001/api/endreLenke', 
             { lenkeID: lenkeID, info: nyInfo, tittel: nyTittel, url: nyUrl, });
         }     
-        alert ("lenkeID" + lenkeID)
-        alert ("url" + nyUrl);
-        alert ("tittel" + nyTittel);
-        alert ("info" + nyInfo);
     };
     
     return(
@@ -34,18 +26,18 @@ function EndreLenke(props) {
                 <label>Endre denne lenken: </label>
                 <Form.Control 
                     input type="text" 
-                    placeholder="Ny Tittel" 
+                    placeholder= {tittel} 
                     onChange = {(event) => {setNyTittel(event.target.value);}} /> 
                 
                     <br />
                     <Form.Control 
                         input type="text" 
-                        placeholder=" Ny Info"  
+                        placeholder=  {info}  
                         onChange = {(event) => {setNyInfo(event.target.value);}}/>
                         <br />
                     <Form.Control 
                         input type="link" 
-                        placeholder=" Ny URL" 
+                        placeholder={url}
                         onChange = {(event) => {setNyUrl(event.target.value);}}/>
                         <br />
                     <Button 

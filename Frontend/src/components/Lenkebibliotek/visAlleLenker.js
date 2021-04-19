@@ -1,18 +1,18 @@
 import React from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {InputGroup, Card, Accordion, Button, InputFelt, Row, Col} from 'react-bootstrap'
-import FormControl from 'react-bootstrap/FormControl'
-import Form from 'react-bootstrap/Form'
-import SelectBrukere from '../Meldinger/Felles/selectBruker';
-import SelectGruppe from '../Meldinger/Grupper/selextGruppe';
-import Gruppeliste from '../Meldinger/grupper';
-import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router';
+import { Card, Accordion, Button} from 'react-bootstrap'
+// import FormControl from 'react-bootstrap/FormControl'
+// import Form from 'react-bootstrap/Form'
+// import SelectBrukere from '../Meldinger/Felles/selectBruker';
+// import SelectGruppe from '../Meldinger/Grupper/selextGruppe';
+// import Gruppeliste from '../Meldinger/grupper';
+// import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router';
 import HentAlleLenker from '../Lenkebibliotek/hentAlleLenker';
-import Example from './visBrukere';
+// import Example from './visBrukere';
 import VisBrukere from './visBrukere';
 import VisGruppene from './visGruppene';
-import AlleLenkerBruker from './alleLenkerBruker';
+// import AlleLenkerBruker from './alleLenkerBruker';
 
 function VisAlleLenker (){
       return (  

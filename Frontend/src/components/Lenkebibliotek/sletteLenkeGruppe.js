@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import 'bootstrap/dist/css/bootstrap.min.css'; // Bootstap
-import { Form, Button } from 'react-bootstrap'; // Bootstrap-greier
+import 'bootstrap/dist/css/bootstrap.min.css'; 
+import { Form, Button } from 'react-bootstrap'; 
 // import AuthService from '../../../services/auth.service'; 
 
 
