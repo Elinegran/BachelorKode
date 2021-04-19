@@ -1,9 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Card, ListGroup, article, Button, CustomToggle } from 'react-bootstrap';
-// import { usearticleToggle } from 'react-bootstrap/articleToggle';
-// import AuthService from '../../../services/auth.service';
+import {Card, ListGroup } from 'react-bootstrap';
 import SletteLenkeBruker from './sletteLenkeBruker';
     
 export default class AlleLenkerBruker extends React.Component {

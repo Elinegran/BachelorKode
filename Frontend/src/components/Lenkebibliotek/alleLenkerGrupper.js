@@ -2,8 +2,6 @@ import React from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Card, ListGroup, article, Button, CustomToggle } from 'react-bootstrap';
-// import { usearticleToggle } from 'react-bootstrap/articleToggle';
-// import AuthService from '../../../services/auth.service';
 import SletteLenkeGruppe from './sletteLenkeGruppe';
     
 export default class AlleLenkerGruppe extends React.Component {

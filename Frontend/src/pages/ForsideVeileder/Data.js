@@ -15,7 +15,7 @@ export const buttonRegBruker = {
 }
 
 export const buttonLenkebibliotek = {
-    path: '/Lenkebibliotek',
+    path: '/LenkebibliotekV',
     id: 'lenkebib',
     buttonLabel: 'Endre Lenkebibliotek',
     img: require ('../../assets/images/Forside/draw_link.svg').default,

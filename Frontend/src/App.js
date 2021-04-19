@@ -15,6 +15,7 @@ import { Kalender } from './pages/Kalender/Kalender';
 import { CV } from './pages/CV/CV';
 import { ChatbotPage } from './pages/Chatbot/Chatbot';
 import { Lenkebibliotek } from './pages/Lenkebibliotek/Lenkebibliotek';
+import { LenkebibliotekV } from './pages/Lenkebibliotek/LenkebibliotekV';
 import { FAQoversikt } from './pages/FAQ/FAQoversikt';
 import { EndreFAQ } from './pages/FAQ/EndreFAQ';
 import { AktivitetsOversikt } from './pages/Aktiviteter/AktivitetsOversikt';
@@ -70,6 +71,7 @@ function App() {
               <ProtectedRouteVeileder path="/EndreFAQ" component={ EndreFAQ } />
               <ProtectedRouteVeileder path="/EndreAktivitet" component={ EndreAktivitet } />
               <ProtectedRouteVeileder path="/MeldingerV" component={ MeldingerV } />
+              <ProtectedRouteVeileder path="/LenkebibliotekV" component= {LenkebibliotekV} />
               <ProtectedRoute path="/Bruker" component={ ForsideBruker } />
                 <ProtectedRoute path="/Profil" component={ RedigerProfil } />
                 <ProtectedRoute path="/TidsbankBruker" component={ TidsbankBruker } />
