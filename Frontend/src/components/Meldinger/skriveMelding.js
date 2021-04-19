@@ -35,7 +35,7 @@ export default class skriveMelding extends React.Component {
                                 <Row>
                                         <Col>
                                                 <Form.Group>
-                                                        <Form.Control type="text" placeholder="Skriv melding" onChange = {this.handleInputChange} />
+                                                        <Form.Control input as ="textarea" placeholder="Skriv melding" onChange = {this.handleInputChange} />
                                                 </Form.Group>
                                         </Col>
                                         <Col>
@@ -47,7 +47,7 @@ export default class skriveMelding extends React.Component {
         )
     }
     handleSend = (event) => {
-        alert("Du sender: " + this.state.melding);
+        // alert("Du sender: " + this.state.melding);
 
 
         const nyInnboksmelding = {

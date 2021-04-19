@@ -28,10 +28,9 @@ render() {
 
   return (
     <p>
-  
+    
     { this.state.nyeMeldinger.map(melding => 
-        <span class="badge badge-pill badge-warning">{melding.AntallNyeMeldinger}</span>
-     
+        <span class="badge badge-pill badge-warning">{melding.AntallNyeMeldinger}</span> 
     )}
     </p>
   ) // Slutt på return

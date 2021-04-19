@@ -44,7 +44,7 @@ exports.getMinSamtale = function(req, res)  {
   let idbruker = req.query.idbruker;
   let avsender = req.query.avsender; 
   
-    const hentMinSamtale = `SELECT DISTINCT tid, fornavn, etternavn, melding, meldingLest
+    const hentMinSamtale = `SELECT DISTINCT idbruker, mottaker, tid, fornavn, etternavn, melding, meldingLest
                             FROM bruker, melding 
                             WHERE melding.avsender = bruker.idbruker 
                             AND (avsender = ? OR avsender = ?) 
@@ -66,7 +66,8 @@ exports.MeldingTilAlle = function(req, res) {
 
   const meldingTilAlle = `INSERT INTO melding(mottaker, avsender, melding) 
                           SELECT bruker.idbruker, ?, ?
-                          FROM bruker`;
+                          FROM bruker
+                          WHERE idbrukertype = 1`;
 
   var avsender = req.body.avsender; // Henter avsender (den innloggede) fra frontend
   var melding = req.body.melding; // Henter medlingsteksen fra Frontend
@@ -87,8 +88,11 @@ exports.Gruppemelding = function(req, res) {
                                WHERE gruppemedlem.gruppeID = ?;`;
 
   const avsender = req.body.avsender; // Henter avsender fra frontend. 
-  const melding = req.body.melding; // Henter meldingsteksen fra Frontend.
+  const meldingstekst = req.body.melding; // Henter meldingsteksen fra Frontend.
   const gruppeID = req.body.gruppeID; //Henter gruppeID fra frontend.
+  const gruppenavn = req.body.gruppenavn; // Henter gruppenavn fra frontend
+
+  const melding = 'Melding til ' + gruppenavn + ': ' + meldingstekst; 
 
   console.log(gruppeID);
 

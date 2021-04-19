@@ -33,7 +33,7 @@ export default class KalenderComp extends React.Component {
       end:0,
       opprettetav: '',  
       opprettetfor : '', 
-      gruppeId : '',
+      // gruppeId : '',
      
     };
     
@@ -45,7 +45,7 @@ export default class KalenderComp extends React.Component {
     this.handleEndChange = this.handleEndChange.bind(this);
     // this.handleDateSelect = this.handleDateSelect.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
-    this.handleSelectG = this.handleSelectG.bind(this);
+    // this.handleSelectG = this.handleSelectG.bind(this);
    
     //Hvis funksjon er gul så er det en arrowfunction
    
@@ -71,10 +71,10 @@ export default class KalenderComp extends React.Component {
     this.setState({opprettetfor: value })
   }
 
-  //Select Gruope id i Opprettelse av arrangement
-  handleSelectG(value){
-    this.setState({gruppeId: value })
-  }
+  // //Select Gruope id i Opprettelse av arrangement
+  // handleSelectG(value){
+  //   this.setState({gruppeId: value })
+  // }
 
   //Onchange håndteringer for inputfelter
   handleTitleChange(event) {
@@ -144,7 +144,7 @@ export default class KalenderComp extends React.Component {
             ? null
             : (
               <div>
-                <p>Dette er en avtale for:</p>
+                <p>Se avtaler for denne brukeren:</p>
                 
                 <SelectBrukere 
                 onHandleSelect={this.kalenderInnhold}/>
@@ -161,14 +161,20 @@ export default class KalenderComp extends React.Component {
             }}
             locale={nbLocale }
             initialView='dayGridMonth'
-            editable={true}
+            // contentHeight='auto'
+            // contentWidth='auto'
+            expandRows={true}
+            editable={true}    
+            droppable={true}
             eventDrop={this.handleUpdate}
+        
             selectable={true}
             selectMirror={true}
             dayMaxEvents={true}
             weekends={this.state.weekendsVisible}
             events={this.state.avtaler}
-            // select={this.handleDateSelect}
+
+            select={this.handleDateSelect}
 
             eventContent={renderEventContent} // custom render function
 
@@ -225,8 +231,8 @@ export default class KalenderComp extends React.Component {
               <SelectBrukere 
                 onHandleSelect={this.handleSelect}
               />
-              <SelectGruppe
-                onHandleSelectG={this.handleSelectG}/>
+              {/* <SelectGruppe
+                onHandleSelectG={this.handleSelectG}/> */}
               </div>
               )
               }
@@ -287,9 +293,8 @@ export default class KalenderComp extends React.Component {
   }
 
   handleUpdate = (info) => {
-    if (!alert("Dette sender di:" + info.event.startStr + " " + info.event.endStr + " " + info.event.title +"?")) {
-      
-      console.log(info.event.extendedProps.Opprettetfor)
+    if (!alert("Vil du Avtale for :" + info.event.extendedProps.Opprettetfor + " til kl: "+ info.event.start + "slutt" + info.event.end +"?")) {
+      console.log(info.event)
 
       const updateTid = {
         
@@ -300,19 +305,20 @@ export default class KalenderComp extends React.Component {
         opprettetfor:info.event.extendedProps.Opprettetfor
       };
 
-      axios.post(`http://localhost:3001/api/updateTid`, updateTid)
+      axios.patch(`http://localhost:3001/api/updateTid`,updateTid)
       .then(response => {
         console.log(response)
       })
       .catch(error => {
         console.log(error)
       })
+
     }
   }
 
   handleSave = (event) => {
     //Sjekker om det er bruker som er valgt. Hvis begge skulle være valgt vil avtalen legges til en bruker.
-    if (this.state.opprettetfor){
+    // if (this.state.opprettetfor){
 
 
     //Lager objekt som sendes til backend
@@ -336,64 +342,40 @@ export default class KalenderComp extends React.Component {
           })
 
           //Slutt på ny avtale
-    }else{
+    // }else{
      // alert('Dette er gruppeID: ' + this.state.gruppeId)
+    //   const nyGruppeAvtale = {
+    //     title: this.state.title,
+    //     beskrivelse: this.state.beskrivelse, 
+    //     start: this.state.start, 
+    //     end: this.state.end, 
+    //     sted: this.state.sted,
+    //     opprettetav: this.state.opprettetav, 
+    //     gruppeId : this.state.gruppeId,
 
-      const nyGruppeAvtale = {
-        title: this.state.title,
-        beskrivelse: this.state.beskrivelse, 
-        start: this.state.start, 
-        end: this.state.end, 
-        sted: this.state.sted,
-        opprettetav: this.state.opprettetav, 
-        gruppeId : this.state.gruppeId,
-
-      }
-      axios.post(`http://localhost:3001/api/nyGruppeAvtale`,nyGruppeAvtale)
-      .then(response => {
-        console.log(response)
-        alert(response)
-      })
-      .catch(error => {
-        console.log(error)
-      }) //Slutt på axios
+    //   }
+    //   axios.post(`http://localhost:3001/api/nyGruppeAvtale`,nyGruppeAvtale)
+    //   .then(response => {
+    //     console.log(response)
+    //     alert(response)
+    //   })
+    //   .catch(error => {
+    //     console.log(error)
+    //   }) //Slutt på axios
       
-    }//Avslutter else
+    // }//Avslutter else
     
   }
 
   //Ved å klikk på avtalen vil brukeren kunne slette(hvis dette er en fremtidig avtale) eller få opp info
   handleEventClick = (clickInfo) => {
 
-    if(clickInfo.event.startStr <= dagensDato){
-
-      //Beskjed om at avtalen er utgått
+      //Informasjon om avtalen
       alert('Denne avtalen er utgått. \n Tittel: ' +  clickInfo.event.title  +
         '\n Beskrivelse: ' + clickInfo.event.extendedProps.beskrivelse +
         '\n Sted: ' + clickInfo.event.extendedProps.sted + 
         '\n Tid : ' + moment(clickInfo.event.startStr).format('DD-MM-YYYY HH:mm') + ' Til ' + moment(clickInfo.event.endStr).format('DD-MM-YYYY HH:mm'));
-    }else{
 
-      //Dette er delete
-      if (window.confirm(`Er du sikker på at du vil slette '${clickInfo.event.title}'?`)) {
-        
-        //alert("dette er ID: " + clickInfo.event.id)
-        console.log(clickInfo.event);
-        const avtaleid = clickInfo.event.id;
-        axios.post(`http://localhost:3001/api/slettAvtale`, {
-          avtaleid: avtaleid
-        })
-          .then(response => {
-              console.log(response)
-            })
-            .catch(error => {
-              console.log(error)
-              console.log("message")
-            })
-            
-            window.location.reload();
-      } 
-    }
   }
 
 //Setter eventene inn i Kalenderen.
@@ -410,8 +392,8 @@ function renderEventContent(eventInfo) {
   console.log(eventInfo);
   return (
     <>
-      <b>{eventInfo.timeText}</b>
-      <i>{eventInfo.event.title}</i>
+      <i> <b>{eventInfo.timeText}</b>
+     {eventInfo.event.title}</i>
       
     </>
   )

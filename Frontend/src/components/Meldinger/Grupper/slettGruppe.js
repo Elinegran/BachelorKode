@@ -13,7 +13,15 @@ function SlettGruppe(props) {
   const slettGruppe = () => {
     if (window.confirm(`Er du sikker på at du vil slette ${ gruppenavn } ?`)) {
     axios.delete("http://localhost:3001/api/deleteGruppe", {data: {gruppeID: gruppeID}}) 
+    .then(response => {
+      console.log(response)
+      
+  })
+  .catch(error => {
+      console.log(error)
+  })
     }
+    
   };
 
   // Dette sendes til grupper.js
