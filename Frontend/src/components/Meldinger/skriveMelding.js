@@ -47,7 +47,7 @@ export default class skriveMelding extends React.Component {
         )
     }
     handleSend = (event) => {
-        alert("Du sender: " + this.state.melding);
+        // alert("Du sender: " + this.state.melding);
 
 
         const nyInnboksmelding = {

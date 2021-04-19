@@ -47,8 +47,8 @@ export default class Gruppemelding extends React.Component {
 }
 
 handleSendGroup = (event) => {
-    alert("Du sender gruppemeldingen: " + this.state.melding);
-    alert("Dette er gruppeID" + this.state.gruppeID);
+    // alert("Du sender gruppemeldingen: " + this.state.melding);
+    alert("Dette er gruppeID: " + this.state.gruppeID);
 
         const nyGruppemelding = {
             avsender: this.state.avsender,
