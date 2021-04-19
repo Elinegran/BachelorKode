@@ -54,8 +54,8 @@ export default class Gruppeliste extends React.Component {
           <Accordion.Collapse eventKey={melding.gruppeID}>
             <Card.Body>
 
-              <Gruppemelding gruppeID ={melding.gruppeID}/>
-              <NyttMedlem senderGruppeID={melding.gruppeID} />  
+              <Gruppemelding gruppeID ={melding.gruppeID} gruppenavn={melding.gruppenavn}/>
+              <NyttMedlem senderGruppeID={melding.gruppeID} senderGruppenavn={melding.gruppenavn}/>  
               <EndreGruppenavn sendeGruppeID={melding.gruppeID} /> 
               <SelectGruppemedlem gruppeIDFraGrupper={melding.gruppeID} />
               <SlettGruppe senderGruppeID={melding.gruppeID} senderGruppenavn={melding.gruppenavn}/> 
