@@ -23,7 +23,7 @@ exports.InsertInnboksMeldinger = function(req, res) {
 // Funksjon som henter alle meldingene som en bruker har fått
 exports.getMineMeldinger = function(req, res)  {
   let idbruker = req.query.idbruker;
-    const hentMineMeldinger = `SELECT meldingsID, avsender, mottaker, tid, meldingLest, fornavn, etternavn, melding
+    const hentMineMeldinger = `SELECT DISTINCT meldingsID, avsender, mottaker, tid, meldingLest, fornavn, etternavn, melding
                                FROM melding, bruker
                                WHERE mottaker = ?
                                AND idbruker = avsender

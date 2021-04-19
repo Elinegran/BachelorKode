@@ -43,7 +43,8 @@ render() {
     <p>
     <Skrivemeldinger mottakerID = {this.state.avsender} />
     { this.state.samtale.map(melding => 
-    <Card> {melding.mottaker == idbruker ?  <Card.Body className= "card-body text-right">
+    <Card> 
+      {melding.mottaker == idbruker ? <Card.Body className= "card-body text-right">
 
     <Card.Title><h2>{melding.fornavn} {melding.etternavn}</h2></Card.Title>
         <Card.Text>
@@ -54,13 +55,11 @@ render() {
               <span class="badge badge-pill badge-success">
                 Meldingen er lest {moment(melding.meldingLest).format("DD-MM-YYYY HH:mm")}                
               </span>}
-          </p> 
-          
-        </Card.Text>
+          </p>    
+    </Card.Text>
 
     </Card.Body>
     : <Card.Body className= "card-body text-left">
-      
         <Card.Title><h2>{melding.fornavn} {melding.etternavn}</h2></Card.Title>
         <Card.Text>
           <p>{melding.melding}</p>
@@ -70,10 +69,11 @@ render() {
               <span class="badge badge-pill badge-success">
                 Meldingen er lest {moment(melding.meldingLest).format("DD-MM-YYYY HH:mm")}                
               </span>}
-          </p> 
-          
+          </p>           
         </Card.Text>
-      </Card.Body>}
+
+      </Card.Body>
+      }
       
       
     </Card>
