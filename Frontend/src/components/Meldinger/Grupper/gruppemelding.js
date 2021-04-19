@@ -12,7 +12,8 @@ export default class Gruppemelding extends React.Component {
         this.state = {
             avsender: idbruker, 
             melding: "",
-            gruppeID: this.props.gruppeID
+            gruppeID: this.props.gruppeID,
+            gruppenavn: this.props.gruppenavn
         };
         this.handleInputSend = this.handleInputSend.bind(this);
     }
@@ -29,7 +30,7 @@ export default class Gruppemelding extends React.Component {
                     <Col>
                         <Form.Group>
                             <Form.Control 
-                                input type="text" placeholder ="Skriv melding..."  
+                                input as ="textarea" placeholder ="Skriv melding..."  
                                 onChange = {this.handleInputSend} style={{float: 'right'}} />
                         </Form.Group>
                     </Col>
@@ -47,13 +48,13 @@ export default class Gruppemelding extends React.Component {
 }
 
 handleSendGroup = (event) => {
-    // alert("Du sender gruppemeldingen: " + this.state.melding);
-    alert("Dette er gruppeID: " + this.state.gruppeID);
+    alert("Du sender gruppemeldingen: " + this.state.melding);
 
         const nyGruppemelding = {
             avsender: this.state.avsender,
             melding: this.state.melding,
-            gruppeID: this.state.gruppeID
+            gruppeID: this.state.gruppeID,
+            gruppenavn: this.state.gruppenavn
         };
 
         axios.post(`http://localhost:3001/api/gruppemelding`,nyGruppemelding)
