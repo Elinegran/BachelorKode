@@ -44,7 +44,7 @@ exports.getMinSamtale = function(req, res)  {
   let idbruker = req.query.idbruker;
   let avsender = req.query.avsender; 
   
-    const hentMinSamtale = `SELECT DISTINCT tid, fornavn, etternavn, melding, meldingLest
+    const hentMinSamtale = `SELECT DISTINCT mottaker, tid, fornavn, etternavn, melding, meldingLest
                             FROM bruker, melding 
                             WHERE melding.avsender = bruker.idbruker 
                             AND (avsender = ? OR avsender = ?) 

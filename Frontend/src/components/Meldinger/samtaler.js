@@ -27,7 +27,8 @@ export default class Samtaleliste extends React.Component {
     axios.get(`http://localhost:3001/api/meldingerMinSamtale`,
     {params: 
       {idbruker: idbruker,
-      avsender: this.state.avsender}
+      avsender: this.state.avsender,
+      mottaker: this.state.mottaker}
       
     })
       .then(res => {
@@ -57,7 +58,8 @@ render() {
           
         </Card.Text>
 
-    </Card.Body>: <Card.Body className= "card-body text-left">
+    </Card.Body>
+    : <Card.Body className= "card-body text-left">
       
         <Card.Title><h2>{melding.fornavn} {melding.etternavn}</h2></Card.Title>
         <Card.Text>

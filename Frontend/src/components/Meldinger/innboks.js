@@ -60,7 +60,7 @@ export default class Meldingsliste extends React.Component {
               </Card.Header>
               <Accordion.Collapse eventKey={melding.meldingsID}>
                 <Card.Body> 
-                  <Samtaleliste idbrukerFraInnboks={melding.avsender} meldingLest={melding.meldingLest}/> 
+                  <Samtaleliste idbrukerFraInnboks={melding.avsender}  meldingLest={melding.meldingLest}/> 
                   
                 </Card.Body> 
             </Accordion.Collapse>
