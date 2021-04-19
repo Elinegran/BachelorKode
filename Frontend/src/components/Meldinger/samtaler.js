@@ -42,8 +42,9 @@ render() {
     <p>
     <Skrivemeldinger mottakerID = {this.state.avsender} />
     { this.state.samtale.map(melding => 
-    <Card> 
-      <Card.Body>
+    <Card> {melding.mottaker == idbruker ? null : <Card.Body className= "card-body text-right">
+      
+
         <Card.Title><h2>{melding.fornavn} {melding.etternavn}</h2></Card.Title>
         <Card.Text>
           <p>{melding.melding}</p>
@@ -56,7 +57,9 @@ render() {
           </p> 
           
         </Card.Text>
-      </Card.Body>
+      </Card.Body>}
+      
+      
     </Card>
     )}
     </p>
