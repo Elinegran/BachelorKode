@@ -10,12 +10,10 @@ function LeggTilLenkeAlle(props) {
     const tittel = props.senderTittel;
     const url = props.senderUrl;
     const addLenkeAlle = () => {
-        if (window.confirm(`Er du sikker på at du vil legge til lenken ${ url } hos alle brukerne: ?`)) {
+        if (window.confirm(`Er du sikker på at du vil legge til lenken ${ url } hos alle brukerne?`)) {
             axios.post('http://localhost:3001/api/LeggTilLenkeAlle', 
             { lenkeID: lenkeID });
         }     
-
-        alert ("lenkeID- legg til for alle" + lenkeID)
     };
 
       return (

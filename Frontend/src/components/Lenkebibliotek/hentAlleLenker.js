@@ -45,7 +45,7 @@ export default class HentAlleLenker extends React.Component {
       { this.state.lenker.map(alleLenker => 
     <Card>
       <Card.Header>
-          <Accordion.Toggle as={Button} variant ="light" eventKey={ alleLenker.lenkeID }>
+          <Accordion.Toggle as={Button} variant ="link" eventKey={ alleLenker.lenkeID }>
           { alleLenker.tittel }
           </Accordion.Toggle>
       </Card.Header>
@@ -55,6 +55,7 @@ export default class HentAlleLenker extends React.Component {
           <LeggTilLenkeAlle senderLenkeID = {alleLenker.lenkeID} senderUrl = {alleLenker.url}/>
           <Card.Text>{ alleLenker.info}</Card.Text>
           <Card.Link href ={ alleLenker.url } >{ alleLenker.url }</Card.Link>
+          <br />
           <br />
           <LenkeV 
           senderlenkeid = {alleLenker.lenkeID}

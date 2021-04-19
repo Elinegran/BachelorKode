@@ -1,8 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Card, Accordion, Button, CustomToggle } from 'react-bootstrap';
-import { useAccordionToggle } from 'react-bootstrap/AccordionToggle';
+import {Card, Accordion, Button } from 'react-bootstrap';
 import AlleLenkerGruppe from './alleLenkerGrupper';
 
 export default class VisGruppene extends React.Component {
