@@ -13,12 +13,12 @@ import LenkebibBruker from '../../components/Lenkebibliotek/LenkebibBruker';
 
 export const Lenkebibliotek = () => (
     <Container>
-        <Col >
+        
         <h1 style = {{ textAlign: 'center', fontSize:'25px'}}>Lenkebibliotek</h1>
+        <div  class = "card-columns">
         <LenkebibBruker/>
-        
-        </Col>  
-        
+        </div>
+      
              
     </Container>  
       

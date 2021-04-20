@@ -24,20 +24,20 @@ function EndreLenke(props) {
         <Form>
             <Form.Group>
                 <label>Endre denne lenken: </label>
-                <Form.Control 
+                <Form.Control
                     input type="text" 
-                    placeholder= {tittel} 
+                    value = {tittel} 
                     onChange = {(event) => {setNyTittel(event.target.value);}} /> 
                 
                     <br />
                     <Form.Control 
                         input type="text" 
-                        placeholder=  {info}  
+                        value =  {info}  
                         onChange = {(event) => {setNyInfo(event.target.value);}}/>
                         <br />
                     <Form.Control 
                         input type="link" 
-                        placeholder={url}
+                        value = {url}
                         onChange = {(event) => {setNyUrl(event.target.value);}}/>
                         <br />
                     <Button 
