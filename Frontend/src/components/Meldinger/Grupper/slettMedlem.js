@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Bootstap
 import { Form, Button } from 'react-bootstrap'; // Bootstrap-greier
@@ -6,7 +6,7 @@ import AuthService from '../../../services/auth.service';
 
 const innlogget = AuthService.getUserId();
 
-
+// Funksjon som sletter et gruppemedlem
  function SlettMedlem(props) {
    // idbruker, gruppeID, gruppenavn, fornavn og etternavn sendes fra selectGruppemedlem.js
     const idbruker = props.senderIDbruker; 

@@ -9,7 +9,6 @@ import { Container, Row, Col } from 'react-bootstrap';
 import AntallMeldinger from '../../components/Meldinger/antallMeldinger';
    
 // Meldingssiden for VEILEDER 
-
 export const MeldingerV = () => (
 <main className ="meldingssiden">
         
