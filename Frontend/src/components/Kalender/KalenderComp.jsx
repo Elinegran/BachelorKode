@@ -1,5 +1,5 @@
 import React from 'react'
-import FullCalendar, { formatDate } from '@fullcalendar/react'
+import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
@@ -12,7 +12,7 @@ import { Accordion, Card, Form , Button} from 'react-bootstrap';
 
 import EditDialog from './editDialog';
 import moment from 'moment';
-import SelectGruppe from '../Meldinger/Grupper/selextGruppe.js'
+// import SelectGruppe from '../Meldinger/Grupper/selextGruppe.js'
 
 
 let dagensDato = moment(new Date()).format("YYYY-MM-DDTHH:MM:00.0000Z");

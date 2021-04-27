@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { render } from 'react-dom'
+
 import KalenderComp from '../../components/Kalender/KalenderComp'
 import './kal.css'
 
