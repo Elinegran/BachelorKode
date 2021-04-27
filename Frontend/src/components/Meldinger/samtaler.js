@@ -1,17 +1,14 @@
 import React from 'react';
 import axios from 'axios';
-// Bootstap
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Accordion, Container, Row, Col, Button, Alert, Breadcrumb, Card, Form } from 'react-bootstrap'; 
+import 'bootstrap/dist/css/bootstrap.min.css';// Bootstap
+import {  Card } from 'react-bootstrap'; 
 import AuthService from '../../services/auth.service'; 
 import Skrivemeldinger from '../../components/Meldinger/skriveMelding.js';
 import moment from 'moment';
 
-
-
-
 const idbruker = AuthService.getUserId();
 
+// Klasse som viser samtalen mellom to brukere
 export default class Samtaleliste extends React.Component {
   constructor (props){
     super (props);
@@ -44,7 +41,7 @@ render() {
     <Skrivemeldinger mottakerID = {this.state.avsender} />
     { this.state.samtale.map(melding => 
     <Card> 
-      {melding.mottaker == idbruker ? <Card.Body className= "card-body text-right">
+      {melding.mottaker == idbruker ? <Card.Body className= "card-body text-left">
 
     <Card.Title><h2>{melding.fornavn} {melding.etternavn}</h2></Card.Title>
         <Card.Text>
@@ -59,7 +56,7 @@ render() {
     </Card.Text>
 
     </Card.Body>
-    : <Card.Body className= "card-body text-left">
+    : <Card.Body className= "card-body text-right">
         <Card.Title><h2>{melding.fornavn} {melding.etternavn}</h2></Card.Title>
         <Card.Text>
           <p>{melding.melding}</p>

@@ -1,11 +1,11 @@
 import React from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Accordion, Container, Row, Col, Button, Alert, Breadcrumb, Card, Form } from 'react-bootstrap'; 
 import AuthService from '../../services/auth.service'; 
 
 const idbruker = AuthService.getUserId();
 
+// Klasse som viser hvor mange nye meldinger en bruker har fått
 export default class AntallMeldinger extends React.Component {
   constructor (props){
     super (props);

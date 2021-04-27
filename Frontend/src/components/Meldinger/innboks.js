@@ -1,23 +1,21 @@
 import React from 'react';
 import axios from 'axios';
 import '../../pages/Meldinger/Meldinger.css';
-// Bootstap
-import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css'; // Bootstap
 import { Accordion, Button, Card } from 'react-bootstrap'; 
 import Samtaleliste from '../../components/Meldinger/samtaler.js';
 import AuthService from '../../services/auth.service'; 
 import moment from 'moment';
 
-
 const idbruker = AuthService.getUserId();
 
- 
+/*  
 const meldingLest = (event) => {
   console.log(event);
 }
+ */
 
-
-
+// Klasse som viser alle meldingene til en bruker
 export default class Meldingsliste extends React.Component {
   constructor (props){
     super (props);

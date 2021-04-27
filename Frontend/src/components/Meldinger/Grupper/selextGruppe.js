@@ -1,9 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Bootstap
-//import { Container, Row, Col, Button, Form } from 'react-bootstrap'; // Bootstrap-greier
 
-
+// Brukes i lenkebiblioteket til å velge en gruppe
 export default class SelectGruppe extends React.Component {
   constructor(props){
     super(props);

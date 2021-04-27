@@ -31,25 +31,25 @@ export default class LenkebibBruker extends React.Component {
       render() {
         return (
        
-        <div class = "card-columns" > 
+      
       <Col>  
-        <Row>
-        
+          <Row>
+          
             { this.state.lenker.map(alleLenker => 
             <Card style={{ width: '50rem' }}>   
                 <Card.Header as="h2">{ alleLenker.tittel }</Card.Header>
-                    <Card.Body>
+                    <Card.Body >
                         {/* <Card.Title>{ alleLenker.tittel }</Card.Title> */}
                             <Card.Text>
                             { alleLenker.info }
                             </Card.Text>
-                        <Card.Link href={ alleLenker.url }>{ alleLenker.url }</Card.Link>
+                        <Card.Link href={ alleLenker.url }>Klikk her for å lese { alleLenker.tittel }</Card.Link>
                     </Card.Body>
             </Card>)}
           </Row>
       </Col>
       
-      </div>
+     
     )
 }
 

@@ -44,16 +44,7 @@ export default class SelectGruppemedlem extends React.Component {
     
   } // Slutt på componentDidMount
 
- /*  function slettMedlem() {
-    const [idbruker, setIDbruker] = useState(0); // idbruker hentes fra inputfelt
-    const gruppeID = setGruppeID] = useState(0); // gruppeID sendes fra grupper.js
-    
-  // Sender medlemmet som skal slettes til Backend
-  const slettMedlem = () => { 
-    axios.delete(`http://localhost:3001/api/deleteMedlem`, { idbruker: idbruker, gruppeID: gruppeID }) 
-  
-    
-  };  */
+ 
 
   // Returnerer en liste over medlemmene i gruppa
   render() {
