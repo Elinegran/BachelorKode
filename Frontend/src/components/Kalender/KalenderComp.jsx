@@ -217,7 +217,7 @@ export default class KalenderComp extends React.Component {
 
           <Form.Group controlId="formSlutt">
             <Form.Label>Velg sluttid: </Form.Label>
-            <Form.Control type="datetime-local" defaultValue = {this.state.slutt}  onChange={this.handleSluttChange} />
+            <Form.Control type="datetime-local" defaultValue = {this.state.slutt}  onChange={this.handleEndChange} />
           </Form.Group>
 
         <div> <b>
