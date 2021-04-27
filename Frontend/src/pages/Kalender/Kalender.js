@@ -17,7 +17,7 @@ import './kal.css'
 export const Kalender = () => (
 
         <div>
-        <h2>Kalender</h2>
+        <h1>Kalender</h1>
 
         
         <KalenderComp />

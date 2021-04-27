@@ -212,12 +212,12 @@ export default class KalenderComp extends React.Component {
 
           <Form.Group controlId="formStart">
             <Form.Label>Velg starttid: </Form.Label>
-            <Form.Control type="datetime-local" value = {this.state.start}  onChange={this.handleStartChange} />
+            <Form.Control type="datetime-local" defaultValue = {this.state.start}  onChange={this.handleStartChange} />
           </Form.Group>
 
           <Form.Group controlId="formSlutt">
             <Form.Label>Velg sluttid: </Form.Label>
-            <Form.Control type="datetime-local" value = {this.state.slutt}  onChange={this.handleSluttChange} />
+            <Form.Control type="datetime-local" defaultValue = {this.state.slutt}  onChange={this.handleSluttChange} />
           </Form.Group>
 
         <div> <b>
