@@ -1,23 +1,21 @@
 import React from 'react';
 import axios from 'axios';
 import '../../pages/Meldinger/Meldinger.css';
-// Bootstap
-import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css'; // Bootstap
 import { Accordion, Button, Card } from 'react-bootstrap'; 
 import Samtaleliste from '../../components/Meldinger/samtaler.js';
 import AuthService from '../../services/auth.service'; 
 import moment from 'moment';
 
-
 const idbruker = AuthService.getUserId();
 
- 
+/*  
 const meldingLest = (event) => {
   console.log(event);
 }
+ */
 
-
-
+// Klasse som viser alle meldingene til en bruker
 export default class Meldingsliste extends React.Component {
   constructor (props){
     super (props);
@@ -49,7 +47,7 @@ export default class Meldingsliste extends React.Component {
                                 onClick = {() =>console.log(axios.post("http://localhost:3001/api/meldingLest", { meldingsID: melding.meldingsID, }) )} 
                                 eventKey={melding.meldingsID}>
                     <h2 className = "innboksMelding">
-                     <p> {melding.meldingLest != '0000-00-00 00:00:00' ? null : <span class="badge badge-pill badge-warning"> Ny </span>}</p>
+                     <p> {melding.meldingLest ? null : <span class="badge badge-pill badge-warning"> Ny </span>}</p>
                      <p> {melding.fornavn} {melding.etternavn} 
                       <br></br>
                       {moment(melding.tid).format("DD-MM-YYYY HH:mm")}</p>

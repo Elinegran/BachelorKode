@@ -1,17 +1,14 @@
 import React from 'react';
 import axios from 'axios';
-// Bootstap
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Accordion, Container, Row, Col, Button, Alert, Breadcrumb, Card, Form } from 'react-bootstrap'; 
+import 'bootstrap/dist/css/bootstrap.min.css';// Bootstap
+import {  Card } from 'react-bootstrap'; 
 import AuthService from '../../services/auth.service'; 
 import Skrivemeldinger from '../../components/Meldinger/skriveMelding.js';
 import moment from 'moment';
 
-
-
-
 const idbruker = AuthService.getUserId();
 
+// Klasse som viser samtalen mellom to brukere
 export default class Samtaleliste extends React.Component {
   constructor (props){
     super (props);
@@ -51,7 +48,7 @@ render() {
           <p>{melding.melding}</p>
           <p className= "tidMelding">{moment(melding.tid).format("DD-MM-YYYY HH:mm")}</p>
           <p> {/* Tester om meldingen er lest */}
-            {melding.meldingLest == '0000-00-00 00:00:00' ? null : 
+            {melding.meldingLest ? null : 
               <span class="badge badge-pill badge-success">
                 Meldingen er lest {moment(melding.meldingLest).format("DD-MM-YYYY HH:mm")}                
               </span>}

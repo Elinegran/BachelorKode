@@ -1,9 +1,9 @@
 import React from 'react'
 import Skrivemeldinger from '../../components/Meldinger/skriveMelding.js';
 import SelectBrukere from '../../components/Meldinger/Felles/selectBruker';
-import { Container } from 'react-bootstrap';
 
-//const mottaker = '';
+
+// Klasse som oppretter en ny melding til en ny bruker
 export default class NyMelding extends React.Component {
     constructor(props){
         super(props);

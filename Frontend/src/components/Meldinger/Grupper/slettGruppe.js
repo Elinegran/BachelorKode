@@ -3,7 +3,6 @@ import axios from 'axios'; // for å sende/ motta til/ fra backend
 import 'bootstrap/dist/css/bootstrap.min.css'; // Bootstap
 import { Button, Form } from 'react-bootstrap'; // Bootstrap-greier
 
-
 // Funksjon for å opprette en ny gruppe i databasen
 function SlettGruppe(props) {
   const gruppeID = props.senderGruppeID;

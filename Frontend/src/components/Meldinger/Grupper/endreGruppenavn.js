@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios'; // for å sende/ motta til/ fra backend
 import { useState } from "react"; // for å sende til backend
 import 'bootstrap/dist/css/bootstrap.min.css'; // Bootstap
-import { Container, Row, Col, Button, Form } from 'react-bootstrap'; // Bootstrap-greier
+import {  Row, Col, Button, Form } from 'react-bootstrap'; // Bootstrap-greier
 
 // Funksjon for å opprette en ny gruppe i databasen
 function EndreGruppenavn(props) {

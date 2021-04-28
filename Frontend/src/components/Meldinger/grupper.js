@@ -9,6 +9,7 @@ import EndreGruppenavn from './Grupper/endreGruppenavn';
 import Gruppemelding from './Grupper/gruppemelding'; 
 import MeldingTilAlle from './Grupper/meldingTilAlle';
 
+// Klasse som returnerer en liste med gruppene
 export default class Gruppeliste extends React.Component {
   constructor (props){
     super (props);
