@@ -1,5 +1,5 @@
 import React from 'react'
-import FullCalendar, { formatDate } from '@fullcalendar/react'
+import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
@@ -12,7 +12,7 @@ import { Accordion, Card, Form , Button} from 'react-bootstrap';
 
 import EditDialog from './editDialog';
 import moment from 'moment';
-import SelectGruppe from '../Meldinger/Grupper/selextGruppe.js'
+// import SelectGruppe from '../Meldinger/Grupper/selextGruppe.js'
 
 
 let dagensDato = moment(new Date()).format("YYYY-MM-DDTHH:MM:00.0000Z");
@@ -212,12 +212,12 @@ export default class KalenderComp extends React.Component {
 
           <Form.Group controlId="formStart">
             <Form.Label>Velg starttid: </Form.Label>
-            <Form.Control type="datetime-local" value = {this.state.start}  onChange={this.handleStartChange} />
+            <Form.Control type="datetime-local" defaultValue = {this.state.start}  onChange={this.handleStartChange} />
           </Form.Group>
 
           <Form.Group controlId="formSlutt">
             <Form.Label>Velg sluttid: </Form.Label>
-            <Form.Control type="datetime-local" value = {this.state.slutt}  onChange={this.handleSluttChange} />
+            <Form.Control type="datetime-local" defaultValue = {this.state.slutt}  onChange={this.handleEndChange} />
           </Form.Group>
 
         <div> <b>
