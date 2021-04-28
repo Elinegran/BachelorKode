@@ -47,7 +47,7 @@ export default class Meldingsliste extends React.Component {
                                 onClick = {() =>console.log(axios.post("http://localhost:3001/api/meldingLest", { meldingsID: melding.meldingsID, }) )} 
                                 eventKey={melding.meldingsID}>
                     <h2 className = "innboksMelding">
-                     <p> {melding.meldingLest != '0000-00-00 00:00:00' ? null : <span class="badge badge-pill badge-warning"> Ny </span>}</p>
+                     <p> {melding.meldingLest ? null : <span class="badge badge-pill badge-warning"> Ny </span>}</p>
                      <p> {melding.fornavn} {melding.etternavn} 
                       <br></br>
                       {moment(melding.tid).format("DD-MM-YYYY HH:mm")}</p>

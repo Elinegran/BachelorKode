@@ -48,7 +48,7 @@ render() {
           <p>{melding.melding}</p>
           <p className= "tidMelding">{moment(melding.tid).format("DD-MM-YYYY HH:mm")}</p>
           <p> {/* Tester om meldingen er lest */}
-            {melding.meldingLest == '0000-00-00 00:00:00' ? null : 
+            {melding.meldingLest ? null : 
               <span class="badge badge-pill badge-success">
                 Meldingen er lest {moment(melding.meldingLest).format("DD-MM-YYYY HH:mm")}                
               </span>}
