@@ -21,32 +21,41 @@ function EndreLenke(props) {
     };
     
     return(
-        <Form>
+
+        <Form>  
+            <label class="font-weight-bold">Endre denne lenken: </label>
             <Form.Group>
-                <label>Endre denne lenken: </label>
-                <Form.Control
-                    input type="text" 
-                    value = {tittel} 
-                    onChange = {(event) => {setNyTittel(event.target.value);}} /> 
+                <Form.Label>Tittel:</Form.Label>           
+                    <Form.Control
+                        type="text" 
+                        defaultValue = {tittel} 
+                        onChange = {(event) => {setNyTittel(event.target.value);}} />
+            </Form.Group> 
                 
-                    <br />
+            <Form.Group>
+                <Form.Label>Info:</Form.Label>      
                     <Form.Control 
-                        input type="text" 
-                        value =  {info}  
+                        type="text" 
+                        defaultValue = {info}  
                         onChange = {(event) => {setNyInfo(event.target.value);}}/>
-                        <br />
+            </Form.Group>
+
+            <Form.Group>
+                <Form.Label>Lenke:</Form.Label>  
                     <Form.Control 
                         input type="link" 
-                        value = {url}
+                        defaultValue= {url}
                         onChange = {(event) => {setNyUrl(event.target.value);}}/>
-                        <br />
+            </Form.Group>  
+
                     <Button 
                         onClick = {endreL} 
                         variant="primary" 
                         type = "submit">Endre lenke
                     </Button>
-            </Form.Group>   
-         </Form>   
+           
+         </Form> 
+         
     )
 }
 

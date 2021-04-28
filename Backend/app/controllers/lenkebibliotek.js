@@ -10,7 +10,10 @@ app.use(express.json());
 
 // Henter ALLE lenkene fra Databasen
 exports.getAlleLenker = function(req, res)  {
-    const sqlSelect = "SELECT DISTINCT * FROM lenke WHERE url IS NOT NULL; ";
+    const sqlSelect = `SELECT DISTINCT * 
+                       FROM lenke 
+                       WHERE url IS NOT NULL
+                       ORDER BY tittel;` ;
     db.query(sqlSelect, (err, result) => {
       if (err) {
         console.log(err)
@@ -97,7 +100,8 @@ exports.VisBrukerLenker = function(req, res)  {
                   FROM lenke, bruker, lenkebruker
                   WHERE lenke.lenkeID = lenkebruker.lenkeID 
                   AND lenkebruker.idbruker = bruker.idbruker
-                  AND bruker.idbruker = ?`;
+                  AND bruker.idbruker = ?
+                  ORDER BY tittel`;
   db.query(sqlSelect, idbruker, (err, result) => {
     if (err) {
       console.log(err)

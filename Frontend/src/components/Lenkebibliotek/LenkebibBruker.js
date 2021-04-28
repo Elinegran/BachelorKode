@@ -31,10 +31,9 @@ export default class LenkebibBruker extends React.Component {
       render() {
         return (
        
-      
+      <div class = "card-columns">
       <Col>  
           <Row>
-          
             { this.state.lenker.map(alleLenker => 
             <Card style={{ width: '50rem' }}>   
                 <Card.Header as="h2">{ alleLenker.tittel }</Card.Header>
@@ -49,7 +48,7 @@ export default class LenkebibBruker extends React.Component {
           </Row>
       </Col>
       
-     
+    </div> 
     )
 }
 
