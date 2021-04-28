@@ -129,7 +129,7 @@ exports.AntallNyeMeldinger = function(req, res)  {
     const antallNye = `SELECT COUNT(meldingsID) AS AntallNyeMeldinger
                        FROM melding
                        WHERE mottaker = ?
-                       AND meldingLest = '0000-00-00 00:00:00' `;
+                       AND meldingLest = NULL `;
 
     db.query(antallNye, mottaker, (err, result) => {
       if (err) {
