@@ -371,7 +371,7 @@ export default class KalenderComp extends React.Component {
   handleEventClick = (clickInfo) => {
 
       //Informasjon om avtalen
-      alert('Denne avtalen er utgått. \n Tittel: ' +  clickInfo.event.title  +
+      alert('Tittel: ' +  clickInfo.event.title  +
         '\n Beskrivelse: ' + clickInfo.event.extendedProps.beskrivelse +
         '\n Sted: ' + clickInfo.event.extendedProps.sted + 
         '\n Tid : ' + moment(clickInfo.event.startStr).format('DD-MM-YYYY HH:mm') + ' Til ' + moment(clickInfo.event.endStr).format('DD-MM-YYYY HH:mm'));
