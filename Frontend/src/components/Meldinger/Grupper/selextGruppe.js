@@ -1,12 +1,22 @@
 import React from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Bootstap
-import { Container, Row, Col, Button, Form } from 'react-bootstrap'; // Bootstrap-greier
 
-
+// Brukes i lenkebiblioteket til å velge en gruppe
 export default class SelectGruppe extends React.Component {
-  state = {
+  constructor(props){
+    super(props);
+    this.state = {
     gruppe: []
+    }
+
+    this.onHandleSelectG = this.onHandleSelectG.bind(this);
+  
+  }
+  
+  //Det som blir valgt blir returnert til parent
+  onHandleSelectG(event){
+    this.props.onHandleSelectG(event.target.value)
   }
 
   componentDidMount() {
@@ -20,7 +30,7 @@ export default class SelectGruppe extends React.Component {
   render() {
     return(
         
-        <select className="custom-select" id = "valgtGruppe">
+        <select className="custom-select" id = "valgtGruppe" onChange={this.onHandleSelectG}> {/* Her mangler det en onChange event, tror jeg */}
             <option selected>-- Velg gruppe --</option>
             { this.state.gruppe.map(melding => 
             <option value={melding.gruppeID}>{melding.gruppenavn}</option>   

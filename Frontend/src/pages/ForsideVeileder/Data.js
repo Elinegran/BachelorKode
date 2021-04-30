@@ -1,11 +1,9 @@
-
-
-export const buttonNyAktivitet = {
-    path: '/NyAktivitet',
-    id: 'NyAktivitet',
-    buttonLabel: 'Legg til ny aktivitet',
+export const buttonEndreAktivitet = {
+    path: '/EndreAktivitet',
+    id: 'EndreAktivitet',
+    buttonLabel: 'Legg til og endre aktivitet',
     img: require ('../../assets/images/Forside/draw_add_activity.svg').default,
-    alt: 'NyAktivitet'
+    alt: 'EndreAktivitet'
 }
 
 export const buttonRegBruker = {
@@ -17,23 +15,23 @@ export const buttonRegBruker = {
 }
 
 export const buttonLenkebibliotek = {
-    path: '/Lenkebibliotek',
+    path: '/LenkebibliotekV',
     id: 'lenkebib',
     buttonLabel: 'Endre Lenkebibliotek',
     img: require ('../../assets/images/Forside/draw_link.svg').default,
     alt: 'Lenkebibliotek',
 }
 
-export const buttonFAQ = {
-    path: '/FAQ',
-    id: 'FAQ',
-    buttonLabel: 'Endre FAQ',
+export const buttonEndreFAQ = {
+    path: '/EndreFAQ',
+    id: 'EndreFAQ',
+    buttonLabel: 'Legg til og endre FAQ',
     img: require ('../../assets/images/Forside/draw_faq.svg').default,
-    alt: 'FAQ',
+    alt: 'EndreFAQ',
 }
 
 export const circleMeldinger = {
-    path: '/Meldinger',
+    path: '/MeldingerV',
     id: 'meldinger',
     alt: 'Meldingsikon',
     img: require ('../../assets/images/Forside/draw_mail_1.png').default,
@@ -67,4 +65,3 @@ export const slides = {
     slide2: require ('../../assets/images/Forside/slide2.jpg').default,
     slide3: require ('../../assets/images/Forside/slide3.jpg').default
 }
-

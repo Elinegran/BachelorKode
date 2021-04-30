@@ -11,3 +11,14 @@
   }
   a:hover { text-decoration: none; color:#5edbdb;}
 
+  input, label  {
+    display: block;
+    
+  }
+
+  
+  @media screen and (max-width: 480px) {
+    h1 {
+      font-size: 24px;
+      }
+  }

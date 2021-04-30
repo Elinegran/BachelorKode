@@ -1,8 +1,10 @@
 import React from 'react'
-export const Chatbot = () => (
+import  ChatbotTest   from '../../components/Chatbot/ChatbotTest'
+export const ChatbotPage = () => (
 
         <div>
         <h2>Chatbot</h2>
-
+        <ChatbotTest />
+        
         </div>
 )

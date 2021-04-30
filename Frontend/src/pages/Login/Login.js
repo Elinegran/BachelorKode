@@ -1,9 +1,26 @@
 import React from 'react'
+import { Container } from 'react-bootstrap'
+import { LoggInn } from '../../components/Login/LoggInn'
+import  ForsideVeilder  from '../../pages/ForsideVeileder/ForsideVeileder'
+import ForsideBruker  from '../../pages/ForsideBruker/ForsideBruker'
+import authService from '../../services/auth.service'
 
-export const Login = () => (
+var getAccessToken = authService.getToken();
+var getRole = authService.getRole();
+var roleCheck;
 
-        <div>
-        <h2>Login</h2>
+if(getRole==1){
+        roleCheck=false;
+} else if(getRole==2) {
+        roleCheck=true;
+}
 
-        </div>
+
+export const Logginn = () => (
+
+        <Container>
+                {getAccessToken ? (roleCheck ? <ForsideVeilder /> : <ForsideBruker />)
+                : <LoggInn /> }
+                
+        </Container>
 )

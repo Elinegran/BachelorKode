@@ -1,5 +1,4 @@
 import React from 'react';
-
 import axios from 'axios';
 
 export default class Brukerliste extends React.Component {
@@ -18,7 +17,7 @@ export default class Brukerliste extends React.Component {
   render() {
     return (
       <ul>
-        { this.state.brukere.map(bruker => <li>{bruker.fornavn}</li>)}
+        {this.state.brukere.map(bruker => <li>{bruker.fornavn}</li>)}
       </ul>
     )
   }

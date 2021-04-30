@@ -2,6 +2,7 @@ import React from "react";
 import { Image, Button } from 'react-bootstrap';
 import styled from 'styled-components';
 import {appColors} from '../Colors'
+import {Responsive} from '../Responsive'
 export const ButtonFrame = styled.div`
     max-width: 47%;
     min-height: 120px;
@@ -56,17 +57,17 @@ ${ButtonFrame}:hover & {
     transition: all 0.3s ease-in-out;
     
 }
-@media screen and (min-width: 360px) and (max-width: 480px) {
+${Responsive.mini}{
    
     max-height: 65px;
 }
-@media screen and (min-width:481px) and (max-width: 767px){
+${Responsive.medium}{
     max-height: 75px;
 }
-@media screen and (min-width:768px) and (max-width: 991px){
+${Responsive.stor}{
     max-height: 95px;
 }
-@media screen and (min-width: 992px)  {
+${Responsive.pc} {
     max-height: 75px;
 }
 

@@ -1,18 +1,15 @@
 import React from "react";
 import { Button } from "react-bootstrap";
-import { Container, Image } from 'react-bootstrap';
+import { Image } from 'react-bootstrap';
 import styled from 'styled-components';
 import {appColors} from '../Colors';
 export const CircleContainer = styled.div`
-    
     margin: auto;
     width: 30%;
     @media screen and (min-width:992px) {
        
         width: 25%;
     }
-
-
 `
 export const CircleInfo = styled.div`
     margin: auto;
@@ -131,8 +128,10 @@ export const CircleImgContainer = ({ img, alt, buttonLabel, subText, path }) => 
       
        </Button> 
     </CircleInfo>
-    <ButtonLabel>{ buttonLabel } </ButtonLabel>
     
+    <Button bsPrefix='CircleContainer' href={ path }>
+    <ButtonLabel href={ path }>{ buttonLabel } </ButtonLabel>
+    </Button>
     </CircleContainer>
    
     )

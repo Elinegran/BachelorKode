@@ -1,9 +1,10 @@
 import React from "react";
-import { Nav, Navbar, NavDropdown} from 'react-bootstrap';
+import { Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import MediaQuery from "react-responsive";
 import styled from 'styled-components';
 import Logo from '../assets/images/logo.png'
 import ProfilePic from '../assets/images/Forside/icon_profile.png';
+import authService from "../services/auth.service";
 
 const Styles = styled.div`
     
@@ -38,7 +39,15 @@ export const Img = styled.img`
 `
 export const ProfileWrapper = styled.div`
     
-`
+`  
+
+var getAccessToken = authService.getToken();
+var view = false;
+
+if(getAccessToken){
+  view=true;
+}
+
 
 export const NavigationBar = () => (
     <Styles>
@@ -51,23 +60,29 @@ export const NavigationBar = () => (
            
             <MediaQuery minWidth={ 0 }>
            
+            {getAccessToken && 
             <Navbar.Toggle>
             <Img src={ProfilePic} fluid ></Img>
-            </Navbar.Toggle>
+            </Navbar.Toggle>}
 
             <Navbar.Collapse >
         
                 <Nav className="ml-auto">
                     <Nav.Item><NavDropdown.Divider className="header-divider" /></Nav.Item>
                     <Nav.Item><Nav.Link href="/Profil">Profil</Nav.Link></Nav.Item>
+                    <Nav.Item><Nav.Link href="/TidsbankBruker">Tidsbank</Nav.Link></Nav.Item>
                     <Nav.Item><Nav.Link href="/Loggut">Logg ut</Nav.Link></Nav.Item>
+
                     <Nav.Item><NavDropdown.Divider className="header-divider" /></Nav.Item>
 
                     <Nav.Item><Nav.Link href="/Meldinger">Meldinger</Nav.Link></Nav.Item>
                     <Nav.Item><Nav.Link href="/Meldekort">Meldekort</Nav.Link></Nav.Item>
                     <Nav.Item><Nav.Link href="/Kalender">Kalender</Nav.Link></Nav.Item>
                     <Nav.Item><Nav.Link href="/CV">CV</Nav.Link></Nav.Item>
+
                     <Nav.Item><NavDropdown.Divider className="header-divider" /></Nav.Item>
+
+                    <Nav.Item><Nav.Link href="/Aktiviteter">Aktiviteter</Nav.Link></Nav.Item>
                     <Nav.Item><Nav.Link href="/Chatbot">Chatbot</Nav.Link></Nav.Item>
                     <Nav.Item><Nav.Link href="/Lenkebibliotek">Lenkebibliotek</Nav.Link></Nav.Item>
                     <Nav.Item><Nav.Link href="/FAQ">FAQ</Nav.Link></Nav.Item>

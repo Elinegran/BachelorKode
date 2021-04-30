@@ -5,95 +5,60 @@
 }
 
 /*  Design for mobil */ 
-
-main.meldingssiden {
-  background: pink; 
+main.meldingssiden { 
 	margin: 0 auto;
 }
 
 section {
-  background: blue;  
+  background: white;  
 }
 
 section.melding {
-  background: red; 
-}
-.avatarOgOverskrift {
-  background: lightgoldenrodyellow;
-  
-}
-
-.meldingsoverskrift {
-  margin:auto;
-  background: lightgoldenrodyellow
-}
-
-.overskrift {
-  color:darkslategray;
-  font-size: 1.5em;
-}
-
-.avatar {
-  max-height: 2.5em;
-  border-radius: 50%;
-  margin: 5px;
-}
-
-section.samtale {
-  background: yellow; 
+  background: #e5ebeb; 
 }
 
 section.gruppe {
-  background: aqua;  
+  background: #e5ebeb;  
+}
+.mobil {
+  visibility:visible;
+  font-size: 1.2em;
+}
+
+.innboksMelding {
+  display:flex;
+}
+
+.tidMelding {
+  font-size: 0.8em ;
 }
 
 /*  Design for stor skjerm  */ 
-/* Main blir delt i 3 kolonner */
-@media screen and (min-width: 900px) {
+/* Main blir delt i 2 kolonner */
+@media screen and (min-width: 950px) {
 
 main.meldingssiden {
   display: flex; 
-  background: pink; 
+  background: white; 
 }
 
 section {
-  background: blue; 
-  margin: 5px;
+  margin: 12px;
 }
 
 section.melding {
-  background: red; 
-  width: 33%;
-}
-
-section.samtale {
-  background: yellow; 
-  width: 33%; 
+  background: #e5ebeb; 
+  width: 60%;
 }
 
 section.gruppe {
-  background: rgb(213, 231, 231);
-  width: 33%;  
+  background: #e5ebeb;
+  width: 40%;  
+}
+
+.mobil {
+  visibility:hidden;
 }
 
 } /* slutt på media-queiry for stor skjerm  */
 
-
-
-
-
-/* Knapper */ 
-/* .knapp {
-  display: inline-block;
-  background-color: #ddd;
-  color: 'black';
-  border: none;
-  padding: 10px 20px;
-  margin: 5px;
-  border-radius: 5px;
-  cursor: pointer;
-  text-decoration: none;
-  font-size: 15px;
-  font-family: inherit;
-}
- */

@@ -1,17 +1,34 @@
 const express = require("express");
-const bodyParser = require("body-parser");
 const cors = require("cors");
+
+const cookieParser = require("cookie-parser");
+const bodyParser = require("body-parser");
+const session = require("express-session");
+require('dotenv').config();
+
 const app = express();
 
-const apiRoutes = require("./app/routes/routes.js");
-
-var corsOptions = {
-  origin: "http://localhost:3001"
-};
-
-app.use(cors());
 app.use(express.json());
+app.use(cors({
+  origin: ["http://localhost:3000"],
+  methods: ["GET", "POST", "DELETE"], // Gruppe 1: la til DELETE 
+  credentials: true
+}));
+
+app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(session({
+  key: "userId",
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    maxAge: 10800000
+  },
+}));
+
+const apiRoutes = require("./app/routes/routes.js");
 
 app.use('/api/', apiRoutes);
 

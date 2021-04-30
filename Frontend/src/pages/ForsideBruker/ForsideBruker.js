@@ -13,27 +13,29 @@ import {
         circleNavMeldekort,
         slides,
         buttonFAQ
- } from './Data'
+ } from './Data' 
+
 export const ForsideBruker = () => (
         <Container>
                 {/* Runde knapper på toppen */}
                 <Row style = {{ margin: 'auto'}}>
-                        <CircleImgContainer { ...circleMeldinger} />
-                        <CircleImgContainer  { ...circleNavMeldekort}  />
-                        <CircleImgContainer { ...circleCalendar}  />
+                        <CircleImgContainer { ...circleMeldinger } />
+                        <CircleImgContainer { ...circleNavMeldekort } />
+                        <CircleImgContainer { ...circleCalendar } />
                 </Row>
         
                 {/* Aktiviteter i karusell */}
-                <ForsideCarousel fluid {... slides }/>
+                <ForsideCarousel fluid {... slides } />
 
                 {/* Knapper nederst */}
                 <MediaQuery maxWidth={992}>
+
                         <Row>
-                                <BigButton { ...buttonCv }/>
-                                <BigButton { ...buttonChatbot }/>
+                                <BigButton { ...buttonCv } />
+                                <BigButton { ...buttonChatbot } />
                         </Row>
                         <Row>
-                                <BigButton { ...buttonLenkebibliotek }/>
+                                <BigButton { ...buttonLenkebibliotek } />
                                 <BigButton { ...buttonFAQ } />
                         </Row>
                 </MediaQuery>
@@ -41,13 +43,15 @@ export const ForsideBruker = () => (
                 {/* Knapper nederst på skjerm over 992px (PC) - en rad istedenfor to*/}
                 <MediaQuery minWidth={993}>
                         <Row>
-                                <BigButton { ...buttonCv }/>
-                                <BigButton { ...buttonChatbot }/>
-                                <BigButton { ...buttonLenkebibliotek }/>
+                                <BigButton { ...buttonCv } />
+                                <BigButton { ...buttonChatbot } />
+                                <BigButton { ...buttonLenkebibliotek } />
                                 <BigButton { ...buttonFAQ } />
                         </Row>
                 </MediaQuery>
         </Container>
         
-)
+);
+
+export default ForsideBruker;
 

@@ -1,8 +1,12 @@
 
-import React from "react";
+import React, { useState, useEffect } from "react";
+import Axios from 'axios';
+import { Link } from 'react-router-dom'
 import { Carousel } from 'react-bootstrap';
+import moment from 'moment';
 import styled from 'styled-components';
 import { appColors } from '../Colors';
+import slide1 from '../../assets/images/Forside/slide3.jpg'
 export const ImageSpec = styled.div`
 
     @width: 450px;
@@ -36,10 +40,24 @@ export const ImageSpec = styled.div`
 }
 `
 
-export const ForsideCarousel = ({ slide1, slide2, slide3 }) => (
-  
+
+export const ForsideCarousel = function ForsideCarousel() {
+  const [aktivitetsList, setAktivitetsList] = useState([]);
+
+useEffect(() => {
+  Axios.get("http://localhost:3001/api/getAktivitetMax3").then((response) => {
+      setAktivitetsList(response.data);
+      console.log(response.data)
+  });
+}, []);
+
+
+  return (
+<div>
+  <Link to='/aktiviteter'>
 <ImageSpec>
   <Carousel bsPrefix='carousel' interval={5000}>
+  {aktivitetsList.map((val) => {return (
     <Carousel.Item  >
       
       <img
@@ -51,34 +69,15 @@ export const ForsideCarousel = ({ slide1, slide2, slide3 }) => (
       />
      
       <Carousel.Caption>
-        <h3>Tittel på aktivitet</h3>
-        <p>Aktivitetstekst osv.</p>
+        <h3>{val.tittel}</h3>
+        <p>{moment(val.dato).format("DD/MM/YYYY")}  kl: {val.tidspunktformat}</p>
+        <p>{ val.sted}</p>
       </Carousel.Caption>
     </Carousel.Item>
-    <Carousel.Item>
-      <img
-        className="d-block w-100"
-        src={slide2}
-        alt="Third slide"
-      />
-
-      <Carousel.Caption>
-      <h3>Tittel på aktivitet</h3>
-        <p>Aktivitetstekst osv.</p>
-      </Carousel.Caption>
-    </Carousel.Item>
-    <Carousel.Item>
-      <img
-        className="d-block w-100"
-        src={slide3}
-        alt="Third slide"
-      />
-
-      <Carousel.Caption>
-      <h3>Tittel på aktivitet</h3>
-        <p>Aktivitetstekst osv.</p>
-      </Carousel.Caption>
-    </Carousel.Item>
+     )})}
   </Carousel>
-  </ImageSpec>
-)
+  </ImageSpec> 
+  </Link>
+  </div>
+);
+}
