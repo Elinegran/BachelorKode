@@ -1,4 +1,4 @@
-
+//Utviklet av: Gruppe 2
 export const appColors = {
     // Farger fra logoen til matchbox
     primaryColor: "#5edbdb",

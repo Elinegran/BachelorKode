@@ -1,7 +1,8 @@
+//Utviklet av: Gruppe 2
 import React, { useState, useEffect } from "react";
 import Axios from 'axios';
 import { Accordion, Card } from 'react-bootstrap';
-import { FaChevronRight } from 'react-icons/fa';
+import { FaPlus, FaMinus } from 'react-icons/fa';
 
 
 function FAQaccordion () {
@@ -15,15 +16,18 @@ function FAQaccordion () {
       })
   }, []);
  
+  const [open, setOpen] = useState(false);
+
     return (
       <div className="App text-center"><h1>Ofte stilte spørsmål (FAQ)</h1>
-          <Accordion> 
+          <Accordion className="mt-4"> 
             {faqList.map((val, index) => {return (
             <Card className="text-left" key={index}>
-                <Accordion.Toggle as={Card.Header} eventKey={val.spørsmål}> 
-                  {val.spørsmål}<FaChevronRight className="float-right"/> 
-                </Accordion.Toggle> 
-                <Accordion.Collapse eventKey={val.spørsmål}>
+                <Accordion.Toggle as={Card.Header} eventKey={val} onClick={() => setOpen(!open)}> 
+                { open ? <FaMinus className="float-right"/> : <FaPlus className="float-right"/> }
+                  {val.spørsmål} 
+                </Accordion.Toggle>
+                <Accordion.Collapse eventKey={val}>
                   <Card.Body> 
                     {val.svar} 
                   </Card.Body>

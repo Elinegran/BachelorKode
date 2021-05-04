@@ -1,3 +1,4 @@
+//Utviklet av: Gruppe 2
 import React from 'react'
 import { Route, Redirect } from 'react-router-dom'
 import authService from '../services/auth.service';

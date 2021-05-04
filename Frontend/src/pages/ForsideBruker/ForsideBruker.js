@@ -1,13 +1,15 @@
+//Utviklet av: Gruppe 2
 import React from 'react'
 import { CircleImgContainer } from '../../components/Forside/CircleImgContainer'
 import{ ForsideCarousel} from '../../components/Forside/Carousel'
 import { Row, Container } from 'react-bootstrap'
 import { BigButton } from '../../components/Forside/BigButton'
 import MediaQuery from 'react-responsive'
+import { CenterModal } from '../../components/Modal';
 import { 
         buttonCv, 
         buttonChatbot,
-        buttonLenkebibliotek, 
+        buttonTidsbank, 
         circleMeldinger, 
         circleCalendar, 
         circleNavMeldekort,
@@ -16,7 +18,10 @@ import {
  } from './Data' 
 
 export const ForsideBruker = () => (
+        
         <Container>
+                <CenterModal />
+                
                 {/* Runde knapper på toppen */}
                 <Row style = {{ margin: 'auto'}}>
                         <CircleImgContainer { ...circleMeldinger } />
@@ -35,7 +40,7 @@ export const ForsideBruker = () => (
                                 <BigButton { ...buttonChatbot } />
                         </Row>
                         <Row>
-                                <BigButton { ...buttonLenkebibliotek } />
+                                <BigButton { ...buttonTidsbank } />
                                 <BigButton { ...buttonFAQ } />
                         </Row>
                 </MediaQuery>
@@ -45,7 +50,7 @@ export const ForsideBruker = () => (
                         <Row>
                                 <BigButton { ...buttonCv } />
                                 <BigButton { ...buttonChatbot } />
-                                <BigButton { ...buttonLenkebibliotek } />
+                                <BigButton { ...buttonTidsbank } />
                                 <BigButton { ...buttonFAQ } />
                         </Row>
                 </MediaQuery>

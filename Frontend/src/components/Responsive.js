@@ -1,5 +1,4 @@
-
-
+//Utviklet av: Gruppe 2
 export const Responsive = {
 
     mini: '@media screen and (max-width: 480px)',

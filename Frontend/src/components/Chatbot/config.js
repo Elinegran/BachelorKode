@@ -1,25 +1,25 @@
+//Utviklet av: Gruppe 2
 import {appColors} from '../Colors';
 // Config starter code
-import { createChatBotMessage } from "react-chatbot-kit";
-import LearningOptions from "./LearningOptions"
+import { createChatBotMessage} from "react-chatbot-kit";
 import LinkList from "./LinkList";
 import AuthService from '../../services/auth.service';
 import './config.css';
-const link = "tom link";
+import  MatchbotAvatar   from './MatchbotAvatar'
 
-export const linkfunction = function linkfunction(svarList) {
-  console.log("Svarlist inne i Linkfunction:" + svarList)
-}
 const config = { 
   botName: "Matchbot",
- 
+  
   initialMessages: [
     createChatBotMessage("Hei " + AuthService.getCurrentUsername() + ", hva trenger du hjelp til?", {
       widget: "learningOptions",
     }),
   ],
   
-
+  customComponents: {
+    botAvatar: (props) => <MatchbotAvatar {...props} />,
+    header: () => <div className="react-chatbot-kit-chat-header" >Samtale med MatchBot</div>
+  },
   customStyles: {
     botMessageBox: {
       backgroundColor: appColors.primaryDarker
@@ -28,23 +28,23 @@ const config = {
     chatButton: {
       backgroundColor: appColors.primaryDarker,
     },
-    
+    chatInput: {
+      placeholder: "bla"
+    }
+
     
   },
   widgets: [
-    // {
-    //   widgetName: "learningOptions",
-    //  widgetFunc: (props) => <LearningOptions {...props} />,
-    // },
+
     {
       widgetName: 'NAVlinks',
       widgetFunc: (props) => <LinkList {...props} />,
       props: {
         options: [
           {
-            text: link,
+            text: "NAV Meldekort",
             url:
-              link,
+              "https://www.nav.no/no/person/arbeid/dagpenger-ved-arbeidsloshet-og-permittering/meldekort-hvordan-gjor-du-det",
             id: 1,
           },
           {
@@ -58,6 +58,27 @@ const config = {
             url: "https://www.nav.no",
             id: 3,
           },
+        ],
+      },
+    },
+    {
+      widgetName: 'VeilederLinks',
+      widgetFunc: (props) => <LinkList {...props} />,
+      props: {
+        options: [
+          {
+            text: "Send melding til Tor",
+            url:
+              "/meldinger",
+            id: 1,
+          },
+          {
+            text: "Send melding til Jon Ola",
+            url:
+              "/meldinger",
+            id: 2,
+          },
+ 
         ],
       },
     },
