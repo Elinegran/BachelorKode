@@ -1,4 +1,4 @@
-
+//Utviklet av: Gruppe 2
 import React, { useState, useEffect } from "react";
 import Axios from 'axios';
 import { Link } from 'react-router-dom'
@@ -6,7 +6,7 @@ import { Carousel } from 'react-bootstrap';
 import moment from 'moment';
 import styled from 'styled-components';
 import { appColors } from '../Colors';
-import slide1 from '../../assets/images/Forside/slide3.jpg'
+import slide1 from '../../assets/images/Bruker/box_ico.png'
 export const ImageSpec = styled.div`
 
     @width: 450px;
@@ -15,17 +15,17 @@ export const ImageSpec = styled.div`
 .carousel {
   width: @width;
   height: @height;
-  background:#fff;
+  background: #f2f2f2;
   margin-bottom: 15px;
   border: 2px solid ${ appColors.primaryColor};
   .carousel-item {
     overflow: hidden;
 
     img {
-      object-fit: cover;
+      object-fit: scale-down;
       max-height: 170px;
       max-width: 100%;
-      left: 50%;
+      left: 20%;
       position: relative;
       transform: translateX(-50%);
       -webkit-transform: translateX(-50%);
@@ -36,18 +36,21 @@ export const ImageSpec = styled.div`
       }
     }
   }
-  .carousel-caption { color: #fff;}
+  .carousel-caption { color: black;}
 }
+
+.carousel-indicators li {
+  background-color: #5edbdb; 
+}
+
 `
 
 
-export const ForsideCarousel = function ForsideCarousel() {
+export const ForsideCarousel = function ForsideCarousel({testdata}) {
   const [aktivitetsList, setAktivitetsList] = useState([]);
-
 useEffect(() => {
   Axios.get("http://localhost:3001/api/getAktivitetMax3").then((response) => {
       setAktivitetsList(response.data);
-      console.log(response.data)
   });
 }, []);
 

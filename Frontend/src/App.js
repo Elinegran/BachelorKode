@@ -1,6 +1,6 @@
-
+//Utviklet av: Gruppe 2
 import './App.css';
-import React, { Component, useState, useEffect  } from 'react';
+import React, { useState, useEffect  } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import ProtectedRouteVeileder from './components/ProtectedRouteVeileder'
 import ProtectedRoute from './components/ProtectedRoute'
@@ -10,13 +10,11 @@ import { Glemtpassord } from './pages/Login/GlemtPassord';
 import { ForsideBruker } from './pages/ForsideBruker/ForsideBruker';
 import { ForsideVeileder } from './pages/ForsideVeileder/ForsideVeileder';
 import { Meldinger } from './pages/Meldinger/Meldinger';
-import { MeldingerV} from './pages/Meldinger/Meldinger-veileder';
 import { Meldekort } from './pages/Meldekort/Meldekort';
 import { Kalender } from './pages/Kalender/Kalender';
 import { CV } from './pages/CV/CV';
 import { ChatbotPage } from './pages/Chatbot/Chatbot';
 import { Lenkebibliotek } from './pages/Lenkebibliotek/Lenkebibliotek';
-import { LenkebibliotekV } from './pages/Lenkebibliotek/LenkebibliotekV';
 import { FAQoversikt } from './pages/FAQ/FAQoversikt';
 import { EndreFAQ } from './pages/FAQ/EndreFAQ';
 import { AktivitetsOversikt } from './pages/Aktiviteter/AktivitetsOversikt';
@@ -46,6 +44,7 @@ function App() {
         onTimeout: () => {
           alert("Du vil nå bli logget ut på grunn av inaktivitet");
           setIsTimeout(true);
+          authService.logout();
         },
         //Callback triggered if users re-open the app after expired time
         onExpired: () => {
@@ -58,8 +57,6 @@ function App() {
     }
   }, []); 
     
-  
-
   return (
       <React.Fragment>
       <Layout><NavigationBar /></Layout> <PageLine />
@@ -67,15 +64,14 @@ function App() {
           <Router>
             <Switch>
             <Route exact path="/" component={ Logginn }></Route>
-            <Route path="/Loggut" component= { Loggut }></Route>
+            <Route path="/Loggut" component={ Loggut }></Route>
+            <Route path="/GlemtPassord" component={ Glemtpassord }></Route>
             <ProtectedRouteVeileder path="/Veileder" component={ ForsideVeileder } />
-            <ProtectedRouteVeileder path="/RegBruker" component={ RegBruker } /> 
+              <ProtectedRouteVeileder path="/RegBruker" component={ RegBruker } />
               <ProtectedRouteVeileder path="/Brukeroversikt" component={ BrukerOversikt } />
               <ProtectedRouteVeileder path="/EndreFAQ" component={ EndreFAQ } />
               <ProtectedRouteVeileder path="/EndreAktivitet" component={ EndreAktivitet } />
-              <ProtectedRouteVeileder path="/MeldingerV" component={ MeldingerV } />
-              <ProtectedRouteVeileder path="/LenkebibliotekV" component= {LenkebibliotekV} />
-			        <ProtectedRouteVeileder path="/EndreChatbot" component={ ChatbotVeileder } />
+              <ProtectedRouteVeileder path="/EndreChatbot" component={ ChatbotVeileder } />
               <ProtectedRouteVeileder path="/ChatbotLogg" component={ Chatbotlogg } />
               <ProtectedRoute path="/Bruker" component={ ForsideBruker } />
                 <ProtectedRoute path="/Profil" component={ RedigerProfil } />

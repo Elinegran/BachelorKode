@@ -1,3 +1,4 @@
+//Utviklet av: Gruppe 2
 import React from "react";
 import { Image, Button } from 'react-bootstrap';
 import styled from 'styled-components';

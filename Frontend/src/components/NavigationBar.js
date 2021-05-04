@@ -102,7 +102,7 @@ export const NavigationBar = () => (
 
                     <Nav.Item><NavDropdown.Divider className="header-divider" /></Nav.Item>
 
-                    <Nav.Item><Nav.Link href="/MeldingerV">Meldinger</Nav.Link></Nav.Item>
+                    <Nav.Item><Nav.Link href="/Meldinger">Meldinger</Nav.Link></Nav.Item>
                     <Nav.Item><Nav.Link href="/Meldekort">Meldekort</Nav.Link></Nav.Item>
                     <Nav.Item><Nav.Link href="/Kalender">Kalender</Nav.Link></Nav.Item>
                     <Nav.Item><Nav.Link href="/CV">CV</Nav.Link></Nav.Item>
@@ -116,7 +116,7 @@ export const NavigationBar = () => (
                     {isVeilAuth && <Nav.Item><Nav.Link href="/EndreChatbot">Legg til og endre Matchbot</Nav.Link></Nav.Item> }
                     {isVeilAuth &&<Nav.Item><Nav.Link href="/ChatbotLogg">Matchbotlogg</Nav.Link></Nav.Item> }
                     {isVeilAuth &&<Nav.Item><NavDropdown.Divider className="header-divider" /></Nav.Item>}
-                    <Nav.Item><Nav.Link href="/LenkebibliotekV">Lenkebibliotek</Nav.Link></Nav.Item>
+                    <Nav.Item><Nav.Link href="/Lenkebibliotek">Lenkebibliotek</Nav.Link></Nav.Item>
                     <Nav.Item><Nav.Link href="/FAQ">FAQ</Nav.Link></Nav.Item>
                     {isVeilAuth && <Nav.Item><Nav.Link href="/EndreFAQ">Legg til og endre FAQ</Nav.Link></Nav.Item> }
                 </Nav>
