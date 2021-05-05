@@ -1,7 +1,6 @@
+//Utviklet av: Gruppe 2
 const express = require('express');
-
 const router = express.Router();
-
 // importerer Query-filer som inneholder forskjellige sql-queries osv.
 const logginnQueries = require('../controllers/logginn');
 const brukerQueries = require('../controllers/bruker');
@@ -51,6 +50,7 @@ router.use("/chatbotUpdate", chatbotQueries.updateChatbot);
 router.use("/chatbotDelete", chatbotQueries.deleteChatbot);
 router.use("/chatbotLogSave", chatbotQueries.saveUAQL);
 router.use("/chatbotGetLog", chatbotQueries.getUAQL);
+
 
 //Kalender: 
 const kalender = require('../controllers/kalender');
@@ -173,7 +173,5 @@ router.use("/LenkebibBruker", lenkerForBruker.LenkerBruker );
 
 
 
-
 // Eksporterer denne modellen, så server.js får brukt den
 module.exports = router;
-

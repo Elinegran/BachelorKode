@@ -11,7 +11,7 @@ const app = express();
 app.use(express.json());
 app.use(cors({
   origin: ["http://localhost:3000"],
-  methods: ["GET", "POST", "DELETE"], // Gruppe 1: la til DELETE 
+  methods: ["GET", "POST"],
   credentials: true
 }));
 

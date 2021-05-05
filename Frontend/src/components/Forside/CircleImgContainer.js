@@ -1,8 +1,10 @@
-import React from "react";
+//Utviklet av: Gruppe 2
+import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
 import { Image } from 'react-bootstrap';
 import styled from 'styled-components';
 import {appColors} from '../Colors';
+import Axios from 'axios';
 export const CircleContainer = styled.div`
     margin: auto;
     width: 30%;
@@ -116,15 +118,22 @@ export const ButtonLabel = styled.div`
     
 `
 
-
-
-export const CircleImgContainer = ({ img, alt, buttonLabel, subText, path }) => (
+export const CircleImgContainer = function CircleImgContainer({ img, alt, buttonLabel, subText, path, aktive }) {
+    const [antallBrukere, setAntallBrukere] = useState(null);
+    useEffect(() => {
+      Axios.get("http://localhost:3001/api/brukergetOnlineUsers").then((response) => {
+          if(aktive===true) {
+          setAntallBrukere(response.data[0].antall);
+          }
+      });
+    }, [aktive]);
     
+    return(
     <CircleContainer >
     <CircleInfo >
     <Button bsPrefix='CircleContainer' href={ path }>
         <ImgWrapper><Image  src={img} alt={alt} fluid /></ImgWrapper>
-        <NumberContainer>{subText}</NumberContainer>
+        <NumberContainer>{antallBrukere ? antallBrukere+' Pålogget' : subText}  </NumberContainer>
       
        </Button> 
     </CircleInfo>
@@ -135,3 +144,4 @@ export const CircleImgContainer = ({ img, alt, buttonLabel, subText, path }) => 
     </CircleContainer>
    
     )
+}
