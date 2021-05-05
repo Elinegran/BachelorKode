@@ -1,12 +1,14 @@
+//Utviklet av: Gruppe 2
 import React from 'react'
 import { CircleImgContainer } from '../../components/Forside/CircleImgContainer'
 import { ForsideCarousel } from '../../components/Forside/Carousel'
 import { Row, Container } from 'react-bootstrap'
 import { BigButton } from '../../components/Forside/BigButton'
 import MediaQuery from 'react-responsive'
+import { CenterModal } from '../../components/Modal';
 import { 
         buttonEndreAktivitet, 
-        buttonLenkebibliotek, 
+        buttonEndreChatbot, 
         circleMeldinger, 
         circleCalendar, 
         circleBrukeroversikt,
@@ -17,6 +19,7 @@ import {
 
 export const ForsideVeileder = () => (
         <Container>
+                <CenterModal />
                 {/* Runde knapper på toppen */}
                 <Row style = {{ margin: 'auto'}}>
                         <CircleImgContainer { ...circleMeldinger } />
@@ -30,11 +33,11 @@ export const ForsideVeileder = () => (
                 {/* Knapper nederst */}
                 <MediaQuery maxWidth={992}>
                         <Row>
+                                <BigButton { ...buttonRegBruker}/>
                                 <BigButton { ...buttonEndreAktivitet }/>
-                                <BigButton { ...buttonRegBruker }/>
                         </Row>
                         <Row>
-                                <BigButton { ...buttonLenkebibliotek }/>
+                                <BigButton { ...buttonEndreChatbot }/>
                                 <BigButton { ...buttonEndreFAQ } />
                         </Row>
                 </MediaQuery>
@@ -42,9 +45,9 @@ export const ForsideVeileder = () => (
                 {/* Knapper nederst på skjerm over 992px (PC) - en rad istedenfor to*/}
                 <MediaQuery minWidth={992}>
                         <Row>
+                                <BigButton { ...buttonRegBruker} />
                                 <BigButton { ...buttonEndreAktivitet } />
-                                <BigButton { ...buttonRegBruker } />
-                                <BigButton { ...buttonLenkebibliotek } />
+                                <BigButton { ...buttonEndreChatbot } />
                                 <BigButton { ...buttonEndreFAQ } />
                         </Row>
                 </MediaQuery>

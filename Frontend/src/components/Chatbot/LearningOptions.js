@@ -1,3 +1,4 @@
+//Utviklet av: Gruppe 2
 // in src/components/LearningOptions/LearningOptions.jsx
 
 import React from "react";

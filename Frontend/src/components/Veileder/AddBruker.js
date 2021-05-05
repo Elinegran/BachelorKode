@@ -1,5 +1,6 @@
+//Utviklet av: Gruppe 2
 import React, { useState } from "react";
-import Axios from 'axios';
+import axios from 'axios';
 import { Button, ButtonGroup, ToggleButton, InputGroup, FormControl } from 'react-bootstrap';
 import { InputFelt } from '../InputFelt';
 import styled from 'styled-components';
@@ -24,24 +25,31 @@ export const AddBruker = function AddBruker() {
     const [epost, setEpost] = useState(null);
     const [idbrukertype, setIdbrukertype] = useState(1);
     const [genPassord, setGenpassord] = useState("");
+    const [message, setMessage] = useState(null);
 
     //Generer tilfeldige passord (5 tegn, med tall ):
     const randomPassord = () => {
         setGenpassord(passordGenerator(5, false));
     }
+    var mailformat = /^(([^<>()\\.,;:\s@"]+(\.[^<>()\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     const submitBruker = () => {
-        Axios.post("http://localhost:3001/api/brukerCreate", {
-        fornavn: fornavn, etternavn: etternavn, tlf: tlf, epost: epost, idbrukertype: idbrukertype, passord: genPassord
-        }).then(() => {
-        alert("Bruker lagt til!");
-        });
+        if(epost.match(mailformat)) {
+            axios.post("http://localhost:3001/api/brukerCreate", {
+            fornavn: fornavn, etternavn: etternavn, tlf: tlf, epost: epost, idbrukertype: idbrukertype, passord: genPassord
+            }).then(() => {
+            alert("Bruker lagt til!");
+            });
+        }
+        else {
+            setMessage("Du har oppgitt en ugyldig e-post adresse");
+        }
     };    
 
     return (
         <div className="App text-center"><h1>Brukerregistrering</h1>
             <div className="form">
-            <InputFelt label="Fornavn" name="fornavn" onChange={(e)=> {
+            <InputFelt label="Fornavn" name="fornavn" autoFocus="true" onChange={(e)=> {
                 setFornavn(e.target.value);
                 }} />
 
@@ -56,13 +64,14 @@ export const AddBruker = function AddBruker() {
             <InputFelt label="E-post" name="epost" onChange={(e)=> {
                 setEpost(e.target.value);
                 }} />
+            <p>{message}</p>
 
             <ButtonGroup toggle className="m-4">
                 {radios.map((radio, idx) => (
                 <ToggleButton
                     key={idx}
                     type="radio"
-                    variant="outline-secondary"
+                    variant="outline-info"
                     name="idbrukertype"
                     value={radio.value}
                     checked={idbrukertype === radio.value}
@@ -86,7 +95,7 @@ export const AddBruker = function AddBruker() {
                 </InputGroup>
             </RandomPassord>
 
-            <Button className="btn btn-success rounded mb-4" onClick={submitBruker}>Registrer</Button>
+            <Button className="btn btn-success rounded mt-4 mb-4" onClick={submitBruker}>Registrer</Button>
         </div>
     </div> 
     )

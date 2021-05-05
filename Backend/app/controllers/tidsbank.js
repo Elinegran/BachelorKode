@@ -1,3 +1,4 @@
+//Utviklet av: Gruppe 2
 const db = require("../config/config.js");
 var idbruker = "";
 
@@ -24,60 +25,71 @@ exports.getMonthly = function(req, res) {
 }
 exports.getMonthlyMinutes = function(req, res) {
   let idbruker = req.query.idbruker;
-  const sqlSelect = "SELECT idbruker, \
+  const sqlSelect = "SELECT DISTINCT idbruker, \
                           (SELECT SUM(TIME_TO_SEC(loggetut) - TIME_TO_SEC(loggetinn))\
                           FROM tidsbank\
                           WHERE idbruker=?\
+                          AND DAY(loggetinn) like DAY(loggetut)\
                           AND MONTH(loggetinn) = '1') as Januar,\
                           (SELECT(SUM(TIME_TO_SEC(loggetut) - TIME_TO_SEC(loggetinn)))\
                           FROM tidsbank\
                           WHERE idbruker=?\
+                          AND DAY(loggetinn) like DAY(loggetut)\
                           AND MONTH(loggetinn) = '2') as Februar,\
                           (SELECT(SUM(TIME_TO_SEC(loggetut) - TIME_TO_SEC(loggetinn)))\
                           FROM tidsbank\
                           WHERE idbruker=?\
+                          AND DAY(loggetinn) like DAY(loggetut)\
                           AND MONTH(loggetinn) = '3') as Mars,\
                           (SELECT(SUM(TIME_TO_SEC(loggetut) - TIME_TO_SEC(loggetinn)))\
                           FROM tidsbank\
                           WHERE idbruker=?\
+                          AND DAY(loggetinn) like DAY(loggetut)\
                           AND MONTH(loggetinn) = '4') as April,\
                           (SELECT(SUM(TIME_TO_SEC(loggetut) - TIME_TO_SEC(loggetinn)))\
                           FROM tidsbank\
                           WHERE idbruker=?\
+                          AND DAY(loggetinn) like DAY(loggetut)\
                           AND MONTH(loggetinn) = '5') as Mai,\
                           (SELECT(SUM(TIME_TO_SEC(loggetut) - TIME_TO_SEC(loggetinn)))\
                           FROM tidsbank\
                           WHERE idbruker=?\
+                          AND DAY(loggetinn) like DAY(loggetut)\
                           AND MONTH(loggetinn) = '6') as Juni,\
                           (SELECT(SUM(TIME_TO_SEC(loggetut) - TIME_TO_SEC(loggetinn)))\
                           FROM tidsbank\
                           WHERE idbruker=?\
+                          AND DAY(loggetinn) like DAY(loggetut)\
                           AND MONTH(loggetinn) = '7') as Juli,\
                           (SELECT(SUM(TIME_TO_SEC(loggetut) - TIME_TO_SEC(loggetinn)))\
                           FROM tidsbank\
                           WHERE idbruker=?\
+                          AND DAY(loggetinn) like DAY(loggetut)\
                           AND MONTH(loggetinn) = '8') as August,\
                           (SELECT(SUM(TIME_TO_SEC(loggetut) - TIME_TO_SEC(loggetinn)))\
                           FROM tidsbank\
                           WHERE idbruker=?\
+                          AND DAY(loggetinn) like DAY(loggetut)\
                           AND MONTH(loggetinn) = '9') as September,\
                           (SELECT(SUM(TIME_TO_SEC(loggetut) - TIME_TO_SEC(loggetinn)))\
                           FROM tidsbank\
                           WHERE idbruker=?\
+                          AND DAY(loggetinn) like DAY(loggetut)\
                           AND MONTH(loggetinn) = '10') as Oktober,\
                           (SELECT(SUM(TIME_TO_SEC(loggetut) - TIME_TO_SEC(loggetinn)))\
                           FROM tidsbank\
                           WHERE idbruker=?\
+                          AND DAY(loggetinn) like DAY(loggetut)\
                           AND MONTH(loggetinn) = '11') as November,\
                           (SELECT(SUM(TIME_TO_SEC(loggetut) - TIME_TO_SEC(loggetinn)))\
                           FROM tidsbank\
                           WHERE idbruker=?\
+                          AND DAY(loggetinn) like DAY(loggetut)\
                           AND MONTH(loggetinn) = '12') as Desember\
                    FROM tidsbank\
                     WHERE idbruker=?\
                     AND loggetinn IS NOT NULL\
                     AND loggetut IS NOT NULL\
-                    AND MONTH(loggetinn) = month(CURRENT_TIMESTAMP)\
                     group by idbruker;"
       
   db.query(sqlSelect, [idbruker, idbruker, idbruker, idbruker, idbruker,idbruker,idbruker,idbruker,idbruker, idbruker, idbruker,idbruker,idbruker],(err, result) => {
@@ -100,6 +112,7 @@ exports.getMonthlyAverage = function(req, res)  {
           SELECT idbruker, SUM((TIME_TO_SEC(loggetut)) - (TIME_TO_SEC(loggetinn))) AS tidsbanksum\
           FROM tidsbank\
           WHERE month(loggetinn) = 1\
+          AND DAY(loggetinn) like DAY(loggetut)\
           GROUP BY idbruker\
         ) as inner_query) as AvgJan, \
       (SELECT AVG(tidsbanksum) as feb\
@@ -108,6 +121,7 @@ exports.getMonthlyAverage = function(req, res)  {
           SELECT idbruker, SUM((TIME_TO_SEC(loggetut)) - (TIME_TO_SEC(loggetinn))) AS tidsbanksum\
           FROM tidsbank\
           WHERE month(loggetinn) = 2\
+          AND DAY(loggetinn) like DAY(loggetut)\
           GROUP BY idbruker\
       ) as inner_query) as AvgFeb,\
       (SELECT AVG(tidsbanksum) as mar\
@@ -116,6 +130,7 @@ exports.getMonthlyAverage = function(req, res)  {
           SELECT idbruker, SUM((TIME_TO_SEC(loggetut)) - (TIME_TO_SEC(loggetinn))) AS tidsbanksum\
           FROM tidsbank\
           WHERE month(loggetinn) = 3\
+          AND DAY(loggetinn) like DAY(loggetut)\
           GROUP BY idbruker\
       ) as inner_query) as AvgMar\,\
       (SELECT AVG(tidsbanksum) as apr\
@@ -124,6 +139,7 @@ exports.getMonthlyAverage = function(req, res)  {
           SELECT idbruker, SUM((TIME_TO_SEC(loggetut)) - (TIME_TO_SEC(loggetinn))) AS tidsbanksum\
           FROM tidsbank\
           WHERE month(loggetinn) = 4\
+          AND DAY(loggetinn) like DAY(loggetut)\
           GROUP BY idbruker\
       ) as inner_query) as AvgApr,\
       (SELECT AVG(tidsbanksum) as may\
@@ -132,6 +148,7 @@ exports.getMonthlyAverage = function(req, res)  {
           SELECT idbruker, SUM((TIME_TO_SEC(loggetut)) - (TIME_TO_SEC(loggetinn))) AS tidsbanksum\
           FROM tidsbank\
           WHERE month(loggetinn) = 5\
+          AND DAY(loggetinn) like DAY(loggetut)\
           GROUP BY idbruker\
       ) as inner_query) as AvgMay,\
       (SELECT AVG(tidsbanksum) as jun\
@@ -140,6 +157,7 @@ exports.getMonthlyAverage = function(req, res)  {
           SELECT idbruker, SUM((TIME_TO_SEC(loggetut)) - (TIME_TO_SEC(loggetinn))) AS tidsbanksum\
           FROM tidsbank\
           WHERE month(loggetinn) = 6\
+          AND DAY(loggetinn) like DAY(loggetut)\
           GROUP BY idbruker\
       ) as inner_query) as AvgJun,\
       (SELECT AVG(tidsbanksum) as jul\
@@ -148,6 +166,7 @@ exports.getMonthlyAverage = function(req, res)  {
           SELECT idbruker, SUM((TIME_TO_SEC(loggetut)) - (TIME_TO_SEC(loggetinn))) AS tidsbanksum\
           FROM tidsbank\
           WHERE month(loggetinn) = 7\
+          AND DAY(loggetinn) like DAY(loggetut)\
           GROUP BY idbruker\
       ) as inner_query) as AvgJul,\
       (SELECT AVG(tidsbanksum) as aug\
@@ -156,6 +175,7 @@ exports.getMonthlyAverage = function(req, res)  {
           SELECT idbruker, SUM((TIME_TO_SEC(loggetut)) - (TIME_TO_SEC(loggetinn))) AS tidsbanksum\
           FROM tidsbank\
           WHERE month(loggetinn) = 8\
+          AND DAY(loggetinn) like DAY(loggetut)\
           GROUP BY idbruker\
       ) as inner_query) as AvgAug,\
       (SELECT AVG(tidsbanksum) as sep\
@@ -164,6 +184,7 @@ exports.getMonthlyAverage = function(req, res)  {
           SELECT idbruker, SUM((TIME_TO_SEC(loggetut)) - (TIME_TO_SEC(loggetinn))) AS tidsbanksum\
           FROM tidsbank\
           WHERE month(loggetinn) = 9\
+          AND DAY(loggetinn) like DAY(loggetut)\
           GROUP BY idbruker\
       ) as inner_query) as AvgSep,\
       (SELECT AVG(tidsbanksum) as oct\
@@ -172,6 +193,7 @@ exports.getMonthlyAverage = function(req, res)  {
           SELECT idbruker, SUM((TIME_TO_SEC(loggetut)) - (TIME_TO_SEC(loggetinn))) AS tidsbanksum\
           FROM tidsbank\
           WHERE month(loggetinn) = 10\
+          AND DAY(loggetinn) like DAY(loggetut)\
           GROUP BY idbruker\
       ) as inner_query) as AvgOct,\
       (SELECT AVG(tidsbanksum) as nov\
@@ -180,6 +202,7 @@ exports.getMonthlyAverage = function(req, res)  {
           SELECT idbruker, SUM((TIME_TO_SEC(loggetut)) - (TIME_TO_SEC(loggetinn))) AS tidsbanksum\
           FROM tidsbank\
           WHERE month(loggetinn) = 11\
+          AND DAY(loggetinn) like DAY(loggetut)\
           GROUP BY idbruker\
       ) as inner_query) as AvgNov,\
       (SELECT AVG(tidsbanksum) as des\
@@ -188,6 +211,7 @@ exports.getMonthlyAverage = function(req, res)  {
           SELECT idbruker, SUM((TIME_TO_SEC(loggetut)) - (TIME_TO_SEC(loggetinn))) AS tidsbanksum\
           FROM tidsbank\
           WHERE month(loggetinn) = 12\
+          AND DAY(loggetinn) like DAY(loggetut)\
           GROUP BY idbruker\
       ) as inner_query) as AvgDec FROM tidsbank;"
   db.query(sqlSelect, (err, result) => {
@@ -223,7 +247,6 @@ exports.getAll = function(req, res) {
 exports.tbStart = function(epostTidsbank, req, res)  {  
     const epost = epostTidsbank;
     var idtidsbank = null;
-    console.log("Epost fra logginn:" + epost);
     const sqlQuery = "SELECT idbruker FROM bruker WHERE epost=?"
     db.query(sqlQuery,[epost] , (err, result)=> {
         if (err) {
@@ -231,7 +254,6 @@ exports.tbStart = function(epostTidsbank, req, res)  {
         } 
         else {
             idbruker = result[0].idbruker;
-          console.log("idbruker fra spørring: " + idbruker)
           const sqlQueryLogoutNull = "SELECT idtidsbank, loggetinn FROM tidsbank WHERE idbruker = ? AND loggetut IS NULL"
           db.query(sqlQueryLogoutNull, [idbruker], (err, result) => {
               if (err) {
@@ -241,7 +263,6 @@ exports.tbStart = function(epostTidsbank, req, res)  {
               else {
                   if (result.length > 0) {
                   idtidsbank = result[0].idtidsbank;
-                  console.log("Sjekk om null:" + idtidsbank)
                   }
                   // Hvis det ikke er registrert loggut-tidspunkt, skal det ikke registreres nytt tidspunkt for logginn.
                   if (idtidsbank != null) {

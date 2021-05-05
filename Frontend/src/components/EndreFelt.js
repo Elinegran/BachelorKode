@@ -1,3 +1,4 @@
+//Utviklet av: Gruppe 2
 import { InputGroup, FormControl } from 'react-bootstrap';
 import {appColors} from './Colors'
 import styled from 'styled-components';

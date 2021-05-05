@@ -1,8 +1,7 @@
+//Utviklet av: Gruppe 2
 const bcrypt = require ('bcrypt');
 
 const db = require("../config/config.js");
-
-
 
 //Legge til en ny aktivitet:
 exports.createAktivitet = function(req, res)  {  
@@ -24,6 +23,19 @@ exports.createAktivitet = function(req, res)  {
 };
 
 
+//Henter en spesifikk aktivitet:
+exports.getOneAktivitet = function(req, res)  {
+  idaktivitet = req.body.idaktivitet;
+  const sqlSelect = "SELECT *, TIME_FORMAT(tidspunkt, '%H:%i') as tidspunktformat FROM aktivitet where idaktivitet=?";
+  db.query(sqlSelect, [idaktivitet], (err, result) => {
+    if (err) {
+      console.log(err)
+    } 
+    else {
+      res.send(result);
+      }
+    });
+};
 //SQL-SELECT:
 exports.getAllAktivitet = function(req, res)  {
     const sqlSelect = "SELECT *, TIME_FORMAT(tidspunkt, '%H:%i') as tidspunktformat FROM aktivitet";

@@ -1,3 +1,4 @@
+//Utviklet av: Gruppe 2
 import React from 'react';
 import Container from 'react-bootstrap/Container';
 

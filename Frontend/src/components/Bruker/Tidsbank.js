@@ -1,14 +1,16 @@
-import React, { useState, useEffect } from "react";
+//Utviklet av: Gruppe 2
+import React from "react";
 import { Badge } from 'react-bootstrap'
-import { Chart } from 'react-charts'
 import Axios from 'axios';
-import AuthService from '../../services/auth.service';
 import { Responsive } from '../Responsive';
 import styled from 'styled-components';
+import { Line } from 'react-chartjs-2';
+
 const ResponsiveContainer = styled.div`
 margin-top: 20px;
       width: 280px;
       height: 200px;
+      margin-bottom: 300px;
         ${Responsive.mini}{
           width: 100%;
           height: 200px;
@@ -26,39 +28,16 @@ margin-top: 20px;
           height: 400px;
         }
       .primaryColor {
-        
         color: #6ac2ee
       }
       .secondaryColor {
         color: #fc8181
       }
-
-
-    
 `
 
-
-const InlineContainer = styled.div`
-      margin-top: 20px;
-      text-size: 14px;
-      display: flex;
-`
-const BadgePrimary = styled.div`
-.badge {
-  margin-left: 4px;
-  color: #6ac2ee;
-}
-`
-const BadgeSecondary = styled.div`
-.badge {
-  margin-left: 4px;
-  color: #fc8181;
-}
-`
 export const TidsbankChart = function TidsbankChart({ id }) {
   const [TidsbankAlt, setTidsbankAlt] = React.useState('')
   const [TidsbankMonthly, setTidsbankMonthly] = React.useState('')
-  console.log("Grafid" + id);
   const [getTrue, setGetTrue] = React.useState(false);
   const [getAvgTrue, setGetAvgTrue] = React.useState(false);
   // Brukerens tidsbank månedlig
@@ -103,7 +82,6 @@ export const TidsbankChart = function TidsbankChart({ id }) {
     setTidsbankMonthly(response.data[0].tid);
       }
 
-//   console.log(response.data);
   }
     )
 }
@@ -118,7 +96,6 @@ function getTidsbankAltNum(){
       if(response.data[0] != null) {
     setTidsbankAlt(response.data[0].totaltid);
       }
-//   console.log(response.data);
   }
     )
 }
@@ -169,68 +146,94 @@ function getTidsbankMonthly(idbruker){
 }
   )
 }
-if (getTrue==true) {  }
+if (getTrue===true) {  }
 else {
   getTidsbankMonthly(idbruker)
   getTidsbankMonthlyNum(idbruker)
   getTidsbankAltNum(); 
 }
-if (getAvgTrue==true) {}
+if (getAvgTrue===true) {}
 else {(getTidsbankAverage());}
-const data = React.useMemo(
-  () => [
-  {
-    label: 'Timer',
-    data: [
-      ['Januar', Januar ],
-      ['Februar', Februar],
-      ['Mars', Mars],
-      ['April', April], 
-      ['Mai', Mai], 
-      ['Juni', Juni],
-      ['Juli', Juli],
-      ['August', August], 
-      ['September', September], 
-      ['Oktober', Oktober], 
-      ['November', November], 
-      ['Desember', Desember]
-    ]},
-  {
-    label: 'Timer',
-    data: [
-      ['Januar',AvgJanuar ],
-      ['Februar', AvgFebruar],
-      ['Mars', AvgMars],
-      ['April', AvgApril], 
-      ['Mai', AvgMai], 
-      ['Juni', AvgJuni],
-      ['Juli', AvgJuli],
-      ['August', AvgAugust], 
-      ['September', AvgSeptember], 
-      ['Oktober', AvgOktober], 
-      ['November', AvgNovember], 
-      ['Desember', AvgDesember]
-    ]}
-]);
-const axes = React.useMemo(
-  () => [
-    { primary: true, type: 'ordinal', position: 'bottom' },
-    { type: 'linear', position: 'left' },
-  ],
-  []
-)
 
+const options = {
+  type: 'line',
+  
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'bottom',
+      },
+      title: {
+        display: true,
+        text: 'Trend for tidsbanken til bruker og gjennomsnittet for alle brukerne'
+      }
+    },
+  
+  scales: {
+    yAxes: [
+      { 
+        suggestedMin: 30,
+        suggestedMax: 50,
+        ticks: {
+          beginAtZero: true,
+        },
+      },
+    ],
+  },
+};
+const data = {
+ 
+  datasets: [
+    {
+      label: 'Bruker',
+      data: [
+              ['Januar', Januar ],
+              ['Februar', Februar],
+              ['Mars', Mars],
+              ['April', April], 
+              ['Mai', Mai], 
+              ['Juni', Juni],
+              ['Juli', Juli],
+              ['August', August], 
+              ['September', September], 
+              ['Oktober', Oktober], 
+              ['November', November], 
+              ['Desember', Desember]],
+      fill: false,
+
+      backgroundColor: 'rgb(106, 194, 238)',
+      borderColor: 'rgb(106, 194, 238, 1)',
+    },
+    {
+      label: 'Gjennomsnitt',
+      data: [
+              ['Januar',AvgJanuar ],
+              ['Februar', AvgFebruar],
+              ['Mars', AvgMars],
+              ['April', AvgApril], 
+              ['Mai', AvgMai], 
+              ['Juni', AvgJuni],
+              ['Juli', AvgJuli],
+              ['August', AvgAugust], 
+              ['September', AvgSeptember], 
+              ['Oktober', AvgOktober], 
+              ['November', AvgNovember], 
+              ['Desember', AvgDesember]
+            ],
+      fill: false,
+      borderDash: [5, 5],
+      backgroundColor: 'rgb(252, 129, 129)',
+      borderColor: 'rgba(252, 129, 129, 1)',
+
+    },
+  ],
+};
     return (
       <ResponsiveContainer>
-         <div className="App text-center"><h1>Tidsbank</h1></div>
+         <div className="App text-center mb-4"><h1>Tidsbank</h1></div>
                 <p>Timer denne måned:<Badge bsPrefix='badge' variant="secondary"> { TidsbankMonthly } </Badge></p>
                 <p>Timer totalt: <Badge bsPrefix='badge' variant="secondary">{ TidsbankAlt } </Badge></p>
-        <InlineContainer>Trend (timer) for tidsbank:
-
-        <BadgePrimary><Badge bsPrefix='badge' variant="secondary">Bruker</Badge></BadgePrimary>
-        <BadgeSecondary><Badge bsPrefix='badge' variant="secondary">Gjennomsnitt</Badge></BadgeSecondary></InlineContainer>
-        <Chart key={id.toString()} data={data} axes={axes} />
-
+        <Line data={data} options={options}  />
       </ResponsiveContainer>
   )
 

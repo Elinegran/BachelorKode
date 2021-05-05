@@ -6,6 +6,7 @@ import ProtectedRouteVeileder from './components/ProtectedRouteVeileder'
 import ProtectedRoute from './components/ProtectedRoute'
 import { Logginn } from './pages/Login/Login';
 import Loggut  from './components/Logout/Loggut';
+import { Glemtpassord } from './pages/Login/GlemtPassord';
 import { ForsideBruker } from './pages/ForsideBruker/ForsideBruker';
 import { ForsideVeileder } from './pages/ForsideVeileder/ForsideVeileder';
 import { Meldinger } from './pages/Meldinger/Meldinger';
@@ -27,6 +28,8 @@ import { RegBruker } from './pages/Veileder/RegBruker';
 import { BrukerOversikt } from './pages/Veileder/BrukerOversikt';
 import { RedigerProfil } from './pages/Bruker/RedigerProfil';
 import { TidsbankBruker } from './pages/Bruker/TidsbankBruker';
+import { ChatbotVeileder } from './pages/Chatbot/ChatbotVeileder'
+import { Chatbotlogg } from './pages/Chatbot/ChatbotLogg'
 import IdleTimer from "./components/IdleTimer"
 import authService from './services/auth.service';
 
@@ -72,6 +75,8 @@ function App() {
               <ProtectedRouteVeileder path="/EndreAktivitet" component={ EndreAktivitet } />
               <ProtectedRouteVeileder path="/MeldingerV" component={ MeldingerV } />
               <ProtectedRouteVeileder path="/LenkebibliotekV" component= {LenkebibliotekV} />
+			        <ProtectedRouteVeileder path="/EndreChatbot" component={ ChatbotVeileder } />
+              <ProtectedRouteVeileder path="/ChatbotLogg" component={ Chatbotlogg } />
               <ProtectedRoute path="/Bruker" component={ ForsideBruker } />
                 <ProtectedRoute path="/Profil" component={ RedigerProfil } />
                 <ProtectedRoute path="/TidsbankBruker" component={ TidsbankBruker } />

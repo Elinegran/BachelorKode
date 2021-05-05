@@ -1,17 +1,15 @@
-import React,   { useState, useEffect } from "react";
-import  UserIcon   from '../../assets/images/Bruker/icon_profile.png'
-import  BackBtn   from '../../assets/images/Bruker/icon_back.png'
+//Utviklet av: Gruppe 2
+import React, { useState, useEffect } from "react";
+import UserIcon from '../../assets/images/Bruker/icon_profile.png'
+import BackBtn from '../../assets/images/Bruker/icon_back.png'
 import { Table, Badge, Container, Media } from 'react-bootstrap';
 import moment from 'moment';
-// import '../App.css';
 import Axios from 'axios';
 import styled from 'styled-components';
 import {appColors} from '../Colors';
 import MediaQuery from 'react-responsive';
-import { data } from "jquery";
 import { TidsbankChart } from "../Bruker/Tidsbank";
 
-//import TimeTracker from 'react-time-tracker';
 export const BrukerContainer = styled.div`
     margin: auto;
     width: 100%;
@@ -21,7 +19,6 @@ export const BrukerContainer = styled.div`
         width: 100%;
     }
 `
-
 export const TableContainer = styled.table `
     margin: auto;
     width: 100%;
@@ -38,12 +35,14 @@ export const TableContainer = styled.table `
                 cursor: pointer;
                 transition: all 0.1s ease-in-out;
                 text-decoration: underline;
-                
-                
             }
         }
         .table {
             
+        }
+
+        .table th {
+            cursor: default;
         }
         .table thead {
             background-color: ${ appColors.primaryColor};
@@ -53,7 +52,6 @@ export const TableContainer = styled.table `
         }
         .table tr {
             cursor: pointer;
-           
         }
         
         }
@@ -95,18 +93,16 @@ export const Btn = styled.div`
     `
 
 function BrukerTabell() {
-    const [showBruker, setShowBruker] = React.useState(false);
-    const [showStatusbtns, setShowStatusbtns] = React.useState(false);
-    const [showTable, setShowTable] = React.useState(true);
+    const [showBruker, setShowBruker] = useState(false);
+    const [showTable, setShowTable] = useState(true);
     const [brukerList, setBrukerList] = useState([]);
-    const [brukerId, setBrukerId] = React.useState(0);
     const [EnBruker, setEnBruker] = useState([]);
     const [TidsbankMonthly, setTidsbankMonthly] = useState([]);
     const [TidsbankAlt, setTidsbankAlt] = useState([]);
     const [brukerStatus, setBrukerStatus] = useState("");
-    const [showAktivBtn, setShowAktivBtn] = React.useState(false);
-    const [showInaktivBtn, setShowInaktivBtn] = React.useState(false);
-    const [grafId, setGrafId]= React.useState('');
+    const [showAktivBtn, setShowAktivBtn] = useState(false);
+    const [showInaktivBtn, setShowInaktivBtn] = useState(false);
+    const [grafId, setGrafId]= useState('');
     var idForGraf= {id : grafId}
     useEffect(() => {
         Axios.get("http://localhost:3001/api/brukerGetAll").then((response) => {
@@ -142,7 +138,7 @@ function BrukerTabell() {
         setGrafId(brukerId);
         console.log("stateGrafId: " + grafId)
         console.log('this is:', brukerId);
-        setBrukerId(brukerId);
+  
         getTidsbankMonthly(brukerId);
         getTidsbankAlt(brukerId);
         setShowBruker(true);
@@ -159,13 +155,13 @@ function BrukerTabell() {
       })
     }
     function checkStatus(brukerstatus) {
-        if (brukerstatus==2) {
+        if (brukerstatus === 2) {
             setBrukerStatus("Inaktiv")
             setShowInaktivBtn(false);
             setShowAktivBtn(true);
             console.log("status: Inaktiv");
         }
-        else if (brukerstatus == 1) {
+        else if (brukerstatus === 1) {
             setBrukerStatus("Aktiv")
             setShowInaktivBtn(true);
             setShowAktivBtn(false);
@@ -204,9 +200,8 @@ function BrukerTabell() {
         )
     }
   
-
     return (
-        <TableContainer>
+        <TableContainer className="mt-4">
             {/* <TimeTracker onSave={onSave} /> */}
             { showTable ? 
              <Table bsPrefix='table' responsive="xs" striped bordered hover size="sm"> 
@@ -245,7 +240,7 @@ function BrukerTabell() {
 
             {/* Når man trykker på en bruker:  */}
             { showBruker ? 
-            <Container>
+            <Container className="mt-4">
 
              {EnBruker.map((val) => {return (    
                 <Media>
@@ -258,7 +253,7 @@ function BrukerTabell() {
                             alt="Generic placeholder"
                         />
                         <p className="tilbakeBtn"  onClick={(e) => clickHide()}>
-                         <img src={BackBtn}  /> 
+                         <img src={BackBtn} alt="Tilbake knapp" /> 
                         </p>
                         <h5>{  val.fornavn + ' ' + val.etternavn }</h5>
                         { showAktivBtn ?
@@ -275,7 +270,7 @@ function BrukerTabell() {
                         Fødselsdato: { moment(val.fdato).format("DD/MM/YYYY") }
                         </p>
                         <p>
-                        Adresse: { val.gatenavn + val.postnr + val.poststed } 
+                        Adresse: { val.gatenavn ? val.gatenavn + val.postnr + val.poststed : '' } 
                         </p> 
                         <p>
                         Telefon: { val.tlf }
@@ -283,16 +278,10 @@ function BrukerTabell() {
                         <p>
                         Epost: { val.epost }
                         </p>
+                        <p>
+                        Kjønn: { val.kjonn }
+                        </p>
                         
-                        
-                        {TidsbankMonthly.map((val) => {return (   
-                        <p>Tidsbank denne måned: { val.tid }</p>
-                        )})}
-
-                        {TidsbankAlt.map((val) => {return (   
-                           
-                        <p>Tidsbank totalt: { val.totaltid }</p>
-                        )})}
                         
                         <Btn  onClick={(e) => clickHide()}>Send melding</Btn>
                         <Btn  onClick={(e) => clickHide()}>Se Kalender</Btn>

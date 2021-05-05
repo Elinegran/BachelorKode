@@ -1,3 +1,4 @@
+//Utviklet av: Gruppe 2
 import React from 'react'
 import { Container } from 'react-bootstrap'
 import { LoggInn } from '../../components/Login/LoggInn'
@@ -9,9 +10,9 @@ var getAccessToken = authService.getToken();
 var getRole = authService.getRole();
 var roleCheck;
 
-if(getRole==1){
+if(getRole === 1){
         roleCheck=false;
-} else if(getRole==2) {
+} else if(getRole === 2) {
         roleCheck=true;
 }
 
