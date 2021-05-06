@@ -3,7 +3,7 @@ import './Meldinger.css';
 import Meldingsliste from '../../components/Meldinger/innboks.js';
 import MinGruppeliste from '../../components/Meldinger/Grupper/mineGrupper.js';
 import NyMelding from '../../components/Meldinger/nyMelding';
-import 'bootstrap/dist/css/bootstrap.min.css'; // Bootstap
+// import 'bootstrap/dist/css/bootstrap.min.css'; // Bootstap
 import { Container, Col, Row } from 'react-bootstrap';
 import AntallMeldinger from '../../components/Meldinger/antallMeldinger';
    

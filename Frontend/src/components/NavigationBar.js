@@ -116,6 +116,7 @@ export const NavigationBar = () => (
                     {isVeilAuth && <Nav.Item><Nav.Link href="/EndreChatbot">Legg til og endre Matchbot</Nav.Link></Nav.Item> }
                     {isVeilAuth &&<Nav.Item><Nav.Link href="/ChatbotLogg">Matchbotlogg</Nav.Link></Nav.Item> }
                     {isVeilAuth &&<Nav.Item><NavDropdown.Divider className="header-divider" /></Nav.Item>}
+                    {isVeilAuth && <Nav.Item><Nav.Link href="/LenkebibliotekV">Endre lenkebibliotek</Nav.Link></Nav.Item>}
                     <Nav.Item><Nav.Link href="/Lenkebibliotek">Lenkebibliotek</Nav.Link></Nav.Item>
                     <Nav.Item><Nav.Link href="/FAQ">FAQ</Nav.Link></Nav.Item>
                     {isVeilAuth && <Nav.Item><Nav.Link href="/EndreFAQ">Legg til og endre FAQ</Nav.Link></Nav.Item> }

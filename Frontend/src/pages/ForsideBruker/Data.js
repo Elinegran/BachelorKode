@@ -46,7 +46,7 @@ export const circleNavMeldekort = {
     id: 'navMeldekort',
     // Dette tallet burde komme fra databasen med antall dager igjen til NAV frist. 7 er bare et eksempel
     subText: '',
-    buttonLabel: 'Meldekort',
+    buttonLabel: 'Aktivitetsplan',
     img: require ('../../assets/images/Forside/navlogo_1.png').default
 }
 

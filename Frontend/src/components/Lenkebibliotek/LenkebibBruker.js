@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import {Card, Col, Row } from 'react-bootstrap'; 
 
 export default class LenkebibBruker extends React.Component {
@@ -30,13 +30,15 @@ export default class LenkebibBruker extends React.Component {
       }
       render() {
         return (
-       
-      <div class = "card-columns">
+      
+      <div class = "card-columns"> 
+    
       <Col>  
           <Row>
             { this.state.lenker.map(alleLenker => 
             <Card style={{ width: '50rem' }}>   
                 <Card.Header as="h2">{ alleLenker.tittel }</Card.Header>
+                {console.log(alleLenker)}
                     <Card.Body >
                         {/* <Card.Title>{ alleLenker.tittel }</Card.Title> */}
                             <Card.Text>

@@ -10,11 +10,13 @@ import { Glemtpassord } from './pages/Login/GlemtPassord';
 import { ForsideBruker } from './pages/ForsideBruker/ForsideBruker';
 import { ForsideVeileder } from './pages/ForsideVeileder/ForsideVeileder';
 import { Meldinger } from './pages/Meldinger/Meldinger';
+import { MeldingerV} from './pages/Meldinger/Meldinger-veileder';
 import { Meldekort } from './pages/Meldekort/Meldekort';
 import { Kalender } from './pages/Kalender/Kalender';
 import { CV } from './pages/CV/CV';
 import { ChatbotPage } from './pages/Chatbot/Chatbot';
 import { Lenkebibliotek } from './pages/Lenkebibliotek/Lenkebibliotek';
+import { LenkebibliotekV } from './pages/Lenkebibliotek/LenkebibliotekV';
 import { FAQoversikt } from './pages/FAQ/FAQoversikt';
 import { EndreFAQ } from './pages/FAQ/EndreFAQ';
 import { AktivitetsOversikt } from './pages/Aktiviteter/AktivitetsOversikt';
@@ -73,6 +75,8 @@ function App() {
               <ProtectedRouteVeileder path="/EndreAktivitet" component={ EndreAktivitet } />
               <ProtectedRouteVeileder path="/EndreChatbot" component={ ChatbotVeileder } />
               <ProtectedRouteVeileder path="/ChatbotLogg" component={ Chatbotlogg } />
+              <ProtectedRouteVeileder path="/LenkebibliotekV" component={ LenkebibliotekV } />
+              <ProtectedRouteVeileder path="/MeldingerV" component={ MeldingerV } />
               <ProtectedRoute path="/Bruker" component={ ForsideBruker } />
                 <ProtectedRoute path="/Profil" component={ RedigerProfil } />
                 <ProtectedRoute path="/TidsbankBruker" component={ TidsbankBruker } />

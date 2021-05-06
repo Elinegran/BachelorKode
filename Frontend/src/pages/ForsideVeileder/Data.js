@@ -32,7 +32,7 @@ export const buttonEndreFAQ = {
 }
 
 export const circleMeldinger = {
-    path: '/Meldinger',
+    path: '/MeldingerV',
     id: 'meldinger',
     alt: 'Meldingsikon',
     img: require ('../../assets/images/Forside/draw_mail_1.png').default,

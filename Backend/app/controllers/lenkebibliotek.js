@@ -247,7 +247,7 @@ exports.LenkerBruker = function(req, res)  {
   console.log ("lenkeID legg til alle brukere" + lenkeID);
   const sqlSelect = 
                   `SELECT * FROM lenke, lenkebruker
-                  WHERE lenkebruker.idbruker = 13
+                  WHERE lenkebruker.idbruker = 3
                   AND lenkebruker.lenkeID = lenke.lenkeID
                   ORDER BY tittel;`;
   db.query(sqlSelect, lenkeID,(err, result) => {
