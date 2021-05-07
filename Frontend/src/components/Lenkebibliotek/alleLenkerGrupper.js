@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import {Card, ListGroup, article, Button, CustomToggle } from 'react-bootstrap';
+import {Card, ListGroup } from 'react-bootstrap';
 import SletteLenkeGruppe from './sletteLenkeGruppe';
     
 export default class AlleLenkerGruppe extends React.Component {
@@ -36,7 +35,6 @@ export default class AlleLenkerGruppe extends React.Component {
                         {gruppeLenke.tittel}
                     <Card.Link  href = {gruppeLenke.url}> {gruppeLenke.url}</Card.Link>
                     <SletteLenkeGruppe />
-                    {/* <Button style = {{ float: 'right'}} variant="danger" type = "submit">Slett</Button> */}
                     </Card.Text>
           </ListGroup.Item>
           </ListGroup>
@@ -44,4 +42,4 @@ export default class AlleLenkerGruppe extends React.Component {
         </Card>
         )
     }
-    }
+}

@@ -1,13 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import {InputGroup, Card, Accordion, Button, InputFelt, Row, Col} from 'react-bootstrap'
-import FormControl from 'react-bootstrap/FormControl'
-import Form from 'react-bootstrap/Form'
-import SelectBrukere from '../Meldinger/Felles/selectBruker';
-import SelectGruppe from '../Meldinger/Grupper/selextGruppe';
-import Gruppeliste from '../Meldinger/grupper';
-import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router';
+import {Card, Accordion, Button} from 'react-bootstrap'
 import LenkeV from '../Lenkebibliotek/LenkeV';
 import EndreLenke from '../Lenkebibliotek/endreLenke';
 import LeggTilLenkeAlle from './leggTilLenkeAlle';
@@ -67,12 +60,9 @@ export default class HentAlleLenker extends React.Component {
           senderInfo = {alleLenker.info}
           senderTittel = {alleLenker.tittel}
           senderUrl = {alleLenker.url}
-          />
-          
-                  
+          />           
       </Card.Body>
-
-          </Accordion.Collapse>
+          </Accordion.Collapse> 
     </Card>)}
 </Accordion>
   </article>
@@ -83,22 +73,3 @@ export default class HentAlleLenker extends React.Component {
 
 }
 
-
-  //   // Returnerer en liste over alle lenkene
-  //   render() {
-  //       return (         
-
-  //       <ul className="list-group">
-  //           {/* Her kan jeg legge et listeelement med alle lenkene hvis jeg vil, } */}
-  //       { this.state.lenker.map(alleLenker => 
-  //       // Her kan jeg legge en løkke med de forskellige gruppene med lenker hvis jeg vil
-  //         <li className="list-group-item">
-  //             { alleLenker.lenkeID } <a href = " { alleLenker.url }">{ alleLenker.tittel }</a> { alleLenker.info}
-              
-  //         </li> 
-  //        )} 
-  //       </ul> 
-
-  //       )
-  //   }
-  // }

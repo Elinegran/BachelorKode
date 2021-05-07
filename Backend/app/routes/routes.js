@@ -119,7 +119,7 @@ router.use("/gruppeGetMedlemmer", getGruppemedlem.getMedlem)
 const getLenker = require('../controllers/lenkebibliotek');
 router.use("/getLenker", getLenker.getAlleLenker)
 
-// Opprette ny lenke
+// Opprette en ny lenke
 const addLenke = require('../controllers/lenkebibliotek'); 
 router.use("/lenkerNylenke", addLenke.LenkeInput );
 
@@ -139,7 +139,6 @@ router.use("/visLenkerBruker", visLenkerBruker.VisBrukerLenker );
 const visLenkerGruppe= require('../controllers/lenkebibliotek'); 
 router.use("/visLenkerGruppe", visLenkerGruppe.VisGruppeLenker );
 
-
 // Slette lenke hos en bruker
 const slettLenkeBruker = require('../controllers/lenkebibliotek'); 
 router.use("/slettLenkeBruker", slettLenkeBruker.SlettBrukerLenke );
@@ -156,11 +155,9 @@ router.use("/endreLenke", endreLenke.RedigerLenke );
 const leggTilLenkeAlle = require('../controllers/lenkebibliotek'); 
 router.use("/leggTilLenkeAlle", leggTilLenkeAlle.LeggTilAlleLenke );
 
-// Liste med lenker hos en bruker
-const lenkerForBruker = require('../controllers/lenkebibliotek'); 
-router.use("/LenkebibBruker", lenkerForBruker.LenkerBruker );
-
-
+// Brukeren kan se sine lenker
+const lenkebibBruker = require('../controllers/lenkebibliotek'); 
+router.use("/LenkebibBruker", lenkebibBruker.LenkerBruker );
 
 
 // Eksporterer denne modellen, så server.js får brukt den

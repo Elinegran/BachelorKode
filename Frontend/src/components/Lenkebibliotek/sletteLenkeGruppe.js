@@ -1,11 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import 'bootstrap/dist/css/bootstrap.min.css'; 
 import { Form, Button } from 'react-bootstrap'; 
-// import AuthService from '../../../services/auth.service'; 
-
-
-
 
 function SletteLenkeGruppe(props) {
     const idbruker = props.senderIdbruker;
@@ -17,8 +12,6 @@ function SletteLenkeGruppe(props) {
         if (window.confirm(`Er du sikker på at du vil slette lenken fra gruppen : ${ url } ${lenkeID} fra ${ fornavn } ${ etternavn } ?`)) {
             axios.delete('http://localhost:3001/api/slettLenkeGruppe', { data: { idbruker: idbruker,lenkeID: lenkeID }});
         }     
-        alert ("idbruker" + idbruker)
-        alert ("lenkeID" + lenkeID)
     };
     
     return(

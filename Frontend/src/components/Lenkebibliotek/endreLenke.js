@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { Form, Button } from 'react-bootstrap'; 
 
 function EndreLenke(props) {
-    // const idbruker = props.senderIdbruker;
     const lenkeID = props.senderlenkeid;
     const tittel = props.senderTittel;
     const info = props.senderInfo;
@@ -53,7 +51,6 @@ function EndreLenke(props) {
                         variant="primary" 
                         type = "submit">Endre lenke
                     </Button>
-           
          </Form> 
          
     )

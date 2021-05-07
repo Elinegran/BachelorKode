@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import {Card, ListGroup } from 'react-bootstrap';
 import SletteLenkeBruker from './sletteLenkeBruker';
     
@@ -47,7 +46,6 @@ export default class AlleLenkerBruker extends React.Component {
                             senderFornavn = {brukerLenke.fornavn}
                             senderEtternavn = {brukerLenke.etternavn}
                         />
-                        {/* <Button style = {{ float: 'right'}} variant="danger" type = "submit">Slett</Button> */}
                         </Card.Text>
                     </ListGroup.Item>
                 </ListGroup>
@@ -56,4 +54,4 @@ export default class AlleLenkerBruker extends React.Component {
         
         )
     }
-    }
+}
