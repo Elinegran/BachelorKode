@@ -1,9 +1,7 @@
 import React from 'react';
 import axios from 'axios';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import {Card, Accordion, Button } from 'react-bootstrap';
 import AlleLenkerBruker from './alleLenkerBruker';
-// import AlleLenkerBruker from '../Lenkebibliotek/alleLenkerBruker';
     
 export default class VisBrukere extends React.Component {
     constructor (props){
@@ -46,7 +44,7 @@ export default class VisBrukere extends React.Component {
             </Accordion>
         )
     }
-    }
+}
   
 
 

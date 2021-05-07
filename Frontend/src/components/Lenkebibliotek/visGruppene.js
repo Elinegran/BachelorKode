@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import {Card, Accordion, Button } from 'react-bootstrap';
 import AlleLenkerGruppe from './alleLenkerGrupper';
 

@@ -1,5 +1,4 @@
 import React from 'react';
-//import 'bootstrap/dist/css/bootstrap.min.css'
 import { Container, Col} from 'react-bootstrap'
 // import LenkebibBruker from '../../components/Lenkebibliotek/LenkebibBruker';
 

@@ -2,7 +2,6 @@ const db = require("../config/config.js");
 const express = require("express");
 const app = express();
 
-
 const cors = require("cors");
 
 app.use(cors());
@@ -32,7 +31,6 @@ exports.LenkeInput = function(req, res)  {
     const tittel = req.body.tittel;
     const info = req.body.info;
 
-
   const LeggTilLenke = `INSERT INTO lenke(url, tittel, info) VALUES (?, ?, ?)`;
   db.query(LeggTilLenke, [url, tittel, info], (err,result) => {
     if (err) {
@@ -50,8 +48,7 @@ exports.LenkeInput = function(req, res)  {
 exports.AddLenkeBruker = function(req, res)  {
   const idbruker = req.body.idbruker;
   const lenkeID = req.body.lenkeID;
-  // console.log("idbruker" + idbruker);
-  // console.log("lenkeID" + lenkeID);
+
 const LeggTilBruker = `INSERT INTO lenkebruker(idbruker, lenkeID) VALUES (?, ? )`;
 db.query(LeggTilBruker, [idbruker, lenkeID], (err,result) => {
   if (err) {
@@ -66,7 +63,6 @@ db.query(LeggTilBruker, [idbruker, lenkeID], (err,result) => {
 // legge til en lenke i en gruppe
 exports.AddLenkeGruppe = function(req, res)  {
   const lenkeID = req.body.lenkeID;
-  console.log ("lenkeID legg til alle brukere" + lenkeID);
   const sqlSelect = 
                   `INSERT INTO lenkebruker (idbruker, lenkeID)
                   SELECT DISTINCT gruppemedlem.idbruker, ?
@@ -82,19 +78,10 @@ exports.AddLenkeGruppe = function(req, res)  {
     });
 };
 
-// INSERT INTO lenkebruker (lenkeID, idbruker)  
-//                   SELECT DISTINCT ?, bruker.idbruker ? = lenkeID
-//                   FROM bruker, gruppemedlem
-//                   WHERE bruker.idbruker = gruppemedlem.idbruker
-//                   AND gruppemedlem.gruppeID = ?
 
-
-
-
-// Funksjonen som henter alle lenkene som en bruker har fått
+// Funksjonen som henter alle lenkene som en bruker har og viser oversikt for veileder
 exports.VisBrukerLenker = function(req, res)  {
   const idbruker = req.query.idbruker;
-  // console.log (idbruker);
   const sqlSelect = 
                   `SELECT DISTINCT lenke.lenkeID, url, tittel, info, bruker.idbruker, fornavn, etternavn
                   FROM lenke, bruker, lenkebruker
@@ -112,34 +99,9 @@ exports.VisBrukerLenker = function(req, res)  {
     });
 };
 
-// SELECT bruker.Idbruker
-
-//Funksjon med alle gruppene som har en bestemt lenke
-
-// exports.HentGruppeLenker = function(req, res)  {
-//   const lenkeID = req.query.lenkeID;
-//   console.log (lenkeID);
-//   const sqlSelect = 
-//                   `SELECT DISTINCT lenke.lenkeID, url, tittel, info, gruppe.gruppeID, gruppenavn
-//                   FROM lenke, gruppe, lenkebruker, gruppemedlem
-//                   WHERE lenke.lenkeID = lenkebruker.lenkeID 
-//                   AND lenkebruker.idbruker = gruppemedlem.idbruker
-//                   AND gruppemedlem.gruppeID = gruppe.gruppeID
-//                   AND lenke.lenkeID = ?`;
-//   db.query(sqlSelect, lenkeID, (err, result) => {
-//     if (err) {
-//       console.log(err)
-//     } 
-//     else {
-//       res.send(result);
-//       }
-//     });
-// };
-
 // alle lenkene som en gruppe har
 exports.VisGruppeLenker = function(req, res)  {
   const gruppeID = req.query.gruppeID;
-  // console.log (gruppeID);
   const sqlSelect = 
                   `SELECT DISTINCT lenke.lenkeID, url, tittel, info, gruppe.gruppeID, gruppenavn
                   FROM lenke, gruppe, lenkebruker, gruppemedlem
@@ -162,8 +124,6 @@ exports.VisGruppeLenker = function(req, res)  {
 exports.SlettBrukerLenke = function(req, res)  {
   const lenkeID = req.body.lenkeID;
   const idbruker = req.body.idbruker;
-  // console.log ("idbruker" + idbruker);
-  // console.log ("lenkeID" + lenkeID);
   const sqlSelect = 
                   `DELETE FROM lenkebruker
                    WHERE lenkeID = ? AND idbruker = ?`;
@@ -177,16 +137,12 @@ exports.SlettBrukerLenke = function(req, res)  {
     });
 };
 
-// Endre redigere en lenke !
+// Endre/redigere en lenke !
 exports.RedigerLenke = function(req, res)  {
   const lenkeID = req.body.lenkeID;
   const nyUrl = req.body.url;
   const nyTittel = req.body.tittel;
   const nyInfo = req.body.info;
-  // console.log ("url" + nyUrl);
-  // console.log ("tittel" + nyTittel);
-  // console.log ("info" + nyInfo);
-  // console.log ("lenkeID" + lenkeID);
   const sqlSelect = 
                 `UPDATE lenke 
                 SET url = ?, tittel = ?, info = ?
@@ -202,13 +158,11 @@ exports.RedigerLenke = function(req, res)  {
 };
 
 
-// Slette en lenke for en gruppe VIRKER IKKE!
+// Slette en lenke for en gruppe
 exports.SlettGruppeLenke
  = function(req, res)  {
   const lenkeID = req.body.lenkeID;
   const idbruker = req.body.idbruker;
-  // console.log ("idbruker" + idbruker);
-  // console.log ("lenkeID" + lenkeID);
   const sqlSelect = 
                   ``;
   db.query(sqlSelect, [lenkeID, idbruker],(err, result) => {
@@ -225,7 +179,6 @@ exports.SlettGruppeLenke
 // legge til en lenke hos alle brukerne
 exports.LeggTilAlleLenke = function(req, res)  {
   const lenkeID = req.body.lenkeID;
-  console.log ("lenkeID legg til alle brukere" + lenkeID);
   const sqlSelect = 
                   `INSERT INTO lenkebruker (idbruker, lenkeID)
                   SELECT bruker.idbruker, ?
@@ -243,14 +196,16 @@ exports.LeggTilAlleLenke = function(req, res)  {
 //Brukeren kan se alle lenkne sine
 
 exports.LenkerBruker = function(req, res)  {
-  const lenkeID = req.body.lenkeID;
-  console.log ("lenkeID legg til alle brukere" + lenkeID);
+  const idbruker = req.query.idbruker;
+  console.log ("idbrukerLenkebib bruker" + idbruker);
   const sqlSelect = 
                   `SELECT * FROM lenke, lenkebruker
-                  WHERE lenkebruker.idbruker = 3
+
+                  WHERE lenkebruker.idbruker = ?
+
                   AND lenkebruker.lenkeID = lenke.lenkeID
                   ORDER BY tittel;`;
-  db.query(sqlSelect, lenkeID,(err, result) => {
+  db.query(sqlSelect, idbruker,(err, result) => {
     if (err) {
       console.log(err)
     } 
@@ -259,36 +214,5 @@ exports.LenkerBruker = function(req, res)  {
       }
     });
 };
-// Se alle brukerne som har en lenke
 
-// Spørring 
-/* // Opprette en lenke for en gruppe: 
--- Opprette en lenke for en gruppe: 
-INSERT INTO lenkebruker (lenkeID, idbruker)  
-SELECT DISTINCT ?, bruker.idbruker // ? = lenkeID
-FROM bruker, gruppemedlem
-WHERE bruker.idbruker = gruppemedlem.idbruker
-AND gruppemedlem.gruppeID = ?; // ? = gruppeID
- */
-
-
-
-
-
-
-
-
-
-// db.query(
-//   "INSERT INTO lenke (url) VALUES (?)",
-//   lenke,
-//   (err, res) => {
-//     if (err) {
-//       console.log(err);
-//     } else {
-//       //res.send("Values Inserted"); // tror man kan få ID'en herfra
-//     }
-//   }
-// );
-// }; // slutt på funksjon GruppeInput()
 
