@@ -7,6 +7,14 @@ export const buttonCv = {
     alt: 'CV'
 }
 
+export const buttonLenkebibliotek = {
+    path: '/Lenkebibliotek',
+    id: 'lenkebib',
+    buttonLabel: 'Lenkebibliotek',
+    img: require ('../../assets/images/Forside/draw_link.svg').default,
+    alt: 'Lenkebibliotek',
+}
+
 export const buttonChatbot = {
     path: '/Chatbot',
     id: 'Chatbot',

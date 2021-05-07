@@ -7,7 +7,8 @@ import { BigButton } from '../../components/Forside/BigButton'
 import MediaQuery from 'react-responsive'
 import { CenterModal } from '../../components/Modal';
 import { 
-        buttonCv, 
+        buttonCv,
+        buttonLenkebibliotek, 
         buttonChatbot,
         buttonTidsbank, 
         circleMeldinger, 
@@ -36,22 +37,26 @@ export const ForsideBruker = () => (
                 <MediaQuery maxWidth={992}>
 
                         <Row>
-                                <BigButton { ...buttonCv } />
+                                <BigButton { ...buttonLenkebibliotek } />
                                 <BigButton { ...buttonChatbot } />
                         </Row>
                         <Row>
                                 <BigButton { ...buttonTidsbank } />
                                 <BigButton { ...buttonFAQ } />
+                        </Row>
+                        <Row>
+                                <BigButton { ...buttonCv} />
                         </Row>
                 </MediaQuery>
 
                 {/* Knapper nederst på skjerm over 992px (PC) - en rad istedenfor to*/}
                 <MediaQuery minWidth={993}>
                         <Row>
-                                <BigButton { ...buttonCv } />
+                                <BigButton { ...buttonLenkebibliotek } />
                                 <BigButton { ...buttonChatbot } />
                                 <BigButton { ...buttonTidsbank } />
                                 <BigButton { ...buttonFAQ } />
+                                <BigButton { ...buttonCv }/>
                         </Row>
                 </MediaQuery>
         </Container>
