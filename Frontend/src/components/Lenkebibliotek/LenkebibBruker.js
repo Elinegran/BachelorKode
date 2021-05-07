@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+
 import {Card,CardColumns, Col, Row } from 'react-bootstrap'; 
 import AuthService from '../../services/auth.service'
 const idbruker = AuthService.getUserId();
@@ -30,6 +31,7 @@ export default class LenkebibBruker extends React.Component {
       
       render() {
         return (
+
         // <Row >
           <CardColumns>
                 { this.state.lenker.map(alleLenker => 
@@ -45,6 +47,7 @@ export default class LenkebibBruker extends React.Component {
                 </Card>)}
           </CardColumns>
         // </Row> 
+
 
     )
   }

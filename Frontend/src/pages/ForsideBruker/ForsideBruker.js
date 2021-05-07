@@ -1,13 +1,16 @@
+//Utviklet av: Gruppe 2
 import React from 'react'
 import { CircleImgContainer } from '../../components/Forside/CircleImgContainer'
 import{ ForsideCarousel} from '../../components/Forside/Carousel'
 import { Row, Container } from 'react-bootstrap'
 import { BigButton } from '../../components/Forside/BigButton'
 import MediaQuery from 'react-responsive'
+import { CenterModal } from '../../components/Modal';
 import { 
-        buttonCv, 
-        buttonChatbot,
+        buttonCv,
         buttonLenkebibliotek, 
+        buttonChatbot,
+        buttonTidsbank, 
         circleMeldinger, 
         circleCalendar, 
         circleNavMeldekort,
@@ -16,7 +19,10 @@ import {
  } from './Data' 
 
 export const ForsideBruker = () => (
+        
         <Container>
+                <CenterModal />
+                
                 {/* Runde knapper på toppen */}
                 <Row style = {{ margin: 'auto'}}>
                         <CircleImgContainer { ...circleMeldinger } />
@@ -31,22 +37,26 @@ export const ForsideBruker = () => (
                 <MediaQuery maxWidth={992}>
 
                         <Row>
-                                <BigButton { ...buttonCv } />
+                                <BigButton { ...buttonLenkebibliotek } />
                                 <BigButton { ...buttonChatbot } />
                         </Row>
                         <Row>
-                                <BigButton { ...buttonLenkebibliotek } />
+                                <BigButton { ...buttonTidsbank } />
                                 <BigButton { ...buttonFAQ } />
+                        </Row>
+                        <Row>
+                                <BigButton { ...buttonCv} />
                         </Row>
                 </MediaQuery>
 
                 {/* Knapper nederst på skjerm over 992px (PC) - en rad istedenfor to*/}
                 <MediaQuery minWidth={993}>
                         <Row>
-                                <BigButton { ...buttonCv } />
-                                <BigButton { ...buttonChatbot } />
                                 <BigButton { ...buttonLenkebibliotek } />
+                                <BigButton { ...buttonChatbot } />
+                                <BigButton { ...buttonTidsbank } />
                                 <BigButton { ...buttonFAQ } />
+                                <BigButton { ...buttonCv }/>
                         </Row>
                 </MediaQuery>
         </Container>

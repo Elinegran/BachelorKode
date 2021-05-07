@@ -11,7 +11,7 @@ const app = express();
 app.use(express.json());
 app.use(cors({
   origin: ["http://localhost:3000"],
-  methods: ["GET", "POST", "DELETE"], // Gruppe 1: la til DELETE 
+  methods: ["GET", "POST", "DELETE"],
   credentials: true
 }));
 
@@ -36,9 +36,14 @@ app.use('/api/', apiRoutes);
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to MB Digital." });
 });
-
+//const proxy = require('http-proxy-middleware')
 // set port, listen for requests
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
+});
+app.use(express.static('../build/'));
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "build",    
+  "index.html"));
 });

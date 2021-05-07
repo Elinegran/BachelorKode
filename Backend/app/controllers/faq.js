@@ -1,8 +1,7 @@
+//Utviklet av: Gruppe 2
 const bcrypt = require ('bcrypt');
 
 const db = require("../config/config.js");
-
-
 
 //Registrere spørsmål og svar:
 exports.createFaq = function(req, res)  {  
@@ -16,6 +15,21 @@ exports.createFaq = function(req, res)  {
       } 
       else {
         res.send(result);
+      }
+    });
+};
+
+
+//Henter en spesifikk FAQ:
+exports.getOneFaq = function(req, res)  {
+  idfaq = req.body.idfaq;
+  const sqlSelect = "SELECT * FROM faq WHERE idfaq = ?";
+  db.query(sqlSelect, [idfaq], (err, result) => {
+    if (err) {
+      console.log(err)
+    } 
+    else {
+      res.send(result);
       }
     });
 };

@@ -1,4 +1,4 @@
-
+//Utviklet av: Gruppe 2
 import styled from 'styled-components'
 export const PageLine = styled.div`
     margin-top: 5px;

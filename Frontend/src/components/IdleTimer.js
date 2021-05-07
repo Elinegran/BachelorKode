@@ -1,3 +1,4 @@
+//Utviklet av: Gruppe 2
 class IdleTimer {
     constructor({ timeout, onTimeout, onExpired }) {
          this.timeout = timeout;

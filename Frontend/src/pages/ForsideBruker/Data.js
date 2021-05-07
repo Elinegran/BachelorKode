@@ -1,9 +1,18 @@
+//Utviklet av: Gruppe 2
 export const buttonCv = {
     path: '/CV',
     id: 'CV',
     buttonLabel: 'Se CV',
     img: require ('../../assets/images/Forside/draw_cv.svg').default,
     alt: 'CV'
+}
+
+export const buttonLenkebibliotek = {
+    path: '/Lenkebibliotek',
+    id: 'lenkebib',
+    buttonLabel: 'Lenkebibliotek',
+    img: require ('../../assets/images/Forside/draw_link.svg').default,
+    alt: 'Lenkebibliotek',
 }
 
 export const buttonChatbot = {
@@ -14,12 +23,12 @@ export const buttonChatbot = {
     alt: 'Chatbot',
 }
 
-export const buttonLenkebibliotek = {
-    path: '/Lenkebibliotek',
-    id: 'lenkebib',
-    buttonLabel: 'Lenkebibliotek',
-    img: require ('../../assets/images/Forside/draw_link.svg').default,
-    alt: 'Lenkebibliotek',
+export const buttonTidsbank = {
+    path: '/TidsbankBruker',
+    id: 'tidsbank',
+    buttonLabel: 'Se din tidsbank',
+    img: require ('../../assets/images/Forside/draw_tidsbank.svg').default,
+    alt: 'Tidsbank',
 }
 
 export const buttonFAQ = {
@@ -36,7 +45,7 @@ export const circleMeldinger = {
     alt: 'Meldingsikon',
     img: require ('../../assets/images/Forside/draw_mail_1.png').default,
     // Dette tallet burde komme fra databasen med antall uleste meldinger. 3 er bare et eksempel
-    subText: '5' + ' nye',
+    subText: '',
     buttonLabel: 'Meldinger'
 }
 
@@ -44,8 +53,7 @@ export const circleNavMeldekort = {
     path: '/Meldekort',
     id: 'navMeldekort',
     // Dette tallet burde komme fra databasen med antall dager igjen til NAV frist. 7 er bare et eksempel
-    buttonLabel: '7',
-    subText: '7' + 'd igjen',
+    subText: '',
     buttonLabel: 'Aktivitetsplan',
     img: require ('../../assets/images/Forside/navlogo_1.png').default
 }
@@ -56,7 +64,7 @@ export const circleCalendar = {
     alt: 'Kalenderikon',
     img: require ('../../assets/images/Forside/draw_calendar_1.png').default,
     // Dette tallet burde komme fra databasen med f.eks antall gjøremål denne dagen. 2 er bare et eksempel
-    subText: '2' +' hendelser',
+    subText: '',
     buttonLabel: 'Kalender'
 }
 

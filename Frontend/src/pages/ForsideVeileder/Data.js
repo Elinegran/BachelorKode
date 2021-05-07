@@ -1,3 +1,4 @@
+//Utviklet av: Gruppe 2
 export const buttonEndreAktivitet = {
     path: '/EndreAktivitet',
     id: 'EndreAktivitet',
@@ -14,12 +15,12 @@ export const buttonRegBruker = {
     alt: 'Registrer Bruker',
 }
 
-export const buttonLenkebibliotek = {
-    path: '/LenkebibliotekV',
-    id: 'lenkebib',
-    buttonLabel: 'Endre Lenkebibliotek',
-    img: require ('../../assets/images/Forside/draw_link.svg').default,
-    alt: 'Lenkebibliotek',
+export const buttonEndreChatbot = {
+    path: '/EndreChatbot',
+    id: 'endreChatbot',
+    buttonLabel: 'Tilpass Matchbot',
+    img: require ('../../assets/images/Forside/draw_chatbot2.svg').default,
+    alt: 'Chatbot',
 }
 
 export const buttonEndreFAQ = {
@@ -36,7 +37,7 @@ export const circleMeldinger = {
     alt: 'Meldingsikon',
     img: require ('../../assets/images/Forside/draw_mail_1.png').default,
     // Dette tallet burde komme fra databasen med antall uleste meldinger. 3 er bare et eksempel
-    subText: '12',
+    subText: '',
     buttonLabel: 'Meldinger'
 }
 
@@ -44,10 +45,10 @@ export const circleBrukeroversikt = {
     path: '/Brukeroversikt',
     id: 'brukeroversikt',
     // Dette tallet burde komme fra databasen med antall dager igjen til NAV frist. 7 er bare et eksempel
-    buttonLabel: 'Brukere',
-    subText: '27' + ' Aktive',
+    // subText: '27' + ' Aktive',
     buttonLabel: 'Brukeroversikt',
-    img: require ('../../assets/images/Forside/icon_users.png').default
+    img: require ('../../assets/images/Forside/icon_users.png').default,
+    aktive: true
 }
 
 export const circleCalendar = {
@@ -56,12 +57,12 @@ export const circleCalendar = {
     alt: 'Kalenderikon',
     img: require ('../../assets/images/Forside/draw_calendar_1.png').default,
     // Dette tallet burde komme fra databasen med f.eks antall gjøremål denne dagen. 2 er bare et eksempel
-    subText: '2' +' hendelser',
+    subText: '',
     buttonLabel: 'Kalender'
 }
 
 export const slides = {
     slide1: require ('../../assets/images/Forside/slide1.jpg').default,
     slide2: require ('../../assets/images/Forside/slide2.jpg').default,
-    slide3: require ('../../assets/images/Forside/slide3.jpg').default
+    slide3: require ('../../assets/images/Forside/slide3.jpg').default,
 }
