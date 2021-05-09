@@ -36,7 +36,7 @@ function NyLenke() {
                 <Form.Label>Url:</Form.Label> 
                     <Form.Control 
                     input type="text" 
-                    placeholder=" https://www.eksempel.no" 
+                    placeholder="https://www.eksempel.no" 
                     onChange = {(event) => {setUrl(event.target.value);}}/>
             </Form.Group> 
 
