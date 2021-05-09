@@ -108,7 +108,8 @@ exports.VisGruppeLenker = function(req, res)  {
                   WHERE lenke.lenkeID = lenkebruker.lenkeID 
                   AND lenkebruker.idbruker = gruppemedlem.idbruker
                   AND gruppemedlem.gruppeID = gruppe.gruppeID
-                  AND gruppe.gruppeID = ?`;
+                  AND gruppe.gruppeID = ?
+                  ORDER BY tittel`;
   db.query(sqlSelect, gruppeID, (err, result) => {
     if (err) {
       console.log(err)

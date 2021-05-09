@@ -7,7 +7,9 @@ import { BigButton } from '../../components/Forside/BigButton'
 import MediaQuery from 'react-responsive'
 import { CenterModal } from '../../components/Modal';
 import { 
-        buttonEndreAktivitet, 
+        buttonEndreAktivitet,
+        buttonLenkebibliotekV,
+        // buttonLenkebibliotek,   
         buttonEndreChatbot, 
         circleMeldinger, 
         circleCalendar, 
@@ -40,6 +42,12 @@ export const ForsideVeileder = () => (
                                 <BigButton { ...buttonEndreChatbot }/>
                                 <BigButton { ...buttonEndreFAQ } />
                         </Row>
+
+                        <Row>
+                                <BigButton { ...buttonLenkebibliotekV }/>
+                                {/* <BigButton { ...buttonLenkebibliotek }/>   */}
+                        </Row>
+                       
                 </MediaQuery>
 
                 {/* Knapper nederst på skjerm over 992px (PC) - en rad istedenfor to*/}
@@ -49,6 +57,8 @@ export const ForsideVeileder = () => (
                                 <BigButton { ...buttonEndreAktivitet } />
                                 <BigButton { ...buttonEndreChatbot } />
                                 <BigButton { ...buttonEndreFAQ } />
+                                <BigButton { ...buttonLenkebibliotekV }/>
+                                {/* <BigButton { ...buttonLenkebibliotek } /> */}
                         </Row>
                 </MediaQuery>
         </Container>  

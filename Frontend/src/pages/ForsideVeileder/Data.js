@@ -30,7 +30,20 @@ export const buttonEndreFAQ = {
     img: require ('../../assets/images/Forside/draw_faq.svg').default,
     alt: 'EndreFAQ',
 }
-
+export const buttonLenkebibliotekV = {
+    path: '/LenkebibliotekV',
+    id: 'lenkebib',
+    buttonLabel: 'Endre Lenkebibliotek',
+    img: require ('../../assets/images/Forside/draw_link.svg').default,
+    alt: 'Lenkebibliotek',
+}
+// export const buttonLenkebibliotek = {
+//     path: '/Lenkebibliotek',
+//     id: 'lenkebib',
+//     buttonLabel: 'Lenkebibliotek',
+//     img: require ('../../assets/images/Forside/draw_link.svg').default,
+//     alt: 'Lenkebibliotek',
+// }
 export const circleMeldinger = {
     path: '/MeldingerV',
     id: 'meldinger',
