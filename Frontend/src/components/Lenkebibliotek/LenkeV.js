@@ -32,7 +32,6 @@ export default class SelectLenker extends React.Component {
          {idbruker: this.state.idbruker, lenkeID: this.state.lenkeID})
         
     }else {
-        alert("gruppeID valgt:" + this.state.gruppeID) 
         axios.post("http://localhost:3001/api/lenkeAddGruppe", 
             {gruppeID: this.state.gruppeID, lenkeID: this.state.lenkeID})
     } 
