@@ -16,7 +16,7 @@ function VisAlleLenker (){
           </Card.Header>
               <Accordion.Collapse eventKey="allelenker">
           <Card.Body>
-              <Card.Title style = {{ textAlign: 'center'}}>Her er en oversikt over alle linker</Card.Title>
+              <Card.Title style = {{ textAlign: 'center'}}>Her er en oversikt over alle lenker</Card.Title>
                       <Card.Text>
                           <HentAlleLenker />
                       </Card.Text>
