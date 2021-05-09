@@ -204,9 +204,7 @@ exports.LenkerBruker = function(req, res)  {
   console.log ("idbrukerLenkebib bruker" + idbruker);
   const sqlSelect = 
                   `SELECT * FROM lenke, lenkebruker
-
                   WHERE lenkebruker.idbruker = ?
-
                   AND lenkebruker.lenkeID = lenke.lenkeID
                   ORDER BY tittel;`;
   db.query(sqlSelect, idbruker,(err, result) => {
