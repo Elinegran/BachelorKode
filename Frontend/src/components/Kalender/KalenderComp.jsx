@@ -252,7 +252,7 @@ export default class KalenderComp extends React.Component {
            </Form.Group>
         </div>
         <div className='demo-app-sidebar-section'>
-
+        <h2>Rediger og slett avtale:</h2>
         <Accordion>
           { this.state.avtaler.map(avtale => 
         
@@ -319,7 +319,6 @@ export default class KalenderComp extends React.Component {
   handleSave = (event) => {
     //Sjekker om det er bruker som er valgt. Hvis begge skulle være valgt vil avtalen legges til en bruker.
     // if (this.state.opprettetfor){
-
 
     //Lager objekt som sendes til backend
     const nyavtale = {

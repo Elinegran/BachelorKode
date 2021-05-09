@@ -56,7 +56,7 @@ export default class SelectGruppemedlem extends React.Component {
         { this.state.bruker.map(alleBrukere => 
           <li className="list-group-item">
             <Row> 
-              <Col> { alleBrukere.idbruker } { alleBrukere.fornavn } { alleBrukere.etternavn } </Col>
+              <Col> { alleBrukere.fornavn } { alleBrukere.etternavn } </Col>
               {!this.state.veileder // Slett-knappen skal bare være synlig for Veiledere
               ? null 
               : (  
