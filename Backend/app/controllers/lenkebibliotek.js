@@ -63,12 +63,15 @@ db.query(LeggTilBruker, [idbruker, lenkeID], (err,result) => {
 // legge til en lenke i en gruppe
 exports.AddLenkeGruppe = function(req, res)  {
   const lenkeID = req.body.lenkeID;
+  const gruppeID = req.body.gruppeID;
+  console.log("gruppe id" + gruppeID);
+  console.log("lenke id" + lenkeID);
   const sqlSelect = 
                   `INSERT INTO lenkebruker (idbruker, lenkeID)
                   SELECT DISTINCT gruppemedlem.idbruker, ?
                   FROM gruppemedlem 
                   WHERE gruppeID = ?`;
-  db.query(sqlSelect, lenkeID,(err, result) => {
+  db.query(sqlSelect, [lenkeID, gruppeID],(err, result) => {
     if (err) {
       console.log(err)
     } 
