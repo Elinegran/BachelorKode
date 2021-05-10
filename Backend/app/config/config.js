@@ -11,7 +11,7 @@ const mysql = require("mysql");
 var db = mysql.createPool({
   host: "mbdigital.mysql.database.azure.com", 
   user: "mbadmin@mbdigital", 
-  password: "!Datab4se12#", 
+  password: "", 
   database: "matchbox_digital", 
   port: 3306, 
   ssl:true, 
@@ -20,7 +20,7 @@ var db = mysql.createPool({
 // const db = mysql.createPool({
 //   host: "mbdigitalno01.mysql.domeneshop.no",
 //   user: "mbdigitalno01", 
-//   password: "9-Stank-tulla-Hogge-hang",
+//   password: "",
 //   database: "mbdigitalno01",
 //   connectionLimit: 3
 // });
